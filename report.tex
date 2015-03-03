@@ -1,0 +1,52 @@
+\documentclass[12pt]{article}
+\title{-Title Goes Here-}
+\author{\normalsize{s1420849}
+%\date{} % uncomment for no date.
+\usepackage[margin=1in]{geometry}
+\usepackage[doublespacing]{setspace}
+\usepackage{apacite}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[font=small]{caption}
+
+% For drawing state machines
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows,automata}
+
+% For making algorithm diagrams
+\usepackage[]{algorithm2e}
+
+% For side-by-side figures!
+\usepackage{floatrow}
+
+% For adding my creds to the header of each page, if required.
+%\usepackage{fancyhdr}
+%\setlength{\headheight}{15pt}
+%\pagestyle{fancy}
+%\rhead{B057443}
+%\lhead{}
+
+% Bibliography
+% Put a space between each reference.
+\let\oldthebibliography=\thebibliography
+\let\endoldthebibliography=\endthebibliography
+\renewenvironment{thebibliography}[1]{%
+\begin{oldthebibliography}{#1}%
+\setlength{\itemsep}{1ex}%
+}%
+{%
+\end{oldthebibliography}%
+}
+
+\begin{document}
+\maketitle
+
+% Put sections here. 
+% For example,
+% \input{introduction}
+
+\nocite{*}
+\bibliographystyle{apacite}
+\bibliography{references}
+
+\end{document}
