@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \title{-Title Goes Here-}
-\author{\normalsize{s1420849}
+\author{\normalsize{s1420849}}
 %\date{} % uncomment for no date.
 \usepackage[margin=1in]{geometry}
 \usepackage[doublespacing]{setspace}
@@ -8,16 +8,13 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage[font=small]{caption}
-
-% For drawing state machines
-\usepackage{pgf,tikz}
-\usetikzlibrary{arrows,automata}
-
+\usepackage{amsmath}
+% Use either float or floatrow, not both.
+%\usepackage{float} 
+\usepackage{floatrow}
 % For making algorithm diagrams
 \usepackage[]{algorithm2e}
-
 % For side-by-side figures!
-\usepackage{floatrow}
 
 % For adding my creds to the header of each page, if required.
 %\usepackage{fancyhdr}
@@ -25,6 +22,9 @@
 %\pagestyle{fancy}
 %\rhead{B057443}
 %\lhead{}
+
+% Better argmax formatting.
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\!\operatorname{max}}\;}
 
 % Bibliography
 % Put a space between each reference.
