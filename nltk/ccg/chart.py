@@ -44,6 +44,7 @@ from nltk.ccg.combinator import (ForwardT, BackwardT, ForwardApplication,
                                  BackwardBx, BackwardSx)
 from nltk.compat import python_2_unicode_compatible, string_types
 
+
 # Based on the EdgeI class from NLTK.
 # A number of the properties of the EdgeI interface don't
 # transfer well to CCGs, however.
