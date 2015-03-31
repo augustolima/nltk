@@ -26,7 +26,7 @@ class SemParser(object):
     CCG parses.
 
     Current status:
-        Syntactically parse a NL sentence using the nltk.ccg 
+        Syntactically parse a NL sentence using the nltk.ccg
         module and a custom lexicon, lex.ccg.
 
     Usage example:
@@ -34,21 +34,20 @@ class SemParser(object):
         from nltk.ccg import chart
         SP = semparser.SemParser("grammars/ccg_grammars/lex.ccg")
         parses = SP.parse("I went home")
-        chart.printCCGDerivation(parses.next())
+        chart.printCCGDerivation(next(parses))
     """
 
-    def __init__(self, lex=None):
+    def __init__(self, lex):
         """
-        :param lex: str nltk path to ccg lexicon file
+        :param str lex: nltk path to ccg lexicon file
         """
-        if lex:
-            self._parser = self.buildParser(lex)
+        self._parser = self.buildParser(lex)
 
     def buildParser(self, lex):
         """
         Create a CCG parser from the provided lexicon.
 
-        :param lex: str nltk path to ccg lexicon file
+        :param str lex: nltk path to ccg lexicon file
         """
         rules = load(lex, 'text')
         lex = lexicon.parseLexicon(str(rules))
@@ -59,7 +58,7 @@ class SemParser(object):
         """
         Parse the sentence.
 
-        :param sentence: str for the input to be parsed
+        :param str sentence: input sentence to be parsed
         """
         p = self._parser.parse(sentence.split())
         return p
@@ -71,7 +70,7 @@ def demo():
     sentence = "I went home"
     print("\nParsing '{0}'...\n" .format(sentence))
     parses = semparser.parse(sentence)
-    chart.printCCGDerivation(parses.next())
+    chart.printCCGDerivation(next(parses))
 
 
 if __name__ == '__main__':
