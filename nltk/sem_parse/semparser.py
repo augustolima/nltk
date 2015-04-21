@@ -182,19 +182,19 @@ class DependencySemParser(object):
                 return
 
             if hyp:
-                out.write("GOLD\n{0}" .format(gold_parse))
+                print("GOLD\n{0}" .format(gold_parse))
                 for parse in hyp:
-                    out.write("HYP\n{0}\n" .format(parse))
+                    print("HYP\n{0}\n" .format(parse))
                 raw_input()
 
             if gold_parse in hyp:
                 correct += 1
 
-            print("\n## Results ##")
-            print("{0}/{1} sentences parsed correctly" 
-                   .format(correct, len(self._testing_data)))
-            print("Accuracy: {0}" 
-                   .format((float(correct)/len(self._testing_data))))
+        print("\n## Results ##")
+        print("{0}/{1} sentences parsed correctly" 
+               .format(correct, len(self._testing_data)))
+        print("Accuracy: {0}" 
+               .format((float(correct)/len(self._testing_data))))
 
 
 def CCGDemo():
