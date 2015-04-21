@@ -195,18 +195,21 @@ class CCGChartParser(ParserI):
     def lexicon(self):
         return self._lexicon
 
-   # Implements the CYK algorithm
+    # Implements the CYK algorithm
     def parse(self, tokens):
         tokens = list(tokens)
         chart = CCGChart(list(tokens))
         lex = self._lexicon
 
         # Initialize leaf edges.
+        # for all tokens
         for index in range(chart.num_leaves()):
+            # for all possible categories for word at index
             for cat in lex.categories(chart.leaf(index)):
+                # Create a new unary edge from leaf to category
                 new_edge = CCGLeafEdge(index, cat, chart.leaf(index))
+                # Add the unary edge to the chart
                 chart.insert(new_edge, ())
-
 
         # Select a span for the new edges
         for span in range(2,chart.num_leaves()+1):
@@ -222,6 +225,7 @@ class CCGChartParser(ParserI):
                         for right in chart.select(span=(mid,rend)):
                             # Generate all possible combinations of the two edges
                             for rule in self._rules:
+                                # Why is this here, for testing?
                                 edges_added_by_rule = 0
                                 for newedge in rule.apply(chart,lex,left,right):
                                     edges_added_by_rule += 1
