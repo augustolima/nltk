@@ -11402,6 +11402,7 @@ New => (S[adj]\NP)/(S[adj]\NP)
 New => N
 New => N/N
 New => NP/NP
+New York => N
 Newark => (N/N)/(N/N)
 Newark => N
 Newark => NP\NP
