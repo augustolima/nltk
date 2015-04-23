@@ -17,6 +17,7 @@ from __future__ import print_function, division, unicode_literals
 
 import sys
 
+from nltk import Tree
 from nltk.data import load
 from nltk.ccg import lexicon, chart
 from nltk.parse import (dependencygraph as dg,
@@ -140,6 +141,46 @@ class DependencySemParser(object):
         sentence = [field[1] for field in sentence]
         return sentence
 
+    def _get_head_for_tokens(self, tree):
+        """
+        Retrieves list of (head, token) pairs for the input tree.
+
+        param nltk.tree.Tree tree: input tree
+        rtype: list(tuple(str,str))
+        """
+        pairs = []
+        for subtree in tree.subtrees():
+            head = subtree.label()
+            tokens = []
+            for child in subtree:
+                if type(child) == Tree:
+                    tokens.append(child.label())
+                else:  # subtree is a leaf
+                    tokens.append(child)
+            for token in tokens:
+                pairs.append((head, token))
+        return pairs
+
+    def attachment_score(self, gold_parse, hypotheses):
+        """
+        Computes unlabeled attachment score for a set of
+        hypothesis parses.
+        Unlabeled attachment score: % of tokens with the correct head.
+
+        param nltk.Tree gold_parse: the gold standard parse.
+        param list(nltk.Tree) hypotheses: list of hypothesis parses.
+        returns: number of correct arcs and number of tokens.
+        rtype: tuple(int, int)
+        """
+        gold_pairs = self._get_head_for_tokens(gold_parse)
+        max_correct = 0
+        for hyp in hypotheses:
+            hyp_pairs = self._get_head_for_tokens(hyp)
+            num_correct = len(set(gold_pairs) & set(hyp_pairs))
+            if num_correct > max_correct:
+                max_correct = num_correct
+        return (max_correct, len(gold_pairs))
+
     def parse(self, sentence):
         """
         Parse the sentence using the trained parser.
@@ -161,38 +202,63 @@ class DependencySemParser(object):
         Using the trained projective dependency parser,
         parse the test data and compute accuracy.
         """
-        def print_results(num_correct, test_data_size):
+        def print_results(results_dict):
+            """
+            param dict results_dict: dictionary of results data with keys:
+                                     exact_match, test_data_size,
+                                     num_correct_arcs, num_tokens
+            """
             print("\n## Results ##")
-            print("{0}/{1} sentences parsed correctly"
-                  .format(num_correct, test_data_size))
-            print("Accuracy: {0}"
-                  .format((float(num_correct)/test_data_size)))
+            # Accuracy
+            accuracy_percentage = float(results_dict['exact_match'])/results_dict['test_data_size']
+            print("Accuracy: {0}/{1} = {2}"
+                  .format(results_dict['exact_match'],
+                          results_dict['test_data_size'],
+                          accuracy_percentage))
+            # Unlabeled Attachment Score (UAS)
+            UAS_percentage = float(results_dict['num_correct_arcs'])/results_dict['num_tokens']
+            print("UAS: {0}/{1} = {2}"
+                  .format(results_dict['num_correct_arcs'],
+                          results_dict['num_tokens'],
+                          UAS_percentage))
 
-        correct = 0
+        results = {}
+        # Accuracy data follows:
+        results['exact_match'] = 0
+        results['test_data_size'] = len(self._testing_data)
+        # Unlabeled attachment score (UAS) data follows:
+        results['num_correct_arcs'] = 0
+        results['num_tokens'] = 0
+
         for (i, (sent, gold_parse)) in enumerate(self._testing_data):
             sys.stderr.write("{0}/{1}\r" .format(i, len(self._testing_data)))
 
-            hyp = None
+            hyps = None
             try:
-                hyp = list(self.parse(sent))
+                hyps = list(self.parse(sent))
             except ZeroDivisionError:
                 print("ZeroDivisionError raised parsing: {0}" .format(sent))
             except:
-                print_results(correct, len(self._testing_data))
+                print_results(results)
                 return
 
-            if hyp:
+            # Accuracy calculation
+            if gold_parse in hyps:
+                results['exact_match'] += 1
+            # UAS calculation
+            num_correct_arcs, num_tokens = self.attachment_score(gold_parse, hyps)
+            results['num_correct_arcs'] += num_correct_arcs
+            results['num_tokens'] += num_tokens
+
+            if hyps:
                 with open('results.out', 'a') as out:
                     out.write("GOLD\n{0}\n" .format(gold_parse))
                     print("GOLD\n{0}" .format(gold_parse))
-                    for parse in hyp:
+                    for parse in hyps:
                         out.write("HYP\n{0}\n" .format(parse))
                         print("HYP\n{0}\n" .format(parse))
 
-            if gold_parse in hyp:
-                correct += 1
-
-        print_results(correct, len(self._testing_data))
+        print_results(results)
         return
 
 
@@ -203,6 +269,7 @@ def CCGDemo():
     print("\nParsing '{0}'...\n" .format(sentence))
     parses = semparser.parse(sentence)
     chart.printCCGDerivation(next(parses))
+
 
 def DepDemo():
     print("Building parser...")
