@@ -168,6 +168,7 @@ class DependencySemParser(object):
         for (i, (sent, gold_parse)) in enumerate(self._testing_data):
             sys.stderr.write("{0}/{1}\r" .format(i, len(self._testing_data)))
 
+            hyp = None
             try:
                 hyp = list(self.parse(sent))
             except ZeroDivisionError:
@@ -181,9 +182,12 @@ class DependencySemParser(object):
                 return
 
             if hyp:
-                print("GOLD\n{0}" .format(gold_parse))
-                for parse in hyp:
-                    print("HYP\n{0}\n" .format(parse))
+                with open('results.out', 'a') as out:
+                    out.write("GOLD\n{0}\n" .format(gold_parse))
+                    print("GOLD\n{0}" .format(gold_parse))
+                    for parse in hyp:
+                        out.write("HYP\n{0}\n" .format(parse))
+                        print("HYP\n{0}\n" .format(parse))
 
             if gold_parse in hyp:
                 correct += 1
@@ -207,7 +211,7 @@ def CCGDemo():
 def DepDemo():
     print("Building parser...")
     semparser = DependencySemParser(train='data/en-ud-train.conllu',
-                                    test='data/en-ud-train.conllu')
+                                    test='data/en-ud-dev.conllu')
     print("Training...")
     semparser.train()
     print("Testing...")
