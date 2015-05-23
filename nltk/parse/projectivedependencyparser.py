@@ -272,7 +272,7 @@ class ProbabilisticProjectiveDependencyParser(object):
         operations are necessary.
         """
 
-    def parse(self, tokens):
+    def parse(self, tokens, nltk_tree=True):
         """
         Parses the list of tokens subject to the projectivity constraint
         and the productions in the parser's grammar.  This uses a method
@@ -313,7 +313,10 @@ class ProbabilisticProjectiveDependencyParser(object):
                 conll_format += '\t%d\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n' % (i+1, tokens[i], tokens[i], parse._tags[i], parse._tags[i], 'null', parse._arcs[i] + 1, 'ROOT', '-', '-')
             dg = DependencyGraph(conll_format)
             score = self.compute_prob(dg)            
-            trees.append((score, dg.tree()))
+            if nltk_tree:
+                trees.append((score, dg.tree()))
+            else
+                trees.append((score, dg))
         trees.sort()
         return (tree for (score, tree) in trees)
 
