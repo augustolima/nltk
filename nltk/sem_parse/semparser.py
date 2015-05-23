@@ -188,7 +188,7 @@ class DependencySemParser(object):
 
         param list sentence: input sentence as a list of words.
         """
-        return self._parser.parse(sentence)
+        return self._parser.parse(sentence, nltk_tree=False)
 
     def train(self):
         """
