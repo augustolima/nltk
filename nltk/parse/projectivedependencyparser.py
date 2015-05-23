@@ -315,7 +315,7 @@ class ProbabilisticProjectiveDependencyParser(object):
             score = self.compute_prob(dg)            
             if nltk_tree:
                 trees.append((score, dg.tree()))
-            else
+            else:
                 trees.append((score, dg))
         trees.sort()
         return (tree for (score, tree) in trees)
