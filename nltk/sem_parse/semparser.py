@@ -16,6 +16,7 @@ and put it in, e.g. $HOME/nltk_data/grammars/ccg_grammars/lex.ccg
 from __future__ import print_function, division, unicode_literals
 
 import sys
+from collections import Counter
 
 from nltk import Tree
 from nltk.data import load
@@ -188,7 +189,7 @@ class DependencySemParser(object):
 
         param list sentence: input sentence as a list of words.
         """
-        return self._parser.parse(sentence, nltk_tree=False)
+        return self._parser.parse(sentence, nltk_tree=True)
 
     def train(self):
         """
@@ -202,6 +203,8 @@ class DependencySemParser(object):
         Using the trained projective dependency parser,
         parse the test data and compute accuracy.
         """
+        import multiprocessing
+
         def print_results(results_dict):
             """
             param dict results_dict: dictionary of results data with keys:
@@ -222,42 +225,70 @@ class DependencySemParser(object):
                           results_dict['num_tokens'],
                           UAS_percentage))
 
-        results = {}
-        # Accuracy data follows:
-        results['exact_match'] = 0
-        results['test_data_size'] = len(self._testing_data)
-        # Unlabeled attachment score (UAS) data follows:
-        results['num_correct_arcs'] = 0
-        results['num_tokens'] = 0
+        def compute_results_data(test_data, queue):
+            """
+            Computes dictionary of results data. Test data can be split
+            so as to easily parallelize the testing process.
 
-        for (i, (sent, gold_parse)) in enumerate(self._testing_data):
-            sys.stderr.write("{0}/{1}\r" .format(i, len(self._testing_data)))
+            param list test_data: list of sentence,gold_parse pairs as
+                                  returned by _get_test_data.
+            """
+            results = {}
+            # Accuracy data follows:
+            results['exact_match'] = 0
+            results['test_data_size'] = len(test_data)
+            # Unlabeled attachment score (UAS) data follows:
+            results['num_correct_arcs'] = 0
+            results['num_tokens'] = 0
 
-            hyps = None
-            try:
-                hyps = list(self.parse(sent))
-            except ZeroDivisionError:
-                print("ZeroDivisionError raised parsing: {0}" .format(sent))
-            except:
-                print_results(results)
-                return
+            for (i, (sent, gold_parse)) in enumerate(test_data):
+                sys.stderr.write("{0}/{1}\r" .format(i, len(test_data)))
 
-            # Accuracy calculation
-            if gold_parse in hyps:
-                results['exact_match'] += 1
-            # UAS calculation
-            num_correct_arcs, num_tokens = self.attachment_score(gold_parse, hyps)
-            results['num_correct_arcs'] += num_correct_arcs
-            results['num_tokens'] += num_tokens
+                hyps = None
+                try:
+                    hyps = list(self.parse(sent))
+                except ZeroDivisionError:
+                    print("ZeroDivisionError raised parsing: {0}" .format(sent))
+                except:
+                    print_results(results)
+                    return
 
-            if hyps:
-                with open('results.out', 'a') as out:
-                    out.write("GOLD\n{0}\n" .format(gold_parse))
-                    print("GOLD\n{0}" .format(gold_parse))
-                    for parse in hyps:
-                        out.write("HYP\n{0}\n" .format(parse))
-                        print("HYP\n{0}\n" .format(parse))
+                # Accuracy calculation
+                if gold_parse in hyps:
+                    results['exact_match'] += 1
+                # UAS calculation
+                num_correct_arcs, num_tokens = self.attachment_score(gold_parse, hyps)
+                results['num_correct_arcs'] += num_correct_arcs
+                results['num_tokens'] += num_tokens
 
+                if hyps:
+                    with open('results.out', 'a') as out:
+                        out.write("GOLD\n{0}\n" .format(gold_parse))
+                        print("GOLD\n{0}" .format(gold_parse))
+                        for parse in hyps:
+                            out.write("HYP\n{0}\n" .format(parse))
+                            print("HYP\n{0}\n" .format(parse))
+            queue.put(Counter(results))
+
+
+        # Multithreaded testing!
+        data_size = len(self._testing_data)
+        arg_list = [self._testing_data[:data_size//3],
+                    self._testing_data[data_size//3:(data_size//3)*2],
+                    self._testing_data[(data_size//3)*2:]]
+
+        results_queue = multiprocessing.Queue()
+        jobs = []
+        for arg in arg_list:
+            p = multiprocessing.Process(target=compute_results_data, args=(arg, results_queue))
+            jobs.append(p)
+            p.start()
+        for job in jobs: job.join()
+
+        results = Counter()
+        for job in jobs: results += results_queue.get()
+        print(results)    
+            
         print_results(results)
         return
 

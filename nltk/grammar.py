@@ -1019,6 +1019,8 @@ class ProbabilisticDependencyGrammar(object):
         str = 'Statistical dependency grammar with %d productions' % len(self._productions)
         for production in self._productions:
             str += '\n  %s' % production
+            print(str)
+            raw_input()
         str += '\nEvents:'
         for event in self._events:
             str += '\n  %d:%s' % (self._events[event], event)
