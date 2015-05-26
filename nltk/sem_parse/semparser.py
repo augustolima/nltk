@@ -204,6 +204,7 @@ class DependencySemParser(object):
         parse the test data and compute accuracy.
         """
         import multiprocessing
+        from filelock import FileLock
 
         def print_results(results_dict):
             """
@@ -225,13 +226,14 @@ class DependencySemParser(object):
                           results_dict['num_tokens'],
                           UAS_percentage))
 
-        def compute_results_data(test_data, queue):
+        def compute_results_data(test_data, queue, job_num):
             """
             Computes dictionary of results data. Test data can be split
-            so as to easily parallelize the testing process.
+            to parallelize the testing process.
 
             param list test_data: list of sentence,gold_parse pairs as
                                   returned by _get_test_data.
+            param multiprocess.Queue: queue for multi-threading
             """
             results = {}
             # Accuracy data follows:
@@ -262,12 +264,13 @@ class DependencySemParser(object):
                 results['num_tokens'] += num_tokens
 
                 if hyps:
-                    with open('results.out', 'a') as out:
+                    with open('results{0}.out'.format(job_num), 'a') as out:
                         out.write("GOLD\n{0}\n" .format(gold_parse))
                         print("GOLD\n{0}" .format(gold_parse))
                         for parse in hyps:
                             out.write("HYP\n{0}\n" .format(parse))
                             print("HYP\n{0}\n" .format(parse))
+
             queue.put(Counter(results))
 
 
@@ -276,19 +279,19 @@ class DependencySemParser(object):
         arg_list = [self._testing_data[:data_size//3],
                     self._testing_data[data_size//3:(data_size//3)*2],
                     self._testing_data[(data_size//3)*2:]]
+        arg_list = [self._testing_data[:data_size//3]]
 
         results_queue = multiprocessing.Queue()
         jobs = []
-        for arg in arg_list:
-            p = multiprocessing.Process(target=compute_results_data, args=(arg, results_queue))
+        for i,arg in enumerate(arg_list):
+            p = multiprocessing.Process(target=compute_results_data,
+                                        args=(arg, results_queue, i))
             jobs.append(p)
             p.start()
         for job in jobs: job.join()
 
         results = Counter()
         for job in jobs: results += results_queue.get()
-        print(results)    
-            
         print_results(results)
         return
 
