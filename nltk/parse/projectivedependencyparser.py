@@ -10,6 +10,7 @@ from __future__ import print_function, unicode_literals
 
 from collections import defaultdict
 
+import nltk
 from nltk.grammar import (DependencyProduction, DependencyGrammar,
                           ProbabilisticDependencyGrammar)
 from nltk.parse.dependencygraph import DependencyGraph
@@ -228,7 +229,12 @@ class ProjectiveDependencyParser(object):
         # adjacent leftward covered concatenation
         new_arcs = span1._arcs + span2._arcs
         if self._grammar.contains(self._tokens[span2._head_index], self._tokens[span1._head_index]):
-
+            new_arcs[span1._head_index - span1._start_index] = span2._head_index
+            spans.append(DependencySpan(span1._start_index, span2._end_index, span2._head_index, new_arcs, new_tags))
+        # ADDED
+        else:
+            new_arcs[span2._head_index - span1._start_index] = span1._head_index
+            spans.append(DependencySpan(span1._start_index, span2._end_index, span1._head_index, new_arcs, new_tags))
             new_arcs[span1._head_index - span1._start_index] = span2._head_index
             spans.append(DependencySpan(span1._start_index, span2._end_index, span2._head_index, new_arcs, new_tags))
         return spans
@@ -289,6 +295,10 @@ class ProbabilisticProjectiveDependencyParser(object):
                 if i==j+1:
                     if tokens[i-1] in self._grammar._tags:
                         for tag in self._grammar._tags[tokens[i-1]]:
+                            chart[i][j].add(DependencySpan(i-1,i,i-1,[-1], [tag]))
+                    # ADDED
+                    elif nltk.pos_tag([tokens[i-1]]):  # Backoff to the pos tagger
+                            tag = nltk.pos_tag([tokens[i-1]])[0][-1]
                             chart[i][j].add(DependencySpan(i-1,i,i-1,[-1], [tag]))
                     else:
                         print('No tag found for input token \'%s\', parse is impossible.' % tokens[i-1])
