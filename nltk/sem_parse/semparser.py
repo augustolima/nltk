@@ -6,12 +6,13 @@
 # For license information, see LICENSE.TXT
 
 """
-Semantic parser which builds MRs using nltk.ccg
+Semantic parser built on top of CCG and Dependency, respectively.
 
 Data:
-Relies on nltk:grammars/ccg_grammars/lex.ccg
-Get it from <homepages.inf.ed.ac.uk/s1420849/lex.ccg>
-and put it in, e.g. $HOME/nltk_data/grammars/ccg_grammars/lex.ccg
+    CCGSemParser relies on lex.ccg (grammar)
+    DependencySemParser relies on en-ud-train.conllu (training)
+                                  en-ud-dev.conllu (evaluation)
+    All files in the data folder.
 """
 from __future__ import print_function, division, unicode_literals
 
@@ -23,6 +24,37 @@ from nltk.data import load
 from nltk.ccg import lexicon, chart
 from nltk.parse import (dependencygraph as dg,
                         projectivedependencyparser as dp)
+
+# For timeout wrapper
+from functools import wraps
+import errno
+import os
+import signal
+
+
+class TimeoutError(Exception):
+	pass
+
+def timeout(seconds=0.1, error_message=os.strerror(errno.ETIME)):
+	def decorator(func):
+		def _handle_timeout(signum, frame):
+			sys.stderr.write("timedout query\n")
+			raise TimeoutError("timeout")
+			# exit()
+
+		def wrapper(*args, **kwargs):
+			signal.signal(signal.SIGALRM, _handle_timeout)
+			signal.setitimer(signal.ITIMER_REAL, seconds)
+			# signal.alarm(seconds)
+			try:
+				result = func(*args, **kwargs)
+			finally:
+				signal.alarm(0)
+			return result
+
+		return wraps(func)(wrapper)
+
+	return decorator
 
 
 class CCGSemParser(object):
@@ -182,6 +214,7 @@ class DependencySemParser(object):
                 max_correct = num_correct
         return (max_correct, len(gold_pairs))
 
+    @timeout(20)
     def parse(self, sentence):
         """
         Parse the sentence using the trained parser.
@@ -204,7 +237,6 @@ class DependencySemParser(object):
         parse the test data and compute accuracy.
         """
         import multiprocessing
-        from filelock import FileLock
 
         def print_results(results_dict):
             """
@@ -226,35 +258,48 @@ class DependencySemParser(object):
                           results_dict['num_tokens'],
                           UAS_percentage))
 
-        def compute_results_data(test_data, queue, job_num):
+        def write_results(gold_parse, hyps, filename):
+            """
+            Write gold parse and all hypothesis parses
+            out to filename.
+
+            param nltk.Tree gold_parse: the gold standard parse
+            param list(nltk.Tree) hyps: list of hypothesis parses
+            param str filename: name of out file.
+            """
+            with open(filename, 'a') as out:
+                out.write("GOLD\n{0}\n" .format(gold_parse))
+                for parse in hyps:
+                    out.write("HYP\n{0}\n" .format(parse))
+
+        def compute_results_data(test_data, results_list, job_num):
             """
             Computes dictionary of results data. Test data can be split
             to parallelize the testing process.
 
             param list test_data: list of sentence,gold_parse pairs as
                                   returned by _get_test_data.
-            param multiprocess.Queue: queue for multi-threading
+            param multiprocess.Manager.list results_list: output list 
+                                  used for multithreading.
             """
             results = {}
-            # Accuracy data follows:
+            # Accuracy data
             results['exact_match'] = 0
             results['test_data_size'] = len(test_data)
-            # Unlabeled attachment score (UAS) data follows:
+            # Unlabeled attachment score (UAS) data
             results['num_correct_arcs'] = 0
             results['num_tokens'] = 0
-
             for (i, (sent, gold_parse)) in enumerate(test_data):
-                sys.stderr.write("{0}/{1}\r" .format(i, len(test_data)))
-
-                hyps = None
+                with open('status{0}.out'.format(job_num), 'a') as out:
+                    out.write("{0}/{1}\n" .format(i, len(test_data)))
+                hyps = []
                 try:
                     hyps = list(self.parse(sent))
-                except ZeroDivisionError:
-                    print("ZeroDivisionError raised parsing: {0}" .format(sent))
+                except TimeoutError:
+                    pass
                 except:
                     print_results(results)
                     return
-
                 # Accuracy calculation
                 if gold_parse in hyps:
                     results['exact_match'] += 1
@@ -262,38 +307,32 @@ class DependencySemParser(object):
                 num_correct_arcs, num_tokens = self.attachment_score(gold_parse, hyps)
                 results['num_correct_arcs'] += num_correct_arcs
                 results['num_tokens'] += num_tokens
-
                 if hyps:
-                    with open('results{0}.out'.format(job_num), 'a') as out:
-                        out.write("GOLD\n{0}\n" .format(gold_parse))
-                        print("GOLD\n{0}" .format(gold_parse))
-                        for parse in hyps:
-                            out.write("HYP\n{0}\n" .format(parse))
-                            print("HYP\n{0}\n" .format(parse))
+                    outfile = 'results{0}.out' .format(job_num)
+                    write_results(gold_parse, hyps, outfile)
+            results_list.append(Counter(results))
 
-            queue.put(Counter(results))
-
-
-        # Multithreaded testing!
+        # Multithreaded testing
         data_size = len(self._testing_data)
         arg_list = [self._testing_data[:data_size//3],
                     self._testing_data[data_size//3:(data_size//3)*2],
                     self._testing_data[(data_size//3)*2:]]
-        arg_list = [self._testing_data[:data_size//3]]
 
-        results_queue = multiprocessing.Queue()
+        manager = multiprocessing.Manager()
+        results_list = manager.list()
         jobs = []
         for i,arg in enumerate(arg_list):
             p = multiprocessing.Process(target=compute_results_data,
-                                        args=(arg, results_queue, i))
+                                        args=(arg, results_list, i))
             jobs.append(p)
             p.start()
-        for job in jobs: job.join()
+        for job in jobs:
+            job.join()
 
         results = Counter()
-        for job in jobs: results += results_queue.get()
+        for result in results_list:
+            results += result
         print_results(results)
-        return
 
 
 def CCGDemo():
