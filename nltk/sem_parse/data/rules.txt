@@ -1,0 +1,10 @@
+dobj :: P-C
+dep :: P-C
+nsubj :: P-C
+nmod :: P-C
+advmod :: C-P
+case :: C-P
+advmod :: C-P
+amod :: C-P
+det :: C-P
+iobj :: P
