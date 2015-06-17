@@ -17,6 +17,7 @@ Data:
 from __future__ import print_function, division, unicode_literals
 
 import sys
+import json #Just for parse_geoquery function
 from collections import Counter
 
 from nltk import Tree
@@ -55,6 +56,21 @@ def timeout(seconds=0.1, error_message=os.strerror(errno.ETIME)):
 		return wraps(func)(wrapper)
 
 	return decorator
+
+
+def parse_geoquery(data_file, DepSemParser):
+    data = open(data_file)
+    parsed = []
+    for (i,sent) in enumerate(data):
+        try:
+            print("{0}/880" .format(i))
+            sent = json.loads(sent)
+            ps = list(DepSemParser.parse(sent))
+            if ps:
+                parsed.append((sent, ps))
+        except TimeoutError:
+            pass
+    return parsed
 
 
 class CCGSemParser(object):
@@ -164,7 +180,7 @@ class DependencySemParser(object):
         """
         Gets the sentence as a list of words from the entry in the data.
 
-        :param str entry: a sentence and it's associated annotations.
+        param str entry: a sentence and it's associated annotations.
         """
         sentence = entry.split('\n')
         if len(sentence) <= 1:
