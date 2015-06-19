@@ -10,6 +10,17 @@ import parse_converter
 lexpr = Expression.fromstring
 appex = ApplicationExpression
 
+
+class MRExpression(object):
+    """
+    Class for keeping track of composed expressions and
+    and their probabilities.
+    """
+    def __init__(self, expression, probability):
+        self.expression = expression
+        self.probability = probability
+
+
 def read_predicate_lexicon(filename):
     """
     param str filename
@@ -18,7 +29,7 @@ def read_predicate_lexicon(filename):
     predicates = open(filename).readlines()
     predicates = [pred.split(' ||| ') for pred in predicates
                     if not pred.startswith('#')]
-    predicates = [(word, lexpr(form)) for (word, form) in predicates]
+    predicates = [(word, MRExpression(lexpr(form), float(prob))) for (word, form, prob) in predicates]
     pred_lex = defaultdict(list)
     for (word,expr) in predicates:
         pred_lex[word].append(expr) 
@@ -143,14 +154,16 @@ def buildMR(dependency_graph, predicates, rules, trace=False):
         # Parent node
         children = [dependency_graph.get_by_address(i) for i in node['deps']]
         for child in children:
-            exprs = []
+            exprs = [] # Keeps track of partially composed expressions.
             for child_pred in compose(child):
                 for parent_pred in stacks[node['address']]:
                     rule = rules.get(child['rel'])
-                    expr = application(parent_pred, child_pred, rule)
-                    exprs.append(expr.simplify())
+                    expr = application(parent_pred.expression, child_pred.expression, rule)
+                    prob = parent_pred.probability * child_pred.probability
+                    mr = MRExpression(expr.simplify(), prob)
+                    exprs.append(mr)
                     tr_print("{0} + {1} -> {2}"
-                              .format(parent_pred, child_pred, expr.simplify()), trace)
+                              .format(parent_pred.expression, child_pred.expression, expr.simplify()), trace)
             if exprs:
                 stacks[node['address']] = exprs[::]
         tr_print("", trace)
@@ -158,11 +171,11 @@ def buildMR(dependency_graph, predicates, rules, trace=False):
 
     root = dependency_graph.get_by_address(0)
     head = dependency_graph.get_by_address(root['deps'][0])
-    compose(head)
+    compose(head)  # Changes stacks in place.
     return stacks[head['address']]
 
 def demo():
-    predicates = read_predicate_lexicon('data/lexicon.txt')
+    predicates = read_predicate_lexicon('data/problexicon.txt')
     rules = read_rule_lexicon('data/rules.txt')
     graphs = parse_converter.convert('data/parses.txt')
     for graph in graphs:
@@ -170,7 +183,7 @@ def demo():
         print "----------------"
         concat_compounds(graph)  # Changes graph in place.
         for mr in buildMR(graph, predicates, rules, trace=True):
-            print "-->", mr
+            print "-->", mr.expression, mr.probability
         print '================'
         raw_input()
 
