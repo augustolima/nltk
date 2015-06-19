@@ -54,3 +54,21 @@ det(density-8, the-5)
 amod(density-8, highest-6)
 compound(density-8, population-7)
 dobj(has-4, density-8)
+
+
+Name/VB the/DT rivers/NNS in/IN Arkansas/NNP ./.
+|||
+root(ROOT-0, Name-1)
+det(rivers-3, the-2)
+dobj(Name-1, rivers-3)
+case(Arkansas-5, in-4)
+nmod(Name-1, Arkansas-5)
+
+
+How/WRB high/JJ is/VBZ Guadalupe/NNP Peak/NNP ?/.
+|||
+advmod(high-2, How-1)
+dep(is-3, high-2)
+root(ROOT-0, is-3)
+compound(Peak-5, Guadalupe-4)
+nsubj(is-3, Peak-5)
