@@ -141,36 +141,19 @@ def buildMR(dependency_graph, predicates, rules, trace=False):
             return stacks[node['address']]
 
         # Parent node
-        exprs = []  # Holds the composed expressions for the given node with its children.
-        next_preds = []  # Keeps track of multiple possible composed
-                         # for a parent node with a child node.
-        for parent_pred in stacks[node['address']]:
-            children = [dependency_graph.get_by_address(i) for i in node['deps']]
-            for i,child in enumerate(children):
-                for child_pred in compose(child):
+        children = [dependency_graph.get_by_address(i) for i in node['deps']]
+        for child in children:
+            exprs = []
+            for child_pred in compose(child):
+                for parent_pred in stacks[node['address']]:
                     rule = rules.get(child['rel'])
-                    if next_preds:
-                        next_exprs = []
-                        for next_pred in next_preds:
-                            next_expr = application(next_pred, child_pred, rule)
-                            next_exprs.append(next_expr.simplify())
-                            tr_print("{0} + {1} -> {2}"
-                                     .format(next_pred, child_pred, next_expr.simplify()), trace)
-                        exprs = next_exprs[::]
                     expr = application(parent_pred, child_pred, rule)
                     exprs.append(expr.simplify())
                     tr_print("{0} + {1} -> {2}"
-                             .format(parent_pred, child_pred, expr.simplify()), trace)
-                if exprs:
-                    stacks[node['address']] = exprs  # Update the stack
-                    if i+1 < len(children):
-                        # If there are multiple children, we update parent_pred
-                        # and next_preds to keep track of how the parent expression
-                        # changes with each child.
-                        parent_pred = exprs.pop(0)
-                        if exprs:
-                            next_preds = exprs[::]
-        tr_print("", trace) 
+                              .format(parent_pred, child_pred, expr.simplify()), trace)
+            if exprs:
+                stacks[node['address']] = exprs[::]
+        tr_print("", trace)
         return stacks[node['address']]
 
     root = dependency_graph.get_by_address(0)
@@ -185,7 +168,7 @@ def demo():
     for graph in graphs:
         print ' '.join(words(graph)) + "\n"
         print "----------------"
-        concat_compounds(graph)
+        concat_compounds(graph)  # Changes graph in place.
         for mr in buildMR(graph, predicates, rules, trace=True):
             print "-->", mr
         print '================'
