@@ -7,7 +7,7 @@ Virginia ||| stateid('virginia') ||| 1.0
 in ||| \x. loc_2(x) ||| 1.0
 big ||| \x. size(x) ||| 1.0
 How ||| \P x. answer(P(x)) ||| 1.0
-North Dakota ||| stateid('north_dakota') ||| 1.0
+North Dakota ||| stateid('north__dakota') ||| 1.0
 is ||| \P x. P(x) ||| 1.0
 high ||| \x. elevation_1(x) ||| 1.0
 point ||| \x. place(x) ||| 1.0
@@ -22,4 +22,4 @@ population density ||| \x. density_1(x) ||| 1.0
 Name ||| \P x. answer(P(x)) ||| 1.0
 rivers ||| \x. river(x) ||| 1.0
 Arkansas ||| stateid('arkansas') ||| 1.0
-Guadalupe Peak ||| placeid('guadalupe_peak') ||| 1.0
+Guadalupe Peak ||| placeid('guadalupe__peak') ||| 1.0
