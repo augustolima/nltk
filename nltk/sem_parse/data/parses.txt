@@ -72,3 +72,22 @@ dep(is-3, high-2)
 root(ROOT-0, is-3)
 compound(Peak-5, Guadalupe-4)
 nsubj(is-3, Peak-5)
+
+
+How/WRB long/JJ is/VBZ Rio/NNP Grande/NNP ?/.
+|||
+advmod(long-2, How-1)
+dep(is-3, long-2)
+root(ROOT-0, is-3)
+compound(Grande-5, Rio-4)
+nsubj(is-3, Grande-5)
+
+
+How/WRB long/JJ is/VBZ the/DT Colorado/NNP river/NN ?/.
+|||
+advmod(long-2, How-1)
+dep(is-3, long-2)
+root(ROOT-0, is-3)
+det(river-6, the-4)
+compound(river-6, Colorado-5)
+nsubj(is-3, river-6)
