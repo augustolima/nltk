@@ -1,0 +1,13 @@
+# > :: apply parent predicate to child predicate
+# < :: apply child predicate to parent predicate
+dobj :: > :: 1.0
+dep :: > :: 1.0
+nsubj :: > :: 1.0
+nmod :: > :: 1.0
+advmod :: < :: 1.0
+case :: < :: 1.0
+amod :: < :: 1.0
+det :: < :: 1.0
+iobj :: < :: 1.0
+compound :: < :: 0.5
+compound :: > :: 0.5

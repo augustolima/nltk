@@ -1,10 +1,13 @@
-dobj :: P-C
-dep :: P-C
-nsubj :: P-C
-nmod :: P-C
-advmod :: C-P
-case :: C-P
-advmod :: C-P
-amod :: C-P
-det :: C-P
-iobj :: P
+# > :: apply parent predicate to child predicate
+# < :: apply child predicate to parent predicate
+dobj :: >
+dep :: >
+nsubj :: >
+nmod :: >
+advmod :: <
+case :: <
+advmod :: <
+amod :: <
+det :: <
+iobj :: <
+compound :: <

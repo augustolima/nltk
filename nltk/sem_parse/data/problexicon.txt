@@ -15,11 +15,16 @@ highest ||| \P x. highest(P(x)) ||| 0.4
 highest ||| \P x. largest_one(P(x)) ||| 0.6
 Montana ||| stateid('montana') ||| 1.0
 Which ||| \x P. answer(P(x)) ||| 1.0
-US city ||| city('all') ||| 0.8
-US city ||| city('US') ||| 0.2
+city ||| city('all') ||| 0.8
+city ||| \x. city('x') ||| 0.2
 has ||| \P x. P(x) ||| 1.0
-population density ||| \x. density_1(x) ||| 1.0
+density ||| \x. density_1(x) ||| 1.0
 Name ||| \P x. answer(P(x)) ||| 1.0
 rivers ||| \x. river(x) ||| 1.0
 Arkansas ||| stateid('arkansas') ||| 1.0
 Guadalupe Peak ||| placeid('guadalupe__peak') ||| 1.0
+long ||| \x. len(x) ||| 1.0
+Rio Grande ||| riverid('rio__grande') ||| 1.0
+Colorado ||| riverid('colorado') ||| 0.5
+Colorado ||| stateid('colorado') ||| 0.5
+river ||| \x. river(x) ||| 1.0
