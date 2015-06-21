@@ -35,7 +35,7 @@ def read_predicate_lexicon(filename):
     returns: dictionary of form {word: MRExpression}
     """
     predicates = open(filename).readlines()
-    predicates = [pred.split(' ||| ') for pred in predicates
+    predicates = [pred.split(' :: ') for pred in predicates
                     if not pred.startswith('#')]
     predicates = [(word, MRExpression(lexpr(form), float(prob))) for (word, form, prob) in predicates]
     pred_lex = defaultdict(list)
@@ -133,12 +133,12 @@ def application(parent_pred, child_pred, rule):
 
 def tr_print(string, suppress=opts.quiet):
     """
-    Trace print. Prints only if tracing is True.
+    Trace print. Prints only if suppress is True.
     """
     if not suppress:
         print string
 
-def buildMR(dependency_graph, predLex, ruleSet, trace=False):
+def depSem(dependency_graph, predLex, ruleSet, trace=False):
     """
     Wrapper for the recursive composition function.
     
@@ -191,7 +191,7 @@ def demo():
         print ' '.join(words(graph)) + "\n"
         print "----------------"
         concat_compounds(graph)  # Changes graph in place.
-        for mr in buildMR(graph, predLex, ruleSet, trace=True):
+        for mr in depSem(graph, predLex, ruleSet, trace=True):
             print "-->", mr.expression, mr.probability
         print '================'
         raw_input()
