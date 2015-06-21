@@ -1,3 +1,6 @@
+#! /usr/bin/env python2.7
+import optparse
+
 from nltk.sem.logic import *
 from itertools import count
 from collections import defaultdict
@@ -6,6 +9,11 @@ from pprint import pprint
 # Local import
 import parse_converter
 
+
+optparser = optparse.OptionParser()
+optparser.add_option("-s", "--stack-size", dest="s", default=2, type="int", help="Maximum stack size (defualt=2)")
+optparser.add_option("-q", "--quiet", action="store_true", dest="quiet", default=False)
+opts = optparser.parse_args()[0]
 
 lexpr = Expression.fromstring
 appex = ApplicationExpression
@@ -24,7 +32,7 @@ class MRExpression(object):
 def read_predicate_lexicon(filename):
     """
     param str filename
-    returns: dictionary of form {word: logical expression}
+    returns: dictionary of form {word: MRExpression}
     """
     predicates = open(filename).readlines()
     predicates = [pred.split(' ||| ') for pred in predicates
@@ -43,7 +51,10 @@ def read_rule_lexicon(filename):
     rules = open(filename).readlines()
     rules = [rule.strip().split(' :: ') for rule in rules
                 if not rule.startswith('#')]
-    return dict(rules)
+    rule_dict = defaultdict(list)
+    for (rel, dir, prob) in rules:
+        rule_dict[rel].append((dir, float(prob)))
+    return rule_dict
 
 def num_words(dependency_graph):
     num = 0
@@ -79,10 +90,11 @@ def concat_compounds(dependency_graph):
         for child_index in children:
             child = dependency_graph.get_by_address(child_index)
             if child['rel'] == 'compound':
-                node['deps'].remove(child['address'])
-                node['lemma'] = child['word'] + " " + node['word'] 
-                node['word'] = ' '.join([child['word'], node['word']])
-                dependency_graph.remove_by_address(child['address'])
+                if node['tag'] == 'NNP' and child['tag'] == 'NNP':
+                    node['deps'].remove(child['address'])
+                    node['lemma'] = child['word'] + " " + node['word'] 
+                    node['word'] = ' '.join([child['word'], node['word']])
+                    dependency_graph.remove_by_address(child['address'])
 
     # Second pass: change node addresses and determine how
     #              arc indices should be changed.
@@ -95,6 +107,7 @@ def concat_compounds(dependency_graph):
             replacements.append((node['address'], j))
             node['address'] = j
             j += 1
+
     # Third pass: change arc indices
     for i in range(num_words(dependency_graph) + 1):
         node = dependency_graph.get_by_address(i)
@@ -114,34 +127,29 @@ def application(parent_pred, child_pred, rule):
     param str rule: application rule from rule dictionary.
     returns: composed expression
     """
-    if not parent_pred: return child_pred
-    if not child_pred: return parent_pred
-
-    if rule == 'P-C': return appex(parent_pred, child_pred)
-    elif rule == 'C-P': return appex(child_pred, parent_pred)
-    elif rule == 'P': return parent_pred
-    elif rule == 'C': return child_pred
+    if rule == '>': return appex(parent_pred, child_pred)
+    elif rule == '<': return appex(child_pred, parent_pred)
     else: raise Exception("Bad rule: {0}" .format(rule))
 
-def tr_print(string, tracing=False):
+def tr_print(string, suppress=opts.quiet):
     """
     Trace print. Prints only if tracing is True.
     """
-    if tracing:
+    if not suppress:
         print string
 
-def buildMR(dependency_graph, predicates, rules, trace=False):
+def buildMR(dependency_graph, predLex, ruleSet, trace=False):
     """
     Wrapper for the recursive composition function.
     
     param nltk.parse.DependencyGraph dependency_graph: dependency parse
-    param dict predicates: output of read_predicate_lexicon
-    param dict rules: output of read_rule_lexicon
+    param dict predLex: output of read_predicate_lexicon
+    param dict ruleSet: output of read_rule_lexicon
     """
-    # stacks hold the possible predicates for each word at each step of the
-    # derivation. Thus the possible predicates for a word will change as  they
-    # are composed by the predicates for the words it dominates in the graph.
-    stacks = [predicates.get(word, [])[::] for word in words(dependency_graph)]
+    # stacks hold the hypothesis expressions for each word at each step of the
+    # derivation. Thus the hypothesis expressions at stacks[node['address']] 
+    # will change as they are composed with the predicates of it's child nodes.
+    stacks = [predLex.get(word, [])[::] for word in words(dependency_graph)]
     stacks.insert(0, [])
 
     # compose modifies stacks such that the final
@@ -154,35 +162,36 @@ def buildMR(dependency_graph, predicates, rules, trace=False):
         # Parent node
         children = [dependency_graph.get_by_address(i) for i in node['deps']]
         for child in children:
-            exprs = [] # Keeps track of partially composed expressions.
+            hyps = []  # Hypothesis composed expressions between parent and child nodes.
             for child_pred in compose(child):
                 for parent_pred in stacks[node['address']]:
-                    rule = rules.get(child['rel'])
-                    expr = application(parent_pred.expression, child_pred.expression, rule)
-                    prob = parent_pred.probability * child_pred.probability
-                    mr = MRExpression(expr.simplify(), prob)
-                    exprs.append(mr)
-                    tr_print("{0} + {1} -> {2}"
-                              .format(parent_pred.expression, child_pred.expression, expr.simplify()), trace)
-            if exprs:
-                stacks[node['address']] = exprs[::]
-        tr_print("", trace)
+                    rules = ruleSet.get(child['rel'], [])
+                    exprs = [application(parent_pred.expression, child_pred.expression, rule)
+                                for (rule,_) in rules]
+                    probs = [parent_pred.probability * child_pred.probability * rule_prob
+                                for (_,rule_prob) in rules]
+                    hyps.extend([MRExpression(expr.simplify(), prob) for (expr,prob) in zip(exprs, probs)])
+                    for (rule, expr) in zip(rules, exprs):
+                        tr_print("{0} {1} {2} ==> {3}"
+                                  .format(parent_pred.expression, rule[0], child_pred.expression, expr.simplify()))
+            if hyps:
+                stacks[node['address']] = sorted(hyps, key=lambda p: -p.probability)[:opts.s]  # prune
+        tr_print("")
         return stacks[node['address']]
 
     root = dependency_graph.get_by_address(0)
     head = dependency_graph.get_by_address(root['deps'][0])
-    compose(head)  # Changes stacks in place.
-    return stacks[head['address']]
+    return compose(head)
 
 def demo():
-    predicates = read_predicate_lexicon('data/problexicon.txt')
-    rules = read_rule_lexicon('data/rules.txt')
+    predLex = read_predicate_lexicon('data/problexicon.txt')
+    ruleSet = read_rule_lexicon('data/probrules.txt')
     graphs = parse_converter.convert('data/parses.txt')
     for graph in graphs:
         print ' '.join(words(graph)) + "\n"
         print "----------------"
         concat_compounds(graph)  # Changes graph in place.
-        for mr in buildMR(graph, predicates, rules, trace=True):
+        for mr in buildMR(graph, predLex, ruleSet, trace=True):
             print "-->", mr.expression, mr.probability
         print '================'
         raw_input()
