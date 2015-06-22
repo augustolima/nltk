@@ -9,5 +9,5 @@ case :: < :: 1.0
 amod :: < :: 1.0
 det :: < :: 1.0
 iobj :: < :: 1.0
-compound :: < :: 0.5
-compound :: > :: 0.5
+compound :: > :: 0.75
+compound :: < :: 0.25
