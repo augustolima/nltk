@@ -1,0 +1,93 @@
+#! /usr/bin/env python2.7
+
+# ============================
+# Semantic parser CLI tool.
+# ============================
+
+import sys
+import optparse
+import re
+from nltk.ccg import lexicon, chart
+from predicatelexicon import PredicateLexicon
+from CCGSem import CCGSem, resolve
+
+
+optparser = optparse.OptionParser()
+optparser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Verbose: show MR derivation")
+optparser.add_option("-s", "--syntax", action="store_true", dest="syntax", default=False, help="Show syntactic parse")
+optparser.add_option("--ccglex", dest="ccglex", default="", help="CCG lexicon file")
+optparser.add_option("--predlex", dest="predlex", default="", help="Predicate lexicon file")
+(opts, _) = optparser.parse_args()
+
+if not opts.ccglex or not opts.predlex:
+    print "Usage: semparser [--ccglex <path/to/file>] [--predlex <path/to/file>]"
+    sys.exit(1)
+
+def parse_cmd(cmd):
+    """
+    param str cmd: command to be parsed
+    """
+    if cmd == '!quit':
+        return 'STOP'
+
+    elif cmd.startswith('!verbose'):
+        (cmd, val) = cmd.split('=')
+        if not val:
+            print "No value specified"
+            return 'GO'
+        if val.lower() == 'false': opts.verbose = False
+        elif val.lower() == 'true': opts.verbose = True
+        else: print "Invalid value: {0}".format(val)
+        return 'GO'
+
+    elif cmd.startswith('!syntax'):
+        (cmd, val) = cmd.split('=')
+        if not val:
+            print "No value specified"
+            return 'GO'
+        if val.lower() == 'false': opts.syntax = False
+        elif val.lower() == 'true': opts.syntax = True
+        else: print "Invalid value: {0}".format(val)
+        return 'GO'
+
+# Set up the CCG parser.
+lexfile = open(opts.ccglex).read()
+lex = lexicon.parseLexicon(lexfile)
+parser = chart.CCGChartParser(lex, chart.DefaultRuleSet)
+
+# Set up the predicate lexicon.
+predLex = PredicateLexicon.fromfile(opts.predlex)
+
+print "\n---- NLTK Semantic Parser (interactive) ----"
+print "Type a sentence at the '>' prompt (no punctuation)."
+print "Type '!quit' to exit.\n"
+
+# Start the interactive terminal
+status = 'GO'
+while status == 'GO':
+    sent = raw_input("> ")
+    if sent.startswith('!'):
+        status = parse_cmd(sent)
+
+    else:
+        try:
+	    parse = parser.parse(sent.split()).next()
+        except:
+	    print "No valid syntactic parse for input sentence."
+            continue
+
+        if opts.syntax:
+            print "\n======== SYNTACTIC PARSE ========\n"
+            chart.printCCGDerivation(parse)
+            print ""
+        if opts.verbose:
+	    print "========= DERIVATION ==========\n"
+        expressions = CCGSem(parse, predLex, opts.verbose)
+        #expressions = [resolve(expr) for expr in expressions]
+        print "======= SEMANTIC PARSES =======\n"
+        if not expressions:
+            print "None"
+        else:
+            for expr in expressions:
+                print "-- {0}".format(expr)
+            print ""

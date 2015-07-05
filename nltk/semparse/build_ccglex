@@ -1,0 +1,63 @@
+#! /usr/bin/env python2.7
+
+# ==========================
+# This script builds a CCG lexicon
+# from the file output by parse_sents
+# ==========================
+
+
+import sys
+import optparse
+import re
+import string
+from collections import defaultdict
+
+
+optparser = optparse.OptionParser()
+optparser.add_option("-i", "--infile", dest="infile", default="", help="Input file")
+optparser.add_option("-o", "--outfile", dest="outfile", default="", help="Output file")
+(opts, _) = optparser.parse_args()
+
+if not opts.infile or not opts.outfile:
+    print "Usage: build_ccg_lex [-i <path/to/inputfile>] [-o <path/to/outputfile>]"
+    sys.exit(1)
+
+reBrack = re.compile(r'\[.*?\]')
+
+primitives = []
+lex = defaultdict(list)
+
+fp = open(opts.infile, 'r')
+for line in fp:
+    if not line.startswith('<c>'):
+        continue
+    line = line.replace('<c> ', '')
+    for entry in line.split():
+        (word, _, cat) = entry.split('|')
+        if re.match(r'[^a-zA-Z_]+', word):
+            continue
+	for p in string.punctuation:
+	    word = word.replace(p, '')
+	if not word:
+	    continue
+
+	cat = reBrack.sub('', cat)
+        if cat == 'conj':
+            cat = 'var\\.,var/.,var'
+        if cat not in lex[word]:
+            lex[word].append(cat) 
+        for prim in re.findall(r'[A-Z]+', cat):
+            if prim not in primitives:
+                primitives.append(prim)
+fp.close()
+
+with open(opts.outfile, 'w') as out:
+    out.write(":- ")
+    prim_str = re.sub(r'[\[\]]', '', str(primitives))
+    prim_str = re.sub(r'\'', '', prim_str)
+    out.write("{0}\n".format(prim_str))
+    out.write("NP :: N\n")
+
+    for (word, cats) in sorted(lex.items(), key=lambda e: e[0]):
+	for cat in cats:
+		out.write("{0} => {1}\n".format(word, cat))
