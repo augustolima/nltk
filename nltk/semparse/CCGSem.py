@@ -185,7 +185,7 @@ def CCGSem(tree, predLex, verbose):
                     if string not in derivation:
                         derivation.append(string)
 
-        if derivation[-1] != '\n':
+        if derivation and derivation[-1] != '\n':
             derivation.append('\n')
         return expressions
 
