@@ -143,7 +143,7 @@ def build_predLex(catLex):
                  'were': rules.copula,
                  'not': rules.negate,
                  "nt": rules.negate,
-                 "no": rules.no
+                 "no": rules.no,
                 }
     posRules = {
                 'NNP': rules.const,
@@ -151,7 +151,11 @@ def build_predLex(catLex):
                 'PRP': rules.const,
                 'NN': rules.const2,
                 'NNS': rules.const2,
+		'IN': rules.prep,
+		'TO': rules.to,
                 'JJ': rules.adj,
+                'JJS': rules.adj,
+		'JJR': rules.adj,
                 #'RB': rules.adv,
                 'CD': rules.num,
                 'CC': rules.conj,
@@ -162,7 +166,7 @@ def build_predLex(catLex):
                }
 
     # If POS tag in depRules, use getpred() function.
-    depRules = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'IN', 'TO', 'POS']
+    depRules = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'POS']
 
     predLex = PredicateLexicon()
     for (word, mrs) in catLex.iteritems():

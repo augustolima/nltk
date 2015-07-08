@@ -29,6 +29,7 @@ def negate():
 def no():
     return [r'\P x.(COMPLEMENT(x) & P(x))']
 
+
 #-----------------------------
 #   POS RULES
 #-----------------------------
@@ -44,6 +45,14 @@ def const2():
 # Adjectives.
 def adj():
     return [r'\P x.(P({0}(x)) & P(x))']
+
+# Prepositions in, of, etc.
+def prep():
+    return [r'\B C y e. exists z .(C({0}:1(e, y)) & C({0}:2(e, z)) & C(y) & B(z))']
+
+# TO
+def to():
+    return [r'\B C y e. exists w .(to:1(e, y) & C({0}:2(e, w)) & C(y) & B(w))']
 
 # Adverbs. NOT WORKING.
 def adv():
