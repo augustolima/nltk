@@ -13,8 +13,10 @@ from CCGSem import CCGSem, resolve
 
 
 optparser = optparse.OptionParser()
-optparser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Verbose: show MR derivation")
-optparser.add_option("-s", "--syntax", action="store_true", dest="syntax", default=False, help="Show syntactic parse")
+optparser.add_option("-v", "--verbose", action="store_true", dest="verbose",
+                     default=False, help="Verbose: show MR derivation")
+optparser.add_option("-s", "--syntax", action="store_true", dest="syntax",
+                     default=False, help="Show syntactic parse")
 optparser.add_option("--ccglex", dest="ccglex", default="", help="CCG lexicon file")
 optparser.add_option("--predlex", dest="predlex", default="", help="Predicate lexicon file")
 (opts, _) = optparser.parse_args()
@@ -58,11 +60,13 @@ parser = chart.CCGChartParser(lex, chart.DefaultRuleSet)
 # Set up the predicate lexicon.
 predLex = PredicateLexicon.fromfile(opts.predlex)
 
-print "\n---- NLTK Semantic Parser (interactive) ----"
-print "Type a sentence at the '>' prompt (no punctuation)."
-print "Type '!quit' to exit.\n"
-
 # Start the interactive terminal
+print "\n---- NLTK Semantic Parser (interactive) ----"
+print "Enter a sentence at the '>' prompt (no punctuation)."
+print "'!quit' to exit."
+print "'!verbose=True|False' to show/hide semantic derivation."
+print "'!syntax=True|False' to show/hide syntactic parse.\n"
+
 status = 'GO'
 while status == 'GO':
     sent = raw_input("> ")
@@ -80,14 +84,16 @@ while status == 'GO':
             print "\n======== SYNTACTIC PARSE ========\n"
             chart.printCCGDerivation(parse)
             print ""
+
         if opts.verbose:
 	    print "========= DERIVATION ==========\n"
         expressions = CCGSem(parse, predLex, opts.verbose)
         #expressions = [resolve(expr) for expr in expressions]
+
         print "======= SEMANTIC PARSES =======\n"
         if not expressions:
             print "None"
         else:
             for expr in expressions:
-                print "-- {0}".format(expr)
+                print "+  {0}".format(expr)
             print ""

@@ -45,6 +45,9 @@ def get_parses(infile):
     return parses
 
 def preprocess_word(word):
+    """
+    Makes word NLTK friendly.
+    """
     # Remove numeric index.
     word = word.split('_')[0]
     # Remove intraword punctuation.
@@ -78,61 +81,7 @@ def build_catLex(parses):
                     catLex[word].append(mr)
     return catLex
 
-def FOLpred(word, dependency):
-    """
-    Determines FOL logical form of a word from it's
-    dependency.
-
-    param str word
-    param str dependency: from MR.deps namedtuple.
-    returns list of predicates.
-    """
-    rePar = re.compile(r'\(')  # Left parentheses.
-    reXargs = re.compile(r'\{[A-Z]\}(?=<[0-9]>)')  # Argument variables \x
-    rePArgs = re.compile(r'\{[A-Z]\}(?!<[0-9]>)')  # Predicate arguments \P
-
-    # Replace the asteriks so that we can match arguments correctly.
-    dependency = dependency.replace('*', '')  
-
-    # Determine the number and type of arguments.
-    xargs = reXargs.findall(dependency)
-    pargs = set(rePArgs.findall(dependency))
-    pargs = [arg for arg in pargs if arg not in xargs]
-
-    # Build the MR string.
-    mr_string = '\\'
-    xarg_chars = []
-    parg_chars = []
-    for parg in pargs:
-        char = re.sub(r'[\{\}]', '', parg)
-        parg_chars.append(char)
-        mr_string += "{0} ".format(char)
-    for xarg in xargs:
-        char = re.sub(r'[\{\}]', '', xarg).lower()
-        xarg_chars.append(char)
-        mr_string += "{0} ".format(char)
-    mr_string += ".("
-
-    if parg_chars:
-        xarg_chars.append("{0}")
-        for c in reversed(parg_chars):
-            mr_string += "{0}(".format(c)
-    else:
-        mr_string += "{0}(".format("{0}")
-
-    for i,c in enumerate(reversed(xarg_chars)):
-        if i+1 == len(xarg_chars):
-            mr_string += "{0}".format(c)
-        else:
-            mr_string += "{0}, ".format(c)
-
-    # Add a right parenthesis for each left parenthesis.
-    for _ in rePar.findall(mr_string):
-        mr_string += ')'
-
-    return [mr_string]
-
-def Eventpred(word, dependency):
+def getpred(word, dependency):
     """
     Determines Neo-Davidsonian Event semantic representation
     of a word given it's dependecy.
@@ -203,7 +152,7 @@ def build_predLex(catLex):
                 'NN': rules.const2,
                 'NNS': rules.const2,
                 'JJ': rules.adj,
-                'RB': rules.adv,
+                #'RB': rules.adv,
                 'CD': rules.num,
                 'CC': rules.conj,
                 'WDT': rules.what,
@@ -212,7 +161,7 @@ def build_predLex(catLex):
                 'WP$': rules.what
                }
 
-    # If POS tag in depRules, use Eventpred function.
+    # If POS tag in depRules, use getpred() function.
     depRules = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'IN', 'TO', 'POS']
 
     predLex = PredicateLexicon()
@@ -225,11 +174,9 @@ def build_predLex(catLex):
             if word in wordRules:
                 predicates.extend(wordRules[word]())
             elif mr.deps and mr.pos in depRules:
-                predicates.extend(Eventpred(word, mr.deps))
+                predicates.extend(getpred(word, mr.deps))
             elif mr.pos in posRules:
                 predicates.extend(posRules[mr.pos]())
-                if mr.deps:
-                    predicates.extend(Eventpred(word, mr.deps))
             else:
                 sys.stderr.write("No applicable rule for {0} {1} {2}.\n"
                                   .format(word, mr.pos, mr.deps != None))
@@ -243,65 +190,21 @@ def build_predLex(catLex):
             else:
                 sub = word
             for predicate in predicates:
+                # Make sure each predicate is valid.
                 try:
                     lexpr(predicate)
                 except:
                     continue
+                # Add it to the lexicon.
                 if predicate.format(sub.lower()) not in predLex[word]:
                     predLex[word].append(predicate.format(sub.lower()))
                 if predicate not in predLex.categories[mr.category]:
                     predLex.categories[mr.category].append(predicate)
-
     return predLex
-
-def resolve_equalities(expression):
-    """
-    Resovles all subexpressions of the form \\x. EQUAL(x, 'Word')
-    into constant expressions and substitutes them for the variable
-    assigned to them.
-
-    >>> expr = lexpr('\\e.exists y z.(ran1(e,y) & ran2(e,z) \
-                      & EQUAL(y,reagan) & UNIQUE(z) & EQUAL(z,us))')
-    >>> resolved_expr = resolve_equalities(expr)
-    >>> print resolved_expr
-    \\e.(ran1(e,reagan) & ran2(e,us) & UNIQUE(us))
-    """
-    reEqual = re.compile(r'(?<=EQUAL\()_?[a-z],_?[a-z]+(?=\))')
-    reDel = re.compile(r'EQUAL\(.*?\)(?: &)? | (?:& )?EQUAL\(.*?\)')
-    reExists = re.compile(r'.*\.?exists (?:([a-z])\s)*([a-z])\.')
-
-    mr_string = expression.__str__()
-
-    # Find the variables to replace.
-    replacements = reEqual.findall(mr_string)
-    replacements = set([tuple(r.split(',')) for r in replacements])
-
-    # Delete the EQUAL subexpression.
-    mr_string = reDel.sub('', mr_string)
-
-    # Find all variables x s.t. exists x 
-    exist_vars = reExists.match(mr_string).groups()
-    exist_vars = [var for var in exist_vars if var]  # Filter out None's
-    
-    # If we're replacing all the variables x s.t. exists x
-    # delete the whole exists part of the expression.
-    if len(exist_vars) == len(replacements):
-        mr_string = re.sub(r'exists.*?\.', '', mr_string)
-        expr = lexpr(mr_string)
-        for (var, word) in replacements:
-            expr = expr.replace(Variable(var), lexpr(word))
-    else:
-        for (var, word) in replacements:
-            mr_string = mr_string.replace(var, '', 1)
-            temp = lexpr(mr_string).replace(Variable(var), lexpr(word))
-            mr_string = temp.__str__()
-        expr = lexpr(mr_string)
-
-    return expr
 
 def write_predLex(predLex, filename):
     """
-    Saves predLex to a file.
+    Saves predLex to filename.
     """
     with codecs.open(filename, 'w', 'utf-8') as out:
         out.write('# WORDS\n')
@@ -318,7 +221,7 @@ def write_predLex(predLex, filename):
 
 def main():
     if not opts.infile or not opts.outfile:
-        print "Usage build_preds [-i <path/to/inputfile>] [-o <path/to/outputfile>]"
+        print "Usage build_predlex [-i <path/to/inputfile>] [-o <path/to/outputfile>]"
         return
 
     parses = get_parses(opts.infile)

@@ -1,3 +1,7 @@
+#NLTK Semantic Parser
+Parses English sentences into Neo-Davidsonian logical forms
+using a CCG parse.
+
 ##Setup
 The semantic parser requires data files to be built before
 it can run. This section details how to build them. For the
@@ -41,9 +45,9 @@ from within Python.
 * -s --syntax: Show syntactic parse tree.
 
 ####Shell commands
-* !quit: exit the shell.
-* !verbose=[True|False]: set verbose.
-* !syntax=[True|False]: set syntax.
+* `!quit`: exit the shell.
+* `!verbose=[True|False]`: set verbose.
+* `!syntax=[True|False]`: set syntax.
 
 
 ###Using the semantic parser within Python

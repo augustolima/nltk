@@ -2,7 +2,8 @@
 
 # ==========================
 # This script builds a CCG lexicon
-# from the file output by parse_sents
+# from the file output by the
+# parse_sents script.
 # ==========================
 
 
@@ -22,11 +23,12 @@ if not opts.infile or not opts.outfile:
     print "Usage: build_ccg_lex [-i <path/to/inputfile>] [-o <path/to/outputfile>]"
     sys.exit(1)
 
-reBrack = re.compile(r'\[.*?\]')
 
 primitives = []
 lex = defaultdict(list)
 
+# Find the supertags in the parse file. 
+# Match words to categories.
 fp = open(opts.infile, 'r')
 for line in fp:
     if not line.startswith('<c>'):
@@ -41,7 +43,7 @@ for line in fp:
 	if not word:
 	    continue
 
-	cat = reBrack.sub('', cat)
+	cat = re.sub('r\[.*?\]', '', cat)
         if cat == 'conj':
             cat = 'var\\.,var/.,var'
         if cat not in lex[word]:
@@ -53,6 +55,7 @@ fp.close()
 
 with open(opts.outfile, 'w') as out:
     out.write(":- ")
+    # NLTK can't handle the bracketed stuff.
     prim_str = re.sub(r'[\[\]]', '', str(primitives))
     prim_str = re.sub(r'\'', '', prim_str)
     out.write("{0}\n".format(prim_str))

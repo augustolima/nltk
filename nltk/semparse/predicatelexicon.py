@@ -9,26 +9,22 @@ class PredicateLexicon(defaultdict):
     If the logical form of a word is known, it is returned.
     Otherwise, user can specify a word and a category to get
     a list of possible logical forms for that word with that category.
-
-    >>> predLex['go']
-    [u'\\a b .(go(b, a))', u'\\a .(go(a))']
-    >>> predLex['slep']
-    []
-    >>> predLex.get(category='N')
-    [u'{0}', u'\\x.({0}(x))', u'\\x.(count(x, {0}))']
-    >>> predLex.get(word='slep', category='N')
-    [u'slep', u'\\x.(slep(x))', u'\\x.(count(x, slep))']
     """
     
     _lexpr = Expression.fromstring
 
     @classmethod
     def fromfile(cls, filename):
+        """
+        Loads predicate lexicon from filename.
+        Input file should be of the format as created
+        by the build_predlex script.
+        """
         predLex = cls()
         fp = codecs.open(filename, 'r', 'utf-8')
         key = None
         for line in fp:
-            if not line or line.startswith('"'):
+            if not line or line.startswith('"'): # Comments
                 continue
             if line.startswith('#'):
                 key = line[1:].strip()

@@ -19,7 +19,8 @@ def indef_art():
     return [r'None']
 
 def copula():
-    return [r'\P R. exists x.(R(x) & P(x))']
+    return [r'\P R. exists x.(R(x) & P(x))',
+            r'\P x.(P(x))']
 #    return [r'\Q P y. exists x.(P(Q(x)) & P(x) & Q(y))']
 
 def negate():

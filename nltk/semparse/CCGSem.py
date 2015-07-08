@@ -1,4 +1,5 @@
 import re
+from pprint import pprint
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
 
 # ==============================
@@ -10,6 +11,7 @@ from nltk.sem.logic import Variable, Expression, ApplicationExpression
 
 lexpr = Expression.fromstring
 
+# Does not currently work for all expressions.
 def resolve(expression):
     """
     Resovles all subexpressions of the form \\x. EQUAL(x, 'Word')
@@ -58,12 +60,83 @@ def resolve(expression):
     return expr
 
 def check(expression):
-    if re.findall(r'[a-zA-Z]+?(?::[0-9])?\([^a-z]', expression.__str__()): return False
+    """
+    Checks if expression is valid.
+    return type bool
+    """
+    # Check for misplaced lambda expressions.
+    if re.findall(r'[a-zA-Z]+?(?::[0-9])?\([^a-z]', expression.__str__()):
+        return False
     try:
         lexpr(expression.__str__())
         return True
     except:
         return False
+
+def typeraise(expression):
+    """
+    Typeraises expression.
+
+    param Expression expression
+    return type Expression
+    """
+    pass
+
+def compose(expr1, expr2):
+    """
+    Performs the functional composition of 
+    expr1 and expr2.
+
+    param Expression expr1 expr2: input expressions
+    return type Expression
+    """
+    first = ApplicationExpression(expr2, lexpr('C')).simplify()
+    sec = ApplicationExpression(expr1, first).simplify()
+    string = sec.__str__() 
+    if string.startswith('\\e'):
+        res = '\\C ' + string
+    else:
+        index = string.index('e')
+        res = string[:index] + '\\C ' + string[index:]
+    return lexpr(res)
+
+def substitute(expr1, expr2):
+    """
+    Performs the substitute operation of expr1 on expr2
+
+    param Expression expr1 expr2: input expressions
+    return type Expression
+    """
+    first = ApplicationExpression(expr1, lexpr('S'))
+    sec = ApplicationExpression(first, expr2).simplify()
+    third = '\S ' + sec.__str__()
+    return lexpr(third)
+
+def apply_rule(left_ex, right_ex, rule):
+    """
+    Passes left_ex and right_ex to the correct rule application
+    function.
+
+    param Expression left_ex right_ex: input expressions
+    param str rule: CCG combinatory rule as specified by the CCG parse.
+    return type Expression
+    """
+    if left_ex.__str__() == 'None': return right_ex
+    if right_ex.__str__() == 'None': return left_ex
+
+    if rule == '>':  # Forward application
+        return ApplicationExpression(left_ex, right_ex).simplify() 
+    if rule == '<':  # Backward application
+        return ApplicationExpression(right_ex, left_ex).simplify()
+    if rule == '>Sx':  # Forward substitution
+        return substitute(left_ex, right_ex)
+    if rule == '<Sx':  # Backward substitution
+        return substitute(right_ex, left_ex)
+    if rule == '>B':  # Forward composition
+        return compose(left_ex, right_ex)
+    if rule == '<B':  # Backward composition
+        return compose(right_ex, left_ex)
+    raise Exception("Bad rule: {0}".format(rule))
 
 def get_children(tree):
     subtrees = list(tree.subtrees())
@@ -75,42 +148,51 @@ def get_children(tree):
             i = i + len(subsubtrees)
     return children
 
-def application(left_ex, right_ex, direction):
-    if left_ex.__str__() == 'None': return right_ex
-    if right_ex.__str__() == 'None': return left_ex
-
-#    if direction == '<':
-    if '<' in direction:
-        return ApplicationExpression(right_ex, left_ex).simplify()
-    elif '>' in direction:
-        return ApplicationExpression(left_ex, right_ex).simplify() 
-    else:
-        raise Exception("Bad direction: {0}".format(direction))
-
 def CCGSem(tree, predLex, verbose):
-    expressions = []
-    children = get_children(tree)
+    """
+    The main MR composition algorithm.
 
-    if len(children) == 0:
-        cat = str(tree.label())
-        if '(' in cat:
-            cat = re.findall(r'\((.*)\)', cat)[0]
-        return predLex.get(word=tree[0], category=cat)
+    param nltk.Tree tree: input CCG parse
+    param nltk.semparse.PredicateLexicon predLex: predicate lexicon to use
+    param bool verbose: Whether to print steps of semantic derivation
+    return type list(Expression)
+    """
+    derivation = []
+    def recurse(tree):
+        expressions = []
+        children = get_children(tree)
 
-    if len(children) == 1:
-        return CCGSem(children[0], predLex, verbose)
+        # Leaf
+        if len(children) == 0:
+            cat = str(tree.label())
+            if '(' in cat:  # Get rid of extra parentheses.
+                cat = re.findall(r'\((.*)\)', cat)[0]
+            return predLex.get(word=tree[0], category=cat)
 
-    direction = tree.label()[1]
-    for left_ex in CCGSem(children[0], predLex, verbose):
-        for right_ex in CCGSem(children[1], predLex, verbose):
-            expr = application(left_ex, right_ex, direction)
-            if check(expr):
-                expressions.append(expr)
-                if verbose:
-                    print "* {0} {1} {2}\n\t==> {3}" \
-                           .format(left_ex, direction, right_ex, expr)
+        # Unary rule
+        if len(children) == 1:
+            return recurse(children[0])
 
-    if verbose: print ""
+        # Binary rule
+        rule = tree.label()[1]
+        for left_ex in recurse(children[0]):
+            for right_ex in recurse(children[1]):
+                expr = apply_rule(left_ex, right_ex, rule)
+                if check(expr):
+                    expressions.append(expr)
+                    string = "* {0} {1} {2}\n\t==> {3}" \
+                              .format(left_ex, rule, right_ex, expr)
+                    if string not in derivation:
+                        derivation.append(string)
+
+        if derivation[-1] != '\n':
+            derivation.append('\n')
+        return expressions
+
+    expressions = recurse(tree)
+    if verbose:
+        for step in derivation:
+            print step
     return expressions
 
 def demo():
@@ -118,20 +200,21 @@ def demo():
     from predicatelexicon import PredicateLexicon
 
     # Set up the CCG parser.
-    lexstr = open('data/reagan.ccg.lex').read()
+    lexstr = open('data/reagan/ccg.lex').read()
     lex = lexicon.parseLexicon(lexstr)
     parser = chart.CCGChartParser(lex, chart.DefaultRuleSet)
 
     # Parse the input sentence.
-    sent = "Reagan was the president"
+    sent = "Reagan the president and an actor"
     try:
         parse = parser.parse(sent.split()).next()
+        chart.printCCGDerivation(parse)
     except:
         print "No valid parse for input sentence."
         return
 
     # Set up the predicate lexicon.
-    predLex = PredicateLexicon.fromfile('data/predicates.lexicon')
+    predLex = PredicateLexicon.fromfile('data/reagan/predicates.lex')
 
     print "\n", sent, "\n"
     print "========= DERIVATION ==========\n"
@@ -141,6 +224,7 @@ def demo():
     for expr in expressions:
         print "-> {0}".format(expr)
     print ""
+
 
 if __name__ == '__main__':
     demo()
