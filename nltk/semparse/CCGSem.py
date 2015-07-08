@@ -1,5 +1,4 @@
 import re
-from pprint import pprint
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
 
 # ==============================
@@ -39,11 +38,11 @@ def resolve(expression):
     # Delete the EQUAL subexpression.
     mr_string = reDel.sub('', mr_string)
 
-    # Find all variables x s.t. exists x 
+    # Find all variables x s.t. exists x
     exist_vars = reExists.match(mr_string).groups()
     exist_vars = [var for var in exist_vars if var]  # Filter out None's
     
-    # If we're replacing all the variables x s.t. exists x
+    # If we're replacing every variable x s.t. exists x,
     # delete the whole exists part of the expression.
     if len(exist_vars) == len(replacements):
         mr_string = re.sub(r'exists.*?\.', '', mr_string)
@@ -93,23 +92,24 @@ def compose(expr1, expr2):
     first = ApplicationExpression(expr2, lexpr('C')).simplify()
     sec = ApplicationExpression(expr1, first).simplify()
     string = sec.__str__() 
-    if string.startswith('\\e'):
-        res = '\\C ' + string
-    else:
-        index = string.index('e')
-        res = string[:index] + '\\C ' + string[index:]
-    return lexpr(res)
+    try:
+        first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
+        index = string.index(first_var)
+        newstring = string[:index] + 'C ' + string[index:]
+    except AttributeError:  # Regex did not match. No lambdas in expression.
+        newstring = '\\C. ' + string
+    return lexpr(newstring)
 
 def substitute(expr1, expr2):
     """
-    Performs the substitute operation of expr1 on expr2
+    Performs the substitute operation of expr1 and expr2
 
     param Expression expr1 expr2: input expressions
     return type Expression
     """
     first = ApplicationExpression(expr1, lexpr('S'))
     sec = ApplicationExpression(first, expr2).simplify()
-    third = '\S ' + sec.__str__()
+    newstring = '\\S ' + sec.__str__()
     return lexpr(third)
 
 def apply_rule(left_ex, right_ex, rule):
@@ -205,10 +205,9 @@ def demo():
     parser = chart.CCGChartParser(lex, chart.DefaultRuleSet)
 
     # Parse the input sentence.
-    sent = "Reagan the president and an actor"
+    sent = "Reagan was the president and an actor"
     try:
         parse = parser.parse(sent.split()).next()
-        chart.printCCGDerivation(parse)
     except:
         print "No valid parse for input sentence."
         return
@@ -217,12 +216,16 @@ def demo():
     predLex = PredicateLexicon.fromfile('data/reagan/predicates.lex')
 
     print "\n", sent, "\n"
+    print "======= SYNTACTIC PARSE =======\n"
+    chart.printCCGDerivation(parse)
+
     print "========= DERIVATION ==========\n"
     expressions = CCGSem(parse, predLex, True)
     #expressions = [resolve(expr) for expr in expressions]
+
     print "======= SEMANTIC PARSES =======\n"
     for expr in expressions:
-        print "-> {0}".format(expr)
+        print "+  {0}".format(expr)
     print ""
 
 
