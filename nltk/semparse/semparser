@@ -6,7 +6,10 @@
 
 import sys
 import optparse
+import readline
 import re
+import string
+from nltk import word_tokenize
 from nltk.ccg import lexicon, chart
 from predicatelexicon import PredicateLexicon
 from CCGSem import CCGSem, resolve
@@ -14,7 +17,7 @@ from CCGSem import CCGSem, resolve
 
 optparser = optparse.OptionParser()
 optparser.add_option("-v", "--verbose", action="store_true", dest="verbose",
-                     default=False, help="Verbose: show MR derivation")
+                     default=False, help="Show MR derivation")
 optparser.add_option("-s", "--syntax", action="store_true", dest="syntax",
                      default=False, help="Show syntactic parse")
 optparser.add_option("--ccglex", dest="ccglex", default="", help="CCG lexicon file")
@@ -22,8 +25,18 @@ optparser.add_option("--predlex", dest="predlex", default="", help="Predicate le
 (opts, _) = optparser.parse_args()
 
 if not opts.ccglex or not opts.predlex:
-    print "Usage: semparser [--ccglex <path/to/file>] [--predlex <path/to/file>]"
+    print "Usage: semparser [-v] [-s] --ccglex <path/to/file> --predlex <path/to/file>"
     sys.exit(1)
+
+def preprocess_sent(sentence):
+    """
+    Removes punctuation and tokenizes sentence.
+
+    param str sentence
+    """
+    sentence = word_tokenize(sentence)
+    sentence = [token for token in sentence if token not in string.punctuation] 
+    return sentence
 
 def parse_cmd(cmd):
     """
@@ -37,8 +50,8 @@ def parse_cmd(cmd):
         if not val:
             print "No value specified"
             return 'GO'
-        if val.lower() == 'false': opts.verbose = False
-        elif val.lower() == 'true': opts.verbose = True
+        if val.lower() == 'off': opts.verbose = False
+        elif val.lower() == 'on': opts.verbose = True
         else: print "Invalid value: {0}".format(val)
         return 'GO'
 
@@ -47,10 +60,13 @@ def parse_cmd(cmd):
         if not val:
             print "No value specified"
             return 'GO'
-        if val.lower() == 'false': opts.syntax = False
-        elif val.lower() == 'true': opts.syntax = True
+        if val.lower() == 'off': opts.syntax = False
+        elif val.lower() == 'on': opts.syntax = True
         else: print "Invalid value: {0}".format(val)
         return 'GO'
+    else:
+	print "Unknown command: {0}".format(cmd)
+	return 'GO'
 
 # Set up the CCG parser.
 lexfile = open(opts.ccglex).read()
@@ -62,10 +78,10 @@ predLex = PredicateLexicon.fromfile(opts.predlex)
 
 # Start the interactive terminal
 print "\n---- NLTK Semantic Parser (interactive) ----"
-print "Enter a sentence at the '>' prompt (no punctuation)."
+print "Enter a sentence at the '>' prompt."
 print "'!quit' to exit."
-print "'!verbose=True|False' to show/hide semantic derivation."
-print "'!syntax=True|False' to show/hide syntactic parse.\n"
+print "'!verbose=ON|OFF' to show/hide semantic derivation."
+print "'!syntax=ON|OFF' to show/hide syntactic parse.\n"
 
 status = 'GO'
 while status == 'GO':
@@ -74,8 +90,9 @@ while status == 'GO':
         status = parse_cmd(sent)
 
     else:
+	sent = preprocess_sent(sent)
         try:
-	    parse = parser.parse(sent.split()).next()
+	    parse = parser.parse(sent).next()
         except:
 	    print "No valid syntactic parse for input sentence."
             continue
@@ -87,8 +104,8 @@ while status == 'GO':
 
         if opts.verbose:
 	    print "========= DERIVATION ==========\n"
-        expressions = CCGSem(parse, predLex, opts.verbose)
-        #expressions = [resolve(expr) for expr in expressions]
+	expressions = CCGSem(parse, predLex, opts.verbose)
+	#expressions = [resolve(expr) for expr in expressions]
 
         print "======= SEMANTIC PARSES =======\n"
         if not expressions:
