@@ -110,7 +110,7 @@ def substitute(expr1, expr2):
     first = ApplicationExpression(expr1, lexpr('S'))
     sec = ApplicationExpression(first, expr2).simplify()
     newstring = '\\S ' + sec.__str__()
-    return lexpr(third)
+    return lexpr(newstring)
 
 def apply_rule(left_ex, right_ex, rule):
     """
