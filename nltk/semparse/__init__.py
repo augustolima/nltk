@@ -6,5 +6,5 @@
 # For license information, see LICENSE.TXT
 
 '''
-Semantic parser which builds MRs using nltk.ccg
+Semantic parser which builds Neo-Davidsonian MRs using nltk.ccg
 '''
