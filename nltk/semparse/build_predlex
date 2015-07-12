@@ -13,12 +13,14 @@ import optparse
 import re
 import string
 import codecs
-from collections import defaultdict, namedtuple
+from collections import defaultdict, OrderedDict, namedtuple
+from pyparsing import nestedExpr
 from nltk.sem.logic import Expression, Variable
 from pprint import pprint
 
 # Local imports
-import rules
+#import rules
+import newrules as rules
 from predicatelexicon import PredicateLexicon
 
 
@@ -81,7 +83,7 @@ def build_catLex(parses):
                     catLex[word].append(mr)
     return catLex
 
-def getpred(word, dependency):
+def getpred(dependency):
     """
     Determines Neo-Davidsonian Event semantic representation
     of a word given it's dependecy.
@@ -123,7 +125,209 @@ def getpred(word, dependency):
 
     return [mr_string]
 
+
+def getvars(dependency):
+    """
+    Finds the predicate and argument variables
+    from the dependency string.
+
+    param str dependency: C&C dependency output (MR.deps).
+    returns tuple(
+                dict(pairs): dictionary of predicate, arguments.
+                char: the lambda argument variable.
+                 )
+    """
+    Pvars = ['P', 'Q', 'R', 'S', 'T']  # Store of predicate variables.
+    pairs = []  # Holds predicate variable, argument pairs, e.g. (P,[x]) => P(x).
+    lambda_var = []
+    def getstr(rhs):
+        if type(rhs) == str or type(rhs) == unicode:
+            Pvar = Pvars.pop(0)
+            Xvars = re.findall(r'\{([A-Ze])\}', rhs) 
+            Xvars = [var.lower() for var in Xvars]
+            pairs.append((Pvar, Xvars))
+            return
+        getstr(rhs[0])
+            
+    def recurse(tree):
+        if type(tree) == str or type(tree) == unicode:
+            cats = re.split(r'[\\/]', tree)
+            Xvars = [re.findall(r'\{([A-Ze])\}', cat)[0]
+                     for cat in cats if cat]
+            Xvars = [var.lower() for var in Xvars]
+            pairs.append((Pvars.pop(0), Xvars[1:]))
+            lambda_var.append(Xvars[0])
+            return
+        else:
+            if len(tree) > 1:
+                getstr(tree[-1])
+                recurse(tree[0])
+            else:
+                recurse(tree[0])
+
+    # Replace the asteriks so that we can match arguments correctly.
+    dependency = dependency.replace('*', '')
+    # Underscores only used with verbs, so make them event variables.
+    dependency = dependency.replace('_', 'e')
+    # Don't need the {_} after the nested blocks if they exist.
+    dependency = re.sub(r'(?<=\))\{[A-Ze]\}', '', dependency)
+    # Parse the parentheses into a tree structure.
+    try:
+        tree = nestedExpr('(', ')').parseString(dependency).asList()
+    except:
+        print "Failed in getvars, in nestedExpr, line 176"
+        return None, None
+
+    recurse(tree[0]) # Gets pairs and lambda_var.
+    return (dict(pairs), lambda_var[0])
+
+
+def get_pred_stem(dependency):
+    """
+    Builds the stem of the logical form based on the
+    number of predicate and argument variables are
+    found in dependency.
+
+    param str depedency: C&C dependency output (MR.deps).
+    returns str stem
+    """
+    (pairs, Xvar) = getvars(dependency)
+    if not pairs:
+        return None
+    
+    # First add the lambdas.
+    stem = r''
+    for p in pairs.keys():
+        stem += "\\{0} ".format(p)
+    stem += "\\{0}. ".format(Xvar)
+
+    # Then the exists expression, if there is one. 
+    exists_expr = ""
+    args = reduce(list.__add__, pairs.values(), [])
+    ordered_args = list(OrderedDict.fromkeys(args))
+    for arg in ordered_args:
+        if arg != Xvar:
+            if not exists_expr:
+                exists_expr += "exists {0} ".format(arg)
+            else:
+                exists_expr += "{0} ".format(arg)
+    if exists_expr:
+        stem += exists_expr + '.'
+    stem += "("
+
+    # Then the predicates with their arguments.
+    for (i,(pred, args)) in enumerate(pairs.items()):
+        stem += "{0}".format(pred)
+        for arg in args:
+            stem += "({0})".format(arg)
+        if i+1 != len(pairs): 
+            stem += " & "
+
+    return stem
+
+def re_key(key, d):
+    """
+    Find the correct key in a dictionary
+    keyed by regular expressions.
+
+    param str key: key to match.
+    param dict d: dictionary keyed by regular expressions.
+    """
+    try:
+        return [k for k in d.keys() if re.match(k, key)][0]
+    except:
+        return None
+        
+
 def build_predLex(catLex):
+    """
+    Builds the predicate lexicon from the pos tag
+    and/or the dependencies for each word in catLex.
+
+    param catLex dict{word: list(MR)}: output of build_catLex.
+    """
+    quantifiers = ['all', 'exists', 'some']
+    special_cases = {
+                     r'an?$': rules.indef,
+                     r'be$|is$|was$|am$|are$': rules.copula,
+                     r'NN$|NNS$': rules.kind,
+                     r'NNP.?$|PRP.?$': rules.entity,
+                     r'CC$': rules.conj
+                    }
+
+    posRules = {
+                r'VB.?$|POS$|IN$|TO$': rules.event,
+                r'RB.?$|JJ.?$': rules.mod,
+                r'CD$': rules.count,
+                r'WDT$|WP.?$|WRB$': rules.question
+               }
+
+    wordRules = {
+                 r'not$|n\'t$': rules.negate,
+                 r'no$': rules.complement,
+                 r'the$': rules.unique
+                }
+
+    predLex = PredicateLexicon()
+    for (word, mrs) in catLex.iteritems():
+        if word.lower() in quantifiers:
+            continue
+        for mr in mrs:
+            # Determine the predicate.
+            predicates = []
+
+            # See if the word is a special case.
+            key = re_key(word, special_cases)
+            if not key:
+                key = re_key(mr.pos, special_cases)
+            if key:
+                pred = special_cases[key]()
+                predicates.append(pred)
+
+            if mr.deps and not predicates:
+                stem = get_pred_stem(mr.deps)
+                if not stem:
+                    break
+                poskey = re_key(mr.pos, posRules)
+                if poskey:
+                    try:
+                        pred = posRules[poskey](stem)
+                    except:
+                        print "Failed to create stem for {0} {1} {2}" \
+                               .format(word, mr.deps, stem)
+                        break
+                    predicates.append(pred)
+                wordkey = re_key(word, wordRules)
+                if wordkey:
+                    pred = wordRules[wordkey](stem)
+                    predicates.append(pred)
+
+            if not predicates:
+                sys.stderr.write("No applicable rule for {0} {1} deps={2}.\n"
+                                  .format(word, mr.pos, mr.deps != None))
+                break
+
+            # Store the predicate.
+            if len(word) == 1:
+                # Change words of length 1 so that they don't
+                # become VariableExpressions but ConstantExpressions.
+                sub = "_{0}".format(word)
+            else:
+                sub = word
+            for predicate in predicates:
+                # Make sure each predicate is valid.
+                try:
+                    lexpr(predicate)
+                except:
+                    continue
+                # Add it to the lexicon.
+                if predicate.format(sub.lower()) not in predLex[word]:
+                    predLex[word].append(predicate.format(sub.lower()))
+                if predicate not in predLex.categories[mr.category]:
+                    predLex.categories[mr.category].append(predicate)
+    return predLex
+
+def old_build_predLex(catLex):
     """
     Builds the predicate lexicon from the pos tag
     and/or the dependencies for each word in catLex.
@@ -178,7 +382,7 @@ def build_predLex(catLex):
             if word in wordRules:
                 predicates.extend(wordRules[word]())
             elif mr.deps and mr.pos in depRules:
-                predicates.extend(getpred(word, mr.deps))
+                predicates.extend(getpred(mr.deps))
             elif mr.pos in posRules:
                 predicates.extend(posRules[mr.pos]())
             else:
