@@ -6,7 +6,7 @@
 
 import sys
 import optparse
-import readline
+import readline  # Needed for shell-style line editing/cmd history.
 import re
 import string
 from nltk import word_tokenize
@@ -89,8 +89,10 @@ class Interpreter(object):
             (cmd, val) = cmd.split()
             if not val:
                 return 'GO'
-            for expr in self.predLex.get(word=val):
-                print expr
+            keys = [(w,c) for (w,c) in self.predLex.keys() if w == val] 
+            for (w,c) in keys:
+                for expr in self.predLex.get(word=w, category=c):
+                    print expr, c
             return 'GO'
 
         else:
@@ -104,8 +106,7 @@ class Interpreter(object):
         print " '!quit' to exit."
         print " '!verbose on|off' to show/hide semantic derivation."
         print " '!syntax on|off' to show/hide syntactic parse."
-        print " '!predlex <word>' to show predicates assigned to <word>."
-        print '\n'
+        print " '!predlex <word>' to show predicates assigned to <word>.\r"
 
     def run(self):
         while self.status == 'GO':
@@ -140,8 +141,11 @@ class Interpreter(object):
                     print ""
 
 
-if not opts.ccglex or not opts.predlex:
-    print "Usage: semparser [-v] [-s] --ccglex <path/to/file> --predlex <path/to/file>"
-    sys.exit(1)
-interpreter = Interpreter(opts.ccglex, opts.predlex)
-interpreter.run()
+if __name__ == '__main__':
+    if not opts.ccglex or not opts.predlex:
+        print "Usage: semparser [-v] [-s] --ccglex <path/to/file> \
+               --predlex <path/to/file>"
+        sys.exit(1)
+
+    interpreter = Interpreter(opts.ccglex, opts.predlex)
+    interpreter.run()
