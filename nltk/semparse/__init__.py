@@ -8,3 +8,5 @@
 '''
 Semantic parser which builds Neo-Davidsonian MRs using nltk.ccg
 '''
+
+from predicatelexicon import PredicateLexicon
