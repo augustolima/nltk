@@ -1,0 +1,478 @@
+#! /usr/bin/env python2.7
+
+# ================================
+# Builds a predicate dictionary from the CCG parses
+# given in the input file (-i option) and saves it
+# to the specified output file (-o option).
+# ================================
+
+from __future__ import unicode_literals
+
+import sys
+import optparse
+import re
+import string
+import codecs
+from collections import defaultdict, OrderedDict, namedtuple
+from pyparsing import nestedExpr
+from nltk.sem.logic import Expression, Variable
+
+# Local imports
+import rules
+from predicatelexicon import PredicateLexicon
+
+
+optparser = optparse.OptionParser()
+optparser.add_option("-i", "--infile", dest="infile", default="", help="Input file")
+optparser.add_option("-o", "--outfile", dest="outfile", default="", help="Output file")
+optparser.add_option("--questions", dest="questions", action="store_true",
+                     default=False, help="Use rules for questions.")
+(opts, _) = optparser.parse_args()
+
+if opts.questions:
+    import rules_questions as rules
+
+lexpr = Expression.fromstring
+
+
+# ============================
+# Step 1: Read in the CCG parses
+#         from the file.
+# ============================
+
+def get_parses(infile):
+    """
+    Read in the parses file.
+
+    param str infile: path to parses file.
+    returns list(list) of parses split into dependencies and tags.
+    """
+    # Open file and split at each parse.
+    parses = codecs.open(infile, 'r', 'utf-8').read().split('\n===\n')
+    # Split each parse between dependencies and tags.
+    parses = [parse.split('\n<c> ') for parse in parses]
+    # Split at each dependency.
+    parses = [[deps.split('\n'), tags.split()] for (deps, tags) in parses]
+    return parses
+
+
+# ============================
+# Step 2: Extract information from
+#         parses and pair it to words.
+# ============================
+
+def preprocess_word(word):
+    """
+    Makes word NLTK friendly.
+    """
+    # Remove numeric index.
+    word = word.split('_')[0]
+    # Remove intraword punctuation.
+    for punct in string.punctuation:
+        word = word.replace(punct, '')
+    return word
+
+def build_catLex(parses):
+    """
+    Builds lexicon of categories for each word in parses.
+
+    param list(list) parses: output of get_parses().
+    returns dict{word: namedtuple(pos_tag, category, dependencies)
+    """
+    catLex = defaultdict(list)
+    MR = namedtuple('MR', 'pos, category, deps') 
+    for (deps, tags) in parses:
+        depDict = {}
+        for line in deps:
+            (word, dep, rest) = line.split(' ', 2)
+            word = preprocess_word(word)
+            if word not in string.punctuation:
+                depDict[word] = dep
+        for tag in tags:
+            (word, pos, cat) = tag.split('|')
+            word = preprocess_word(word)
+            cat = re.sub(r'\[.*?\]', '', cat)
+            if 'NP' in cat:
+                cat = cat.replace('NP', 'N')
+            mr = MR(pos, cat, depDict.get(word))
+            if word not in string.punctuation:
+                if mr not in catLex[word]:
+                    catLex[word].append(mr)
+    return catLex
+
+
+# ============================
+# Step 3: Determine logical predicate(s) for each word.
+#         Main function: build_predlex()
+#           - If the word is a special case, return it's MR.
+#           - Otherwise:
+#              + build a stem logical form from the dependency.
+#              + add word, specific information based on pos tag,
+#                   lemma, etc.
+#           - Store the predicate with the word.
+#         Currently: build_predLex ( get_pred_stem ( get_vars ) rules )
+# ============================
+
+def re_key(key, d):
+    """
+    Find the correct key in a dictionary
+    keyed by regular expressions.
+
+    param str key: key to match.
+    param dict d: dictionary keyed by regular expressions.
+    """
+    try:
+        return [k for k in d.keys() if re.match(k, key)][0]
+    except:
+        return None
+
+def getvars(dependency):
+    """
+    Finds the predicate and argument variables
+    from the dependency string.
+
+    param str dependency: C&C dependency output (MR.deps).
+    returns tuple(
+                dict(pairs): dictionary of predicate, arguments.
+                char: the lambda argument variable.
+                 )
+    """
+    Pvars = ['P', 'Q', 'R', 'S', 'T']  # Store of predicate variables.
+    pairs = []  # Holds predicate variable, argument pairs, e.g. (P,[x])=>P(x).
+    lambda_var = []
+
+    def getstr(rhs):
+        if type(rhs) == str or type(rhs) == unicode:
+            Pvar = Pvars.pop(0)
+            Xvar = re.findall(r'\{([A-Ze])\}', rhs)[-1]
+            Xvar = Xvar.lower()
+            pairs.append((Pvar, Xvar))
+            return
+        getstr(rhs[0])
+            
+    def recurse(tree):
+        if type(tree) == str or type(tree) == unicode:
+            Xvars = re.findall(r'\{([A-Ze])\}', tree)
+            if len(Xvars) > 1:
+                Xvars = [var.lower() for var in Xvars]
+                pairs.append((Pvars.pop(0), Xvars[-1]))
+            lambda_var.append(Xvars[0])
+            return
+        else:
+            if len(tree) > 1:
+                getstr(tree[-1])
+                recurse(tree[0])
+            else:
+                recurse(tree[0])
+
+    # Replace the asteriks so that we can match arguments correctly.
+    dependency = dependency.replace('*', '')
+    # Underscores only used with verbs, so make them event variables.
+    dependency = dependency.replace('_', 'e')
+    # Don't need the {_} after the nested blocks if they exist.
+    dependency = re.sub(r'(?<=\))\{[A-Ze]\}.*?(?=[\\/\)])', '', dependency)
+    # Parse the parentheses into a tree structure.
+    try:
+        tree = nestedExpr('(', ')').parseString(dependency).asList()
+    except:
+        print "Failed in getvars, in nestedExpr, line 176"
+        return None, None
+
+    recurse(tree[0]) # Gets pairs and lambda_var.
+    return (dict(pairs), lambda_var[0])
+
+def get_pred_stem(dependency):
+    """
+    Builds the stem of the logical form based on the
+    number of predicate and argument variables are
+    found in dependency.
+
+    param str depedency: C&C dependency output (MR.deps).
+    returns str stem
+    """
+    (pairs, Xvar) = getvars(dependency)
+
+    if not pairs:
+        return None
+    
+    # First add the lambdas.
+    stem = r''
+    for p in pairs.keys():
+        stem += "\\{0} ".format(p)
+    stem += "\\{0}. ".format(Xvar)
+
+    # Then add the exists expression, if there is one. 
+    exists_expr = ""
+    # The following removes duplicates while keeping the list in order.
+    for arg in list(OrderedDict.fromkeys(pairs.values())):
+        if arg != Xvar:
+            if not exists_expr:
+                exists_expr += "exists {0} ".format(arg)
+            else:
+                exists_expr += "{0} ".format(arg)
+    if exists_expr:
+        stem += exists_expr + '.'
+    stem += "("
+
+    # Finally, add the predicates with their arguments.
+    for (i,(pred, args)) in enumerate(pairs.items()):
+        for arg in args: ##
+            stem += "{0}({1})".format(pred, arg) ##
+            if i+1 != len(pairs): ##
+                stem += " & " ##
+#        stem += "{0}".format(pred)
+#        for arg in args:
+#            stem += "({0})".format(arg)
+#        if i+1 != len(pairs): 
+#            stem += " & "
+    return stem
+
+def build_predLex(catLex):
+    """
+    Builds the predicate lexicon from the pos tag
+    and/or the dependencies for each word in catLex.
+
+    param catLex dict{word: list(MR)}: output of build_catLex.
+    """
+    quantifiers = ['all', 'exists', 'some']
+    special_cases = {
+                     r'an?$': rules.indef,
+                     r'be$|is$|was$|am$|are$': rules.copula,
+                     r'NN$|NNS$': rules.kind,
+                     r'NNP.?$|PRP.?$': rules.entity,
+                     r'CC$': rules.conj
+                    }
+
+    posRules = {
+                r'VB.?$|POS$|IN$|TO$': rules.event,
+                r'RB.?$|JJ.?$': rules.mod,
+                r'CD$': rules.count,
+                r'WDT$|WP.?$|WRB$': rules.question
+               }
+
+    wordRules = {
+                 r'not$|n\'t$': rules.negate,
+                 r'no$': rules.complement,
+                 r'the$': rules.unique
+                }
+
+    predLex = PredicateLexicon()
+    for (word, mrs) in catLex.iteritems():
+        if word.lower() in quantifiers:
+            continue
+        for mr in mrs:
+            # Determine the predicate.
+            predicates = []
+
+            # See if the word is a special case.
+            key = re_key(word, special_cases)
+            if not key:
+                key = re_key(mr.pos, special_cases)
+            if key:
+                pred = special_cases[key]()
+                predicates.append(pred)
+
+            if mr.deps and not predicates:
+                stem = get_pred_stem(mr.deps)
+                if not stem:
+                    break
+                poskey = re_key(mr.pos, posRules)
+                if poskey:
+                    try:
+                        pred = posRules[poskey](stem)
+                    except:
+                        print "Failed to create stem for {0} {1} {2}" \
+                               .format(word, mr.deps, stem)
+                        break
+                    predicates.append(pred)
+                wordkey = re_key(word, wordRules)
+                if wordkey:
+                    pred = wordRules[wordkey](stem)
+                    predicates.append(pred)
+
+            if not predicates:
+                sys.stderr.write("No applicable rule for {0} {1} deps={2}.\n"
+                                  .format(word, mr.pos, mr.deps != None))
+                break
+
+            # Store the predicate.
+            if len(word) == 1:
+                # Change words of length 1 so that they don't
+                # become VariableExpressions but ConstantExpressions.
+                sub = "_{0}".format(word)
+            else:
+                sub = word
+            for predicate in predicates:
+                # Make sure each predicate is valid.
+                try:
+                    lexpr(predicate)
+                except:
+                    continue
+                # Add it to the lexicon.
+                key = (word, mr.category)
+                if predicate.format(sub.lower()) not in predLex[key]:
+                    predLex[key].append(predicate.format(sub.lower()))
+                if predicate not in predLex.categories[mr.category]:
+                    predLex.categories[mr.category].append(predicate)
+    return predLex
+
+
+# == START OLD/UNUSED FUNCTIONS ==
+def getpred(dependency):
+    """
+    Determines Neo-Davidsonian Event semantic representation
+    of a word given it's dependecy.
+
+    param str word
+    param str dependency: from MR.deps namedtuple.
+    returns list of predicates.
+    """
+    rePar = re.compile(r'\(')  # Left parentheses.
+    reXargs = re.compile(r'\{[A-Z]\}(?=<[0-9]>)')  # Argument variables \x
+
+    # Replace the asteriks so that we can match arguments correctly.
+    dependency = dependency.replace('*', '')  
+
+    # Determine the number and type of arguments.
+    xargs = reXargs.findall(dependency)
+    
+    mr_string = '\\'
+    xarg_chars = []
+    parg_chars = []
+    for i,_ in enumerate(xargs):
+        char = string.ascii_uppercase[i+1]
+        parg_chars.append(char)
+        mr_string += "{0} ".format(char)
+    mr_string += "e. exists "
+    for xarg in xargs:
+        char = re.sub(r'[\{\}]', '', xarg).lower()
+        xarg_chars.append(char)
+        mr_string += "{0} ".format(char)
+    mr_string += ".("
+    for i,char in enumerate(xarg_chars):
+        mr_string += "{0}:{1}(e, {2}) & ".format("{0}", i+1, char)
+    for i,char in enumerate(reversed(parg_chars)):
+        if i+1 == len(parg_chars):
+            mr_string += "{0}({1})".format(char, xarg_chars[i])
+        else:
+            mr_string += "{0}({1}) & ".format(char, xarg_chars[i])
+    mr_string += ')'
+
+    return [mr_string]
+
+def old_build_predLex(catLex):
+    """
+    Builds the predicate lexicon from the pos tag
+    and/or the dependencies for each word in catLex.
+
+    param catLex dict{word: list(MR)}: output of build_catLex.
+    """
+    quantifiers = ['all', 'exists', 'some']
+    wordRules = {
+                 'the': rules.def_art,
+                 'a': rules.indef_art,
+                 'an': rules.indef_art,
+                 'is': rules.copula,
+                 'be': rules.copula,
+                 'am': rules.copula,
+                 'are': rules.copula,
+                 'was': rules.copula,
+                 'were': rules.copula,
+                 'not': rules.negate,
+                 "nt": rules.negate,
+                 "no": rules.no,
+                }
+    posRules = {
+                'NNP': rules.const,
+                'NNPS': rules.const,
+                'PRP': rules.const,
+                'NN': rules.const2,
+                'NNS': rules.const2,
+		'IN': rules.prep,
+		'TO': rules.to,
+                'JJ': rules.adj,
+                'JJS': rules.adj,
+		'JJR': rules.adj,
+                #'RB': rules.adv,
+                'CD': rules.num,
+                'CC': rules.conj,
+                'WDT': rules.what,
+                'WRB': rules.what,
+                'WP': rules.what,
+                'WP$': rules.what
+               }
+
+    # If POS tag in depRules, use getpred() function.
+    depRules = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'POS']
+
+    predLex = PredicateLexicon()
+    for (word, mrs) in catLex.iteritems():
+        if word.lower() in quantifiers:
+            continue
+        for mr in mrs:
+            # Determine the predicate.
+            predicates = []
+            if word in wordRules:
+                predicates.extend(wordRules[word]())
+            elif mr.deps and mr.pos in depRules:
+                predicates.extend(getpred(mr.deps))
+            elif mr.pos in posRules:
+                predicates.extend(posRules[mr.pos]())
+            else:
+                sys.stderr.write("No applicable rule for {0} {1} {2}.\n"
+                                  .format(word, mr.pos, mr.deps != None))
+                break
+
+            # Store the predicate.
+            if len(word) == 1:
+                # Change words of length 1 so that they don't
+                # become VariableExpressions but ConstantExpressions.
+                sub = "_{0}".format(word)
+            else:
+                sub = word
+            for predicate in predicates:
+                # Make sure each predicate is valid.
+                try:
+                    lexpr(predicate)
+                except:
+                    continue
+                # Add it to the lexicon.
+                if predicate.format(sub.lower()) not in predLex[word]:
+                    predLex[word].append(predicate.format(sub.lower()))
+                if predicate not in predLex.categories[mr.category]:
+                    predLex.categories[mr.category].append(predicate)
+    return predLex
+# == END OLD/UNUSED FUNCTIONS ==
+
+
+def write_predLex(predLex, filename):
+    """
+    Saves predLex to filename.
+    """
+    with codecs.open(filename, 'w', 'utf-8') as out:
+        out.write('# WORDS\n')
+        word_list = sorted(predLex.items(), key=lambda ((w,c),_): w)
+        for ((word, cat), preds) in word_list:
+            for pred in preds:
+                out.write('{0} :: {1} :: {2}\n'.format(word, cat, pred))
+        out.write('# CATEGORIES\n')
+        cat_list = sorted(predLex.categories.items(), key=lambda (c,e): len(c))
+        for (cat, preds) in cat_list:
+            for pred in preds:
+                out.write('{0} :: {1}\n'.format(cat, pred))
+    print "predLex written to {0}.".format(filename)
+
+def main():
+    if not opts.infile or not opts.outfile:
+        print "Usage build_predlex [-i <path/to/inputfile>] \
+               [-o <path/to/outputfile>]"
+        return
+
+    parses = get_parses(opts.infile)
+    catLex = build_catLex(parses)
+    predLex = build_predLex(catLex)
+    write_predLex(predLex, opts.outfile)
+
+
+if __name__ == '__main__':
+    main()
