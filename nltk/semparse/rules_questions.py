@@ -14,9 +14,9 @@ import re
 
 # VB*, IN, TO, POS
 def event(stem):
-    exist_args = re.findall(r'exists ((?:[a-z]\s?)*?)\.', stem)[0].split()
+    exist_args = re.findall(r'exists ((?:[a-z]\s)*?)\.', stem)[0].split()
     lambda_args = [arg.strip('\\') for arg in re.findall(r'\\[a-z]', stem)]
-    for larg in reversed(lambda_args):
+    for larg in lambda_args:
         for (i,earg) in enumerate(reversed(exist_args)):
             stem += " & {0}:{1}({2}, {3})".format('{0}', i+1, larg, earg)
     stem += ')'
@@ -87,7 +87,7 @@ def indef():
 
 # copula
 def copula():
-    return r'\Q \P \y. exists x.(P(x) & Q(x))'
+    return r'\P \x.(P(x))'
 
 # NN, NNS
 def kind():
@@ -100,22 +100,3 @@ def entity():
 # CC
 def conj():
     return r'\P Q x.(P(x) & Q(x))'
-
-
-rules = {
-        'NEGATE': negate,
-        'COMPLEMENT': complement,
-        'UNIQUE': unique,
-        'EVENT': event,
-        'MOD': mod,
-        'COUNT': count,
-        'QUESTION': question
-        }
-
-special_rules = {
-        'INDEF': indef,
-        'COPULA': copula,
-        'TYPE': kind,
-        'ENTITY': entity,
-        'CONJ': conj
-      }
