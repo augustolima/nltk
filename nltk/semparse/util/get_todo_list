@@ -1,0 +1,12 @@
+#! /bin/bash
+
+for FILE in $(grepfind TODO); do
+	if [ $(basename ${FILE}) = "get_todo_list" ]
+	then
+		continue
+	fi
+
+	find . -name $(basename ${FILE})
+	grep TODO ${FILE} | sed -e 's/^\s*//'
+	echo
+done
