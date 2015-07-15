@@ -24,17 +24,33 @@ class reDict(dict):
 class SemanticCategory(object):
 
     def __init__(self, word, pos, syntactic_category=None):
-        self.word = word
+        if len(word) == 1:
+            self.word = "_{0}".format(word)
+        else:
+            self.word = word
         self.pos = pos
-        self.expression = self.generateExpression(syntactic_category).format(word)
+        self._expression = self.generateExpression(syntactic_category)
+        if not self._expression:
+            raise Exception("No valid expression possible.")
 
     def __str__(self):
-        return self.expression
+        return self._expression.format(self.word)
+
+    def __repr__(self):
+        return self._expression.format(self.word)
+
+    def getExpression(self):
+        return self._expression.format(self.word)
+
+    def getBaseExpression(self):
+        return self._expression
 
     def generateExpression(self, syntactic_category):
         semantic_type = self.getSemanticType()
         if semantic_type in special_rules:
             return special_rules[semantic_type]()
+        if not syntactic_category:
+            return None
         processed_category = self._preprocessCategory(syntactic_category)
         (pred_vars, arg_var) = self._getVars(processed_category)
         stem_expression = self._getStem(pred_vars, arg_var)
