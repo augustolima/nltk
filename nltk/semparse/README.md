@@ -42,30 +42,26 @@ interpreter or from within Python.
 * `--predlex path/to/file`: Predicate lexicon to use.
 
 #####Optional
-* `-v --verbose`: Show full semantic derivation.
+* <del>`-v --verbose`: Show full semantic derivation.</del> Not currently supported.
 * `-s --syntax`: Show syntactic parse tree.
 
 ####Commands
+* `!help`: show help message.
 * `!quit`: exit the interpreter.
-* `!verbose=[On|Off]`: set verbose.
-* `!syntax=[On|Off]`: set syntax.
+* `!verbose On|Off`: set verbose.
+* `!syntax On|Off`: set syntax.
+* `!predlex <word>`: show predicates assigned to word.
 
 
 ###Using the semantic parser within Python
 
-    from nltk.ccg import lexicon, chart
-    from nltk.semparse.predicatelexicon import PredicateLexicon
-    from nltk.semparse.CCGSem import CCGSem
+    from nltk.semparse import SemanticParser
+
+    ccglex = 'data/reagan/ccg.lex'
+    predlex = 'data/reagan/predicates.lex'
+    SemParser = SemanticParser(ccglex, predlex)
     
-    lexfile = open('data/reagan/ccg.lex').read()
-    ccglex = lexicon.parseLexicon(lexfile)
-    parser = chart.CCGChartParser(ccglex, chart.DefaultRuleSet)
-    
-    predLex = PredicateLexicon.fromfile('data/reagan/predicates.lex')
-    
-    sent = "Reagan was an actor".split()
-    parse = parser.parse(sent).next()
-    
-    expressions = CCGSem(parse, predLex, False)
+    sent = "Reagan was an actor."
+    expressions = SemParser.parse(sent)
     for expression in expressions:
         print expression
