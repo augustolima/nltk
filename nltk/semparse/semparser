@@ -12,7 +12,7 @@ import string
 from nltk import word_tokenize
 from nltk.ccg import lexicon, chart
 from predicatelexicon import PredicateLexicon
-from CCGSem import CCGSem, resolve
+from semanticparser import SemanticParser
 
 
 optparser = optparse.OptionParser()
@@ -20,41 +20,31 @@ optparser.add_option("-v", "--verbose", action="store_true", dest="verbose",
                      default=False, help="Show MR derivation")
 optparser.add_option("-s", "--syntax", action="store_true", dest="syntax",
                      default=False, help="Show syntactic parse")
-optparser.add_option("--ccglex", dest="ccglex", default="", help="CCG lexicon file")
-optparser.add_option("--predlex", dest="predlex", default="", help="Predicate lexicon file")
+optparser.add_option("--ccglex", dest="ccglex", default="",
+                     help="CCG lexicon file")
+optparser.add_option("--predlex", dest="predlex", default="",
+                     help="Predicate lexicon file")
 (opts, _) = optparser.parse_args()
 
 
 class Interpreter(object):
 
-    def __init__(self, ccglex, predlex):
-        self.ccg_parser = self._setup_ccg_parser(ccglex)
-        self.predLex = self._setup_predlex(predlex)
-        self.print_welcome()
+    def __init__(self, ccglex, predlex, syntax=False, derivation=False):
+        trace = sum([1 for opt in [syntax, derivation] if opt])
+        self.semParser = SemanticParser(ccglex, predlex, trace)
         self.status = 'GO'
 
-    def _setup_ccg_parser(self, ccglex_file):
-        lexfile = open(ccglex_file).read()
-        lex = lexicon.parseLexicon(lexfile)
-        parser = chart.CCGChartParser(lex, chart.DefaultRuleSet)
-        return parser
+    def print_welcome(self):
+        print "\n---- NLTK Semantic Parser (interactive) ----"
+        print "Enter a sentence at the '>' prompt."
+        print " '!help' to show this message."
+        print " '!quit' to exit."
+        print " '!verbose on|off' to show/hide semantic derivation."
+        print " '!syntax on|off' to show/hide syntactic parse."
+        print " '!predlex <word>' to show predicates assigned to <word>.\n"
 
-    def _setup_predlex(self, predlex_file):
-        predLex = PredicateLexicon.fromfile(opts.predlex)
-        return predLex
-
-    def preprocess_sent(self, sentence):
-        """
-        Removes punctuation and tokenizes sentence.
-
-        param str sentence
-        """
-        sentence = word_tokenize(sentence)
-        sentence = [token for token in sentence
-                    if token not in string.punctuation] 
-        return sentence
-
-    def parse_cmd(self, cmd):
+    # TODO: clean up parseCmd function.
+    def parseCmd(self, cmd):
         """
         param str cmd: command to be parsed
         """
@@ -70,8 +60,8 @@ class Interpreter(object):
             if not val:
                 print "No value specified"
                 return 'GO'
-            if val.lower() == 'off': opts.verbose = False
-            elif val.lower() == 'on': opts.verbose = True
+            if val.lower() == 'off': self.semParser.derivation = False ##
+            elif val.lower() == 'on': self.semParser.derivation = True ##
             else: print "Invalid value: {0}".format(val)
             return 'GO'
 
@@ -80,8 +70,8 @@ class Interpreter(object):
             if not val:
                 print "No value specified"
                 return 'GO'
-            if val.lower() == 'off': opts.syntax = False
-            elif val.lower() == 'on': opts.syntax = True
+            if val.lower() == 'off': self.semParser.syntax = False ##
+            elif val.lower() == 'on': self.semParser.syntax = True ##
             else: print "Invalid value: {0}".format(val)
             return 'GO'
 
@@ -99,46 +89,26 @@ class Interpreter(object):
             print "Unknown command: {0}".format(cmd)
             return 'GO'
 
-    def print_welcome(self):
-        print "\n---- NLTK Semantic Parser (interactive) ----"
-        print "Enter a sentence at the '>' prompt."
-        print " '!help' to show this message."
-        print " '!quit' to exit."
-        print " '!verbose on|off' to show/hide semantic derivation."
-        print " '!syntax on|off' to show/hide syntactic parse."
-        print " '!predlex <word>' to show predicates assigned to <word>.\r"
+    def printExpressions(self, expressions):
+        print "======= SEMANTIC PARSES =======\n"
+        if not expressions:
+            print "None"
+        else:
+            for expr in expressions:
+                print "+  {0}".format(expr)
+            print ""
 
     def run(self):
         while self.status == 'GO':
             sent = raw_input("> ")
+
+            # Command
             if sent.startswith('!'):
-                self.status = self.parse_cmd(sent)
-
+                self.status = self.parseCmd(sent)
+            # Sentence
             else:
-                sent = self.preprocess_sent(sent)
-                try:
-                    parse = self.ccg_parser.parse(sent).next()
-                except:
-                    print "No valid syntactic parse for input sentence."
-                    continue
-
-                if opts.syntax:
-                    print "\n======== SYNTACTIC PARSE ========\n"
-                    chart.printCCGDerivation(parse)
-                    print ""
-
-                if opts.verbose:
-                    print "========= DERIVATION ==========\n"
-                expressions = CCGSem(parse, self.predLex, opts.verbose)
-                #expressions = [resolve(expr) for expr in expressions]
-
-                print "======= SEMANTIC PARSES =======\n"
-                if not expressions:
-                    print "None"
-                else:
-                    for expr in expressions:
-                        print "+  {0}".format(expr)
-                    print ""
+                expressions = self.semParser.parse(sent)
+                self.printExpressions(expressions)
 
 
 if __name__ == '__main__':
@@ -147,5 +117,7 @@ if __name__ == '__main__':
                --predlex <path/to/file>"
         sys.exit(1)
 
-    interpreter = Interpreter(opts.ccglex, opts.predlex)
+    interpreter = Interpreter(opts.ccglex, opts.predlex,
+                              opts.syntax, opts.verbose)
+    interpreter.print_welcome()
     interpreter.run()
