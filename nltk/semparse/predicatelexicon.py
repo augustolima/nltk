@@ -40,29 +40,35 @@ class PredicateLexicon(defaultdict):
                 predLex[(word, cat)].append(cls._lexpr(pred))
             elif key == 'CATEGORIES':
                 (cat, pred) = line.strip().split(' :: ')
-                predLex.categories[cat].append(cls._lexpr(pred))
+                predLex[cat].append(cls._lexpr(pred))
             else:
                 raise Exception("Invalid key in lexicon: {0}".format(key))
         return predLex
 
     def __init__(self):
         self.default_factory = list
-        self.categories = defaultdict(list)
 
-    def get(self, word=None, category=None):
-        if not word and not category:
-            return set()
-        elif not word and category:
-            return set(self.categories[category])
-        elif word and not category:
-            preds = [self[(w,c)] for (w,c) in self.keys() if word == w]
-            preds = set(reduce(list.__add__, preds, []))
-            return preds
-        elif (word, category) in self.keys():
-            return set(self[(word, category)])
+    def get(self, key):
+        # Exact key match.
+        if key in self.keys():
+            return defaultdict.__getitem__(self, key)
+
+        # No match or inexact match (i.e. word doesn't match but cat does).
+        elif type(key) == tuple:
+            (word, cat) = key
+            # templates will be [] if cat not a key.
+            templates = defaultdict.__getitem__(self, cat)
+            return [self._lexpr(template.__str__().format(word))
+                    for template in templates] 
+
+        # The word is known but no category specified.
         else:
-            if len(word) == 1:
-                word = "_{0}".format(word)
-            preds = [self._lexpr(expr.__str__().format(word))
-                     for expr in self.categories.get(category, [])]
-            return set(preds)
+            word_keys = [k for k in self.keys() if type(k) == tuple]
+            word_list = [word for (word, cat) in word_keys]
+            if key in word_list:
+                preds = [defaultdict.__getitem__(self, (w,c))
+                         for (w,c) in word_keys if key == w]
+                return set(reduce(list.__add__, preds, []))
+        
+        # Invalid key altogether.
+        return defaultdict.__getitem__(self, key)

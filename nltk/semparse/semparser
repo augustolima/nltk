@@ -31,7 +31,7 @@ class Interpreter(object):
 
     def __init__(self, ccglex, predlex, syntax=False, derivation=False):
         trace = sum([1 for opt in [syntax, derivation] if opt])
-        self.semParser = SemanticParser(ccglex, predlex, trace)
+        self.SemParser = SemanticParser(ccglex, predlex, trace)
         self.status = 'GO'
 
     def print_welcome(self):
@@ -60,8 +60,8 @@ class Interpreter(object):
             if not val:
                 print "No value specified"
                 return 'GO'
-            if val.lower() == 'off': self.semParser.derivation = False ##
-            elif val.lower() == 'on': self.semParser.derivation = True ##
+            if val.lower() == 'off': self.SemParser.derivation = False ##
+            elif val.lower() == 'on': self.SemParser.derivation = True ##
             else: print "Invalid value: {0}".format(val)
             return 'GO'
 
@@ -70,8 +70,8 @@ class Interpreter(object):
             if not val:
                 print "No value specified"
                 return 'GO'
-            if val.lower() == 'off': self.semParser.syntax = False ##
-            elif val.lower() == 'on': self.semParser.syntax = True ##
+            if val.lower() == 'off': self.SemParser.syntax = False ##
+            elif val.lower() == 'on': self.SemParser.syntax = True ##
             else: print "Invalid value: {0}".format(val)
             return 'GO'
 
@@ -79,10 +79,8 @@ class Interpreter(object):
             (cmd, val) = cmd.split()
             if not val:
                 return 'GO'
-            keys = [(w,c) for (w,c) in self.predLex.keys() if w == val] 
-            for (w,c) in keys:
-                for expr in self.predLex.get(word=w, category=c):
-                    print expr, c
+            for expr in self.SemParser.composer.predLex.get(val):
+                print expr
             return 'GO'
 
         else:
@@ -107,7 +105,7 @@ class Interpreter(object):
                 self.status = self.parseCmd(sent)
             # Sentence
             else:
-                expressions = self.semParser.parse(sent)
+                expressions = self.SemParser.parse(sent)
                 self.printExpressions(expressions)
 
 
