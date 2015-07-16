@@ -1,15 +1,16 @@
 import re
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
+from collections import namedtuple
 
 # ==============================
-# TODO: find elegant way to keep track of derivations.
 # The main semantic parsing algorithm
-# CCGSem. Takes as input a CCG parse
+# buildExpressions. Takes as input a CCG parse
 # as an nltk.Tree and outputs a logic form.
 # ==============================
 
 
 lexpr = Expression.fromstring
+MR = namedtuple('MR', 'expression, derivation') 
 
 class SemanticComposer(object):
 
@@ -36,7 +37,8 @@ class SemanticComposer(object):
             cat = str(tree.label())
             if '(' in cat:  # Get rid of extra parentheses.
                 cat = re.findall(r'\((.*)\)', cat)[0]
-            return self.predLex.get(word=tree[0], category=cat)
+            preds = self.predLex.get((tree[0], cat)) 
+            return [MR(pred, []) for pred in preds]
 
         # Unary rule
         if len(children) == 1:
@@ -46,17 +48,14 @@ class SemanticComposer(object):
         rule = tree.label()[1]
         for left_ex in self.buildExpressions(children[0]):
             for right_ex in self.buildExpressions(children[1]):
-                expr = self.applyRule(left_ex, right_ex, rule)
+                expr = self.applyRule(left_ex.expression, right_ex.expression, rule)
                 if self.check(expr):
-                    expressions.append(expr)
-
                     string = "* {0} {1} {2}\n\t==> {3}" \
-                              .format(left_ex, rule, right_ex, expr)
-                    #if string not in self.derivation:
-                    #    self.derivation.append(string)
+                              .format(left_ex.expression, rule, right_ex.expression, expr)
+                    derivation = left_ex.derivation+right_ex.derivation
+                    derivation.append(string)
+                    expressions.append(MR(expr, derivation))
 
-        #if self.derivation and self.derivation[-1] != '\n':
-        #    self.derivation.append('\n')
         return expressions
 
     def getChildren(self, tree):
@@ -83,6 +82,8 @@ class SemanticComposer(object):
         :type expression: nltk.sem.logic.Expression
         :rtype: bool
         """
+        if not expression:
+            return False
         # Check for misplaced lambda expressions.
         if re.findall(r'[a-zA-Z]+?(?::[0-9])?\([^a-z]', expression.__str__()):
             return False
@@ -120,6 +121,7 @@ class SemanticComposer(object):
             return self.compose(right_ex, left_ex)
         raise Exception("Bad rule: {0}".format(rule))
 
+    # TODO: complete typeraise function.
     def typeraise(self, expression):
         """
         Typeraises expression.
@@ -139,8 +141,8 @@ class SemanticComposer(object):
         :type expr1, expr2: nltk.sem.logic.Expression 
         :rtype: nltk.sem.logic.Expression
         """
-        first = ApplicationExpression(expr2, lexpr('C')).simplify()
-        sec = ApplicationExpression(expr1, first).simplify()
+        first = ApplicationExpression(expr1, lexpr('C')).simplify()
+        sec = ApplicationExpression(first, expr2).simplify()
         string = sec.__str__() 
         try:
             first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
@@ -150,6 +152,7 @@ class SemanticComposer(object):
             newstring = '\\C. ' + string
         return lexpr(newstring)
 
+    # TODO: check/fix substitute function.
     def substitute(self, expr1, expr2):
         """
         Performs the substitute operation of expr1 and expr2

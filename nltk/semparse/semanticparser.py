@@ -10,7 +10,7 @@ class SemanticParser(object):
     Relies on a CCG parser and a semantic composition function.
     Here we use nltk.ccg.CCGChartParser and nltk.semparse.CCGSem.
     """
-    def __init__(self, ccglex_file, predlex_file, trace=0):
+    def __init__(self, ccglex_file, predlex_file, syntax=False, derivation=False):
         """
         :param ccglex_file: CCG lexicon filename.
         :type ccglex_file: str
@@ -23,7 +23,8 @@ class SemanticParser(object):
         """
         self.ccg_parser = self._setupCCGParser(ccglex_file)
         self.composer = self._setupSemanticComposer(predlex_file)
-        self.trace = trace
+        self.syntax = syntax
+        self.derivation = derivation
 
     def _setupCCGParser(self, ccglex_file):
         """
@@ -77,16 +78,18 @@ class SemanticParser(object):
         except:
             raise Exception("No valid syntactic parse for input sentence.")
 
-        if self.trace >= 2:
+        if self.syntax:
             print "\n======== SYNTACTIC PARSE ========\n"
             chart.printCCGDerivation(ccg_parse)
             print ""
 
         expressions = self.composer.buildExpressions(ccg_parse)
         # Currently can't track derivations.
-#        if self.trace >= 1:
-#            print "========= DERIVATION ==========\n"
-#            for expr in self.composer.derivation:
-#                print expr
+        if self.derivation:
+            print "========= DERIVATION ==========\n"
+            for expr in expressions:
+                for d in expr.derivation:
+                    print d
+                print ""
 
         return expressions

@@ -30,8 +30,7 @@ optparser.add_option("--predlex", dest="predlex", default="",
 class Interpreter(object):
 
     def __init__(self, ccglex, predlex, syntax=False, derivation=False):
-        trace = sum([1 for opt in [syntax, derivation] if opt])
-        self.SemParser = SemanticParser(ccglex, predlex, trace)
+        self.SemParser = SemanticParser(ccglex, predlex, syntax, derivation)
         self.status = 'GO'
 
     def print_welcome(self):
@@ -60,8 +59,8 @@ class Interpreter(object):
             if not val:
                 print "No value specified"
                 return 'GO'
-            if val.lower() == 'off': self.SemParser.derivation = False ##
-            elif val.lower() == 'on': self.SemParser.derivation = True ##
+            if val.lower() == 'off': self.SemParser.derivation = False
+            elif val.lower() == 'on': self.SemParser.derivation = True
             else: print "Invalid value: {0}".format(val)
             return 'GO'
 
@@ -70,8 +69,8 @@ class Interpreter(object):
             if not val:
                 print "No value specified"
                 return 'GO'
-            if val.lower() == 'off': self.SemParser.syntax = False ##
-            elif val.lower() == 'on': self.SemParser.syntax = True ##
+            if val.lower() == 'off': self.SemParser.syntax = False 
+            elif val.lower() == 'on': self.SemParser.syntax = True 
             else: print "Invalid value: {0}".format(val)
             return 'GO'
 
@@ -93,7 +92,7 @@ class Interpreter(object):
             print "None"
         else:
             for expr in expressions:
-                print "+  {0}".format(expr)
+                print "+  {0}".format(expr.expression)
             print ""
 
     def run(self):

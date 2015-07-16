@@ -42,7 +42,7 @@ interpreter or from within Python.
 * `--predlex path/to/file`: Predicate lexicon to use.
 
 #####Optional
-* <del>`-v --verbose`: Show full semantic derivation.</del> Not currently supported.
+* `-v --verbose`: Show full semantic derivation.
 * `-s --syntax`: Show syntactic parse tree.
 
 ####Commands
