@@ -2,9 +2,14 @@ import re
 from collections import OrderedDict
 from pyparsing import nestedExpr
 
-from rules import rules, special_rules
+import rules
 
 class reDict(dict):
+    """
+    Dictionary keyed by regular expressions. Cuts down
+    on redundancy when matching e.g. multiple POS tags
+    to one function.
+    """
     def __init__(self, arg):
         dict.__init__(self, arg)
 
@@ -23,15 +28,26 @@ class reDict(dict):
 
 class SemanticCategory(object):
 
-    def __init__(self, word, pos, syntactic_category=None):
+    def __init__(self, word, pos, syntactic_category=None, question=False):
+        # Special question handling.
+        if question:
+            self.rules = rules.question_rules
+            self.special_rules = rules.question_special_rules
+        else:
+            self.rules = rules.rules
+            self.special_rules = rules.special_rules
+
+        # Reformat 1-length words so that they don't become VariableExpressions.
         if len(word) == 1:
             self.word = "_{0}".format(word)
         else:
             self.word = word
         self.pos = pos
+        self.semantic_type = self.getSemanticType()
         self._expression = self.generateExpression(syntactic_category)
         if not self._expression:
-            raise Exception("No valid expression possible.")
+            raise Exception("No valid expression possible. {0} {1} {2}"
+                            .format(word, syntactic_category, self.semantic_type))
 
     def __str__(self):
         return self._expression.format(self.word)
@@ -46,17 +62,31 @@ class SemanticCategory(object):
         return self._expression
 
     def generateExpression(self, syntactic_category):
-        semantic_type = self.getSemanticType()
-        if semantic_type in special_rules:
-            return special_rules[semantic_type]()
+        """
+        Determines logical predicate for the word given its
+        syntactic category and semantic type.
+
+        :param syntactic_category: CCG category for self.word.
+        :type syntactic_category: str
+        """
+        if self.semantic_type in self.special_rules:
+            return self.special_rules[self.semantic_type]()
         if not syntactic_category:
             return None
+
         processed_category = self._preprocessCategory(syntactic_category)
         (pred_vars, arg_var) = self._getVars(processed_category)
         stem_expression = self._getStem(pred_vars, arg_var)
-        return rules[semantic_type](stem_expression)
+        try:
+            return self.rules[self.semantic_type](stem_expression)
+        except KeyError:
+            return None
 
     def getSemanticType(self):
+        """
+        Determines semantic type for the given word
+        based on it's lemma or POS tag.
+        """
         MAP = reDict({r'an?$': 'INDEF',
                 r'be$|is$|was$|am$|are$': 'COPULA',
                 r'not$|n\'t$': 'NEGATE',
@@ -78,13 +108,30 @@ class SemanticCategory(object):
             return None
 
     def _preprocessCategory(self, syntactic_category):
-        reBrack = re.compile(r'(?<=\))\{[A-Ze]\}.*?(?=[\\/\)])')
+        """
+        Removes astericks in category (it specifies unneeded information). 
+        Changes underscore to event variable 'e'.
+        Removes bracketed syntactic specifiers, e.g. 'S[dcl]' => 'S'
+
+        :param syntactic_category: CCG category for self.word.
+        :type syntactic_category: str
+        """
         processed_category = syntactic_category.replace('*', '')
         processed_category = processed_category.replace('_', 'e')
+        reBrack = re.compile(r'(?<=\))\{[A-Ze]\}.*?(?=[\\/\)])')
         processed_category = reBrack.sub('', processed_category)
         return processed_category
         
     def _getVars(self, syntactic_category):
+        """
+        Finds and pairs up the predicate and argument variables
+        for the logical expression from the syntactic category.
+        Operates by first parsing the category according to it's
+        parentheses, and then recursing.
+
+        :param syntactic_category: CCG category for self.word.
+        :type syntactic_category: str
+        """
         variable_store = ['P', 'Q', 'R', 'S']
         predicate_variables = {}
         argument_variable = [] 
@@ -121,6 +168,16 @@ class SemanticCategory(object):
         return (predicate_variables, argument_variable[0])
 
     def _getStem(self, predicate_variables, argument_variable):
+        """
+        Builds the stem expression. i.e. the expression without
+        semantic type specific information.
+
+        :param predicate_variables: lambda predicate variables paired with
+            their argument variables.
+        :type predicate_variables: dict(str: list(str))
+        :param argument_variable: lambda argument variable.
+        :type argument_variable: str
+        """
         # Add the lambdas.
         stem = r''
         for var in predicate_variables.keys():

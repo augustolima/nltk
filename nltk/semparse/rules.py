@@ -12,6 +12,7 @@ import re
 #        POS Rules        =
 # =========================
 
+# TODO: figure out how to deal with events without 'exists' arguments.
 # VB*, IN, TO, POS
 def event(stem):
     exist_args = re.findall(r'exists ((?:[a-z]\s?)*?)\.', stem)[0].split()
@@ -40,9 +41,12 @@ def count(stem):
 
 # WDT, WP*, WRB
 def question(stem):
-    exist_args = re.findall(r'exists ((?:[a-z]\s)*?)\.', stem)[0].split()
-    for earg in exist_args:
-        stem += " & TARGET({0})".format(earg)
+    try:
+        args = re.findall(r'exists ((?:[a-z]\s?)*?)\.', stem)[0].split()
+    except IndexError:  # No exists in stem expression.
+        args = re.findall(r'\\([a-z])\.', stem)[0]
+    for arg in args:
+        stem += " & TARGET({0})".format(arg)
     stem += ')'
     return stem
 
@@ -102,7 +106,31 @@ def conj():
     return r'\P Q x.(P(x) & Q(x))'
 
 
+# =========================
+#        Questions        =
+# =========================
+
+# copula
+def qcopula():
+    return r'\P \x.(P(x))'
+
+
+
+# =========================
+#         Mappings        =
+# =========================
+
 rules = {
+        'NEGATE': negate,
+        'COMPLEMENT': complement,
+        'UNIQUE': unique,
+        'EVENT': event,
+        'MOD': mod,
+        'COUNT': count,
+        'QUESTION': question
+        }
+
+question_rules = {
         'NEGATE': negate,
         'COMPLEMENT': complement,
         'UNIQUE': unique,
@@ -115,6 +143,14 @@ rules = {
 special_rules = {
         'INDEF': indef,
         'COPULA': copula,
+        'TYPE': kind,
+        'ENTITY': entity,
+        'CONJ': conj
+      }
+
+question_special_rules = {
+        'INDEF': indef,
+        'COPULA': qcopula,
         'TYPE': kind,
         'ENTITY': entity,
         'CONJ': conj

@@ -1,13 +1,14 @@
 #! /usr/bin/env python2.7
 
-# ================================
+# ==================================================
 # Builds a predicate dictionary from the CCG parses
 # given in the input file (-i option) and saves it
 # to the specified output file (-o option).
-# ================================
+# ==================================================
 
 from __future__ import unicode_literals
 
+import sys
 import optparse
 import re
 import string
@@ -16,7 +17,6 @@ from collections import defaultdict, namedtuple
 from semanticcategory import SemanticCategory
 
 
-# TODO: take --questions flag into account.
 optparser = optparse.OptionParser()
 optparser.add_option("-i", "--infile", dest="infile", default="", help="Input file")
 optparser.add_option("-o", "--outfile", dest="outfile", default="", help="Output file")
@@ -26,10 +26,9 @@ optparser.add_option("--questions", dest="questions", action="store_true",
 
 
 
-# ============================
-# Step 1: Read in the CCG parses
-#         from the file.
-# ============================
+# =============================================
+# Step 1: Read in the CCG parses from the file.
+# =============================================
 
 def get_parses(infile):
     """
@@ -47,10 +46,9 @@ def get_parses(infile):
     return parses
 
 
-# ============================
-# Step 2: Extract information from
-#         parses and pair it to words.
-# ============================
+# =============================================================
+# Step 2: Extract information from parses and pair it to words.
+# =============================================================
 
 def preprocess_word(word):
     """
@@ -92,17 +90,9 @@ def build_catLex(parses):
     return catLex
 
 
-# ============================
+# ======================================================
 # Step 3: Determine logical predicate(s) for each word.
-#         Main function: build_predlex()
-#           - If the word is a special case, return it's MR.
-#           - Otherwise:
-#              + build a stem logical form from the dependency.
-#              + add word, specific information based on pos tag,
-#                   lemma, etc.
-#           - Store the predicate with the word.
-#         Currently: build_predLex ( get_pred_stem ( get_vars ) rules )
-# ============================
+# ======================================================
 
 def build_preds(catLex):
     words = defaultdict(list)
@@ -110,9 +100,12 @@ def build_preds(catLex):
     for (word, mrs) in catLex.items():
         for mr in mrs:
             try:
-                semCat = SemanticCategory(word, mr.pos, mr.deps)
+                semCat = SemanticCategory(word, mr.pos, mr.deps, opts.questions)
             except:
+                line = "Error creating expression for '{0}' mr({1} {2} {3})\n"
+                sys.stderr.write(line.format(word, mr.pos, mr.category, mr.deps))
                 continue
+
             key = (word, mr.category)
             if semCat.getExpression() not in words[key]:
                 words[key].append(semCat.getExpression())
@@ -135,12 +128,12 @@ def write_predLex(words, categories, filename):
         for (cat, preds) in cat_list:
             for pred in preds:
                 out.write('{0} :: {1}\n'.format(cat, pred))
-    print "predLex written to {0}.".format(filename)
+    sys.stderr.write("predLex written to {0}.\n".format(filename))
 
 def main():
     if not opts.infile or not opts.outfile:
-        print "Usage build_predlex [-i <path/to/inputfile>] \
-               [-o <path/to/outputfile>]"
+        line = "Usage build_predlex [-i <path/to/inputfile>] [-o <path/to/outputfile>]\n"
+        sys.stderr.write(line)
         return
 
     parses = get_parses(opts.infile)
