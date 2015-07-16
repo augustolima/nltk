@@ -84,7 +84,6 @@ class SemanticParser(object):
             print ""
 
         expressions = self.composer.buildExpressions(ccg_parse)
-        # Currently can't track derivations.
         if self.derivation:
             print "========= DERIVATION ==========\n"
             for expr in expressions:

@@ -1,15 +1,15 @@
 from __future__ import unicode_literals
 import re
 
-# ============================
-# Rules for translating words/phrases
-# into Neo-Davidsonian logic forms 
-# as described in Reddy et. al. 2014.
-# ===========================
+# =========================================
+# Rules for translating words/phrases into
+# Neo-Davidsonian logic forms as described
+# in Reddy et. al. 2014.
+# =========================================
 
 
 # =========================
-#        POS Rules        =
+#        POS Rules        
 # =========================
 
 # TODO: figure out how to deal with events without 'exists' arguments.
@@ -52,7 +52,7 @@ def question(stem):
 
 
 # =========================
-#        Word Rules       =
+#        Word Rules       
 # =========================
 
 # not, n't
@@ -82,7 +82,7 @@ def unique(stem):
 
 
 # =========================
-#      Special Cases      =
+#      Special Cases      
 # =========================
 
 # indefinite articles
@@ -107,7 +107,7 @@ def conj():
 
 
 # =========================
-#        Questions        =
+#        Questions        
 # =========================
 
 # copula
@@ -117,7 +117,7 @@ def qcopula():
 
 
 # =========================
-#         Mappings        =
+#         Mappings        
 # =========================
 
 rules = {
