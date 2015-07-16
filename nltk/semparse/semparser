@@ -16,14 +16,10 @@ from semanticparser import SemanticParser
 
 
 optparser = optparse.OptionParser()
-optparser.add_option("-v", "--verbose", action="store_true", dest="verbose",
-                     default=False, help="Show MR derivation")
-optparser.add_option("-s", "--syntax", action="store_true", dest="syntax",
-                     default=False, help="Show syntactic parse")
-optparser.add_option("--ccglex", dest="ccglex", default="",
-                     help="CCG lexicon file")
-optparser.add_option("--predlex", dest="predlex", default="",
-                     help="Predicate lexicon file")
+optparser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Show MR derivation")
+optparser.add_option("-s", "--syntax", action="store_true", dest="syntax", default=False, help="Show syntactic parse")
+optparser.add_option("--ccglex", dest="ccglex", default="", help="CCG lexicon file")
+optparser.add_option("--predlex", dest="predlex", default="", help="Predicate lexicon file")
 (opts, _) = optparser.parse_args()
 
 
@@ -42,46 +38,23 @@ class Interpreter(object):
         print " '!syntax on|off' to show/hide syntactic parse."
         print " '!predlex <word>' to show predicates assigned to <word>.\n"
 
-    # TODO: clean up parseCmd function.
     def parseCmd(self, cmd):
         """
         param str cmd: command to be parsed
         """
+        args = cmd.split()
+        args.pop(0)  # Strip off command name.
+
         if cmd == '!quit':
-            return 'STOP'
-
+            return self._quit(*args)
         elif cmd == '!help':
-            self.print_welcome()
-            return 'GO'
-
+            return self._help(*args)
         elif cmd.startswith('!verbose'):
-            (cmd, val) = cmd.split()
-            if not val:
-                print "No value specified"
-                return 'GO'
-            if val.lower() == 'off': self.SemParser.derivation = False
-            elif val.lower() == 'on': self.SemParser.derivation = True
-            else: print "Invalid value: {0}".format(val)
-            return 'GO'
-
+            return self._verbose(*args)
         elif cmd.startswith('!syntax'):
-            (cmd, val) = cmd.split()
-            if not val:
-                print "No value specified"
-                return 'GO'
-            if val.lower() == 'off': self.SemParser.syntax = False 
-            elif val.lower() == 'on': self.SemParser.syntax = True 
-            else: print "Invalid value: {0}".format(val)
-            return 'GO'
-
+            return self._syntax(*args)
         elif cmd.startswith("!predlex"):
-            (cmd, val) = cmd.split()
-            if not val:
-                return 'GO'
-            for expr in self.SemParser.composer.predLex.get(val):
-                print expr
-            return 'GO'
-
+            return self._predlex(*args)
         else:
             print "Unknown command: {0}".format(cmd)
             return 'GO'
@@ -108,10 +81,53 @@ class Interpreter(object):
                 self.printExpressions(expressions)
 
 
+    # ===============================
+    #     Interpreter commands 
+    # ===============================
+
+    def _quit(self, arg=None):
+        return 'STOP'
+
+    def _help(self, arg=None):
+        self.print_welcome()
+        return 'GO'
+
+    def _verbose(self, arg=None):
+        if not arg:
+            if self.SemParser.derivation == True:
+                print 'On'
+            else:
+                print 'Off'
+            return 'GO'
+        if arg.lower() == 'off': self.SemParser.derivation = False
+        elif arg.lower() == 'on': self.SemParser.derivation = True
+        else: print "Invalid value: {0}".format(arg)
+        return 'GO'
+
+    def _syntax(self, arg=None):
+        if not arg:
+            if self.SemParser.syntax == True:
+                print 'On'
+            else:
+                print 'Off'
+            return 'GO'
+        if arg.lower() == 'off': self.SemParser.syntax = False 
+        elif arg.lower() == 'on': self.SemParser.syntax = True 
+        else: print "Invalid value: {0}".format(arg)
+        return 'GO'
+
+    def _predlex(self, arg=None):
+        if not arg:
+            return 'GO'
+        for expr in self.SemParser.composer.predLex.get(arg):
+            print expr
+        return 'GO'
+
+
 if __name__ == '__main__':
     if not opts.ccglex or not opts.predlex:
-        print "Usage: semparser [-v] [-s] --ccglex <path/to/file> \
-               --predlex <path/to/file>"
+        line = "Usage: semparser [-v] [-s] --ccglex <path/to/file> --predlex <path/to/file>\n"
+        sys.stderr.write(line)
         sys.exit(1)
 
     interpreter = Interpreter(opts.ccglex, opts.predlex,
