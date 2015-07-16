@@ -6,9 +6,20 @@ from nltk.sem.logic import Expression
 class PredicateLexicon(defaultdict):
     """
     Lexicon that maps words and CCG categories to logical forms.
-    If the logical form of a word is known, it is returned.
-    Otherwise, user can specify a word and a category to get
-    a list of possible logical forms for that word with that category.
+    The lexicon is keyed by both tuple(word, category) and 
+    just category. It can be queryed in multiple ways.
+
+    predlex.get("cat")
+        => predicates assigned to "cat" for all categories of "cat".
+    predlex.get(("cat", 'N'))
+        => predicates assign to "cat" only for category 'N'.
+    predlex.get(('N'))
+        => All predicates assigned to 'N'.
+    predlex.get(("slurm", 'N'))
+        => For unknown word "slurm", fills in all predicates for 'N' with "slurm".
+
+    PredicateLexicon should only be queryed with the get method,
+        not __getitem__.
 
     Predicate lexicon file format:
     #WORDS
@@ -25,6 +36,9 @@ class PredicateLexicon(defaultdict):
         Loads predicate lexicon from filename.
         Input file should be of the format as created
         by the build_predlex script.
+
+        :param filename: path to predicate lexicon file.
+        :type filename: str
         """
         predLex = cls()
         fp = codecs.open(filename, 'r', 'utf-8')

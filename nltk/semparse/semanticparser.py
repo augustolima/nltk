@@ -8,7 +8,7 @@ from composer import SemanticComposer
 class SemanticParser(object):
     """
     Relies on a CCG parser and a semantic composition function.
-    Here we use nltk.ccg.CCGChartParser and nltk.semparse.CCGSem.
+    Here we use nltk.ccg.CCGChartParser and nltk.semparse.SemanticComposer
     """
     def __init__(self, ccglex_file, predlex_file, syntax=False, derivation=False):
         """

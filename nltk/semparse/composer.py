@@ -52,9 +52,9 @@ class SemanticComposer(object):
                 if self.check(expr):
                     string = "* {0} {1} {2}\n\t==> {3}" \
                               .format(left_ex.expression, rule, right_ex.expression, expr)
-                    derivation = left_ex.derivation+right_ex.derivation
+                    derivation = left_ex.derivation + right_ex.derivation
                     derivation.append(string)
-                    expressions.append(MR(expr, derivation))
+                    expressions.append( MR(expr, derivation) )
 
         return expressions
 
@@ -166,6 +166,7 @@ class SemanticComposer(object):
         newstring = '\\S ' + sec.__str__()
         return lexpr(newstring)
 
+    # TODO: fix resolve function.
     def resolve(expression):
         """
         Does not currently work for all expressions.
