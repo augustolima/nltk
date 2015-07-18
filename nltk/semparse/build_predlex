@@ -9,6 +9,7 @@
 from __future__ import unicode_literals
 
 import sys
+import traceback
 import optparse
 import re
 import string
@@ -101,9 +102,10 @@ def build_preds(catLex):
         for mr in mrs:
             try:
                 semCat = SemanticCategory(word, mr.pos, mr.deps, opts.questions)
-            except:
+            except Exception as e:
                 line = "Error creating expression for '{0}' mr({1} {2} {3})\n"
                 sys.stderr.write(line.format(word, mr.pos, mr.category, mr.deps))
+		print traceback.format_exc()
                 continue
 
             key = (word, mr.category)
