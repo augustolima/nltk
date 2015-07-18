@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import re
 import string
 from nltk import word_tokenize
@@ -92,3 +94,32 @@ class SemanticParser(object):
                 print ""
 
         return expressions
+
+
+def demo():
+    # Statement data.
+    semParser = SemanticParser('data/reagan/ccg.lex', 'data/reagan/predicates.lex',
+                                syntax=True, derivation=True)
+    sent = "Reagan had four children."
+    print sent, '\n'
+    mrs = semParser.parse(sent)
+    print "========= SEMANTIC PARSES ==========\n"
+    for mr in mrs:
+        print "+", mr.expression 
+    print ""
+    
+
+    # Question data.
+    semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.lex',
+                                syntax=True, derivation=True)
+    sent = "What is the longest river?"
+    print sent, '\n'
+    mrs = semParser.parse(sent)
+    print "========= SEMANTIC PARSES ==========\n"
+    for mr in mrs:
+        print "+", mr.expression 
+    print ""
+
+
+if __name__ == '__main__':
+    demo()

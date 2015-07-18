@@ -4,6 +4,8 @@
 # Semantic parser CLI tool.
 # ============================
 
+from __future__ import unicode_literals
+
 import sys
 import optparse
 import readline  # Needed for shell-style line editing/cmd history.
@@ -73,6 +75,8 @@ class Interpreter(object):
             sent = raw_input("> ")
 
             # Command
+	    if not sent:
+		continue
             if sent.startswith('!'):
                 self.status = self.parseCmd(sent)
             # Sentence
@@ -119,8 +123,9 @@ class Interpreter(object):
     def _predlex(self, arg=None):
         if not arg:
             return 'GO'
-        for expr in self.SemParser.composer.predLex.get(arg):
-            print expr
+        for (exprs, cat) in self.SemParser.composer.predLex.get(arg):
+            for expr in exprs:
+                print "{0} -- {1}".format(expr, cat)
         return 'GO'
 
 

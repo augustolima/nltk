@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import codecs
 from collections import defaultdict
 from nltk.sem.logic import Expression
@@ -64,10 +66,12 @@ class PredicateLexicon(defaultdict):
 
     def get(self, key):
         # Exact key match.
+        # Return predicates.
         if key in self.keys():
             return defaultdict.__getitem__(self, key)
 
         # No match or inexact match (i.e. word doesn't match but cat does).
+        # Return template predicates filled in by word.
         elif type(key) == tuple:
             (word, cat) = key
             # templates will be [] if cat not a key.
@@ -76,13 +80,14 @@ class PredicateLexicon(defaultdict):
                     for template in templates] 
 
         # The word is known but no category specified.
+        # Return lambda expression with associated category.
         else:
             word_keys = [k for k in self.keys() if type(k) == tuple]
             word_list = [word for (word, cat) in word_keys]
             if key in word_list:
-                preds = [defaultdict.__getitem__(self, (w,c))
+                preds = [(defaultdict.__getitem__(self, (w,c)), c)
                          for (w,c) in word_keys if key == w]
-                return set(reduce(list.__add__, preds, []))
+                return preds
         
         # Invalid key altogether.
         return defaultdict.__getitem__(self, key)

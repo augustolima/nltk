@@ -1,6 +1,8 @@
+from __future__ import unicode_literals
+
 import re
-from nltk.sem.logic import Variable, Expression, ApplicationExpression
 from collections import namedtuple
+from nltk.sem.logic import Variable, Expression, ApplicationExpression
 
 # ==============================
 # The main semantic parsing algorithm
@@ -161,8 +163,8 @@ class SemanticComposer(object):
         :type expr1, expr2: nltk.sem.logic.Expression 
         :rtype: nltk.sem.logic.Expression
         """
-        first = ApplicationExpression(expr1, lexpr('S'))
-        sec = ApplicationExpression(first, expr2).simplify()
+        first = ApplicationExpression(expr2, lexpr('S'))
+        sec = ApplicationExpression(expr1, first).simplify()
         newstring = '\\S ' + sec.__str__()
         return lexpr(newstring)
 
