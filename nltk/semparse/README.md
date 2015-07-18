@@ -65,3 +65,9 @@ interpreter or from within Python.
     expressions = SemParser.parse(sent)
     for expression in expressions:
         print expression
+
+##Testing
+`test.py` holds unit tests for both the logical lexicon generation step
+and the semantic parsing step. For the semantic parsing step, the tests
+will output the composed logical form, nothing, or any error messages that
+occur in the pipeline.
