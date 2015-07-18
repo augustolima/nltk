@@ -1,0 +1,7 @@
+# word_regex	pos_regex	indexsyncat	semantic_type
+
+be$|is$|was$|am$|are$	.*$	((S[dcl]{_}\NP{Y}<1>){_}/NP{Z}<2>){_}	COPULA
+be$|is$|was$|am$|are$	.*$	((S[dcl]{_}\NP{Y}<1>){_}/(S[adj]{Z}<2>\NP{Y*}){Z}){_}	COPULA
+
+# TODO: I want JJs of syncat S\N to behave like JJs of syncat N\N.
+.+$	JJ.?$	(S[adj]{_}\NP{Y}<1>){_}	MOD

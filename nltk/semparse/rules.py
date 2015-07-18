@@ -1,5 +1,11 @@
 from __future__ import unicode_literals
+
 import re
+from nltk.sem.logic import (is_eventvar, is_indvar, Expression,
+                            LambdaExpression, ExistsExpression,
+                            AndExpression, ApplicationExpression,
+                            IndividualVariableExpression,
+                            FunctionVariableExpression)
 
 # =========================================
 # Rules for translating words/phrases into
@@ -7,48 +13,74 @@ import re
 # in Reddy et. al. 2014.
 # =========================================
 
+lexpr = Expression.fromstring
+
+def findVariables(expression):
+    ''' Returns all bound variables.'''
+    if type(expression) == LambdaExpression or type(expression) == ExistsExpression:
+        return findVariables(expression.term)
+    if type(expression) == AndExpression:
+        return findVariables(expression.second) + findVariables(expression.first)
+    if type(expression) == ApplicationExpression:
+        return findVariables(expression.function) + [expression.argument] 
+    if type(expression) == IndividualVariableExpression:
+        return [expression.variable]
+    if type(expression) == FunctionVariableExpression:
+        return []
+
+def getIndVar(stem):
+    '''Returns independent variable, e.g. \\e or \\x'''
+    ivar = None
+    while not ivar:
+        v = stem.variable.__str__()
+        if is_eventvar(v) or is_indvar(v):
+            ivar = stem.variable
+        stem = stem.term 
+    return ivar
+
+def getAndExpr(stem):
+    '''Returns just the AND expression of stem.
+       e.g. \P Q x.(P(x) & Q(x) => (P(x) & Q(x))'''
+    while type(stem) == LambdaExpression or type(stem) == ExistsExpression:
+        stem = stem.term 
+    return stem
+
 
 # =========================
 #        POS Rules        
 # =========================
 
-# TODO: figure out how to deal with events without 'exists' arguments.
 # VB*, IN, TO, POS
 def event(stem):
-    exist_args = re.findall(r'exists ((?:[a-z]\s?)*?)\.', stem)[0].split()
-    lambda_args = [arg.strip('\\') for arg in re.findall(r'\\[a-z]', stem)]
-    for larg in reversed(lambda_args):
-        for (i,earg) in enumerate(reversed(exist_args)):
-            stem += " & {0}:{1}({2}, {3})".format('{0}', i+1, larg, earg)
-    stem += ')'
-    return stem
+    evar = getIndVar(stem)  # Event variable.
+    andexpr = getAndExpr(stem)
+    for (i,var) in enumerate(findVariables(andexpr)):
+        string = "{0}:{1}({2})({3})".format('{0}', i+1, evar, var)
+        andexpr = AndExpression(andexpr, lexpr(string))
+    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
+    expression = lambda_bit + andexpr.__str__()
+    return lexpr(expression)
 
 # RB*, JJ*
 def mod(stem):
-    args = [arg.strip('\\') for arg in re.findall(r'\\[a-z]', stem)]
-    for arg in args:
-        stem += " & {0}({1})".format('{0}', arg)
-    stem += ')'
-    return stem
+    arg = getIndVar(stem)
+    andexpr = getAndExpr(stem)
+    string = "{0}({1})".format('{0}', arg)
+    andexpr = AndExpression(andexpr, lexpr(string))
+    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
+    expression = lambda_bit + andexpr.__str__()
+    return lexpr(expression)
 
 # CD
 def count(stem):
-    args = [arg.strip('\\') for arg in re.findall(r'\\[a-z]', stem)]
-    for arg in args:
-        stem += " & COUNT({0}, {1})".format(arg, '{0}')
-    stem += ')'
-    return stem
+    arg = getIndVar(stem)
+    andexpr = getAndExpr(stem)
+    string = "COUNT({0}, {1})".format(arg, '{0}')
+    andexpr = AndExpression(andexpr, lexpr(string))
+    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
+    expression = lambda_bit + andexpr.__str__()
+    return lexpr(expression)
 
-# WDT, WP*, WRB
-def question(stem):
-    try:
-        args = re.findall(r'exists ((?:[a-z]\s?)*?)\.', stem)[0].split()
-    except IndexError:  # No exists in stem expression.
-        args = re.findall(r'\\([a-z])\.', stem)[0]
-    for arg in args:
-        stem += " & TARGET({0})".format(arg)
-    stem += ')'
-    return stem
 
 
 # =========================
@@ -57,28 +89,30 @@ def question(stem):
 
 # not, n't
 def negate(stem):
-    args = [arg.strip('\\') for arg in re.findall(r'\\[a-z]', stem)]
-    for arg in args:
-        stem += " & NEGATION({0})".format(arg)
-    stem += ')'
-    return stem
+    arg = getIndVar(stem)
+    andexpr = getAndExpr(stem)
+    andexpr = AndExpression(andexpr, lexpr("NEGATION({0})".format(arg)))
+    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
+    expression = lambda_bit + andexpr.__str__()
+    return lexpr(expression)
 
 # no
 def complement(stem):
-    args = [arg.strip('\\') for arg in re.findall(r'\\[a-z]', stem)]
-    for arg in args:
-        stem += " & COMPLEMENT({0})".format(arg)
-    stem += ')'
-    return stem
+    arg = getIndVar(stem)
+    andexpr = getAndExpr(stem)
+    andexpr = AndExpression(andexpr, lexpr("COMPLEMENT({0})".format(arg)))
+    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
+    expression = lambda_bit + andexpr.__str__()
+    return lexpr(expression)
 
 # definite articles
 def unique(stem):
-    args = [arg.strip('\\') for arg in re.findall(r'\\[a-z]', stem)]
-    for arg in args:
-        stem += " & UNIQUE({0})".format(arg)
-    stem += ')'
-    return stem
-
+    arg = getIndVar(stem)
+    andexpr = getAndExpr(stem)
+    andexpr = AndExpression(andexpr, lexpr("UNIQUE({0})".format(arg)))
+    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
+    expression = lambda_bit + andexpr.__str__()
+    return lexpr(expression)
 
 
 # =========================
@@ -87,23 +121,23 @@ def unique(stem):
 
 # indefinite articles
 def indef():
-    return "None"
+    return lexpr("None")
 
 # copula
 def copula():
-    return r'\Q \P \y. exists x.(P(x) & Q(x))'
+    return lexpr(r'\P Q y.exists x.(Q(x) & P(x))')
 
 # NN, NNS
 def kind():
-    return r'\x.({0}(x))'
+    return lexpr(r'\x.({0}(x))')
 
 # NNP*, PRP*
 def entity():
-    return r'\x.(EQUAL(x, {0}))'
+    return lexpr(r'\x.(EQUAL(x, {0}))')
 
 # CC
 def conj():
-    return r'\P Q x.(P(x) & Q(x))'
+    return lexpr(r'\P Q x.(P(x) & Q(x))')
 
 
 # =========================
@@ -112,14 +146,23 @@ def conj():
 
 # copula
 def qcopula():
-    return r'\P \x.(P(x))'
+    return lexpr(r'\P \x.(P(x))')
 
+# WDT, WP*, WRB
+def question(stem):
+    andexpr = getAndExpr(stem)
+    for arg in findVariables(stem):
+        andexpr = AndExpression(andexpr, lexpr("TARGET({0})".format(arg)))
+    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
+    expression = lambda_bit + andexpr.__str__()
+    return lexpr(expression)
 
 
 # =========================
 #         Mappings        
 # =========================
 
+# TODO: implement CLOSED type.
 rules = {
         'NEGATE': negate,
         'COMPLEMENT': complement,
@@ -127,8 +170,16 @@ rules = {
         'EVENT': event,
         'MOD': mod,
         'COUNT': count,
-        'QUESTION': question
+#        'CLOSED': closed  not implemented.
         }
+
+special_rules = {
+        'INDEF': indef,
+        'COPULA': copula,
+        'TYPE': kind,
+        'ENTITY': entity,
+        'CONJ': conj
+      }
 
 question_rules = {
         'NEGATE': negate,
@@ -139,14 +190,6 @@ question_rules = {
         'COUNT': count,
         'QUESTION': question
         }
-
-special_rules = {
-        'INDEF': indef,
-        'COPULA': copula,
-        'TYPE': kind,
-        'ENTITY': entity,
-        'CONJ': conj
-      }
 
 question_special_rules = {
         'INDEF': indef,
