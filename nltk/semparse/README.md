@@ -62,9 +62,9 @@ interpreter or from within Python.
     SemParser = SemanticParser(ccglex, predlex)
     
     sent = "Reagan was an actor."
-    expressions = SemParser.parse(sent)
-    for expression in expressions:
-        print expression
+    for parse in SemParser.parse(sent):
+        print parse.expression
+        break
 
 ##Testing
 `test.py` holds unit tests for both the logical lexicon generation step
