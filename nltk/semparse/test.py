@@ -109,28 +109,26 @@ class SemanticParserTest(unittest.TestCase):
         with open('data/test/reagan.txt', 'r') as sentences:
             for sent in sentences:
                 print '\n', sent
-                mrs = []
                 try:
-                    mrs = semParser.parse(sent)
+                    derivation = semParser.parse(sent).next()
                 except Exception as e:
                     print e
-                for mr in mrs:
-                    print mr.expression
+                    continue
+                print derivation.expression
             print ""
 
     def testQuestion(self):
         sys.stdout.write("\nQUESTIONS\n")
-        semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.lex')
+        semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.old')
         with open('data/test/geoquery.txt', 'r') as sentences:
             for sent in sentences:
                 print '\n', sent
-                mrs = []
                 try:
-                    mrs = semParser.parse(sent)
+                    derivation = semParser.parse(sent).next()
                 except Exception as e:
                     print e
-                for mr in mrs:
-                    print mr.expression
+                    continue
+                print derivation.expression
             print ""
         
 

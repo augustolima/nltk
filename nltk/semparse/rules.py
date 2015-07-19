@@ -149,13 +149,18 @@ def qcopula():
     return lexpr(r'\P \x.(P(x))')
 
 # WDT, WP*, WRB
-def question(stem):
+# Want the TARGET to be the subject. If we're asked a questions like,
+# "What river runs through Texas?"
+def oldquestion(stem):
     andexpr = getAndExpr(stem)
-    for arg in findVariables(stem):
-        andexpr = AndExpression(andexpr, lexpr("TARGET({0})".format(arg)))
+    subjarg = findVariables(stem)[0]
+    andexpr = AndExpression(andexpr, lexpr("TARGET({0})".format(subjarg)))
     lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
     expression = lambda_bit + andexpr.__str__()
     return lexpr(expression)
+
+def question():
+    return lexpr(r'\P x. (P(x) & TARGET(x))')
 
 
 # =========================
@@ -188,7 +193,6 @@ question_rules = {
         'EVENT': event,
         'MOD': mod,
         'COUNT': count,
-        'QUESTION': question
         }
 
 question_special_rules = {
@@ -196,5 +200,6 @@ question_special_rules = {
         'COPULA': qcopula,
         'TYPE': kind,
         'ENTITY': entity,
-        'CONJ': conj
+        'CONJ': conj,
+        'QUESTION': question
       }

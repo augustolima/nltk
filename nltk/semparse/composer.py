@@ -134,6 +134,12 @@ class SemanticComposer(object):
         """
         pass
 
+    # TODO: fix compose function.
+    # This doesn't work. For example,
+    # \Q e.exists z y.(capital(z) & Q(y) & TARGET(y) & TARGET(z)) >B
+    # \P Q e.exists z y.(P(z) & Q(y) & has:1(e,y) & has:2(e,z))
+    #        ==> \C.exists z y.(capital(z) & C(y) & TARGET(y) & TARGET(z))
+    # The 'has' goes away!
     def compose(self, expr1, expr2):
         """
         Performs the functional composition of 
@@ -143,8 +149,8 @@ class SemanticComposer(object):
         :type expr1, expr2: nltk.sem.logic.Expression 
         :rtype: nltk.sem.logic.Expression
         """
-        first = ApplicationExpression(expr1, lexpr('C')).simplify()
-        sec = ApplicationExpression(first, expr2).simplify()
+        first = ApplicationExpression(expr2, lexpr('C')).simplify()
+        sec = ApplicationExpression(first, expr1).simplify()
         string = sec.__str__() 
         try:
             first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
