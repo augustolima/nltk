@@ -9,6 +9,7 @@
 Semantic parser which builds Neo-Davidsonian MRs using nltk.ccg
 '''
 
+from semanticparser import SemanticParser
 from predicatelexicon import PredicateLexicon
 from semanticcategory import SemanticCategory
 from composer import SemanticComposer
