@@ -175,10 +175,8 @@ class SemanticCategory(object):
         def rhsVars(rhs):
             if type(rhs) == str or type(rhs) == unicode:
                 p_var = variable_store.pop(0)
-#                a_var = re.findall(r'\{([A-Ze])\}', rhs)[-1].lower()
-                avars = re.findall(r'\{([A-Ze])\}(?=<\d>)', rhs) ##
-                avars = [var.lower() for var in avars] ##
-#                predicate_variables[p_var] = [a_var]
+                avars = re.findall(r'\{([A-Ze])\}(?=<\d>)', rhs)
+                avars = [var.lower() for var in avars]
                 predicate_variables[p_var] = avars
                 return
             rhsVars(rhs[0])
