@@ -105,14 +105,6 @@ class SemanticParser(object):
                 yield Derivation(parse, derivation, expression)
 
 
-def printSemanticExpressions(semantic_parse):
-    """
-    Prints all expressions for the given semantic parse.
-    i.e. the yield of SemanticParser.parse(sentence) 
-    """
-    for derivation in parse:
-        print derivation.expression
-
 def demo():
     # Statement data.
     semParser = SemanticParser('data/reagan/ccg.lex', 'data/reagan/predicates.lex')
