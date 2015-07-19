@@ -27,8 +27,10 @@ optparser.add_option("--predlex", dest="predlex", default="", help="Predicate le
 
 class Interpreter(object):
 
-    def __init__(self, ccglex, predlex, syntax=False, derivation=False):
-        self.SemParser = SemanticParser(ccglex, predlex, syntax, derivation)
+    def __init__(self, ccglex, predlex, syntax=False, semantics=False):
+        self.SemParser = SemanticParser(ccglex, predlex)
+        self.opt_syntax = syntax
+        self.opt_semantics = semantics
         self.status = 'GO'
 
     def print_welcome(self):
@@ -61,28 +63,31 @@ class Interpreter(object):
             print "Unknown command: {0}".format(cmd)
             return 'GO'
 
-    def printExpressions(self, expressions):
-        print "======= SEMANTIC PARSES =======\n"
-        if not expressions:
-            print "None"
-        else:
-            for expr in expressions:
-                print "+  {0}".format(expr.expression)
-            print ""
+    def printSemanticParse(self, semparse):
+        if self.opt_syntax:
+            print "\n======== SYNTACTIC PARSE ========\n"
+            semparse.printSyntacticDerivation()
+        if self.opt_semantics:
+	    print "\n====== SEMANTIC DERIVATION =======\n"
+	    semparse.printSemanticDerivation()
+        print "\n========= SEMANTIC PARSE =========\n"
+        print semparse.expression
 
     def run(self):
         while self.status == 'GO':
             sent = raw_input("> ")
-
-            # Command
 	    if not sent:
 		continue
+            # Command
             if sent.startswith('!'):
                 self.status = self.parseCmd(sent)
             # Sentence
             else:
-                expressions = self.SemParser.parse(sent)
-                self.printExpressions(expressions)
+                for parse in self.SemParser.parse(sent):
+                    self.printSemanticParse(parse)
+                    ans = raw_input("ENTER for next or 'q' to stop: ")
+                    if ans.lower() == 'q':
+                        break
 
 
     # ===============================
@@ -103,8 +108,8 @@ class Interpreter(object):
             else:
                 print 'Off'
             return 'GO'
-        if arg.lower() == 'off': self.SemParser.derivation = False
-        elif arg.lower() == 'on': self.SemParser.derivation = True
+        if arg.lower() == 'off': self.opt_semantics = False
+        elif arg.lower() == 'on': self.opt_semantics = True
         else: print "Invalid value: {0}".format(arg)
         return 'GO'
 
@@ -115,8 +120,8 @@ class Interpreter(object):
             else:
                 print 'Off'
             return 'GO'
-        if arg.lower() == 'off': self.SemParser.syntax = False 
-        elif arg.lower() == 'on': self.SemParser.syntax = True 
+        if arg.lower() == 'off': self.opt_syntax = False 
+        elif arg.lower() == 'on': self.opt_syntax = True 
         else: print "Invalid value: {0}".format(arg)
         return 'GO'
 

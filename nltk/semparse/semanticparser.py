@@ -7,12 +7,29 @@ from nltk.ccg import lexicon, chart
 from predicatelexicon import PredicateLexicon
 from composer import SemanticComposer
 
+
+class Derivation(object):
+
+    def __init__(self, syntactic, semantic, expression):
+        self.syntax = syntactic
+        self.semantics = semantic
+        self.expression = expression
+
+    def printSyntacticDerivation(self):
+        chart.printCCGDerivation(self.syntax)
+
+    def printSemanticDerivation(self):
+        for step in self.semantics:
+            print step
+        print ""
+        
+
 class SemanticParser(object):
     """
     Relies on a CCG parser and a semantic composition function.
     Here we use nltk.ccg.CCGChartParser and nltk.semparse.SemanticComposer
     """
-    def __init__(self, ccglex_file, predlex_file, syntax=False, derivation=False):
+    def __init__(self, ccglex_file, predlex_file):
         """
         :param ccglex_file: CCG lexicon filename.
         :type ccglex_file: str
@@ -25,8 +42,6 @@ class SemanticParser(object):
         """
         self.ccg_parser = self._setupCCGParser(ccglex_file)
         self.composer = self._setupSemanticComposer(predlex_file)
-        self.syntax = syntax
-        self.derivation = derivation
 
     def _setupCCGParser(self, ccglex_file):
         """
@@ -69,56 +84,49 @@ class SemanticParser(object):
         """
         Parses sentences first into a CCG syntactic parse.
         Then uses this parse to compose a semantics.
+        Yields a list of Derivation instances for each syntactic
+        parse of the sentence.
 
         :param sentence: sentence to parse into logical form.
         :type sentence: str
-        :rtype: list
+        :rtype: list(Derivation)
         """
         sentence = self._preprocessSent(sentence)
-        try:
-            ccg_parse = self.ccg_parser.parse(sentence).next()
-        except:
-            raise Exception("No valid syntactic parse for input sentence.")
+        ccg_parses = self.ccg_parser.parse(sentence)
 
-        if self.syntax:
-            print "\n======== SYNTACTIC PARSE ========\n"
-            chart.printCCGDerivation(ccg_parse)
-            print ""
+        for parse in ccg_parses:
+            try:
+                expressions = self.composer.buildExpressions(parse)
+            except:
+                continue
+            if not expressions:
+                continue
+            for (expression, derivation) in expressions:
+                yield Derivation(parse, derivation, expression)
 
-        expressions = self.composer.buildExpressions(ccg_parse)
-        if self.derivation:
-            print "========= DERIVATION ==========\n"
-            for expr in expressions:
-                for d in expr.derivation:
-                    print d
-                print ""
 
-        return expressions
-
+def printSemanticExpressions(semantic_parse):
+    """
+    Prints all expressions for the given semantic parse.
+    i.e. the yield of SemanticParser.parse(sentence) 
+    """
+    for derivation in parse:
+        print derivation.expression
 
 def demo():
     # Statement data.
-    semParser = SemanticParser('data/reagan/ccg.lex', 'data/reagan/predicates.lex',
-                                syntax=True, derivation=True)
+    semParser = SemanticParser('data/reagan/ccg.lex', 'data/reagan/predicates.lex')
     sent = "Reagan had four children."
-    print sent, '\n'
-    mrs = semParser.parse(sent)
-    print "========= SEMANTIC PARSES ==========\n"
-    for mr in mrs:
-        print "+", mr.expression 
-    print ""
-    
+    print '\n', sent
+    derivation = semParser.parse(sent).next()
+    print "+", derivation.expression
 
     # Question data.
-    semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.lex',
-                                syntax=True, derivation=True)
+    semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.lex')
     sent = "What is the longest river?"
-    print sent, '\n'
-    mrs = semParser.parse(sent)
-    print "========= SEMANTIC PARSES ==========\n"
-    for mr in mrs:
-        print "+", mr.expression 
-    print ""
+    print '\n', sent
+    derivation = semParser.parse(sent).next()
+    print "+", derivation.expression
 
 
 if __name__ == '__main__':
