@@ -1,15 +1,18 @@
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 import re
 from collections import OrderedDict
+# TODO: Figure out if I can really use pyparsing, because its not builtin.
 from pyparsing import nestedExpr
+
 from nltk.sem.logic import (Expression, Tokens, Variable,
                             ExistsExpression, LambdaExpression)
-
-import rules
+#from nltk.semparse import rules
+import rules ##
 
 
 lexpr = Expression.fromstring
+_SPECIAL_CASES_FILE = 'data/lib/specialcases.txt'
 
 
 class reDict(dict):
@@ -69,6 +72,7 @@ class SemanticCategory(object):
         if not self._expression:
             raise Exception("No valid expression possible.")
 
+    # TODO: figure out unicode() for Python3 compatibility.
     def __str__(self):
         expression = unicode(str(self._expression))
         word = self.word.lower()
@@ -95,13 +99,14 @@ class SemanticCategory(object):
         :param syntactic_category: CCG category for self.word.
         :type syntactic_category: str
         """
+        # TODO: use quantifiers.
         quantifiers = Tokens.EXISTS_LIST + Tokens.ALL_LIST
         if self.word.lower() in quantifiers:
             return None
         if self.semantic_type in self.special_rules:
             return self.special_rules[self.semantic_type]()
         if not self.syntactic_category:
-            print "No syntactic category specified."
+            print("No syntactic category specified.")
             return None
 
         processed_category = self._preprocessCategory()
@@ -110,7 +115,7 @@ class SemanticCategory(object):
         try:
             return self.rules[self.semantic_type](stem_expression)
         except KeyError:
-            print "No rule for {0}.".format(self.semantic_type)
+            print("No rule for {0}.".format(self.semantic_type))
             return None
 
     def getSemanticType(self):
@@ -134,7 +139,8 @@ class SemanticCategory(object):
         this is a special case, return the corresponding type.
         Otherwise, return None.
         """
-        with open('data/lib/specialcases.txt', 'r') as file:
+#        with open('data/lib/specialcases.txt', 'r') as file:
+        with open(_SPECIAL_CASES_FILE, 'r') as file: ##
             for line in file:
                 if line.startswith('\n') or line.startswith('#'):
                     continue
@@ -175,7 +181,8 @@ class SemanticCategory(object):
         def rhsVars(rhs):
             if type(rhs) == str or type(rhs) == unicode:
                 p_var = variable_store.pop(0)
-                avars = re.findall(r'\{([A-Ze])\}(?=<\d>)', rhs)
+#                avars = re.findall(r'\{([A-Ze])\}(?=<\d>)', rhs)
+                avars = re.findall(r'\{([A-Ze])\}', rhs) ##
                 avars = [var.lower() for var in avars]
                 predicate_variables[p_var] = avars
                 return
@@ -220,14 +227,17 @@ class SemanticCategory(object):
         lambda_vars = []
         for (pred, args) in predicate_variables.items():
             lambda_vars.append(pred)
-            for arg in args:
+            for arg in reversed(args):
                 pred += "({0})".format(arg)    
-                if arg != argument_variable:
+                if arg != argument_variable and arg not in exists_vars:
                     exists_vars.append(arg)
             sub_expressions.append(lexpr(pred))
         lambda_vars.append(argument_variable)
                 
-        andexpr = reduce(lambda x,y: x & y, sub_expressions)
+        # Just the expression without lambdas or quantifiers.
+        andexpr = sub_expressions[0]
+        for i in range(1, len(sub_expressions)):
+            andexpr = andexpr & sub_expressions[i]
        
         # Add the exists part.
         existsexpr = andexpr

@@ -6,7 +6,7 @@
 # to the specified output file (-o option).
 # ==================================================
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 import sys
 import traceback
@@ -15,7 +15,9 @@ import re
 import string
 import codecs
 from collections import defaultdict, namedtuple
-from semanticcategory import SemanticCategory
+
+#from nltk.semparse.semanticcategory import SemanticCategory
+from semanticcategory import SemanticCategory ##
 
 
 optparser = optparse.OptionParser()
@@ -105,7 +107,7 @@ def build_preds(catLex):
             except Exception as e:
                 line = "Error creating expression for '{0}' mr({1} {2} {3})\n"
                 sys.stderr.write(line.format(word, mr.pos, mr.category, mr.deps))
-		print traceback.format_exc()
+		print(traceback.format_exc())
                 continue
 
             key = (word, mr.category)
@@ -121,12 +123,14 @@ def write_predLex(words, categories, filename):
     """
     with codecs.open(filename, 'w', 'utf-8') as out:
         out.write('# WORDS\n')
-        word_list = sorted(words.items(), key=lambda ((w,c),_): w)
+#        word_list = sorted(words.items(), key=lambda ((w,c),_): w)
+        word_list = sorted(words.items(), key=lambda i: i[0][0]) ##
         for ((word, cat), preds) in word_list:
             for pred in preds:
                 out.write('{0} :: {1} :: {2}\n'.format(word, cat, pred))
         out.write('# CATEGORIES\n')
-        cat_list = sorted(categories.items(), key=lambda (c,e): len(c))
+#        cat_list = sorted(categories.items(), key=lambda (c,e): len(c))
+        cat_list = sorted(categories.items(), key=lambda c: len(c[0])) ##
         for (cat, preds) in cat_list:
             for pred in preds:
                 out.write('{0} :: {1}\n'.format(cat, pred))

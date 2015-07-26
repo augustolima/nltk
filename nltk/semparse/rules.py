@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 
 import re
+from collections import OrderedDict
+
 from nltk.sem.logic import (is_eventvar, is_indvar, Expression,
                             LambdaExpression, ExistsExpression,
                             AndExpression, ApplicationExpression,
@@ -17,22 +19,26 @@ lexpr = Expression.fromstring
 
 def findVariables(expression):
     ''' Returns all bound variables.'''
-    if type(expression) == LambdaExpression or type(expression) == ExistsExpression:
-        return findVariables(expression.term)
-    if type(expression) == AndExpression:
-        return findVariables(expression.second) + findVariables(expression.first)
-    if type(expression) == ApplicationExpression:
-        return findVariables(expression.function) + [expression.argument] 
-    if type(expression) == IndividualVariableExpression:
-        return [expression.variable]
-    if type(expression) == FunctionVariableExpression:
-        return []
+    def helper(expression):
+        if isinstance(expression, LambdaExpression) or isinstance(expression, ExistsExpression): 
+            return findVariables(expression.term)
+        if isinstance(expression, AndExpression): 
+            return findVariables(expression.second) + findVariables(expression.first)
+        if isinstance(expression, ApplicationExpression): 
+            return findVariables(expression.function) + [expression.argument] 
+        if isinstance(expression, IndividualVariableExpression): 
+            return [expression.variable]
+        if isinstance(expression, FunctionVariableExpression): 
+            return []
+    vars = helper(expression)
+    # Removes duplicates while keeping order.
+    return list(OrderedDict.fromkeys(vars))
 
 def getIndVar(stem):
     '''Returns independent variable, e.g. \\e or \\x'''
     ivar = None
     while not ivar:
-        v = stem.variable.__str__()
+        v = str(stem.variable)
         if is_eventvar(v) or is_indvar(v):
             ivar = stem.variable
         stem = stem.term 
@@ -57,8 +63,8 @@ def event(stem):
     for (i,var) in enumerate(findVariables(andexpr)):
         string = "{0}:{1}({2})({3})".format('{0}', i+1, evar, var)
         andexpr = AndExpression(andexpr, lexpr(string))
-    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
-    expression = lambda_bit + andexpr.__str__()
+    lambda_bit = re.split(r'\.(?!.*\..*)', str(stem))[0] + '.'
+    expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
 # RB*, JJ*
@@ -67,8 +73,8 @@ def mod(stem):
     andexpr = getAndExpr(stem)
     string = "{0}({1})".format('{0}', arg)
     andexpr = AndExpression(andexpr, lexpr(string))
-    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
-    expression = lambda_bit + andexpr.__str__()
+    lambda_bit = re.split(r'\.(?!.*\..*)', str(stem))[0] + '.'
+    expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
 # CD
@@ -77,8 +83,8 @@ def count(stem):
     andexpr = getAndExpr(stem)
     string = "COUNT({0}, {1})".format(arg, '{0}')
     andexpr = AndExpression(andexpr, lexpr(string))
-    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
-    expression = lambda_bit + andexpr.__str__()
+    lambda_bit = re.split(r'\.(?!.*\..*)', str(stem))[0] + '.'
+    expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
 
@@ -92,8 +98,8 @@ def negate(stem):
     arg = getIndVar(stem)
     andexpr = getAndExpr(stem)
     andexpr = AndExpression(andexpr, lexpr("NEGATION({0})".format(arg)))
-    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
-    expression = lambda_bit + andexpr.__str__()
+    lambda_bit = re.split(r'\.(?!.*\..*)', str(stem))[0] + '.'
+    expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
 # no
@@ -101,8 +107,8 @@ def complement(stem):
     arg = getIndVar(stem)
     andexpr = getAndExpr(stem)
     andexpr = AndExpression(andexpr, lexpr("COMPLEMENT({0})".format(arg)))
-    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
-    expression = lambda_bit + andexpr.__str__()
+    lambda_bit = re.split(r'\.(?!.*\..*)', str(stem))[0] + '.'
+    expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
 # definite articles
@@ -110,8 +116,8 @@ def unique(stem):
     arg = getIndVar(stem)
     andexpr = getAndExpr(stem)
     andexpr = AndExpression(andexpr, lexpr("UNIQUE({0})".format(arg)))
-    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
-    expression = lambda_bit + andexpr.__str__()
+    lambda_bit = re.split(r'\.(?!.*\..*)', str(stem))[0] + '.'
+    expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
 
@@ -155,8 +161,8 @@ def oldquestion(stem):
     andexpr = getAndExpr(stem)
     subjarg = findVariables(stem)[0]
     andexpr = AndExpression(andexpr, lexpr("TARGET({0})".format(subjarg)))
-    lambda_bit = re.split(r'\.(?!.*\..*)', stem.__str__())[0] + '.'
-    expression = lambda_bit + andexpr.__str__()
+    lambda_bit = re.split(r'\.(?!.*\..*)', str(stem))[0] + '.'
+    expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
 def question():

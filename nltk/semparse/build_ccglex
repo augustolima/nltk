@@ -6,7 +6,7 @@
 # parse_sents script.
 # ==========================
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 import sys
 import optparse
@@ -21,7 +21,7 @@ optparser.add_option("-o", "--outfile", dest="outfile", default="", help="Output
 (opts, _) = optparser.parse_args()
 
 if not opts.infile or not opts.outfile:
-    print "Usage: build_ccg_lex [-i <path/to/inputfile>] [-o <path/to/outputfile>]"
+    print("Usage: build_ccg_lex [-i <path/to/inputfile>] [-o <path/to/outputfile>]")
     sys.exit(1)
 
 

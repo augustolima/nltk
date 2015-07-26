@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import codecs
 from collections import defaultdict
+
 from nltk.sem.logic import Expression
 
 

@@ -2,10 +2,14 @@ from __future__ import unicode_literals
 
 import re
 import string
+
 from nltk import word_tokenize
 from nltk.ccg import lexicon, chart
-from predicatelexicon import PredicateLexicon
-from composer import SemanticComposer
+
+#from nltk.semparse.predicatelexicon import PredicateLexicon
+#from nltk.semparse.composer import SemanticComposer
+from predicatelexicon import PredicateLexicon ##
+from composer import SemanticComposer ##
 
 
 class Derivation(object):
@@ -19,9 +23,12 @@ class Derivation(object):
         chart.printCCGDerivation(self.syntax)
 
     def printSemanticDerivation(self):
+        if not self.semantics:
+            print("None")
+            return
         for step in self.semantics:
-            print step
-        print ""
+            print(step)
+        print()
         
 
 class SemanticParser(object):
@@ -97,9 +104,12 @@ class SemanticParser(object):
         for parse in ccg_parses:
             try:
                 expressions = self.composer.buildExpressions(parse)
+            # Yield just syntactic parse if semantics fail.
             except:
+                yield Derivation(parse, None, None)
                 continue
             if not expressions:
+                yield Derivation(parse, None, None)
                 continue
             for (expression, derivation) in expressions:
                 yield Derivation(parse, derivation, expression)
@@ -109,16 +119,16 @@ def demo():
     # Statement data.
     semParser = SemanticParser('data/reagan/ccg.lex', 'data/reagan/predicates.lex')
     sent = "Reagan had four children."
-    print '\n', sent
+    print('\n', sent)
     derivation = semParser.parse(sent).next()
-    print "+", derivation.expression
+    print("+", derivation.expression)
 
     # Question data.
     semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.lex')
     sent = "What is the longest river?"
-    print '\n', sent
+    print('\n', sent)
     derivation = semParser.parse(sent).next()
-    print "+", derivation.expression
+    print("+", derivation.expression)
 
 
 if __name__ == '__main__':
