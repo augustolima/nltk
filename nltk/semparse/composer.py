@@ -51,6 +51,7 @@ class SemanticComposer(object):
         for left_ex in self.buildExpressions(children[0]):
             for right_ex in self.buildExpressions(children[1]):
                 expr = self.applyRule(left_ex.expression, right_ex.expression, rule)
+                expr = self.postProcess(expr)
                 if self.check(expr):
                     string = "* {0} {1} {2}\n\t==> {3}" \
                               .format(left_ex.expression, rule, right_ex.expression, expr)
@@ -59,6 +60,23 @@ class SemanticComposer(object):
                     expressions.append( MR(expr, derivation) )
 
         return expressions
+
+    def postProcess(self, expression): 
+        """
+        Looks for subexpression of the form y(z). If it finds one,
+        replaces it with EQUAL(z, y).
+        """
+        string = str(expression)
+        equality = re.findall(r'[\( ]([a-z]\(.+?\))', string)
+        if not equality:
+            return expression
+        else:
+            equality = equality[0]
+        (repl, var) = re.sub(r'[\(\)]', ' ', equality).split()
+        index = string.find(equality)
+        sub = "EQUAL({0}, {1})".format(var, repl)
+        processed_str = string[:index] + sub + string[index + len(equality):]
+        return lexpr(processed_str)
 
     def getChildren(self, tree):
         """
@@ -109,6 +127,7 @@ class SemanticComposer(object):
         if left_ex.__str__() == 'None': return right_ex
         if right_ex.__str__() == 'None': return left_ex
 
+
         if rule == '>':  # Forward application
             return ApplicationExpression(left_ex, right_ex).simplify() 
         if rule == '<':  # Backward application
@@ -150,7 +169,7 @@ class SemanticComposer(object):
         :rtype: nltk.sem.logic.Expression
         """
         first = ApplicationExpression(expr2, lexpr('C')).simplify()
-        sec = ApplicationExpression(first, expr1).simplify()
+        sec = ApplicationExpression(expr1, first).simplify()
         string = sec.__str__() 
         try:
             first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
@@ -185,7 +204,7 @@ class SemanticComposer(object):
         >>> expr = lexpr('\\e.exists y z.(ran1(e,y) & ran2(e,z) \
                           & EQUAL(y,reagan) & UNIQUE(z) & EQUAL(z,us))')
         >>> resolved_expr = resolve_equalities(expr)
-        >>> print resolved_expr
+        >>> resolved_expr
         \\e.(ran1(e,reagan) & ran2(e,us) & UNIQUE(us))
         """
         mr_string = expression.__str__()
@@ -199,7 +218,6 @@ class SemanticComposer(object):
         # Find the variables to replace.
         replacements = reEqual.findall(mr_string)
         replacements = set([tuple(r.split(',')) for r in replacements])
-
         # Delete the EQUAL subexpression.
         mr_string = reDel.sub('', mr_string)
 
