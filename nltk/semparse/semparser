@@ -4,17 +4,20 @@
 # Semantic parser CLI tool.
 # ============================
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 import sys
 import optparse
 import readline  # Needed for shell-style line editing/cmd history.
 import re
 import string
+
 from nltk import word_tokenize
 from nltk.ccg import lexicon, chart
-from predicatelexicon import PredicateLexicon
-from semanticparser import SemanticParser
+#from nltk.semparse.predicatelexicon import PredicateLexicon
+#from nltk.semparse.semanticparser import SemanticParser
+from predicatelexicon import PredicateLexicon ##
+from semanticparser import SemanticParser ##
 
 
 optparser = optparse.OptionParser()
@@ -34,13 +37,13 @@ class Interpreter(object):
         self.status = 'GO'
 
     def print_welcome(self):
-        print "\n---- NLTK Semantic Parser (interactive) ----"
-        print "Enter a sentence at the '>' prompt."
-        print " '!help' to show this message."
-        print " '!quit' to exit."
-        print " '!verbose on|off' to show/hide semantic derivation."
-        print " '!syntax on|off' to show/hide syntactic parse."
-        print " '!predlex <word>' to show predicates assigned to <word>.\n"
+        print("\n---- NLTK Semantic Parser (interactive) ----")
+        print("Enter a sentence at the '>' prompt.")
+        print(" '!help' to show this message.")
+        print(" '!quit' to exit.")
+        print(" '!verbose on|off' to show/hide semantic derivation.")
+        print(" '!syntax on|off' to show/hide syntactic parse.")
+        print(" '!predlex <word>' to show predicates assigned to <word>.\n")
 
     def parseCmd(self, cmd):
         """
@@ -60,24 +63,24 @@ class Interpreter(object):
         elif cmd.startswith("!predlex"):
             return self._predlex(*args)
         else:
-            print "Unknown command: {0}".format(cmd)
+            print("Unknown command: {0}".format(cmd))
             return 'GO'
 
     def printSemanticParse(self, semparse):
         if self.opt_syntax:
-            print "\n======== SYNTACTIC PARSE ========\n"
+            print("\n======== SYNTACTIC PARSE ========\n")
             semparse.printSyntacticDerivation()
         if self.opt_semantics:
-	    print "\n====== SEMANTIC DERIVATION =======\n"
-	    semparse.printSemanticDerivation()
-        print "\n========= SEMANTIC PARSE =========\n"
-        print semparse.expression
+            print("\n====== SEMANTIC DERIVATION =======\n")
+            semparse.printSemanticDerivation()
+        print("\n========= SEMANTIC PARSE =========\n")
+        print(semparse.expression)
 
     def run(self):
         while self.status == 'GO':
             sent = raw_input("> ")
-	    if not sent:
-		continue
+            if not sent:
+                continue
             # Command
             if sent.startswith('!'):
                 self.status = self.parseCmd(sent)
@@ -103,26 +106,26 @@ class Interpreter(object):
 
     def _verbose(self, arg=None):
         if not arg:
-            if self.SemParser.derivation == True:
-                print 'On'
+            if self.opt_semantics == True:
+                print('On')
             else:
-                print 'Off'
+                print('Off')
             return 'GO'
         if arg.lower() == 'off': self.opt_semantics = False
         elif arg.lower() == 'on': self.opt_semantics = True
-        else: print "Invalid value: {0}".format(arg)
+        else: print("Invalid value: {0}".format(arg))
         return 'GO'
 
     def _syntax(self, arg=None):
         if not arg:
-            if self.SemParser.syntax == True:
-                print 'On'
+            if self.opt_syntax == True:
+                print('On')
             else:
-                print 'Off'
+                print('Off')
             return 'GO'
         if arg.lower() == 'off': self.opt_syntax = False 
         elif arg.lower() == 'on': self.opt_syntax = True 
-        else: print "Invalid value: {0}".format(arg)
+        else: print("Invalid value: {0}".format(arg))
         return 'GO'
 
     def _predlex(self, arg=None):
@@ -130,7 +133,7 @@ class Interpreter(object):
             return 'GO'
         for (exprs, cat) in self.SemParser.composer.predLex.get(arg):
             for expr in exprs:
-                print "{0} -- {1}".format(expr, cat)
+                print("{0} -- {1}".format(expr, cat))
         return 'GO'
 
 
