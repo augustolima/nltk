@@ -5,11 +5,13 @@
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
+# TODO: make all code Python 3 compatible.
+
 '''
 Semantic parser which builds Neo-Davidsonian MRs using nltk.ccg
 '''
 
-from semanticparser import SemanticParser
-from predicatelexicon import PredicateLexicon
-from semanticcategory import SemanticCategory
-from composer import SemanticComposer
+from nltk.semparse.semanticparser import SemanticParser
+from nltk.semparse.composer import SemanticComposer
+from nltk.semparse.predicatelexicon import PredicateLexicon
+from nltk.semparse.semanticcategory import SemanticCategory
