@@ -1,17 +1,21 @@
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 import sys
 import unittest
-from nltk.sem.logic import Expression
+import logging
 
-from semanticcategory import SemanticCategory
-from semanticparser import SemanticParser
+from nltk.sem.logic import Expression
+#from nltk.semparse.semanticcategory import SemanticCategory
+#from nltk.semparse.semanticparser import SemanticParser
+from semanticcategory import SemanticCategory ##
+from semanticparser import SemanticParser ##
 
 '''
 Unit tests for SemanticCategory.
 '''
 
 lexpr = Expression.fromstring
+logging.basicConfig(filename=".unittest.log", level=logging.DEBUG)
 
 class SemanticCategoryTest(unittest.TestCase):
 
@@ -27,9 +31,9 @@ class SemanticCategoryTest(unittest.TestCase):
 
 
         # TODO: figure out adverbs
-#        expression = SemanticCategory("annually", "RB",
-#                                       r'((S[X]{Y}\\NP{Z}){Y}\\(S[X]{Y}\\NP{Z}){Y}){_}').getExpression()
-#        self.assertEqual(expression, lexpr(r'\P \Q \y. exists z y. (P(z)(y) & Q(z) & annually(y))'))
+        expression = SemanticCategory("annually", "RB",
+                                       r'((S[X]{Y}\\NP{Z}){Y}\\(S[X]{Y}\\NP{Z}){Y}){_}').getExpression()
+        self.assertEqual(expression, lexpr(r'\P \Q \y. exists z. (P(z)(y) & Q(z) & annually(y))'))
 
     # COUNT
     def testCount(self):
@@ -40,7 +44,7 @@ class SemanticCategoryTest(unittest.TestCase):
     def testNegate(self):
         expression = SemanticCategory("not", "RB",
                                       r'((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}').getExpression()
-        self.assertEqual(expression, lexpr(r'\P Q y.exists z.(P(y) & Q(z) & NEGATION(y))'))
+        self.assertEqual(expression, lexpr(r'\P Q y.exists z.(P(z)(y) & Q(z) & NEGATION(y))'))
 
     # COMPLEMENT
     def testComplement(self):
@@ -93,12 +97,11 @@ class SemanticCategoryTest(unittest.TestCase):
         expression = SemanticCategory("and", "CC", "conj").getExpression()
         self.assertEqual(expression, lexpr(r'\P Q x.(P(x) & Q(x))'))
 
-    # TODO: check how to deal with indexed categories such as this one.
     # QUESTION
     def testQuestion(self):
         expression = SemanticCategory("What", "WP", r'(S[wq]{_}/(S[q]{Y}<1>/NP{Z}){Y}){_}',
                                       question = True).getExpression()
-        self.assertEqual(expression, lexpr(r'\P e. exists y.(P(y) & TARGET(y))'))
+        self.assertEqual(expression, lexpr(r'\P x.(P(x) & TARGET(x))'))
 
 
 class SemanticParserTest(unittest.TestCase):
@@ -106,30 +109,38 @@ class SemanticParserTest(unittest.TestCase):
     def testStatement(self):
         sys.stdout.write("\nSTATEMENTS\n")
         semParser = SemanticParser('data/reagan/ccg.lex', 'data/reagan/predicates.lex')
+        num_parsed = 0
         with open('data/test/reagan.txt', 'r') as sentences:
             for sent in sentences:
-                print '\n', sent
+                print('\n', sent)
                 try:
                     derivation = semParser.parse(sent).next()
+                    print(derivation.expression)
+                    if derivation.expression is not None:
+                        num_parsed += 1
                 except Exception as e:
-                    print e
-                    continue
-                print derivation.expression
-            print ""
+                    print(e)
+            print()
+        print("STATEMENTS PARSED: {0}".format(num_parsed))
+        logging.info("STATEMENTS PARSED: {0}".format(num_parsed))
 
     def testQuestion(self):
         sys.stdout.write("\nQUESTIONS\n")
-        semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.old')
+        semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.lex')
+        num_parsed = 0
         with open('data/test/geoquery.txt', 'r') as sentences:
             for sent in sentences:
-                print '\n', sent
+                print('\n', sent)
                 try:
                     derivation = semParser.parse(sent).next()
+                    print(derivation.expression)
+                    if derivation.expression is not None:
+                        num_parsed += 1
                 except Exception as e:
-                    print e
-                    continue
-                print derivation.expression
-            print ""
+                    print(e)
+            print()
+        print("QUESTIONS PARSED: {0}".format(num_parsed))
+        logging.info("QUESTIONS PARSED: {0}".format(num_parsed))
         
 
 if __name__ == '__main__':
