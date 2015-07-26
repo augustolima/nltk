@@ -57,8 +57,8 @@ interpreter or from within Python.
 
     from nltk.semparse import SemanticParser
 
-    ccglex = 'data/reagan/ccg.lex'
-    predlex = 'data/reagan/predicates.lex'
+    ccglex = 'nltk/semparse/data/reagan/ccg.lex'
+    predlex = 'nltk/semparse/data/reagan/predicates.lex'
     SemParser = SemanticParser(ccglex, predlex)
     
     sent = "Reagan was an actor."
