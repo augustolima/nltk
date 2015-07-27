@@ -503,6 +503,7 @@ World :: N/N :: \x.EQUAL(x,world)
 Wyman :: N :: \x.EQUAL(x,wyman)
 York :: N/N :: \x.EQUAL(x,york)
 You :: N :: \x.EQUAL(x,you)
+a :: N/N :: None
 able :: (S\N)/(S\N) :: \P Q e.exists y z.(P(y,z) & Q(y) & able(e))
 aboard :: ((S\N)\(S\N))/N :: \P Q R y.exists w z.(P(w) & Q(z,y) & R(z) & aboard:1(y,z) & aboard:2(y,y) & aboard:3(y,w))
 aboard :: (N\N)/N :: \P Q y.exists z.(P(z) & Q(y) & aboard:1(y,y) & aboard:2(y,z))
