@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 import re
 from collections import namedtuple
@@ -52,7 +52,7 @@ class SemanticComposer(object):
             for right_ex in self.buildExpressions(children[1]):
                 expr = self.applyRule(left_ex.expression, right_ex.expression, rule)
                 expr = self.postProcess(expr)
-                if check(expr):
+                if self.check(expr):
                     string = "* {0} {1} {2}\n\t==> {3}" \
                               .format(left_ex.expression, rule, right_ex.expression, expr)
                     derivation = left_ex.derivation + right_ex.derivation
@@ -93,7 +93,7 @@ class SemanticComposer(object):
         try:
             lexpr(expression.__str__())
             return True
-        except:
+        except Exception as e:
             return False
 
     def postProcess(self, expression): 

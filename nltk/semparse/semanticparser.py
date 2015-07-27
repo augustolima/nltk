@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 import io
 import re
@@ -6,6 +6,7 @@ import string
 
 from nltk import word_tokenize
 from nltk.ccg import lexicon, chart
+from nltk.sem.logic import LogicalExpressionException
 
 #from nltk.semparse.predicatelexicon import PredicateLexicon
 #from nltk.semparse.composer import SemanticComposer
@@ -106,7 +107,7 @@ class SemanticParser(object):
             try:
                 expressions = self.composer.buildExpressions(parse)
             # Yield just syntactic parse if semantics fail.
-            except:
+            except LogicalExpressionException:
                 yield Derivation(parse, None, None)
                 continue
             if not expressions:
