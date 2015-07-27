@@ -52,7 +52,7 @@ class SemanticComposer(object):
             for right_ex in self.buildExpressions(children[1]):
                 expr = self.applyRule(left_ex.expression, right_ex.expression, rule)
                 expr = self.postProcess(expr)
-                if self.check(expr):
+                if check(expr):
                     string = "* {0} {1} {2}\n\t==> {3}" \
                               .format(left_ex.expression, rule, right_ex.expression, expr)
                     derivation = left_ex.derivation + right_ex.derivation
@@ -60,23 +60,6 @@ class SemanticComposer(object):
                     expressions.append( MR(expr, derivation) )
 
         return expressions
-
-    def postProcess(self, expression): 
-        """
-        Looks for subexpression of the form y(z). If it finds one,
-        replaces it with EQUAL(z, y).
-        """
-        string = str(expression)
-        equality = re.findall(r'[\( ]([a-z]\(.+?\))', string)
-        if not equality:
-            return expression
-        else:
-            equality = equality[0]
-        (repl, var) = re.sub(r'[\(\)]', ' ', equality).split()
-        index = string.find(equality)
-        sub = "EQUAL({0}, {1})".format(var, repl)
-        processed_str = string[:index] + sub + string[index + len(equality):]
-        return lexpr(processed_str)
 
     def getChildren(self, tree):
         """
@@ -112,6 +95,23 @@ class SemanticComposer(object):
             return True
         except:
             return False
+
+    def postProcess(self, expression): 
+        """
+        Looks for subexpression of the form y(z). If it finds one,
+        replaces it with EQUAL(z, y).
+        """
+        string = str(expression)
+        equality = re.findall(r'[\( ]([a-z]\(.+?\))', string)
+        if not equality:
+            return expression
+        else:
+            equality = equality[0]
+        (repl, var) = re.sub(r'[\(\)]', ' ', equality).split()
+        index = string.find(equality)
+        sub = "EQUAL({0}, {1})".format(var, repl)
+        processed_str = string[:index] + sub + string[index + len(equality):]
+        return lexpr(processed_str)
 
     def applyRule(self, left_ex, right_ex, rule):
         """
@@ -153,12 +153,6 @@ class SemanticComposer(object):
         """
         pass
 
-    # TODO: fix compose function.
-    # This doesn't work. For example,
-    # \Q e.exists z y.(capital(z) & Q(y) & TARGET(y) & TARGET(z)) >B
-    # \P Q e.exists z y.(P(z) & Q(y) & has:1(e,y) & has:2(e,z))
-    #        ==> \C.exists z y.(capital(z) & C(y) & TARGET(y) & TARGET(z))
-    # The 'has' goes away!
     def compose(self, expr1, expr2):
         """
         Performs the functional composition of 
