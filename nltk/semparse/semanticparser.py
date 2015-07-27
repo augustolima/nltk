@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import io
 import re
 import string
 
@@ -58,7 +59,7 @@ class SemanticParser(object):
         :type ccglex_file: str
         :rtype: nltk.ccg.chart.CCGChartParser
         """
-        lexfile = open(ccglex_file).read()
+        lexfile = io.open(ccglex_file, 'rt', encoding='utf-8').read()
         lex = lexicon.parseLexicon(lexfile)
         parser = chart.CCGChartParser(lex, chart.DefaultRuleSet)
         return parser
