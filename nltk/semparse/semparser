@@ -78,7 +78,10 @@ class Interpreter(object):
 
     def run(self):
         while self.status == 'GO':
-            sent = raw_input("> ")
+            try:
+                sent = raw_input("> ")
+            except EOFError:
+                break
             if not sent:
                 continue
             # Command
