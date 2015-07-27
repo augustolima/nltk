@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-import codecs
+import io
 from collections import defaultdict
 
 from nltk.sem.logic import Expression
@@ -44,7 +44,7 @@ class PredicateLexicon(defaultdict):
         :type filename: str
         """
         predLex = cls()
-        fp = codecs.open(filename, 'r', 'utf-8')
+        fp = io.open(filename, 'rt', encoding='utf-8')
         key = None
         for line in fp:
             if not line or line.startswith('"'): # Comments
