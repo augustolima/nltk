@@ -8,12 +8,12 @@
 
 from __future__ import print_function, unicode_literals
 
+import io
 import sys
 import traceback
 import optparse
 import re
 import string
-import codecs
 from collections import defaultdict, namedtuple
 
 #from nltk.semparse.semanticcategory import SemanticCategory
@@ -41,7 +41,7 @@ def get_parses(infile):
     returns list(list) of parses split into dependencies and tags.
     """
     # Open file and split at each parse.
-    parses = codecs.open(infile, 'r', 'utf-8').read().split('\n===\n')
+    parses = io.open(infile, 'rt', encoding='utf-8').read().split('\n===\n')
     # Split each parse between dependencies and tags.
     parses = [parse.split('\n<c> ') for parse in parses]
     # Split at each dependency.
@@ -107,7 +107,7 @@ def build_preds(catLex):
             except Exception as e:
                 line = "Error creating expression for '{0}' mr({1} {2} {3})\n"
                 sys.stderr.write(line.format(word, mr.pos, mr.category, mr.deps))
-		print(traceback.format_exc())
+                print(traceback.format_exc())
                 continue
 
             key = (word, mr.category)
@@ -121,15 +121,13 @@ def write_predLex(words, categories, filename):
     """
     Saves predLex to filename.
     """
-    with codecs.open(filename, 'w', 'utf-8') as out:
+    with io.open(filename, 'wt', encoding='utf-8') as out:
         out.write('# WORDS\n')
-#        word_list = sorted(words.items(), key=lambda ((w,c),_): w)
         word_list = sorted(words.items(), key=lambda i: i[0][0]) ##
         for ((word, cat), preds) in word_list:
             for pred in preds:
                 out.write('{0} :: {1} :: {2}\n'.format(word, cat, pred))
         out.write('# CATEGORIES\n')
-#        cat_list = sorted(categories.items(), key=lambda (c,e): len(c))
         cat_list = sorted(categories.items(), key=lambda c: len(c[0])) ##
         for (cat, preds) in cat_list:
             for pred in preds:

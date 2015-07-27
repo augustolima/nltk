@@ -8,6 +8,7 @@
 
 from __future__ import print_function, unicode_literals
 
+import io
 import sys
 import optparse
 import re
@@ -30,7 +31,7 @@ lex = defaultdict(list)
 
 # Find the supertags in the parse file. 
 # Match words to categories.
-fp = open(opts.infile, 'r')
+fp = io.open(opts.infile, 'rt', encoding='utf-8')
 for line in fp:
     if not line.startswith('<c>'):
         continue
@@ -54,7 +55,7 @@ for line in fp:
                 primitives.append(prim)
 fp.close()
 
-with open(opts.outfile, 'w') as out:
+with io.open(opts.outfile, 'wt', encoding='utf-8') as out:
     out.write(":- ")
     # NLTK can't handle the bracketed stuff.
     prim_str = re.sub(r'[\[\]]', '', str(primitives))
