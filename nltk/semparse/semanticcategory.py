@@ -1,10 +1,12 @@
 from __future__ import print_function, unicode_literals
 
+import io
 import re
 from collections import OrderedDict
 # TODO: Figure out if I can really use pyparsing, because its not builtin.
 from pyparsing import nestedExpr
 
+from nltk.compat import python_2_unicode_compatible
 from nltk.sem.logic import (Expression, Tokens, Variable,
                             ExistsExpression, LambdaExpression)
 #from nltk.semparse import rules
@@ -15,6 +17,7 @@ lexpr = Expression.fromstring
 _SPECIAL_CASES_FILE = 'data/lib/specialcases.txt'
 
 
+@python_2_unicode_compatible
 class reDict(dict):
     """
     Dictionary keyed by regular expressions. Cuts down
@@ -63,8 +66,7 @@ class SemanticCategory(object):
         # Reformat 1-length words so that they don't become VariableExpressions.
         if len(word) == 1:
             self.word = "_{0}".format(word)
-        else:
-            self.word = word
+        self.word = word
         self.pos = pos
         self.syntactic_category = syntactic_category
         self.semantic_type = self.getSemanticType()
@@ -74,18 +76,30 @@ class SemanticCategory(object):
 
     # TODO: figure out unicode() for Python3 compatibility.
     def __str__(self):
+        if len(self.word) == 1:
+            word = "_{0}".format(self.word)
+        else:
+            word = self.word
+        word = word.lower()
         expression = unicode(str(self._expression))
-        word = self.word.lower()
         return expression.format(word)
 
     def __repr__(self):
+        if len(self.word) == 1:
+            word = "_{0}".format(self.word)
+        else:
+            word = self.word
+        word = word.lower()
         expression = unicode(str(self._expression))
-        word = self.word.lower()
         return str(self._expression).format(word)
 
     def getExpression(self):
+        if len(self.word) == 1:
+            word = "_{0}".format(self.word)
+        else:
+            word = self.word
+        word = word.lower()
         expression = unicode(str(self._expression))
-        word = self.word.lower()
         return lexpr(expression.format(word))
 
     def getBaseExpression(self):
@@ -139,8 +153,7 @@ class SemanticCategory(object):
         this is a special case, return the corresponding type.
         Otherwise, return None.
         """
-#        with open('data/lib/specialcases.txt', 'r') as file:
-        with open(_SPECIAL_CASES_FILE, 'r') as file: ##
+        with io.open(_SPECIAL_CASES_FILE, 'rt', encoding='utf-8') as file:
             for line in file:
                 if line.startswith('\n') or line.startswith('#'):
                     continue
