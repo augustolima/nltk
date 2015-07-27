@@ -1,5 +1,6 @@
 from __future__ import print_function, unicode_literals
 
+import io
 import sys
 import unittest
 import logging
@@ -109,38 +110,52 @@ class SemanticParserTest(unittest.TestCase):
     def testStatement(self):
         sys.stdout.write("\nSTATEMENTS\n")
         semParser = SemanticParser('data/reagan/ccg.lex', 'data/reagan/predicates.lex')
+        total = 0
         num_parsed = 0
-        with open('data/test/reagan.txt', 'r') as sentences:
+        num_sem = 0
+        with io.open('data/test/reagan.txt', 'rt', encoding='utf-8') as sentences:
             for sent in sentences:
+                total += 1
                 print('\n', sent)
                 try:
                     derivation = semParser.parse(sent).next()
                     print(derivation.expression)
-                    if derivation.expression is not None:
+                    if derivation.syntax is not None:
                         num_parsed += 1
+                    if derivation.expression is not None:
+                        num_sem += 1
                 except Exception as e:
                     print(e)
             print()
-        print("STATEMENTS PARSED: {0}".format(num_parsed))
-        logging.info("STATEMENTS PARSED: {0}".format(num_parsed))
+        print("STATEMENTS SYNPARSED: {0}/{1}".format(num_parsed, total))
+        print("STATEMENTS SEMPARSED: {0}/{1}".format(num_sem, total))
+        logging.info("STATEMENTS SYNPARSED: {0}/{1}".format(num_parsed, total))
+        logging.info("STATEMENTS SEMPARSED: {0}/{1}".format(num_sem, total))
 
     def testQuestion(self):
         sys.stdout.write("\nQUESTIONS\n")
         semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.lex')
+        total = 0
         num_parsed = 0
-        with open('data/test/geoquery.txt', 'r') as sentences:
+        num_sem = 0
+        with io.open('data/test/geoquery.txt', 'rt', encoding='utf-8') as sentences:
             for sent in sentences:
+                total += 1
                 print('\n', sent)
                 try:
                     derivation = semParser.parse(sent).next()
                     print(derivation.expression)
-                    if derivation.expression is not None:
+                    if derivation.syntax is not None:
                         num_parsed += 1
+                    if derivation.expression is not None:
+                        num_sem += 1
                 except Exception as e:
                     print(e)
             print()
-        print("QUESTIONS PARSED: {0}".format(num_parsed))
-        logging.info("QUESTIONS PARSED: {0}".format(num_parsed))
+        print("QUESTIONS SYNPARSED: {0}/{1}".format(num_parsed, total))
+        print("QUESTIONS SEMPARSED: {0}/{1}".format(num_sem, total))
+        logging.info("QUESTIONS SYNPARSED: {0}/{1}".format(num_parsed, total))
+        logging.info("QUESTIONS SEMPARSED: {0}/{1}".format(num_sem, total))
         
 
 if __name__ == '__main__':
