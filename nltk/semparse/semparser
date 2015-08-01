@@ -6,17 +6,14 @@
 
 from __future__ import print_function, unicode_literals
 
-import sys
 import optparse
 import readline  # Needed for shell-style line editing/cmd history.
 import re
 import string
 
-from nltk import word_tokenize
+from nltk import word_tokenize, pos_tag
 from nltk.ccg import lexicon, chart
-#from nltk.semparse.predicatelexicon import PredicateLexicon
 #from nltk.semparse.semanticparser import SemanticParser
-from predicatelexicon import PredicateLexicon ##
 from semanticparser import SemanticParser ##
 
 
@@ -24,14 +21,13 @@ optparser = optparse.OptionParser()
 optparser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Show MR derivation")
 optparser.add_option("-s", "--syntax", action="store_true", dest="syntax", default=False, help="Show syntactic parse")
 optparser.add_option("--ccglex", dest="ccglex", default="", help="CCG lexicon file")
-optparser.add_option("--predlex", dest="predlex", default="", help="Predicate lexicon file")
 (opts, _) = optparser.parse_args()
 
 
 class Interpreter(object):
 
-    def __init__(self, ccglex, predlex, syntax=False, semantics=False):
-        self.SemParser = SemanticParser(ccglex, predlex)
+    def __init__(self, ccglex, syntax=False, semantics=False):
+        self.SemParser = SemanticParser(ccglex)
         self.opt_syntax = syntax
         self.opt_semantics = semantics
         self.status = 'GO'
@@ -81,7 +77,8 @@ class Interpreter(object):
             try:
                 sent = raw_input("> ")
             except EOFError:
-                break
+                self.status = 'STOP'
+		continue
             if not sent:
                 continue
             # Command
@@ -89,7 +86,9 @@ class Interpreter(object):
                 self.status = self.parseCmd(sent)
             # Sentence
             else:
-                for parse in self.SemParser.parse(sent):
+                tokens = word_tokenize(sent)
+                tagged_sent = pos_tag(tokens)
+                for parse in self.SemParser.parse(tagged_sent):
                     self.printSemanticParse(parse)
                     ans = raw_input("ENTER for next or 'q' to stop: ")
                     if ans.lower() == 'q':
@@ -131,22 +130,13 @@ class Interpreter(object):
         else: print("Invalid value: {0}".format(arg))
         return 'GO'
 
-    def _predlex(self, arg=None):
-        if not arg:
-            return 'GO'
-        for (exprs, cat) in self.SemParser.composer.predLex.get(arg):
-            for expr in exprs:
-                print("{0} -- {1}".format(expr, cat))
-        return 'GO'
-
 
 if __name__ == '__main__':
-    if not opts.ccglex or not opts.predlex:
-        line = "Usage: semparser [-v] [-s] --ccglex <path/to/file> --predlex <path/to/file>\n"
+    import sys
+    if not opts.ccglex:
+        line = "Usage: semparser [-v] [-s] --ccglex <path/to/file>\n"
         sys.stderr.write(line)
         sys.exit(1)
-
-    interpreter = Interpreter(opts.ccglex, opts.predlex,
-                              opts.syntax, opts.verbose)
+    interpreter = Interpreter(opts.ccglex, opts.syntax, opts.verbose)
     interpreter.print_welcome()
     interpreter.run()

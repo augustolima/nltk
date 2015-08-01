@@ -1,7 +1,7 @@
 # word_regex	pos_regex	indexsyncat	semantic_type
 
 # Copula
-be$|is$|was$|am$|are|\'m$	.*$	((S[adj]{_}\NP{Y}<1>){_}/N[num]{Z}<2>){_}	\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))
+be$|is$|was$|am$|are|\'m$	.*$	((S[adj]{_}\NP{Y}<1>){_}/N[num]{Z}<2>){_}	\P x.P(x)
 # be$|is$|was$|am$|are|\'m$	.*$	((S[dcl]{_}\NP[thr]{Y}<1>){_}/(S[pt]{Z}<2>\NP{Y*}){Z}){_}	\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))
 
 # Quantifiers
@@ -11,14 +11,13 @@ the$	.*$	(((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}/N[num]{W}<2>){_}	UNIQUE
 no$	.*$	(NP{Y}/N{Y}<1>){_}	COMPLEMENT
 not$|n't$	.*$	((S[adj]{Y}\NP{Z}){Y}\(S[adj]{Y}<1>\NP{Z}){Y}){_}	NEGATE	
 
-# TODO: figure out conjunction. What I have isn't quite right.
 # Conjunction
-.*$	CC$	conj{_}	\P Q x.(P(x) & Q(x))
+.*$	CC$	conj	\P Q x.(P(x) & Q(x))
 
 # Adjectives which act like verbs - e.g. Reagan was athletic.
 .*$	JJ.?$	(S{_}\NP{Y}<1>){_}	EVENT
 
-# TODO: figure out passive case.
+# TODO: NLTK CCG can't parse passive case. Fix that and finish 'by' special case.
 # Passive case
 #by$	.*$	(((S[X]{Y}\\NP{Z}){Y}\\(S[X]{Y}<1>\\NP{Z}){Y}){_}/N[num]{W}<2>){_}	\P Q R y. exists w z.(P(w) & Q(\x.EQUAL(x,z))(y) & R(z) & 
 

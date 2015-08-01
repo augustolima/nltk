@@ -1,0 +1,880 @@
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N cities|NNS|N in|IN|(NP\NP)/NP Virginia|NNP|N .|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N high|JJ|N/N points|NNS|N of|IN|(NP\NP)/NP states|NNS|N surrounding|VBG|(S[ng]\NP)/NP Mississippi|NNP|N ?|.|.
+Name|VB|(S[b]\NP)/NP the|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP Arkansas|NNP|N .|.|.
+Name|NNP|N all|PDT|NP/NP the|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP Colorado|NNP|N .|.|.
+Can|MD|(S[q]/(S[b]\NP))/NP you|PRP|NP tell|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+Could|MD|(S[q]/(S[b]\NP))/NP you|PRP|NP tell|VB|(S[b]\NP)/NP me|PRP|NP what|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N of|IN|(NP\NP)/NP Oregon|NNP|N ?|.|.
+Count|NNP|N the|DT|NP[nb]/N states|NNS|N which|WDT|(NP\NP)/(S[dcl]\NP) have|VBP|(S[dcl]\NP)/NP elevations|NNS|N lower|JJR|S[adj]\NP than|IN|((S[adj]\NP)\(S[adj]\NP))/NP what|WP|NP/(S[dcl]/NP) Alabama|NNP|N has|VBZ|(S[dcl]\NP)/NP .|.|.
+Give|VB|(S[b]\NP)/NP me|PRP|NP all|PDT|NP/NP the|DT|NP[nb]/N states|NNS|N of|IN|(NP\NP)/NP USA|NNP|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N cities|NNS|N in|IN|(NP\NP)/NP Texas|NNP|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N cities|NNS|N in|IN|(NP\NP)/NP USA|NNP|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N cities|NNS|N in|IN|(NP\NP)/NP Virginia|NNP|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N cities|NNS|N which|WDT|(NP\NP)/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Texas|NNP|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N lakes|NNS|N in|IN|(NP\NP)/NP California|NNP|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) passes|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N US|NNP|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N number|NN|N of|IN|(NP\NP)/NP rivers|NNS|N in|IN|(NP\NP)/NP California|NNP|N .|.|.
+Give|VB|((S[b]\NP)/NP)/NP me|PRP|NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N/N Utah|NNP|N .|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) big|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Alaska|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) big|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Massachusetts|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) big|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) big|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP North|NNP|N/N Dakota|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) big|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Texas|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) big|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N city|NN|N of|IN|(NP\NP)/NP New|NNP|N/N York|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP are|VBP|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N points|NNS|N of|IN|(NP\NP)/NP all|PDT|NP/NP the|DT|NP[nb]/N states|NNS|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Guadalupe|NNP|N/N Peak|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Mount|NNP|N/N McKinley|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP America|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Montana|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP Alabama|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP Delaware|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP Florida|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) high|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP Louisiana|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) large|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Alaska|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) large|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Texas|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) large|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Rio|NNP|N/N Grande|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N Delaware|NNP|N/N river|NN|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP California|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N in|IN|(NP\NP)/NP miles|NNS|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N Missouri|NNP|N/N river|NN|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N North|NNP|N/N Platte|NNP|N/N river|NN|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N Ohio|NNP|N/N river|NN|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N Rio|NNP|N/N Grande|NNP|N/N river|NN|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) long|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N big|JJ|N/N cities|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Pennsylvania|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N capitals|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP Rhode|NNP|N/N Island|NNP|N have|VB|(S[b]\NP)/NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP Louisiana|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP Montana|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP US|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP USA|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP Texas|NNP|N have|VB|(S[b]\NP)/NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N USA|NNP|N have|VB|(S[b]\NP)/NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N cities|NNS|N named|VBN|(S[pss]\NP)/NP Austin|NNP|N are|VBP|(S[dcl]\NP)/(S[adj]\NP) there|RB|S[adj]\NP in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N citizens|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N have|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N citizens|NNS|N in|IN|(NP\NP)/NP Alabama|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N citizens|NNS|N in|IN|(NP\NP)/NP Boulder|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N citizens|NNS|N live|VB|S[b]\NP in|IN|((S\NP)\(S\NP))/NP California|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N Colorado|NNP|N/N rivers|NNS|N are|VBP|(S[dcl]\NP)/(S[adj]\NP) there|RB|S[adj]\NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N inhabitants|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP Montgomery|NNP|N have|VB|(S[b]\NP)/NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N major|JJ|N/N cities|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Arizona|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N major|JJ|N/N cities|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Florida|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N major|JJ|N/N cities|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP states|NNS|N bordering|VBG|(S[ng]\NP)/NP Nebraska|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N major|JJ|N/N cities|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP states|NNS|N bordering|VBG|(S[ng]\NP)/NP Utah|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N major|JJ|N/N cities|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Texas|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N major|JJ|N/N cities|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N major|JJ|N/N cities|NNS|N are|VBP|(S[dcl]\NP)/PP there|RB|(S\NP)\(S\NP) in|IN|PP/NP Oregon|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N major|JJ|N/N rivers|NNS|N cross|VBP|(S[dcl]\NP)/NP Ohio|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP the|DT|NP[nb]/N state|NN|N of|IN|(NP\NP)/NP Nevada|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N are|VBP|(S[q]/NP)/NP there|EX|N in|IN|((S\NP)\(S\NP))/NP Iowa|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP New|NNP|N/N York|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N in|IN|(NP\NP)/NP Boulder|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Austin|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Austin|NNP|N/N Texas|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VB|S[b]\NP in|IN|((S\NP)\(S\NP))/NP California|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Chicago|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Detroit|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Hawaii|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Houston|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Kalamazoo|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Kansas|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Minneapolis|NNP|N/N Minnesota|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Mississippi|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Montana|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP New|NNP|N/N Hampshire|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP New|NNP|N/N York|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Rhode|NNP|N/N Island|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Riverside|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP San|NNP|N/N Francisco|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP South|NNP|N/N Dakota|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Spokane|NNP|N/N Washington|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Texas|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP New|NNP|N/N York|NNP|N/N state|NN|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Georgia|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N/N bordering|NN|N/N Wyoming|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Washington|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Washington|NNP|N/N DC|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N lived|VBD|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Austin|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N reside|VBP|(S[q]/PP)/NP in|IN|PP/NP Utah|NNP|N ?|.|.
+How|WRB|(((S[wq]/PP)/((S[q]/PP)/NP))/N)/(NP/N) many|JJ|NP/N people|NNS|N stay|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Utah|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N residents|NNS|N live|VBP|S[dcl]\NP in|IN|((S\NP)\(S\NP))/NP Texas|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[dcl]\NP)/(S[pss]\NP) called|VBN|(S[pss]\NP)/NP Colorado|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[dcl]\NP)/(S[pss]\NP) found|VBN|S[pss]\NP in|IN|((S\NP)\(S\NP))/NP Colorado|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP Colorado|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP Iowa|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP Missouri|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP New|NNP|N/N York|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP the|DT|NP[nb]/N state|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N rivers|NNS|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/NP)/NP there|EX|N in|IN|((S\NP)\(S\NP))/NP Idaho|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP Texas|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP US|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N do|VBP|(S[dcl]\NP)/(S[b]\NP) not|RB|(S\NP)\(S\NP) traverse|VB|(S[b]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N/N Albany|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP Alaska|NNP|N have|VB|(S[b]\NP)/NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP Colorado|NNP|N have|VB|(S[b]\NP)/NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N in|IN|(NP\NP)/NP Texas|NNP|N are|VBP|(S[dcl]\NP)/(S[adj]\NP) longer|RBR|S[adj]\NP than|IN|((S[adj]\NP)\(S[adj]\NP))/NP the|DT|NP[nb]/N Red|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N in|IN|(NP\NP)/NP Washington|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N run|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Texas|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N rivers|NNS|N run|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N states|NNS|N bordering|VBG|(S[ng]\NP)/NP Colorado|NNP|N ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) many|JJ|NP/N square|JJ|N/N kilometers|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N are|VBP|(S[q]/PP)/NP in|IN|PP/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N are|VBP|(S[dcl]\NP)/(S[adj]\NP) next|JJ|(S[adj]\NP)/PP to|TO|PP/NP major|JJ|N/N rivers|NNS|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N are|VBP|(S[q]/NP)/NP there|RB|NP in|IN|(S[wq]\S[wq])/NP United|NNP|N/N States|NNPS|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N/N Alaska|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N at|IN|((N/N)/(N/N))/(S[asup]\NP) least|JJS|S[asup]\NP one|CD|N/N other|JJ|N/N state|NN|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N/N Colorado|NNP|N and|CC|conj border|NN|N/N New|NNP|N/N Mexico|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N/N Hawaii|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N/N Iowa|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N on|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N whose|WP$|((NP\NP)/(S[dcl]\NP))/N capital|NN|N is|VBZ|(S[dcl]\NP)/NP Boston|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N/N Tennessee|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N/N Texas|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|S/S the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|N/S[dcl] the|DT|NP[nb]/N state|NN|N that|IN|S[em]/S[dcl] borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N border|NN|S/S the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N do|VBP|(S[dcl]\NP)/(S[b]\NP) not|RB|(S\NP)\(S\NP) have|VB|(S[b]\NP)/NP rivers|NNS|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP Iowa|NNP|N/N border|NN|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP Missouri|NNP|N/N border|NN|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP Tennessee|NNP|N/N border|NN|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N/N flow|NN|N through|IN|PP/NP ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Missouri|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP USA|NNP|N have|VB|(S[b]\NP)/NP ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N city|NN|N called|VBN|(S[pss]\NP)/NP Rochester|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N city|NN|N named|VBN|(S[pss]\NP)/NP Springfield|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N higher|JJR|N/N point|NN|N than|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N capital|NN|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Austin|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N or|CC|conj towns|NNS|N named|VBN|(S[pss]\NP)/NP Springfield|NNP|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N have|VBP|(S[dcl]\NP)/NP major|JJ|N/N rivers|NNS|N ?|.|.
+How|WRB|(((S[wq]/(S[pss]\NP))/((S[q]/(S[pss]\NP))/NP))/N)/(NP/N) many|JJ|NP/N states|NNS|N in|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N US|NNP|N does|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+How|WRB|((S[wq]/(S[q]/NP))/N)/(NP/N) much|JJ|NP/N population|NN|N does|VBZ|(S[q]/(S[b]\NP))/NP Texas|NNP|N have|VB|(S[b]\NP)/NP ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) tall|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP Mount|NNP|N/N McKinley|NNP|N ?|.|.
+How|WRB|(S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) tall|JJ|S[adj]\NP is|VBZ|(S[q]/(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Montana|NNP|N ?|.|.
+In|IN|(S[wq]/(S[q]/PP))/(S[wq]/(S[q]/NP)) what|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/(S[pss]\NP))/NP Mount|NNP|N/N McKinley|NNP|N ?|.|.
+In|IN|(S[wq]/(S[q]/PP))/(S[wq]/(S[q]/NP)) which|WDT|(S[wq]/(S[q]/NP))/N state|NN|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP USA|NNP|N exist|VB|S[b]\NP ?|.|.
+In|IN|(S[wq]/(S[q]/PP))/(S[wq]/(S[q]/NP)) which|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/NP)/NP Rochester|NNP|N ?|.|.
+Iowa|NNP|N/N borders|NNS|N how|WRB|((S[qem]/(S[dcl]\NP))/N)/(S[adj]\NP) many|JJ|N/N states|NNS|N ?|.|.
+List|VB|(S[b]\NP)/NP the|DT|NP[nb]/N states|NNS|N .|.|.
+Name|NNP|N all|PDT|NP/NP the|DT|NP[nb]/N lakes|NNS|N of|IN|(NP\NP)/NP US|NNP|N .|.|.
+Name|NNP|N all|PDT|NP/NP the|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP Colorado|NNP|N .|.|.
+Name|VB|(S[b]\NP)/NP the|DT|NP[nb]/N 50|CD|N/N capitals|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N .|.|.
+Name|VB|(S[b]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP US|NNP|N .|.|.
+Name|VB|(S[b]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N lakes|NNS|N in|IN|(NP\NP)/NP Michigan|NNP|N .|.|.
+Name|VB|(S[b]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N rivers|NNS|N in|IN|(NP\NP)/NP Florida|NNP|N .|.|.
+Name|VB|(S[b]\NP)/NP the|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP Arkansas|NNP|N .|.|.
+Name|VB|(S[b]\NP)/NP the|DT|NP[nb]/N states|NNS|N which|WDT|(NP\NP)/(S[dcl]\NP) have|VBP|(S[dcl]\NP)/NP no|DT|NP[nb]/N surrounding|VBG|N/N states|NNS|N .|.|.
+Number|NNP|N of|IN|(NP\NP)/NP citizens|NNS|N in|IN|(NP\NP)/NP Boulder|NNP|N ?|.|.
+Number|NNP|N of|IN|(NP\NP)/NP people|NNS|N in|IN|(NP\NP)/NP Boulder|NNP|N ?|.|.
+Number|NNP|N of|IN|(NP\NP)/NP states|NNS|N bordering|VBG|(S[ng]\NP)/NP Iowa|NNP|N ?|.|.
+Of|IN|(S/S)/NP the|DT|NP[nb]/N states|NNS|N washed|VBN|S[pss]\NP by|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N which|WDT|(NP\NP)/(S[dcl]\NP) has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N ?|.|.
+People|NNS|N in|IN|(NP\NP)/NP Boulder|NNP|N ?|.|.
+Population|NN|N of|IN|(NP\NP)/NP Boulder|NNP|N ?|.|.
+Rivers|NNS|N in|IN|(NP\NP)/NP New|NNP|N/N York|NNP|N ?|.|.
+Sacramento|NNP|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) state|NN|N ?|.|.
+San|NNP|N/N Antonio|NNP|N is|VBZ|(S[dcl]\NP)/PP in|IN|PP/NP what|WP|NP/(S[dcl]/NP) state|NN|N ?|.|.
+Show|NNP|N/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Colorado|NNP|N .|.|.
+Show|NNP|N me|PRP|N\N all|PDT|NP/NP the|DT|NP[nb]/N major|JJ|N/N lakes|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N .|.|.
+State|NNP|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N area|NN|N .|.|.
+States|NNPS|N bordering|VBG|(S[ng]\NP)/NP Iowa|NNP|N ?|.|.
+Tell|VB|(S[b]\NP)/NP me|PRP|NP what|WDT|(NP/(S[dcl]\NP))/N cities|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Texas|NNP|N .|.|.
+Through|IN|(S[wq]/(S[q]/PP))/(S[wq]/(S[q]/NP)) which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Texas|NNP|N run|VB|(S[b]\NP)/PP ?|.|.
+Through|IN|(S[wq]/(S[q]/PP))/(S[wq]/(S[q]/NP)) which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N/N flow|NN|N ?|.|.
+Through|IN|(S[wq]/(S[q]/PP))/(S[wq]/(S[q]/NP)) which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N run|VB|(S[b]\NP)/(S[adj]\NP) ?|.|.
+What|WP|S[wq]/(S[q]/NP) are|VBP|(S[q]/NP)/NP all|PDT|NP/NP the|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) are|VBP|(S[q]/NP)/NP major|JJ|N/N rivers|NNS|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N rivers|NNS|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N/N cities|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N which|WDT|(NP\NP)/(S[dcl]/NP) border|NN|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N/N city|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N capitals|NNS|N of|IN|(NP\NP)/NP states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N/N Missouri|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N capitals|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N that|WDT|(NP\NP)/(S[dcl]/NP) border|NN|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N cities|NNS|N in|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N cities|NNS|N in|IN|(NP\NP)/NP states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N cities|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N points|NNS|N of|IN|(NP\NP)/NP all|PDT|NP/NP the|DT|NP[nb]/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N points|NNS|N of|IN|(NP\NP)/NP states|NNS|N surrounding|VBG|(S[ng]\NP)/NP Mississippi|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N lakes|NNS|N in|IN|(NP\NP)/NP states|NNS|N bordering|VBG|(S[ng]\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N cities|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Alabama|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|((S\NP)\(S\NP))/NP Delaware|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Kansas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Missouri|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP New|NNP|N/N York|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP North|NNP|N/N Carolina|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Ohio|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Oklahoma|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Rhode|NNP|N/N Island|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N of|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N major|JJ|N/N river|NN|N in|IN|(NP\NP)/NP Virginia|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|((S\NP)\(S\NP))/NP Vermont|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Wyoming|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N lakes|NNS|N in|IN|(NP\NP)/NP United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N rivers|NNS|N in|IN|(NP\NP)/NP Ohio|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N rivers|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N names|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Illinois|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N neighboring|JJ|N/N states|NNS|N for|IN|(NP\NP)/NP Michigan|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N densities|NNS|N of|IN|(NP\NP)/NP each|DT|NP[nb]/N US|NNP|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Mississippi|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP all|PDT|NP/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Montana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP states|NNS|N which|WDT|(NP\NP)/(S[dcl]\NP) border|NN|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N populations|NNS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N of|IN|(NP\NP)/NP Indiana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N rivers|NNS|N of|IN|(NP\NP)/NP Montana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N greatest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) the|DT|NP[nb]/N Potomac|NNP|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N longest|JJS|N/N river|NN|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) can|MD|(S[q]/(S[b]\NP))/NP you|PRP|NP tell|VB|((S[b]\NP)/PP)/NP me|PRP|NP about|IN|PP/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Missouri|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N capital|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N capital|NN|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N cities|NNS|N are|VBP|(S[dcl]\NP)/(S[pss]\NP) located|VBN|S[pss]\NP in|IN|((S\NP)\(S\NP))/NP Pennsylvania|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N cities|NNS|N in|IN|(N\N)/NP California|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N cities|NNS|N in|IN|(N\N)/NP Texas|NNP|N have|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N number|NN|N of|IN|(NP\NP)/NP citizens|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N cities|NNS|N in|IN|(N\N)/NP Texas|NNP|N have|VBP|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N populations|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N city|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N city|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N least|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N city|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N people|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N city|NN|N in|IN|(N\N)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) is|VBZ|(S[q]/NP)/NP capital|NN|N of|IN|(NP\NP)/NP Iowa|NNP|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) is|VBZ|(S[q]/NP)/NP capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) is|VBZ|(S[q]/NP)/NP largest|JJS|N/N capital|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N adjacent|JJ|N/N state|NN|N of|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP all|PDT|NP/NP the|DT|NP[nb]/N states|NNS|N combined|VBN|(S[pss]\NP)/PP ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Florida|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Idaho|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Maine|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Maryland|NNP|N in|IN|(NP\NP)/NP square|JJ|N/N kilometers|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Ohio|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Seattle|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP South|NNP|N/N Carolina|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N/N Albany|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N Texas|NNP|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N area|NN|N of|IN|(NP\NP)/NP Wisconsin|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N average|JJ|N/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N by|IN|((S\NP)\(S\NP))/NP state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N average|JJ|N/N population|NN|N per|IN|(NP\NP)/NP square|JJ|N/N km|NN|N in|IN|(NP\NP)/NP Pennsylvania|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N average|JJ|N/N population|NN|N per|IN|(NP\NP)/NP square|JJ|N/N km|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N American|JJ|N/N city|NN|N in|IN|((S\NP)\(S\NP))/NP a|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP a|DT|NP[nb]/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N capital|NN|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Arizona|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Georgia|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Kansas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Louisiana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Nebraska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Oregon|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Wyoming|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Illinois|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP continental|JJ|N/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N/N city|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Colorado|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Georgia|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Hawaii|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Illinois|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Indiana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Iowa|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Maine|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Maryland|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Massachusetts|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Michigan|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP New|NNP|N/N Hampshire|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP New|NNP|N/N Jersey|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP New|NNP|N/N York|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP North|NNP|N/N Dakota|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Ohio|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Pennsylvania|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP states|NNS|N that|WDT|(NP\NP)/(S[dcl]\NP) have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Durham|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N Alabama|NNP|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N Florida|NNP|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N that|IN|S[em]/S[dcl] borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N that|IN|S[em]/S[dcl] borders|NNS|N the|DT|NP[nb]/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N elevation|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N most|JJS|N/N inhabitants|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Utah|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Vermont|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Washington|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N city|NN|N in|IN|(NP\NP)/NP Texas|NNP|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N city|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N combined|JJ|N/N area|NN|N of|IN|(NP\NP)/NP all|DT|(N/N)/(N/N) 50|CD|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N combined|JJ|N/N population|NN|N of|IN|(NP\NP)/NP all|DT|NP[nb]/N 50|CD|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N density|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N density|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N New|NNP|N/N York|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N elevation|NN|N of|IN|(NP\NP)/NP Death|NNP|N/N Valley|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N elevation|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N height|NN|N of|IN|(NP\NP)/NP Mount|NNP|N/N McKinley|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N height|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N mountain|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N height|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N high|JJ|N/N point|NN|N of|IN|(NP\NP)/NP Wyoming|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N elevation|NN|N in|IN|(NP\NP)/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N elevation|NN|N in|IN|(NP\NP)/NP South|NNP|N/N Carolina|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N elevation|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N elevation|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N mountain|NN|N in|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N mountain|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N mountain|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N mountain|NN|N in|IN|(NP\NP)/NP US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Colorado|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Delaware|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP each|DT|NP[nb]/N state|NN|N whose|WP$|((NP\NP)/(S[dcl]\NP))/N lowest|JJS|N/N point|NN|N is|VBZ|(S[dcl]\NP)/NP sea|NN|N/N level|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Florida|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Iowa|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Kansas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Maine|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Montana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Nevada|NNP|N in|IN|(NP\NP)/NP meters|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Ohio|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Rhode|NNP|N/N Island|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP states|NNS|N bordering|VBG|(S[ng]\NP)/NP Georgia|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N country|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP capital|NN|N/N Austin|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP capital|NN|N/N Des|NNS|N/N Moines|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N/N Des|NNS|N/N Moines|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N most|JJS|N/N rivers|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N bordering|VBG|(S[ng]\NP)/NP Colorado|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Virginia|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Wyoming|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N area|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N capital|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N capital|NN|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP a|DT|NP[nb]/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Alabama|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Michigan|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Minnesota|NNP|N by|IN|((S\NP)\(S\NP))/NP population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Missouri|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Rhode|NNP|N/N Island|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP smallest|JJS|N/N state|NN|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP states|NNS|N that|IN|(NP\NP)/S[dcl] border|NN|N/N California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Wisconsin|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N of|IN|(NP\NP)/NP Kansas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) the|DT|NP[nb]/N Rio|NNP|N/N Grande|NNP|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Washington|NNP|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N/N bordering|NN|N/N Arkansas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N bordering|VBG|(S[ng]\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N/N capital|NN|N in|IN|(NP\NP)/NP population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N traversed|VBN|S[pss]\NP by|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N least|JJS|(N/N)/(N/N) populous|JJ|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) runs|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) flows|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) runs|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N most|RBS|N/N number|NN|N of|IN|(NP\NP)/NP states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) runs|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N length|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) traverses|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N flowing|VBG|S[ng]\NP through|IN|((S\NP)\(S\NP))/NP New|NNP|N/N York|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP America|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Florida|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Mississippi|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP New|NNP|N/N York|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Pennsylvania|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N most|RBS|N/N major|JJ|N/N cities|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N/N Nebraska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N that|IN|(NP\NP)/(S[dcl]\NP) does|VBZ|(S[dcl]\NP)/(S[b]\NP) not|RB|(S\NP)\(S\NP) run|VB|S[b]\NP through|IN|((S\NP)\(S\NP))/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) flows|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP a|DT|NP[nb]/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Indiana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) flows|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Colorado|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) passes|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N the|DT|NP[nb]/N state|NN|N that|IN|S[em]/S[dcl] borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) runs|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP a|DT|NP[nb]/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Tennessee|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N elevation|NN|N in|IN|(NP\NP)/NP Pennsylvania|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Arkansas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Louisiana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Massachusetts|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Mississippi|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Nebraska|NNP|N in|IN|(NP\NP)/NP meters|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Oregon|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N of|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Wisconsin|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP all|DT|NP[nb]/N states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP Colorado|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N area|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Montana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N maximum|JJ|N/N elevation|NN|N of|IN|(NP\NP)/NP San|NNP|N/N Francisco|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) dense|JJ|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populated|JJ|N/N capital|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populated|JJ|N/N state|NN|N/N bordering|NN|N/N Oklahoma|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populous|JJ|N/N city|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populous|JJ|N/N city|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populous|JJ|N/N city|NN|N in|IN|(NP\NP)/NP Wyoming|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populous|JJ|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populous|JJ|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populous|JJ|N/N state|NN|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N name|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N number|NN|N of|IN|(NP\NP)/NP neighboring|JJ|N/N states|NNS|N for|IN|(NP\NP)/NP Kentucky|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP capital|NN|N/N Austin|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N of|IN|(NP\NP)/NP Maine|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N of|IN|(NP\NP)/NP South|NNP|N/N Dakota|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N area|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N/N density|NN|N of|IN|(NP\NP)/NP Wyoming|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N in|IN|(NP\NP)/NP Boston|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Arizona|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Atlanta|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Atlanta|NNP|N/N GA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Austin|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Austin|NNP|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Boston|NNP|N/N Massachusetts|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Boulder|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Dallas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Denver|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Erie|NNP|N/N Pennsylvania|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Hawaii|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Houston|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Idaho|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Illinois|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Maine|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Maryland|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Minnesota|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Montana|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP New|NNP|N/N York|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP New|NNP|N/N York|NNP|N/N City|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Oregon|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Portland|NNP|N/N Maine|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Rhode|NNP|N/N Island|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Sacramento|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP San|NNP|N/N Antonio|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Seattle|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Seattle|NNP|N/N Washington|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP South|NNP|N/N Dakota|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Springfield|NNP|N/N Missouri|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Springfield|NNP|N/N South|NNP|N/N Dakota|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Tempe|NNP|N/N Arizona|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N area|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N major|JJ|N/N cities|NNS|N in|IN|(NP\NP)/NP Wisconsin|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N that|IN|S[em]/S[dcl] borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N area|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Tucson|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Utah|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Washington|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N population|NN|N of|IN|(NP\NP)/NP Washington|NNP|N/N DC|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N river|NN|N that|IN|S[em]/S[dcl] cross|NN|N over|IN|(NP\NP)/NP Ohio|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Iowa|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Nebraska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N size|NN|N of|IN|(NP\NP)/NP California|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N size|NN|N of|IN|(NP\NP)/NP Florida|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N size|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N size|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N of|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N size|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Arkansas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Hawaii|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Washington|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N/N bordering|NN|N/N Ohio|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N/N bordering|NN|N/N Wyoming|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N by|IN|(NP\NP)/NP area|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Texas|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N longest|JJS|N/N river|NN|N/N runs|NNS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) contains|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N elevation|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N area|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N density|NN|N in|IN|(NP\NP)/NP USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N area|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N tallest|JJS|N/N mountain|NN|N in|IN|(NP\NP)/NP America|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N tallest|JJS|N/N mountain|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N total|JJ|N/N area|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N total|JJ|N/N length|NN|N of|IN|(NP\NP)/NP all|DT|NP[nb]/N rivers|NNS|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N total|JJ|N/N population|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N that|WDT|(NP\NP)/(S[dcl]/NP) border|NN|N/N Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N length|NN|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N Mississippi|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N major|JJ|N/N cities|NNS|N are|VBP|(S[dcl]\NP)/(S[pss]\NP) located|VBN|S[pss]\NP in|IN|((S\NP)\(S\NP))/NP Pennsylvania|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N major|JJ|N/N rivers|NNS|N run|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Illinois|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N mountains|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Alaska|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N flows|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP Kansas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N flows|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N flows|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N one|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP Illinois|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N most|JJS|N/N cities|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP Virginia|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N traverses|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N traverses|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N state|NN|N which|WDT|(NP\NP)/(S[dcl]\NP) borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Nevada|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Oregon|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP states|NNS|N that|IN|S[em]/S[dcl] border|NN|N/N Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Utah|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N are|VBP|(S[dcl]\NP)/PP there|RB|(S\NP)\(S\NP) in|IN|PP/NP Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N do|VBP|(S[dcl]\NP)/(S[b]\NP) not|RB|(S\NP)\(S\NP) run|VB|S[b]\NP through|IN|((S\NP)\(S\NP))/NP Tennessee|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N/N flow|NN|N though|IN|(NP\NP)/NP Colorado|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N/N flow|NN|N through|IN|(NP\NP)/NP Missouri|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N flow|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP states|NNS|N that|IN|S[em]/S[dcl] Alabama|NNP|N/N borders|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N flow|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP states|NNS|N that|IN|S[em]/S[dcl] border|NN|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N/N flow|NN|N through|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N state|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N/N flow|NN|N through|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Arizona|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Austin|NNP|N/N Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Colorado|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Louisiana|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/PP through|IN|PP/NP Maine|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP New|NNP|N/N York|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N/N Atlanta|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/PP through|IN|PP/NP West|NNP|N/N Virginia|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N rivers|NNS|N traverses|VBZ|(S[q]/(S[pt]\NP))/NP the|DT|NP[nb]/N state|NN|N which|WDT|(NP\NP)/(S[dcl]\NP) borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N/N bordering|NN|N/N Nevada|NNP|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N/N borders|NNS|N/N Michigan|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N/N borders|NNS|N most|RBS|N/N other|JJ|N/N states|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N/N borders|NNS|N/N New|NNP|N/N York|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N/N borders|NNS|N the|DT|NP[nb]/N least|JJS|N/N states|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N/N borders|NNS|N the|DT|NP[nb]/N least|JJS|N/N states|NNS|N excluding|VBG|(NP\NP)/NP Alaska|NNP|N and|CC|conj excluding|VBG|(NP\NP)/NP Hawaii|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N/N borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N/N borders|NNS|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N contains|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N contains|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP those|DT|NP the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N/N traverses|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP highest|JJS|N/N elevation|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP no|DT|NP[nb]/N rivers|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N capital|NN|N/N Salem|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N city|NN|N/N Flint|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N city|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N city|NN|N with|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N most|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N greatest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N elevation|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N area|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N capital|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N urban|JJ|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N least|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N cities|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N major|JJ|N/N cities|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N major|JJ|N/N rivers|NNS|N running|VBG|S[ng]\NP through|IN|((S\NP)\(S\NP))/NP it|PRP|NP ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N people|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N rivers|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N rivers|NNS|N running|VBG|S[ng]\NP through|IN|((S\NP)\(S\NP))/NP it|PRP|NP ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N area|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N capital|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N urban|JJ|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N sparsest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/PP)/NP Austin|NNP|N in|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/PP)/NP Austin|NNP|N the|DT|NP[nb]/N capital|NN|N of|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/PP)/NP Boston|NNP|N in|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N is|VBZ|(S[dcl]\NP)/NP Columbus|NN|N the|DT|NP[nb]/N capital|NN|N of|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/PP)/NP Dallas|NNP|N in|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/(S[pss]\NP))/NP Des|NNP|N/N Moines|NNP|N located|VBN|(S[pss]\NP)/PP in|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/PP)/NP Miami|NNP|N in|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/PP)/NP Pittsburgh|NNP|N in|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/(S[pss]\NP))/NP the|DT|NP[nb]/N biggest|JJS|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/(S[pss]\NP))/NP the|DT|NP[nb]/N largest|JJS|N in|IN|(NP\NP)/NP population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N state|NN|N is|VBZ|(S[q]/(S[pss]\NP))/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N most|JJS|N/N rivers|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N Texas|NNP|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N that|IN|S[em]/S[dcl] borders|NNS|N/N Texas|NNP|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N which|WDT|(NP\NP)/(S[dcl]/NP) the|DT|NP[nb]/N Mississippi|NNP|N runs|VBZ|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N are|VBP|(S[dcl]\NP)/(S[adj]\NP) next|JJ|(S[adj]\NP)/PP to|TO|PP/NP Arizona|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N are|VBP|(S[dcl]\NP)/(S[adj]\NP) next|JJ|(S[adj]\NP)/PP to|TO|PP/NP Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N are|VBP|(S[dcl]\NP)/(S[adj]\NP) next|JJ|(S[adj]\NP)/PP to|TO|PP/NP the|DT|NP[nb]/N Mississippi|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Alaska|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Arkansas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Delaware|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Florida|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Georgia|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Hawaii|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Indiana|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Kentucky|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Michigan|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Missouri|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Montana|NNP|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N/N New|NNP|N/N Hampshire|NNP|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N/N New|NNP|N/N Jersey|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Ohio|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Rhode|NNP|N/N Island|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N/N Colorado|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N/N Mississippi|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N that|IN|(NP\NP)/S[dcl] border|NN|N/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) border|NN|N/N Florida|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N that|IN|(NP\NP)/S[dcl] border|NN|N/N states|NNS|N that|IN|(NP\NP)/S[dcl] border|NN|N/N states|NNS|N that|WDT|(NP\NP)/S[dcl] border|NN|N/N Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N that|IN|S[em]/S[dcl] border|NN|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) the|DT|NP[nb]/N Mississippi|NNP|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) the|DT|NP[nb]/N Ohio|NNP|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N which|WDT|(NP\NP)/(S[dcl]/NP) the|DT|NP[nb]/N Mississippi|NNP|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Texas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Texas|NNP|N and|CC|conj have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N major|JJ|N/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populous|JJ|N/N state|NN|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N the|DT|NP[nb]/N state|NN|N that|IN|S[em]/S[dcl] borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N most|JJS|N/N cities|NNS|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N most|RBS|N/N major|JJ|N/N cities|NNS|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N area|NN|N ?|.|.
+What|WP|S[wq]/(S[q]/NP) states|VBZ|(S[dcl]\NP)/S[dcl] border|NN|N the|DT|NP[nb]/N states|NNS|N with|IN|((S\NP)\(S\NP))/NP the|DT|NP[nb]/N most|JJS|N/N cities|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Wisconsin|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N 's|POS|((S[wq]/(S[dcl]\NP))/N)\(S[wq]/(S[dcl]\NP)) capital|NN|N is|VBZ|(S[dcl]\NP)/NP Dover|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N contain|VBP|(S[dcl]\NP)/NP at|IN|((N/N)/(N/N))/(S[asup]\NP) least|JJS|S[asup]\NP one|CD|N/N major|JJ|N/N rivers|NNS|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Delaware|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Missouri|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Missouri|NNP|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Ohio|NNP|N/N river|NN|N go|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Ohio|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N capital|NN|N that|WDT|(NP\NP)/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N city|NN|N named|VBN|(S[pss]\NP)/NP Austin|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Austin|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Dallas|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Plano|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Portland|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Rochester|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Salt|NNP|N/N Lake|NNP|N/N City|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP no|DT|NP[nb]/N bordering|VBG|N/N state|NN|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP rivers|NNS|N named|VBN|(S[pss]\NP)/NP Colorado|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP rivers|NNS|N running|VBG|(S[ng]\NP)/PP through|IN|PP/NP them|PRP|NP ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP towns|NNS|N named|VBN|(S[pss]\NP)/NP Springfield|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N 's|POS|((S[wq]/(S[dcl]\NP))/N)\(S[wq]/(S[dcl]\NP)) high|JJ|N/N point|NN|N is|VBZ|(S[dcl]\NP)/(S[adj]\NP) higher|JJR|S[adj]\NP than|IN|((S[adj]\NP)\(S[adj]\NP))/NP that|DT|NP of|IN|(NP\NP)/NP Colorado|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N in|IN|(N\N)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N city|NN|N of|IN|(NP\NP)/NP Springfield|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N neighbor|NN|N/N Maine|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N surround|VBP|(S[dcl]\NP)/NP Kentucky|NNP|N ?|.|.
+What|WDT|(S[wq]/(S[q]/NP))/N Texas|NNP|N/N city|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+What|WP|S[wq]/(S[dcl]\NP) 's|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) are|VBP|(S[q]/PP)/NP mountains|NNS|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Austin|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Baton|NNP|N/N Rouge|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Dallas|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Fort|NNP|N/N Wayne|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Houston|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Indianapolis|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Massachusetts|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Mount|NNP|N/N Whitney|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Mount|NNP|N/N Whitney|NNP|N located|VBN|(S[pss]\NP)/PP ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP New|NNP|N/N Hampshire|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP New|NNP|N/N Orleans|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Portland|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP San|NNP|N/N Diego|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP San|NNP|N/N Jose|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Scotts|NNP|N/N Valley|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP Springfield|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N Chattahoochee|NNP|N/N river|NN|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N highest|JJS|N/N mountain|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Hawaii|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Montana|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Maryland|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N lowest|JJS|N/N spot|NN|N in|IN|(NP\NP)/NP Iowa|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N most|RBS|(N/N)/(N/N) populated|JJ|N/N area|NN|N of|IN|(NP\NP)/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+Where|WRB|S[wq]/(S[q]/PP) is|VBZ|(S[q]/PP)/NP the|DT|NP[nb]/N smallest|JJS|N/N city|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N capitals|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP the|DT|NP[nb]/N states|NNS|N that|WDT|(NP\NP)/(S[dcl]/NP) border|NN|N/N Texas|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N capitals|NNS|N are|VBP|(S[dcl]\NP)/NP not|RB|(S\NP)\(S\NP) major|JJ|N/N cities|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N city|NN|N in|IN|(N\N)/NP California|NNP|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+Which|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N density|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N state|NN|N that|IN|S[em]/S[dcl] the|DT|NP[nb]/N largest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+Which|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N peak|NN|N not|RB|NP\NP in|IN|(NP\NP)/NP Alaska|NNP|N ?|.|.
+Which|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP USA|NNP|N ?|.|.
+Which|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N that|IN|(NP\NP)/(S[dcl]/NP) the|DT|NP[nb]/N Mississippi|NNP|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP ?|.|.
+Which|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N shortest|JJS|N/N river|NN|N ?|.|.
+Which|WP|S[wq]/(S[dcl]\NP) is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N state|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N of|IN|(NP\NP)/NP the|DT|NP[nb]/N states|NNS|N bordering|VBG|(S[ng]\NP)/NP Pennsylvania|NNP|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N population|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N goes|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP most|JJS|N/N states|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N runs|VBZ|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N river|NN|N traverses|VBZ|(S[dcl]\NP)/NP most|JJS|N/N states|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N are|VBP|(S[dcl]\NP)/PP in|IN|PP/NP Alaska|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N do|VBP|(S[dcl]\NP)/(S[b]\NP) not|RB|(S\NP)\(S\NP) run|VB|S[b]\NP through|IN|((S\NP)\(S\NP))/NP Texas|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N do|VBP|(S[dcl]\NP)/(S[b]\NP) not|RB|(S\NP)\(S\NP) run|VB|S[b]\NP through|IN|((S\NP)\(S\NP))/NP USA|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N flow|VBP|S[dcl]\NP through|IN|((S\NP)\(S\NP))/NP Alaska|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/PP through|IN|PP/NP states|NNS|N bordering|VBG|(S[ng]\NP)/NP New|NNP|N/N Mexico|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/NP through|IN|((S\NP)\(S\NP))/NP states|NNS|N that|IN|S[em]/S[dcl] border|NN|N the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N capital|NN|N/N Austin|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/PP through|IN|PP/NP states|NNS|N with|IN|(NP\NP)/NP fewest|JJS|N/N cities|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N US|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N rivers|NNS|N run|VBP|(S[dcl]\NP)/PP through|IN|PP/NP the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N elevation|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N/N border|NN|N/N Kentucky|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N/N borders|NNS|N/N Florida|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N/N borders|NNS|N/N Hawaii|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N/N borders|NNS|N most|RBS|N/N states|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N/N borders|NNS|N the|DT|NP[nb]/N most|JJS|N/N states|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N/N capital|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N contains|VBZ|(S[dcl]\NP)/NP most|RBS|N/N rivers|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N biggest|JJS|N/N population|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N greatest|JJS|N/N density|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N greatest|JJS|N/N population|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N elevation|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N peak|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N country|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N density|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N least|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N elevation|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N point|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Idaho|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N lowest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N major|JJ|N/N cities|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N major|JJ|N/N rivers|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N major|JJ|N/N rivers|NNS|N running|VBG|S[ng]\NP through|IN|((S\NP)\(S\NP))/NP it|PRP|NP ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N people|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N population|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N rivers|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N most|JJS|N/N rivers|NNS|N running|VBG|S[ng]\NP through|IN|((S\NP)\(S\NP))/NP it|PRP|NP ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N Red|NNP|N/N river|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N area|NN|N that|IN|(NP\NP)/(S[dcl]/NP) borders|NNS|N/N Texas|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N average|JJ|N/N urban|JJ|N/N population|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N sparsest|JJS|N/N population|NN|N/N density|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N is|VBZ|(S[dcl]\NP)/NP Kalamazoo|NNP|N in|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N is|VBZ|(S[dcl]\NP)/NP Mount|NNP|N/N McKinley|NNP|N in|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N city|NN|N/N Denver|NNP|N located|VBN|(S[pss]\NP)/PP in|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N/N city|NN|N in|IN|(NP\NP)/NP Montana|NNP|N in|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N adjoin|JJ|N/N Alabama|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Alabama|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Alaska|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Arizona|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Colorado|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Hawaii|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Illinois|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Iowa|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Kentucky|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Michigan|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N New|NNP|N/N York|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N no|DT|NP[nb]/N other|JJ|N/N states|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N South|NNP|N/N Dakota|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N states|NNS|N through|IN|(NP\NP)/NP which|WDT|((NP\NP)/S[dcl])\((NP\NP)/NP) the|DT|NP[nb]/N Mississippi|NNP|N/N traverses|NNS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|N/N Texas|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|(S\NP)\(S\NP) the|DT|NP[nb]/N longest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N USA|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|S/S the|DT|NP[nb]/N Missouri|NNP|N/N river|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N border|NN|(S\NP)\(S\NP) the|DT|NP[nb]/N state|NN|N with|IN|(NP\NP)/NP the|DT|NP[nb]/N smallest|JJS|N/N area|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N state|NN|N 's|POS|((S[wq]/(S[dcl]\NP))/N)\(S[wq]/(S[dcl]\NP)) capital|NN|N/N city|NN|N is|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N largest|JJS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N do|VBP|(S[dcl]\NP)/NP Colorado|NNP|N/N river|NN|N/N flow|NN|N through|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP not|RB|NP/NP border|NN|N/N Texas|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Chattahoochee|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Colorado|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N/N cross|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N longest|JJS|N/N river|NN|N/N run|NN|N through|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Mississippi|NNP|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Missouri|NNP|N/N river|NN|N pass|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[q]/NP))/N states|NNS|N does|VBZ|(S[q]/(S[b]\NP))/NP the|DT|NP[nb]/N Missouri|NNP|N/N river|NN|N run|VB|(S[b]\NP)/PP through|IN|PP/NP ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N major|JJ|N/N city|NN|N named|VBN|(S[pss]\NP)/NP Austin|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP a|DT|NP[nb]/N river|NN|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP cities|NNS|N named|VBN|(S[pss]\NP)/NP Austin|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP points|NNS|N higher|JJR|S[adj]\NP than|IN|((S[adj]\NP)\(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Colorado|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N have|VBP|(S[dcl]\NP)/NP points|NNS|N that|WDT|(NP\NP)/(S[dcl]\NP) are|VBP|(S[dcl]\NP)/(S[adj]\NP) higher|JJR|S[adj]\NP than|IN|((S[adj]\NP)\(S[adj]\NP))/NP the|DT|NP[nb]/N highest|JJS|N/N point|NN|N in|IN|(NP\NP)/NP Texas|NNP|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N states|NNS|N lie|VBP|(S[dcl]\NP)/PP on|IN|PP/NP the|DT|NP[nb]/N largest|JJS|N/N river|NN|N in|IN|(NP\NP)/NP the|DT|NP[nb]/N United|NNP|N/N States|NNPS|N ?|.|.
+Which|WDT|(S[wq]/(S[dcl]\NP))/N US|NNP|N/N city|NN|N has|VBZ|(S[dcl]\NP)/NP the|DT|NP[nb]/N highest|JJS|N/N population|NN|N/N density|NN|N ?|.|.

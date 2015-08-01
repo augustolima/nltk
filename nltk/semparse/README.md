@@ -3,43 +3,47 @@ Parses English sentences into Neo-Davidsonian logical forms
 using a CCG parse. Following [Reddy et. al.](http://www.sivareddy.in/papers/reddy2014semanticparsing.pdf)
 
 ##Setup
-The semantic parser requires data files to be built before
-it can run. This section details how to build them. For the
-purpose of example, the `data/` directory contains 
-CCG and predicate lexicons in two domains. 
+The semantic parser requires a CCG lexicon in order to run. 
+This section explains how to build it. For the
+purpose of example, the `data/lexica/` directory contains 
+CCG lexicons in two domains. It also requires a special cases file
+(e.g. `data/lib/specialcases.txt`).
 
 ### Data required for the semantic parser
 * CCG lexicon
-* Predicate lexicon
+* Special cases file
 
-###Building the required files
+####Building the CCG lexicon.
 * First, obtain a file of tokenized sentences, one per line.
-  + e.g. `data/reagan/sentences.txt`
-* Parse this file using the C&C parser using `parse_sents`.
-  + Read usage instructions ( `parse_sents -h` ) to make sure the C&C parser is set up as required.
-  + `./parse_sents -i data/reagan/sentences.txt -o data/reagan/parses.txt`
-* The output of `parse_sents` will be used to build both
-      the CCG lexicon and the predicate lexicon.
-
-####Building the CCG lexicon
+  + e.g. `data/lexica/reagan_sentences.txt`
+* Supertag these sentences using the C&C parser using `get_supertags`.
+  + Read usage instructions ( `get_supertags -h` ) to make sure the C&C parser is set up as required.
+  + `./get_supertags data/lexica/reagan_sentences.txt > data/lexica/reagan_supertags.txt`
+  + N.B. use the `-q` flag for supertagging questions.
+* The output of `get_supertags` will be used to build the CCG lexicon.
 * Build the CCG lexicon using `build_ccglex`
-  + `./build_ccglex -i data/reagan/parses.txt -o data/reagan/ccg.lex`
+  + `./build_ccglex -i data/lexica/reagan_supertags.txt -o data/lexica/reagan.ccg`
 
-####Building the predicate lexicon
-* Build the predicate lexicon using `build_predlex`
-  + `./build_predlex -i data/reagan/parses.txt -o data/reagan/predicates.lex`
+It is also possible to use an existing CCG lexicon so long as it conforms to the format
+required by `nltk.ccg.lexicon`. See [this link](http://www.nltk.org/howto/ccg.html) for more information.
+
+####Special Cases File
+The special cases file determines the semantics for words when the SemanticCategory class
+fails to generate an expression. It can be found at `data/lib/specialcases.txt`.
+A version for questions is at `data/lib/question_specialcases.txt`.
 
 ##Usage
 Once you have the required data, the semantic parser can be used as an interactive
 interpreter or from within Python.
 
 ###Using the interactive interpreter
-`./semparser --ccglex data/reagan/ccg.lex --predlex data/reagan/predicates.lex`
+The interpreter supports shell-like command line editing and history. Type a sentence
+at the '>' prompt and press ENTER.
+`./semparser --ccglex data/lexica/reagan.ccg`
 
 ####Command line options
 #####Required
 * `--ccglex path/to/file`: CCG lexicon to use.
-* `--predlex path/to/file`: Predicate lexicon to use.
 
 #####Optional
 * `-v --verbose`: Show full semantic derivation.
@@ -50,19 +54,21 @@ interpreter or from within Python.
 * `!quit`: exit the interpreter.
 * `!verbose On|Off`: set verbose.
 * `!syntax On|Off`: set syntax.
-* `!predlex <word>`: show predicates assigned to word.
 
 
 ###Using the semantic parser within Python
+The SemanticParser requires tokenized and POS tagged input, in the format
+output by nltk.pos_tag.
 
+    from nltk import word_tokenize, pos_tag
     from nltk.semparse import SemanticParser
 
-    ccglex = 'nltk/semparse/data/reagan/ccg.lex'
-    predlex = 'nltk/semparse/data/reagan/predicates.lex'
-    SemParser = SemanticParser(ccglex, predlex)
+    ccglex = 'nltk/semparse/data/lexica/reagan.ccg'
+    semparser = SemanticParser(ccglex)
     
     sent = "Reagan was an actor."
-    for parse in SemParser.parse(sent):
+    tagged_sent = pos_tag(word_tokenize(sent))
+    for parse in semparser.parse(sent):
         print parse.expression
         break
 

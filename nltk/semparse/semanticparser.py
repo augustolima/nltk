@@ -8,9 +8,7 @@ from nltk import word_tokenize
 from nltk.ccg import lexicon, chart
 from nltk.sem.logic import LogicalExpressionException
 
-#from nltk.semparse.predicatelexicon import PredicateLexicon
 #from nltk.semparse.composer import SemanticComposer
-from predicatelexicon import PredicateLexicon ##
 from composer import SemanticComposer ##
 
 
@@ -36,25 +34,19 @@ class Derivation(object):
 class SemanticParser(object):
     """
     Relies on a CCG parser and a semantic composition function.
-    Here we use nltk.ccg.CCGChartParser and nltk.semparse.SemanticComposer
+    Here use nltk.ccg.CCGChartParser and nltk.semparse.SemanticComposer
     """
-    def __init__(self, ccglex_file, predlex_file):
+    def __init__(self, ccglex_file):
         """
         :param ccglex_file: CCG lexicon filename.
         :type ccglex_file: str
-
-        :param predlex_file: Predicate lexicon filename.
-        :type predlex_file: str
-
-        :param trace: Set trace level. 0: no trace. 2: max trace.
-        :type trace: int
         """
         self.ccg_parser = self._setupCCGParser(ccglex_file)
-        self.composer = self._setupSemanticComposer(predlex_file)
+        self.composer = SemanticComposer()
 
     def _setupCCGParser(self, ccglex_file):
         """
-        Sets up the CCG parser to use.
+        Sets up the CCG parser.
 
         :param ccglex_file: CCG lexicon filename to use.
         :type ccglex_file: str
@@ -65,31 +57,19 @@ class SemanticParser(object):
         parser = chart.CCGChartParser(lex, chart.DefaultRuleSet)
         return parser
 
-    def _setupSemanticComposer(self, predlex_file):
+    def _getTokens(self, tagged_sentence):
         """
-        Sets up the semantic composer.
-
-        :param predlex_file: Predicate lexicon filename to use.
-        :type predlex_file: str
-        :rtype: nltk.semparse.SemanticComposer
-        """
-        predLex = PredicateLexicon.fromfile(predlex_file)
-        composer = SemanticComposer(predLex)
-        return composer
-
-    def _preprocessSent(self, sentence):
-        """
-        Removes punctuation and tokenizes sentence.
-
-        :param sentence: sentence to process
-        :type sentence: str
+        Gets the words of the sentence and removes punctuation.
+        
+        :param tagged_sentence: POS tagged input sentence.
+        :type tagged_sentence: list(tuple(str, str))
         :rtype: list
         """
-        sentence = word_tokenize(sentence)
-        sentence = [tok for tok in sentence if tok not in string.punctuation]
-        return sentence
+        tokens = [tagtok[0] for tagtok in tagged_sentence]
+        tokens = [tok for tok in tokens if tok not in string.punctuation]
+        return tokens
 
-    def parse(self, sentence):
+    def parse(self, tagged_sentence):
         """
         Parses sentences first into a CCG syntactic parse.
         Then uses this parse to compose a semantics.
@@ -100,12 +80,19 @@ class SemanticParser(object):
         :type sentence: str
         :rtype: list(Derivation)
         """
-        sentence = self._preprocessSent(sentence)
-        ccg_parses = self.ccg_parser.parse(sentence)
+        if tagged_sentence[-1][0] == '?':
+            question = True
+        else:
+            question = False
+
+        tokens = self._getTokens(tagged_sentence)
+        ccg_parses = self.ccg_parser.parse(tokens)
 
         for parse in ccg_parses:
             try:
-                expressions = self.composer.buildExpressions(parse)
+                expressions = self.composer.buildExpressions(parse,
+                                                             tagged_sentence,
+                                                             question)
             # Yield just syntactic parse if semantics fail.
             except LogicalExpressionException:
                 yield Derivation(parse, None, None)
@@ -118,18 +105,22 @@ class SemanticParser(object):
 
 
 def demo():
+    from nltk import word_tokenize, pos_tag
+
     # Statement data.
-    semParser = SemanticParser('data/reagan/ccg.lex', 'data/reagan/predicates.lex')
+    semParser = SemanticParser('data/lexica/reagan.ccg')
     sent = "Reagan had four children."
     print('\n', sent)
-    derivation = semParser.parse(sent).next()
+    tagged_sent = pos_tag(word_tokenize(sent))
+    derivation = semParser.parse(tagged_sent).next()
     print("+", derivation.expression)
 
     # Question data.
-    semParser = SemanticParser('data/geoquery/ccg.lex', 'data/geoquery/predicates.lex')
+    semParser = SemanticParser('data/lexica/geoquery.ccg')
     sent = "What is the longest river?"
     print('\n', sent)
-    derivation = semParser.parse(sent).next()
+    tagged_sent = pos_tag(word_tokenize(sent))
+    derivation = semParser.parse(tagged_sent).next()
     print("+", derivation.expression)
 
 

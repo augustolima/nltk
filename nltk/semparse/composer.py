@@ -3,6 +3,7 @@ from __future__ import print_function, unicode_literals
 import re
 from collections import namedtuple
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
+from semanticcategory import SemanticCategory
 
 # ==============================
 # The main semantic parsing algorithm
@@ -16,42 +17,43 @@ MR = namedtuple('MR', 'expression, derivation')
 
 class SemanticComposer(object):
 
-    def __init__(self, predicateLexicon):
-        """
-        :param predicateLexicon: predicate lexicon to use.
-        :type predicateLexicon: nltk.semparse.PredicateLexicon
-        """
-        self.predLex = predicateLexicon
+    def __init__(self):
+        pass
 
-    def buildExpressions(self, tree):
+    def buildExpressions(self, tree, pos_tags, question=False):
         """
         The main semantic composition algorithm.
 
         :param tree: input CCG parse
         :type tree: nltk.Tree
+        :param pos_tags: POS tags for words in input sentence.
+        :type pos_tags: list(tuple(str, str))
         :rtype: list(nltk.sem.logic.Expression)
         """
+
         expressions = []
         children = self.getChildren(tree)
 
         # Leaf
         if len(children) == 0:
-            cat = str(tree.label())
-            if '(' in cat:  # Get rid of extra parentheses.
-                cat = re.findall(r'\((.*)\)', cat)[0]
-            preds = self.predLex.get((tree[0], cat)) 
+            word = tree[0]
+            pos = dict(pos_tags)[word]
+            syncat = str(tree.label())
+            if '(' in syncat:  # Get rid of extra parentheses.
+                syncat = re.findall(r'\((.*)\)', syncat)[0]
+            semcat = SemanticCategory(word, pos, syncat, question)
+            preds = [semcat.getExpression()]
             return [MR(pred, []) for pred in preds]
 
         # Unary rule
         if len(children) == 1:
-            return self.buildExpressions(children[0])
+            return self.buildExpressions(children[0], pos_tags, question)
 
         # Binary rule
         rule = tree.label()[1]
-        for left_ex in self.buildExpressions(children[0]):
-            for right_ex in self.buildExpressions(children[1]):
+        for left_ex in self.buildExpressions(children[0], pos_tags, question):
+            for right_ex in self.buildExpressions(children[1], pos_tags, question):
                 expr = self.applyRule(left_ex.expression, right_ex.expression, rule)
-                expr = self.postProcess(expr)
                 if self.check(expr):
                     string = "* {0} {1} {2}\n\t==> {3}" \
                               .format(left_ex.expression, rule, right_ex.expression, expr)
@@ -96,23 +98,6 @@ class SemanticComposer(object):
         except Exception as e:
             return False
 
-    def postProcess(self, expression): 
-        """
-        Looks for subexpression of the form y(z). If it finds one,
-        replaces it with EQUAL(z, y).
-        """
-        string = str(expression)
-        equality = re.findall(r'[\( ]([a-z]\(.+?\))', string)
-        if not equality:
-            return expression
-        else:
-            equality = equality[0]
-        (repl, var) = re.sub(r'[\(\)]', ' ', equality).split()
-        index = string.find(equality)
-        sub = "EQUAL({0}, {1})".format(var, repl)
-        processed_str = string[:index] + sub + string[index + len(equality):]
-        return lexpr(processed_str)
-
     def applyRule(self, left_ex, right_ex, rule):
         """
         Passes left_ex and right_ex to the correct rule application
@@ -127,7 +112,6 @@ class SemanticComposer(object):
         if left_ex.__str__() == 'None': return right_ex
         if right_ex.__str__() == 'None': return left_ex
 
-
         if rule == '>':  # Forward application
             return ApplicationExpression(left_ex, right_ex).simplify() 
         if rule == '<':  # Backward application
@@ -140,7 +124,7 @@ class SemanticComposer(object):
             return self.compose(left_ex, right_ex)
         if rule == '<B':  # Backward composition
             return self.compose(right_ex, left_ex)
-        raise Exception("Bad rule: {0}".format(rule))
+        raise Exception("Unknown rule: {0}".format(rule))
 
     # TODO: complete typeraise function.
     def typeraise(self, expression):

@@ -1,0 +1,14 @@
+#! /bin/bash
+
+
+usage() { echo "Usage: $0 [-i <path/to/inputfile>] [-o <path/to/outputfile>]" 1>&2; exit 1; }
+
+INFILE=$1
+
+if [ -z "${INFILE}" ]; then
+    usage
+fi
+
+bin/pos --model models/pos_questions --input ${INFILE} --output pos.out
+bin/super --model models/super --input pos.out 
+rm pos.out
