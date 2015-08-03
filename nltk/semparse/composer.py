@@ -116,13 +116,13 @@ class SemanticComposer(object):
             return ApplicationExpression(left_ex, right_ex).simplify() 
         if rule == '<':  # Backward application
             return ApplicationExpression(right_ex, left_ex).simplify()
-        if rule == '>Sx':  # Forward substitution
+        if '>S' in rule:  # Forward substitution
             return self.substitute(left_ex, right_ex)
-        if rule == '<Sx':  # Backward substitution
+        if '<S' in rule:  # Backward substitution
             return self.substitute(right_ex, left_ex)
-        if rule == '>B':  # Forward composition
+        if '>B' in rule:  # Forward composition
             return self.compose(left_ex, right_ex)
-        if rule == '<B':  # Backward composition
+        if '<B' in rule:  # Backward composition
             return self.compose(right_ex, left_ex)
         raise Exception("Unknown rule: {0}".format(rule))
 
