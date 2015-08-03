@@ -4,8 +4,6 @@ import os
 import io
 import re
 from collections import OrderedDict
-# TODO: Figure out if I can use pyparsing because its not builtin.
-from pyparsing import nestedExpr
 
 from nltk.compat import python_2_unicode_compatible
 #from nltk.semparse import rules
@@ -157,7 +155,7 @@ class SemanticCategory(object):
         # according to the NLTK CCG lexicon. 
         # TODO: changing NP to N here is not robust. Do it on the fly.
         processed_pairs = [(syncat.replace('NP', 'N'), _)
-                           for (syncat, _) in ppairs]
+                           for (syncat, _) in pairs]
         # Create the dictionary that maps from syntactic
         # category to indexed syntactic category.
         pairsdict = dict(processed_pairs)
@@ -237,66 +235,99 @@ class SemanticCategory(object):
         For self.index_syncat
         Removes astericks in (it specifies unneeded information). 
         Removes bracketed syntactic specifiers, e.g. 'S[dcl]' => 'S'
+
+        :rtype: str
         """
         processed_category = self.index_syncat.replace('*', '')
         processed_category = processed_category.replace('_', 'e')
-        reCurlyBrace = re.compile(r'(?<=\))\{[A-Ze]\}.*?(?=[\\/\)])')
+        reCurlyBrace = re.compile(r'(?<=\))\{[A-Ze]\}.*?')
         processed_category = reCurlyBrace.sub('', processed_category)
         return processed_category
-        
-    # TODO: find a clearer way of parsing the syntactic_category.
-    def _getVars(self, syntactic_category):
+
+    def _parseIndexSyncat(self, index_syncat):
+        """
+        Parses the indexed syntactic category string into a binary
+        tree according to parentheses and '/' or '\\' operators.
+        Result is a binary tree in which each node is a function,
+        the left child is the return value and the right child
+        is the argument. Represents the curried function.
+
+        :param index_syncat: indexed syntactic category to parse.
+        :type index_syncat: str
+        :rtype: list
+        """
+        PARENS = ['(', ')']
+        OPERATORS = ['\\', '/']
+
+        def levelappend(stack, level, arg):
+            levelstack = stack
+            for i in range(level):
+                levelstack = levelstack[-1]
+            levelstack.append(arg)
+
+        level = 0
+        levelup = 0
+        stack = []
+        arg = ""
+        for i,c in enumerate(index_syncat):
+            if c == '(':
+                levelappend(stack, level, [])
+                level += 1
+            elif c not in PARENS + OPERATORS:
+                arg += c
+            elif c in OPERATORS:
+                levelappend(stack, level, arg)
+                arg = ""
+                if levelup > 0 and level > 0:
+                    level -= levelup 
+                    levelup = 0
+            elif c == ')':
+                levelup += 1
+        if arg:
+            levelappend(stack, level, arg)
+        return stack
+
+    def _getVars(self, index_syncat):
         """
         Finds and pairs up the predicate and argument variables
         for the logical expression from the syntactic category.
         Operates by first parsing the category according to it's
-        parentheses, and then recursing.
+        parentheses, and then recursively pairing predicate variables
+        with their arguments.
 
-        :param syntactic_category: CCG category for self.word.
-        :type syntactic_category: str
+        Returns an OrderedDict of predicate variables with their
+        argument variables, and the individual variable.
+
+        :param index_syncat: indexed syntactic category
+        :type index_syncat: str
+        :rtype: tuple(OrderedDict, char)
         """
         variable_store = ['P', 'Q', 'R', 'S']
         predicate_variables = OrderedDict()
-        argument_variable = [] 
+        individual_variable = [] 
 
-        def rhsVars(rhs):
-            if type(rhs) == str or type(rhs) == unicode:
-                p_var = variable_store.pop(0)
-                a_vars = re.findall(r'\{([A-Ze])\}', rhs)
-                a_vars = [var.lower() for var in a_vars]
-                if len(a_vars) > 1: ##
-                    # N{X}/N{Y} -> [N{X}, N{Y}] -> P[<lexpr>\y0.EQUAL(y0, y), 'x']
-                    # Turn first argument into an EQUALITY expression.
-                    subexps = re.split(r'[\\\/]', rhs, 1)
-                    exprvar = str(SemanticCategory(a_vars[-1], 'NNP', subexps[-1]))
-                    exprvar = exprvar.replace('_'+a_vars[-1], a_vars[-1])
-                    a_vars[-1] = exprvar
-                predicate_variables[p_var] = a_vars
-                return
-            rhsVars(rhs[0])
-
-        def lhsVars(parsed_category):
-            if type(parsed_category) == str or type(parsed_category) == unicode:
-                p_var = variable_store.pop(0)
-                a_vars = re.findall(r'\{([A-Ze])\}', parsed_category)
-                if len(a_vars) > 1:
-                    a_vars = [var.lower() for var in a_vars]
-                    predicate_variables[p_var] = a_vars[1:]
-                argument_variable.append(a_vars[0])
-                return
-            if len(parsed_category) >1:
-                rhsVars(parsed_category[-1])
-                lhsVars(parsed_category[0])
+        def getArgs(tree):
+            if isinstance(tree, list):
+                first_arg = getArgs(tree[1])[0]
+                exprvar = str(SemanticCategory(first_arg, 'NNP', 'N'))
+                exprvar = exprvar.replace('_'+first_arg, first_arg)
+                return getArgs(tree[0]) + [exprvar]
             else:
-                lhsVars(parsed_category[0])
+                var = re.findall(r'\{([A-Ze])\}', tree)[0]
+                return [var.lower()]
 
-        bracketParser = nestedExpr('(', ')')
-        try:
-            parsed_category = bracketParser.parseString(syntactic_category).asList()
-        except:
-            parsed_category = [syntactic_category]
-        lhsVars(parsed_category)  # Gets predicate and argument variables.
-        return (predicate_variables, argument_variable[0])
+        def getVars(tree):
+            if isinstance(tree, list):
+                var = variable_store.pop(0)
+                predicate_variables[var] = getArgs(tree[1])
+                getVars(tree[0])
+            else:
+                var = re.findall(r'\{([A-Ze])\}', tree)[0]
+                individual_variable.append(var.lower())
+
+        parse = self._parseIndexSyncat(index_syncat)
+        getVars(parse[0])
+        return (predicate_variables, individual_variable[0])
 
     def _getStem(self, predicate_variables, argument_variable):
         """

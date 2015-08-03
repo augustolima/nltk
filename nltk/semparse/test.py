@@ -67,10 +67,6 @@ class SemanticCategoryTest(unittest.TestCase):
         expression = SemanticCategory("is", "VBZ", r'(S\N)/N').getExpression()
         self.assertEqual(expression, lexpr(r'\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))'))
 
-#    def testCopula2(self):
-#        expression = SemanticCategory("is", "VBZ", r'(S\N)/(S\N)').getExpression()
-#        self.assertEqual(expression, lexpr(r'\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))'))
-
     def testQuesCopula(self):
         # "is" in a question.
         expression = SemanticCategory("is", "VBZ", r'(S\N)/N', question=True).getExpression() 
@@ -80,6 +76,10 @@ class SemanticCategoryTest(unittest.TestCase):
         # "is" as a normal verb.
         expression = SemanticCategory("is", "VBZ", r'(S\N)/S').getExpression()
         self.assertEqual(expression, lexpr(r'\P Q e.exists z y.(P(z) & Q(y) & is:1(e,y) & is:2(e,z))'))
+
+    def testIsAsEvent(self):
+        expression = SemanticCategory("is", "VBZ", r'(S\N)/(S\N)').getExpression()
+        self.assertEqual(expression, lexpr(r'\P Q e. exists z y.(P(z) & Q(y) & is:1(e,y) & is:2(e,z))'))
 
     # TYPE
     def testType(self):

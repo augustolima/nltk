@@ -1,7 +1,7 @@
 # word_regex	pos_regex	indexsyncat	semantic_type
 
 # Copula
-be$|is$|was$|am$|are|\'m$	.*$	((S[adj]{_}\NP{Y}<1>){_}/N[num]{Z}<2>){_}	\P x.P(x)
+be$|is$|was$|am$|are|\'m$	.*$	((S{_}\NP{Y}<1>){_}/NP{Z}<2>){_}	\P x.P(x)
 # be$|is$|was$|am$|are|\'m$	.*$	((S[dcl]{_}\NP[thr]{Y}<1>){_}/(S[pt]{Z}<2>\NP{Y*}){Z}){_}	\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))
 
 # Quantifiers
