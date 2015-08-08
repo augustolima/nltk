@@ -14,10 +14,9 @@ from composer import SemanticComposer ##
 
 class Derivation(object):
 
-    def __init__(self, syntactic, semantic, expression):
-        self.syntax = syntactic
-        self.semantics = semantic
-        self.expression = expression
+    def __init__(self, syntax, semantics):
+        self.syntax = syntax
+        self.semantics = semantics
 
     def printSyntacticDerivation(self):
         chart.printCCGDerivation(self.syntax)
@@ -26,10 +25,25 @@ class Derivation(object):
         if not self.semantics:
             print("None")
             return
-        for step in self.semantics:
-            print(step)
-        print()
-        
+        def derivation_print(tree):
+            children = list(tree.subtrees())
+            if len(children) == 1:
+                return tree.label()
+            rule = tree.label()[1]
+            lhs = derivation_print(children[1])
+            rhs = derivation_print(children[2])
+            print("{0} {1} {2}\n\t==> {3}"
+                   .format(lhs[0], rule, rhs[0], tree.label()[0]))
+            return tree.label()
+
+        derivation_print(self.semantics)
+
+    def getExpression(self):
+        if self.semantics:
+            return self.semantics.label()[0]
+        else:
+            return None
+
 
 class SemanticParser(object):
     """
@@ -69,7 +83,7 @@ class SemanticParser(object):
         tokens = [tok for tok in tokens if tok not in string.punctuation]
         return tokens
 
-    def parse(self, tagged_sentence):
+    def parse(self, tagged_sentence, n=100):
         """
         Parses sentences first into a CCG syntactic parse.
         Then uses this parse to compose a semantics.
@@ -88,20 +102,19 @@ class SemanticParser(object):
         tokens = self._getTokens(tagged_sentence)
         ccg_parses = self.ccg_parser.parse(tokens)
 
-        for parse in ccg_parses:
+        for (i,parse) in enumerate(ccg_parses):
+            if i > n:
+                break
             try:
-                expressions = self.composer.buildExpressions(parse,
-                                                             tagged_sentence,
-                                                             question)
+                derivation = self.composer.buildExpressions(parse, tagged_sentence, question)
+                yield Derivation(parse, derivation)
             # Yield just syntactic parse if semantics fail.
             except LogicalExpressionException:
-                yield Derivation(parse, None, None)
+                yield Derivation(parse, None)
                 continue
-            if not expressions:
-                yield Derivation(parse, None, None)
+            else:
+                yield Derivation(parse, None)
                 continue
-            for (expression, derivation) in expressions:
-                yield Derivation(parse, derivation, expression)
 
 
 def demo():

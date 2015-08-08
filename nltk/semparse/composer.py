@@ -2,6 +2,7 @@ from __future__ import print_function, unicode_literals
 
 import re
 from collections import namedtuple
+from nltk import Tree
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
 from semanticcategory import SemanticCategory
 
@@ -13,15 +14,16 @@ from semanticcategory import SemanticCategory
 
 
 lexpr = Expression.fromstring
-MR = namedtuple('MR', 'expression, derivation') 
 
 class SemanticComposer(object):
 
     def __init__(self):
         pass
 
+    # TODO: make buildExpressions return None if not valid expression is possible.
     def buildExpressions(self, tree, pos_tags, question=False):
         """
+
         The main semantic composition algorithm.
 
         :param tree: input CCG parse
@@ -30,38 +32,33 @@ class SemanticComposer(object):
         :type pos_tags: list(tuple(str, str))
         :rtype: list(nltk.sem.logic.Expression)
         """
-
-        expressions = []
         children = self.getChildren(tree)
 
         # Leaf
         if len(children) == 0:
             word = tree[0]
             pos = dict(pos_tags)[word]
-            syncat = str(tree.label())
-            if '(' in syncat:  # Get rid of extra parentheses.
-                syncat = re.findall(r'\((.*)\)', syncat)[0]
+            syncat_str = str(tree.label())
+            if '(' in syncat_str:  # Get rid of extra parentheses.
+                syncat_str = re.findall(r'\((.*)\)', syncat_str)[0]
+            syncat = SyntacticCategory(syncat_str)
             semcat = SemanticCategory(word, pos, syncat, question)
-            preds = [semcat.getExpression()]
-            return [MR(pred, []) for pred in preds]
+            expr = semcat.getExpression()
+            return Tree((expr,None), [])
 
         # Unary rule
         if len(children) == 1:
             return self.buildExpressions(children[0], pos_tags, question)
 
-        # Binary rule
         rule = tree.label()[1]
-        for left_ex in self.buildExpressions(children[0], pos_tags, question):
-            for right_ex in self.buildExpressions(children[1], pos_tags, question):
-                expr = self.applyRule(left_ex.expression, right_ex.expression, rule)
-                if self.check(expr):
-                    string = "* {0} {1} {2}\n\t==> {3}" \
-                              .format(left_ex.expression, rule, right_ex.expression, expr)
-                    derivation = left_ex.derivation + right_ex.derivation
-                    derivation.append(string)
-                    expressions.append( MR(expr, derivation) )
-
-        return expressions
+        left_expr = self.buildExpressions(children[0], pos_tags, question)
+        right_expr = self.buildExpressions(children[1], pos_tags, question)
+        expr = self.applyRule(left_expr.label()[0], right_expr.label()[0], rule)
+        if self.check(expr):
+            derivation = Tree((expr, rule), [left_expr, right_expr])
+            return derivation
+        else:
+            return Tree((None, None), [])
 
     def getChildren(self, tree):
         """

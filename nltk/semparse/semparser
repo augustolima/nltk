@@ -70,7 +70,7 @@ class Interpreter(object):
             print("\n====== SEMANTIC DERIVATION =======\n")
             semparse.printSemanticDerivation()
         print("\n========= SEMANTIC PARSE =========\n")
-        print(semparse.expression)
+        print(semparse.getExpression())
 
     def run(self):
         while self.status == 'GO':
