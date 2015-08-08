@@ -51,7 +51,6 @@ class reDict(dict):
 class SemanticCategory(object):
 
     _CandC_MARKEDUP_FILE = os.path.join(_DATA_DIR, 'lib/markedup')
-    syncat_dict_cache = None
 
     TYPEMAP = reDict({r'NN$|NNS$': 'TYPE',
             r'NNP.?$|PRP.?$': 'ENTITY',
@@ -65,11 +64,6 @@ class SemanticCategory(object):
              'CONJ', 'EVENT', 'COPULA', 'MOD', 'COUNT', 'ENTQUESTION']
 
     def __init__(self, word, pos, syntactic_category=None, question=False):
-        if not self.syncat_dict_cache:
-            self.syncat_dict = self.parseMarkedupFile()
-        else:
-            self.syncat_dict = self.syncat_dict_cache
-
         # Special question handling.
         if question:
             self._SPECIAL_CASES_FILE = os.path.join(_DATA_DIR, 'lib/question_specialcases.txt')
@@ -84,7 +78,7 @@ class SemanticCategory(object):
 
         self.word = word
         self.pos = pos
-        self.index_syncat = self.syncat_dict.get(syntactic_category, None)
+        self.syncat = syntactic_category
         
         special_case = self.getSpecialCase()
         if special_case and special_case in self.TYPES:
@@ -128,39 +122,6 @@ class SemanticCategory(object):
     def getBaseExpression(self):
         return self._expression
 
-    def parseMarkedupFile(self):
-        """
-        Parses the C&C markedup file into a dictionary of the form
-        {syntactic_category: indexed_syntactic_category}. E.g.
-        {'S\\N': '(S{_}\\NP{Y}<1>){_}'}
-        :rtype: dict
-        """ 
-        file = open(self._CandC_MARKEDUP_FILE, 'r').read()
-        marks = file.split('\n\n')
-        marks = [line.strip() for line in marks
-                 if not line.startswith('#') and not line.startswith('=')]
-        pairs = [line.split('\n')[:2] for line in marks]
-        pairs = [(syncat.strip(), idxsyncat.strip())
-                 for (syncat, idxsyncat) in pairs]
-        pairs = [(syncat, idxsyncat.split()[1])
-                 for (syncat, idxsyncat) in pairs]
-        # For matching the syntactic_categories to the
-        # NLTK CCG syntactic categories, we have to get rid of
-        # the brackets. S[adj]\\NP => S\NP.
-        # This means the the resulting dictionary will collapse
-        # all syntactic categories that differ only in type,
-        # e.g. S[adj]\\NP & S[ng]NP => S\\NP.
-        ppairs = [(re.sub(r'\[.*?\]', '', syncat), _) for (syncat, _) in pairs]
-        # This is necessary because of the mapping that happens
-        # according to the NLTK CCG lexicon. 
-        # TODO: changing NP to N here is not robust. Do it on the fly.
-        processed_pairs = [(syncat.replace('NP', 'N'), _)
-                           for (syncat, _) in pairs]
-        # Create the dictionary that maps from syntactic
-        # category to indexed syntactic category.
-        pairsdict = dict(processed_pairs)
-        return pairsdict
-
     def isExpression(self, string):
         """
         Determines if string is a valid Expression.
@@ -189,11 +150,11 @@ class SemanticCategory(object):
         quantifiers = Tokens.EXISTS_LIST + Tokens.ALL_LIST
         if self.word.lower() in quantifiers:
             return None
-        if not self.index_syncat:
+        if not self.syncat:
             return None
 
-        processed_category = self._preprocessCategory()
-        (pred_vars, arg_var) = self._getVars(processed_category)
+        syncat_parse = self.syncat.parse()
+        (pred_vars, arg_var) = self._getVars(syncat_parse)
         stem_expression = self._getStem(pred_vars, arg_var)
         try:
             return self.rules[self.semantic_type](stem_expression)
@@ -223,71 +184,14 @@ class SemanticCategory(object):
                 if line.startswith('\n') or line.startswith('#'):
                     continue
                 line = line.strip().split('\t')
-                (word_regex, pos_regex, syncat, sem) = line
+                (word_regex, pos_regex, syncat_str, sem) = line
                 if re.match(word_regex, self.word) and \
                    re.match(pos_regex, self.pos) and \
-                   syncat == self.index_syncat:
+                   syncat_str == self.syncat.index_syncat: ##
                     return sem
         return None
 
-    def _preprocessCategory(self):
-        """
-        For self.index_syncat
-        Removes astericks in (it specifies unneeded information). 
-        Removes bracketed syntactic specifiers, e.g. 'S[dcl]' => 'S'
-
-        :rtype: str
-        """
-        processed_category = self.index_syncat.replace('*', '')
-        processed_category = processed_category.replace('_', 'e')
-        reCurlyBrace = re.compile(r'(?<=\))\{[A-Ze]\}.*?')
-        processed_category = reCurlyBrace.sub('', processed_category)
-        return processed_category
-
-    def _parseIndexSyncat(self, index_syncat):
-        """
-        Parses the indexed syntactic category string into a binary
-        tree according to parentheses and '/' or '\\' operators.
-        Result is a binary tree in which each node is a function,
-        the left child is the return value and the right child
-        is the argument. Represents the curried function.
-
-        :param index_syncat: indexed syntactic category to parse.
-        :type index_syncat: str
-        :rtype: list
-        """
-        PARENS = ['(', ')']
-        OPERATORS = ['\\', '/']
-
-        def levelappend(stack, level, arg):
-            levelstack = stack
-            for i in range(level):
-                levelstack = levelstack[-1]
-            levelstack.append(arg)
-
-        level = 0
-        levelup = 0
-        stack = []
-        arg = ""
-        for i,c in enumerate(index_syncat):
-            if c == '(':
-                levelappend(stack, level, [])
-                level += 1
-            elif c not in PARENS + OPERATORS:
-                arg += c
-            elif c in OPERATORS:
-                levelappend(stack, level, arg)
-                arg = ""
-                if levelup > 0 and level > 0:
-                    level -= levelup 
-                    levelup = 0
-            elif c == ')':
-                levelup += 1
-        if arg:
-            levelappend(stack, level, arg)
-        return stack
-
-    def _getVars(self, index_syncat):
+    def _getVars(self, syncat_parse):
         """
         Finds and pairs up the predicate and argument variables
         for the logical expression from the syntactic category.
@@ -325,8 +229,7 @@ class SemanticCategory(object):
                 var = re.findall(r'\{([A-Ze])\}', tree)[0]
                 individual_variable.append(var.lower())
 
-        parse = self._parseIndexSyncat(index_syncat)
-        getVars(parse[0])
+        getVars(syncat_parse[0])
         return (predicate_variables, individual_variable[0])
 
     def _getStem(self, predicate_variables, argument_variable):

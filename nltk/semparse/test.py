@@ -9,6 +9,7 @@ from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 #from nltk.semparse.semanticcategory import SemanticCategory
 #from nltk.semparse.semanticparser import SemanticParser
+from syntacticcategory import SyntacticCategory
 from semanticcategory import SemanticCategory ##
 from semanticparser import SemanticParser ##
 
@@ -24,81 +25,98 @@ class SemanticCategoryTest(unittest.TestCase):
 
     # EVENT
     def testEvent(self):
-        expression = SemanticCategory("won", "VBD", r'(S\N)/N').getExpression()
+        syncat = SyntacticCategory(r'(S\N)/N')
+        expression = SemanticCategory("won", "VBD", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P Q e.exists z y.(P(z) & Q(y) & won:1(e,y) & won:2(e,z))'))
 
     # MOD
     def testMod(self):
-        expression = SemanticCategory("successful", "JJ", r'N/N').getExpression()
+        syncat = SyntacticCategory(r'N/N')
+        expression = SemanticCategory("successful", "JJ", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P y.(P(y) & successful(y))')) 
 
 
-        expression = SemanticCategory("annually", "RB", r'(S\N)\(S\N)').getExpression()
+        syncat = SyntacticCategory(r'(S\N)\(S\N)')
+        expression = SemanticCategory("annually", "RB", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P \Q \y. exists z. (P(\x.EQUAL(x,z))(y) & Q(z) & annually(y))'))
 
     # COUNT
     def testCount(self):
-        expression = SemanticCategory("four", "CD", r'N/N').getExpression()
+        syncat = SyntacticCategory(r'N/N')
+        expression = SemanticCategory("four", "CD", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P y.(P(y) & COUNT(y,four))'))
 
     # NEGATE
     def testNegate(self):
-        expression = SemanticCategory("not", "RB", r'(S\N)\(S\N)').getExpression()
+        syncat = SyntacticCategory(r'(S\N)\(S\N)')
+        expression = SemanticCategory("not", "RB", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P Q y.exists z.(P(\x.EQUAL(x,z))(y) & Q(z) & NEGATION(y))'))
 
     # COMPLEMENT
     def testComplement(self):
-        expression = SemanticCategory("no", "DT", r'N/N').getExpression()
+        syncat = SyntacticCategory(r'N/N')
+        expression = SemanticCategory("no", "DT", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P y.(P(y) & COMPLEMENT(y))'))
 
     # UNIQUE
     def testUnique(self):
-        expression = SemanticCategory("the", "DT", r'N/N').getExpression()
+        syncat = SyntacticCategory(r'N/N')
+        expression = SemanticCategory("the", "DT", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P y.(P(y) & UNIQUE(y))'))
 
     # INDEFINITE ARTICLES
     def testIndef(self):
-        expression = SemanticCategory("an", "DT", r'N/N').getExpression()
+        syncat = SyntacticCategory(r'N/N')
+        expression = SemanticCategory("an", "DT", syncat).getExpression()
         self.assertEqual(expression, lexpr("None"))
 
     # COPULA
     def testCopula1(self):
         # "is" as copula.
-        expression = SemanticCategory("is", "VBZ", r'(S\N)/N').getExpression()
+        syncat = SyntacticCategory(r'(S\N)/N')
+        expression = SemanticCategory("is", "VBZ", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))'))
 
     def testQuesCopula(self):
         # "is" in a question.
-        expression = SemanticCategory("is", "VBZ", r'(S\N)/N', question=True).getExpression() 
+        syncat = SyntacticCategory(r'(S\N)/N')
+        expression = SemanticCategory("is", "VBZ", syncat, question=True).getExpression() 
         self.assertEqual(expression, lexpr(r'\P x. (P(x))'))
 
     def testIsAsEvent(self):
         # "is" as a normal verb.
-        expression = SemanticCategory("is", "VBZ", r'(S\N)/S').getExpression()
+        syncat = SyntacticCategory(r'(S\N)/S')
+        expression = SemanticCategory("is", "VBZ", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P Q e.exists z y.(P(z) & Q(y) & is:1(e,y) & is:2(e,z))'))
 
     def testIsAsEvent(self):
-        expression = SemanticCategory("is", "VBZ", r'(S\N)/(S\N)').getExpression()
+        syncat = SyntacticCategory(r'(S\N)/(S\N)')
+        expression = SemanticCategory("is", "VBZ", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P Q e. exists z y.(P(z) & Q(y) & is:1(e,y) & is:2(e,z))'))
 
     # TYPE
     def testType(self):
-        expression = SemanticCategory("actor", "NN", "N").getExpression()
+        syncat = SyntacticCategory('N')
+        expression = SemanticCategory("actor", "NN", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\x.(actor(x))'))
 
     # ENTITY
     def testEntity(self):
-        expression = SemanticCategory("Reagan", "NNP", None).getExpression()
+        syncat = SyntacticCategory('N')
+        expression = SemanticCategory("Reagan", "NNP", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\x.EQUAL(x, reagan)'))
 
+    # TODO: fix conj
     # CONJ
     def testConj(self):
+        syncat = SyntacticCategory('conj')
         expression = SemanticCategory("and", "CC", "conj").getExpression()
         self.assertEqual(expression, lexpr(r'\P Q x.(P(x) & Q(x))'))
 
     # QUESTION
     def testQuestion(self):
-        expression = SemanticCategory("What", "WP", r'S/(S/N)', question=True).getExpression()
+        syncat = SyntacticCategory(r'S/(S/N)')
+        expression = SemanticCategory("What", "WP", syncat, question=True).getExpression()
         self.assertEqual(expression, lexpr(r'\P x.(P(x) & TARGET(x))'))
 
 class bcolors:
@@ -132,9 +150,8 @@ class SemanticParserTest(unittest.TestCase):
                     for derivation in derivations:
                         if derivation.syntax is not None:
                             parsed = True
-                        if derivation.expression is not None:
+                        if derivation.semantics is not None:
                             sem_parsed = True
-#                            print(derivation.expression)
                 except Exception as e:
                     error = str(e)
                 if parsed: num_parsed += 1
@@ -176,9 +193,9 @@ class SemanticParserTest(unittest.TestCase):
                     for derivation in derivations:
                         if derivation.syntax is not None:
                             parsed = True
-                        if derivation.expression is not None:
-#                            print(derivation.expression)
+                        if derivation.getExpression() is not None:
                             sem_parsed = True
+                            break
                 except Exception as e:
                     error = str(e)
                 if parsed: num_parsed += 1
