@@ -4,6 +4,7 @@ import re
 from collections import namedtuple
 from nltk import Tree
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
+from syntacticcategory import SyntacticCategory
 from semanticcategory import SemanticCategory
 
 # ==============================
@@ -150,7 +151,8 @@ class SemanticComposer(object):
             first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
             index = string.index(first_var)
             newstring = string[:index] + 'C ' + string[index:]
-        except AttributeError:  # Regex did not match. No lambdas in expression.
+        # Regex did not match. No lambdas in expression.
+        except AttributeError:
             newstring = '\\C. ' + string
         return lexpr(newstring)
 
@@ -163,10 +165,21 @@ class SemanticComposer(object):
         :type expr1, expr2: nltk.sem.logic.Expression 
         :rtype: nltk.sem.logic.Expression
         """
-        first = ApplicationExpression(expr2, lexpr('S'))
-        sec = ApplicationExpression(expr1, first).simplify()
-        newstring = '\\S ' + sec.__str__()
+        first = ApplicationExpression(expr1, lexpr('S'))
+        sec = ApplicationExpression(first, expr2).simplify()
+        string = sec.__str__() 
+        try:
+            first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
+            index = string.index(first_var)
+            newstring = string[:index] + 'C ' + string[index:]
+        # Regex did not match. No lambdas in expression.
+        except AttributeError:
+            newstring = '\\S. ' + string
         return lexpr(newstring)
+#        first = ApplicationExpression(expr2, lexpr('S'))
+#        sec = ApplicationExpression(expr1, first).simplify()
+#        newstring = '\\S ' + sec.__str__()
+#        return lexpr(newstring)
 
     # TODO: fix resolve function.
     def resolve(expression):
