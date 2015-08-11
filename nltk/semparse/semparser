@@ -26,7 +26,9 @@ optparser.add_option("--ccglex", dest="ccglex", default="", help="CCG lexicon fi
 
 class Interpreter(object):
 
-    def __init__(self, ccglex, syntax=False, semantics=False):
+    def __init__(self, ccglex_path, syntax=False, semantics=False):
+        lexstr = open(ccglex_path).read()
+        ccglex = lexicon.parseLexicon(lexstr)
         self.SemParser = SemanticParser(ccglex)
         self.opt_syntax = syntax
         self.opt_semantics = semantics
@@ -63,6 +65,7 @@ class Interpreter(object):
             return 'GO'
 
     def printSemanticParse(self, semparse):
+        print(semparse.sentence_type)
         if self.opt_syntax:
             print("\n======== SYNTACTIC PARSE ========\n")
             semparse.printSyntacticDerivation()
@@ -86,8 +89,7 @@ class Interpreter(object):
                 self.status = self.parseCmd(sent)
             # Sentence
             else:
-                tokens = word_tokenize(sent)
-                tagged_sent = pos_tag(tokens)
+                tagged_sent = pos_tag(word_tokenize(sent))
                 for parse in self.SemParser.parse(tagged_sent):
                     self.printSemanticParse(parse)
                     ans = raw_input("ENTER for next or 'q' to stop: ")

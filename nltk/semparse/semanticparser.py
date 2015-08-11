@@ -14,9 +14,10 @@ from composer import SemanticComposer ##
 
 class Derivation(object):
 
-    def __init__(self, syntax, semantics):
+    def __init__(self, syntax, semantics, sentence_type):
         self.syntax = syntax
         self.semantics = semantics
+        self.sentence_type = sentence_type
 
     def printSyntacticDerivation(self):
         chart.printCCGDerivation(self.syntax)
@@ -50,26 +51,13 @@ class SemanticParser(object):
     Relies on a CCG parser and a semantic composition function.
     Here use nltk.ccg.CCGChartParser and nltk.semparse.SemanticComposer
     """
-    def __init__(self, ccglex_file):
+    def __init__(self, ccg_lexicon):
         """
         :param ccglex_file: CCG lexicon filename.
         :type ccglex_file: str
         """
-        self.ccg_parser = self._setupCCGParser(ccglex_file)
+        self.ccg_parser = chart.CCGChartParser(ccg_lexicon, chart.DefaultRuleSet)
         self.composer = SemanticComposer()
-
-    def _setupCCGParser(self, ccglex_file):
-        """
-        Sets up the CCG parser.
-
-        :param ccglex_file: CCG lexicon filename to use.
-        :type ccglex_file: str
-        :rtype: nltk.ccg.chart.CCGChartParser
-        """
-        lexfile = io.open(ccglex_file, 'rt', encoding='utf-8').read()
-        lex = lexicon.parseLexicon(lexfile)
-        parser = chart.CCGChartParser(lex, chart.DefaultRuleSet)
-        return parser
 
     def _getTokens(self, tagged_sentence):
         """
@@ -83,37 +71,40 @@ class SemanticParser(object):
         tokens = [tok for tok in tokens if tok not in string.punctuation]
         return tokens
 
-    def parse(self, tagged_sentence, n=100):
+    def parse(self, tagged_sentence, n=0):
         """
         Parses sentences first into a CCG syntactic parse.
         Then uses this parse to compose a semantics.
         Yields a list of Derivation instances for each syntactic
         parse of the sentence.
 
-        :param sentence: sentence to parse into logical form.
-        :type sentence: str
-        :rtype: list(Derivation)
+        :param tagged_sentence: tokenized and POS tagged sentence.
+        :type tagged_sentence: list(tuple(str, str))
+        :returns: yields a derivation for each syntactic parse.
+        :rtype: Derivation
         """
         if tagged_sentence[-1][0] == '?':
             question = True
+            sent_type = 'QUESTION'
         else:
             question = False
+            sent_type = 'STATEMENT'
 
         tokens = self._getTokens(tagged_sentence)
         ccg_parses = self.ccg_parser.parse(tokens)
 
         for (i,parse) in enumerate(ccg_parses):
-            if i > n:
+            if i+1 == n:
                 break
             try:
                 derivation = self.composer.buildExpressions(parse, tagged_sentence, question)
-                yield Derivation(parse, derivation)
+                yield Derivation(parse, derivation, sent_type)
             # Yield just syntactic parse if semantics fail.
             except LogicalExpressionException:
-                yield Derivation(parse, None)
+                yield Derivation(parse, None, sent_type)
                 continue
             else:
-                yield Derivation(parse, None)
+                yield Derivation(parse, None, sent_type)
                 continue
 
 
