@@ -143,10 +143,6 @@ def entity():
 def entityQuestion():
     return lexpr(r'\P x. (P(x) & TARGET(x))')
 
-# e.g. "How long ... ?"
-def degreeQuestion():
-    return lexpr(r'\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))')
-
 
 # =========================
 #         Mappings        
@@ -179,5 +175,4 @@ question_special_rules = {
         'TYPE': kind,
         'ENTITY': entity,
         'ENTQUESTION': entityQuestion,
-        'DEGQUESTION': degreeQuestion
         }
