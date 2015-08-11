@@ -6,11 +6,12 @@ import re
 from collections import OrderedDict
 
 from nltk.compat import python_2_unicode_compatible
-#from nltk.semparse import rules
-import rules ##
 from nltk.sem.logic import (Expression, Tokens, Variable,
                             ExistsExpression, LambdaExpression,
                             LogicalExpressionException)
+#from nltk.semparse import rules
+import rules ##
+from syntacticcategory import SyntacticCategory
 
 
 lexpr = Expression.fromstring
@@ -63,7 +64,7 @@ class SemanticCategory(object):
     TYPES = ['INDEF', 'UNIQUE', 'COMPLEMENT', 'NEGATE', 'TYPE', 'ENTITY',
              'CONJ', 'EVENT', 'COPULA', 'MOD', 'COUNT', 'ENTQUESTION']
 
-    def __init__(self, word, pos, syntactic_category=None, question=False):
+    def __init__(self, word, pos, syntactic_category, question=False):
         # Special question handling.
         if question:
             self._SPECIAL_CASES_FILE = os.path.join(_DATA_DIR, 'lib/question_specialcases.txt')
@@ -150,11 +151,13 @@ class SemanticCategory(object):
         quantifiers = Tokens.EXISTS_LIST + Tokens.ALL_LIST
         if self.word.lower() in quantifiers:
             return None
-        if not self.syncat:
+        if not self.syncat.index_syncat:
             return None
 
         syncat_parse = self.syncat.parse()
         (pred_vars, arg_var) = self._getVars(syncat_parse)
+        if not pred_vars:
+            return None
         stem_expression = self._getStem(pred_vars, arg_var)
         try:
             return self.rules[self.semantic_type](stem_expression)
@@ -185,11 +188,16 @@ class SemanticCategory(object):
                     continue
                 line = line.strip().split('\t')
                 (word_regex, pos_regex, syncat_str, sem) = line
+                if syncat_str == '.*$':
+                    syncat_match = True
+                else:
+                    syncat_match = syncat_str == self.syncat.index_syncat
                 if re.match(word_regex, self.word) and \
                    re.match(pos_regex, self.pos) and \
-                   syncat_str == self.syncat.index_syncat: ##
+                   syncat_match:
                     return sem
         return None
+#                   syncat_str == self.syncat.index_syncat: ##
 
     def _getVars(self, syncat_parse):
         """
@@ -213,7 +221,8 @@ class SemanticCategory(object):
         def getArgs(tree):
             if isinstance(tree, list):
                 first_arg = getArgs(tree[1])[0]
-                exprvar = str(SemanticCategory(first_arg, 'NNP', 'N'))
+                sc = SyntacticCategory('N')
+                exprvar = str(SemanticCategory(first_arg, 'NNP', sc))
                 exprvar = exprvar.replace('_'+first_arg, first_arg)
                 return getArgs(tree[0]) + [exprvar]
             else:
@@ -246,6 +255,10 @@ class SemanticCategory(object):
         sub_expressions = []
         exists_vars = []
         lambda_vars = []
+
+        if self.semantic_type == 'EVENT' and argument_variable != 'e':
+            argument_variable = 'e'
+
         for (pred, args) in predicate_variables.items():
             lambda_vars.append(pred)
             for arg in reversed(args):
