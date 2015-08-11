@@ -1,7 +1,8 @@
 # word_regex	pos_regex	indexsyncat	semantic_type
 
 # Copula
-be$|is$|was$|am$|are|\'m$	.*$	((S{_}\NP{Y}<1>){_}/NP{Z}<2>){_}	\P x.P(x)
+#be$|is$|was$|am$|are|\'m$	.*$	((S{_}\NP{Y}<1>){_}/NP{Z}<2>){_}	\P x.P(x)
+be$|is$|was$|am$|are|\'m$	.*$	.*$	\P x.P(x)
 # be$|is$|was$|am$|are|\'m$	.*$	((S[dcl]{_}\NP[thr]{Y}<1>){_}/(S[pt]{Z}<2>\NP{Y*}){Z}){_}	\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))
 
 # Quantifiers
@@ -25,4 +26,4 @@ not$|n't$	.*$	((S[adj]{Y}\NP{Z}){Y}\(S[adj]{Y}<1>\NP{Z}){Y}){_}	NEGATE
 .*$	VBG	(NP{Y}/N{Y}<1>){_}	MOD
 
 # Degree questions
-[Hh]ow$	.*$	.*$	\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))
+[Hh]ow$	.*$	((S[wq]{_}/(S[q]{Y}<1>/(S[adj]{Z}\NP{W}){Z}){V}){_}/(S[adj]{Z}<2>\NP{W}){Z}){_}	\P Q.exists z d.(P(\x.EQUAL(x,z),d) & Q(z) & TARGET(d))	
