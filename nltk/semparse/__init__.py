@@ -12,5 +12,6 @@ Semantic parser which builds Neo-Davidsonian MRs using nltk.ccg
 '''
 
 from nltk.semparse.semanticparser import SemanticParser
+from nltk.semparse.semanticparser import Derivation
 from nltk.semparse.composer import SemanticComposer
 from nltk.semparse.semanticcategory import SemanticCategory
