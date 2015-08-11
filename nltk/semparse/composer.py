@@ -45,7 +45,7 @@ class SemanticComposer(object):
             syncat = SyntacticCategory(syncat_str)
             semcat = SemanticCategory(word, pos, syncat, question)
             expr = semcat.getExpression()
-            return Tree((expr,None), [])
+            return expr
 
         # Unary rule
         if len(children) == 1:
@@ -54,7 +54,15 @@ class SemanticComposer(object):
         rule = tree.label()[1]
         left_expr = self.buildExpressions(children[0], pos_tags, question)
         right_expr = self.buildExpressions(children[1], pos_tags, question)
-        expr = self.applyRule(left_expr.label()[0], right_expr.label()[0], rule)
+        if isinstance(left_expr, Tree):
+            lexpr = left_expr.label()[0]
+        else:
+            lexpr = left_expr
+        if isinstance(right_expr, Tree):
+            rexpr = right_expr.label()[0]
+        else:
+            rexpr = right_expr
+        expr = self.applyRule(lexpr, rexpr, rule)
         if self.check(expr):
             derivation = Tree((expr, rule), [left_expr, right_expr])
             return derivation
