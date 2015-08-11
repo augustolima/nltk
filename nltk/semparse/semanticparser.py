@@ -99,6 +99,7 @@ class SemanticParser(object):
             try:
                 derivation = self.composer.buildExpressions(parse, tagged_sentence, question)
                 yield Derivation(parse, derivation, sent_type)
+                continue
             # Yield just syntactic parse if semantics fail.
             except LogicalExpressionException:
                 yield Derivation(parse, None, sent_type)

@@ -45,12 +45,13 @@ class SyntacticCategory(object):
         # This means the the resulting dictionary will collapse
         # all syntactic categories that differ only in type,
         # e.g. S[adj]\\NP & S[ng]NP => S\\NP.
-        ppairs = [(re.sub(r'\[.*?\]', '', syncat), _) for (syncat, _) in pairs]
+        ppairs = [(re.sub(r'\[.*?\]', '', syncat), _)
+                  for (syncat, _) in pairs]
         # This is necessary because of the mapping that happens
         # according to the NLTK CCG lexicon. 
         # TODO: changing NP to N here is not robust. Do it on the fly.
         processed_pairs = [(syncat.replace('NP', 'N'), _)
-                           for (syncat, _) in pairs]
+                           for (syncat, _) in ppairs]
         # Create the dictionary that maps from syntactic
         # category to indexed syntactic category.
         pairsdict = dict(processed_pairs)
