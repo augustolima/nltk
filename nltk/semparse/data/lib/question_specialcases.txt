@@ -23,3 +23,6 @@ not$|n't$	.*$	((S[adj]{Y}\NP{Z}){Y}\(S[adj]{Y}<1>\NP{Z}){Y}){_}	NEGATE
 
 # Gerunds which modify nouns.
 .*$	VBG	(NP{Y}/N{Y}<1>){_}	MOD
+
+# Degree questions
+[Hh]ow$	.*$	.*$	\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))

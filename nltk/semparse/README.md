@@ -61,15 +61,21 @@ The SemanticParser requires tokenized and POS tagged input, in the format
 output by nltk.pos_tag.
 
     from nltk import word_tokenize, pos_tag
+    from nltk.ccg import lexicon
     from nltk.semparse import SemanticParser
 
-    ccglex = 'nltk/semparse/data/lexica/reagan.ccg'
+    ccglex = lexicon.parseLexicon(r'''
+	:- S, N
+	I => N
+	eat => (S\N)/N
+	peaches => N
+    ''')	
     semparser = SemanticParser(ccglex)
     
-    sent = "Reagan was an actor."
+    sent = "I eat peaches."
     tagged_sent = pos_tag(word_tokenize(sent))
-    for parse in semparser.parse(sent):
-        print parse.expression
+    for parse in semparser.parse(tagged_sent):
+        print parse.getExpression()
         break
 
 ##Testing

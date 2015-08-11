@@ -7,6 +7,7 @@ import logging
 
 from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
+from nltk.ccg import lexicon
 #from nltk.semparse.semanticcategory import SemanticCategory
 #from nltk.semparse.semanticparser import SemanticParser
 from syntacticcategory import SyntacticCategory
@@ -92,7 +93,7 @@ class SemanticCategoryTest(unittest.TestCase):
     def testIsAsEvent(self):
         syncat = SyntacticCategory(r'(S\N)/(S\N)')
         expression = SemanticCategory("is", "VBZ", syncat).getExpression()
-        self.assertEqual(expression, lexpr(r'\P Q e. exists z y.(P(z) & Q(y) & is:1(e,y) & is:2(e,z))'))
+        self.assertEqual(expression, lexpr(r'\P Q e. exists y z.(P(\x.EQUAL(x,z),y) & Q(z) & is:1(e,z) & is:2(e,y))'))
 
     # TYPE
     def testType(self):
@@ -106,11 +107,10 @@ class SemanticCategoryTest(unittest.TestCase):
         expression = SemanticCategory("Reagan", "NNP", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\x.EQUAL(x, reagan)'))
 
-    # TODO: fix conj
     # CONJ
     def testConj(self):
         syncat = SyntacticCategory('conj')
-        expression = SemanticCategory("and", "CC", "conj").getExpression()
+        expression = SemanticCategory("and", "CC", syncat).getExpression()
         self.assertEqual(expression, lexpr(r'\P Q x.(P(x) & Q(x))'))
 
     # QUESTION
@@ -118,6 +118,12 @@ class SemanticCategoryTest(unittest.TestCase):
         syncat = SyntacticCategory(r'S/(S/N)')
         expression = SemanticCategory("What", "WP", syncat, question=True).getExpression()
         self.assertEqual(expression, lexpr(r'\P x.(P(x) & TARGET(x))'))
+
+    # DEGREE QUESTION
+    def testDegQuestion(self):
+        syncat = SyntacticCategory(r'S/S')
+        expression = SemanticCategory("How", "WP", syncat, question=True).getExpression()
+        self.assertEqual(expression, lexpr(r'\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))'))
 
 class bcolors:
     HEADER = '\033[95m'
@@ -133,7 +139,9 @@ class SemanticParserTest(unittest.TestCase):
 
     def testStatement(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD + "STATEMENTS" + bcolors.ENDC + "\n")
-        semParser = SemanticParser('data/lexica/reagan.ccg')
+        filestr = open('data/lexica/reagan.ccg').read()
+        ccglex = lexicon.parseLexicon(filestr)
+        semParser = SemanticParser(ccglex)
         total = 0
         num_parsed = 0
         num_sem = 0
@@ -142,11 +150,10 @@ class SemanticParserTest(unittest.TestCase):
                 total += 1
                 parsed = False
                 sem_parsed = False
-                tokens = word_tokenize(sent)
-                tagged = pos_tag(tokens)
+                tagged = pos_tag(word_tokenize(sent))
                 error = None
                 try:
-                    derivations = semParser.parse(tagged)
+                    derivations = semParser.parse(tagged, n=100)
                     for derivation in derivations:
                         if derivation.syntax is not None:
                             parsed = True
@@ -176,7 +183,9 @@ class SemanticParserTest(unittest.TestCase):
 
     def testQuestion(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD + "QUESTIONS" + bcolors.ENDC + "\n")
-        semParser = SemanticParser('data/lexica/geoquery.ccg')
+        filestr = open('data/lexica/geoquery.ccg').read()
+        ccglex = lexicon.parseLexicon(filestr)
+        semParser = SemanticParser(ccglex)
         total = 0
         num_parsed = 0
         num_sem = 0
@@ -185,11 +194,10 @@ class SemanticParserTest(unittest.TestCase):
                 total += 1
                 parsed = False
                 sem_parsed = False
-                tokens = word_tokenize(sent)
-                tagged = pos_tag(tokens)
+                tagged = pos_tag(word_tokenize(sent))
                 error = None
                 try:
-                    derivations = semParser.parse(tagged)
+                    derivations = semParser.parse(tagged, n=100)
                     for derivation in derivations:
                         if derivation.syntax is not None:
                             parsed = True
