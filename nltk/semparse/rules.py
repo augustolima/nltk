@@ -130,6 +130,10 @@ def unique(stem):
     expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
+# What, which
+def entityQuestion():
+    return lexpr(r'\P. exists x.(P(x) & TARGET(x))')
+
 # TODO: should these go in the specialcases file?
 # NN, NNS
 def kind():
@@ -139,9 +143,6 @@ def kind():
 def entity():
     return lexpr(r'\x.(EQUAL(x, {0}))')
 
-# What, which
-def entityQuestion():
-    return lexpr(r'\P x. (P(x) & TARGET(x))')
 
 
 # =========================
@@ -168,11 +169,11 @@ question_rules = {
         'UNIQUE': unique,
         'EVENT': event,
         'MOD': mod,
-        'COUNT': count
+        'COUNT': count,
         }
 
 question_special_rules = {
         'TYPE': kind,
         'ENTITY': entity,
-        'ENTQUESTION': entityQuestion,
+        'ENTQUESTION': entityQuestion
         }
