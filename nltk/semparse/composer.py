@@ -133,15 +133,18 @@ class SemanticComposer(object):
         raise Exception("Unknown rule: {0}".format(rule))
 
     # TODO: complete typeraise function.
-    def typeraise(self, expression):
+    def typeraise(self, expression, ccg_op):
         """
         Typeraises expression.
 
         :param expression: expression to typeraise.
         :type expression: nltk.sem.logic.Expression
+        :param ccg_op: ccg_op specifying the direction of the type-raise.
+        :type ccg_op: str ('>T' or '<T')
         :rtype: nltk.sem.logic.Expression
         """
         pass
+        
 
     def compose(self, expr1, expr2):
         """
@@ -179,7 +182,7 @@ class SemanticComposer(object):
         try:
             first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
             index = string.index(first_var)
-            newstring = string[:index] + 'C ' + string[index:]
+            newstring = string[:index] + 'S ' + string[index:]
         # Regex did not match. No lambdas in expression.
         except AttributeError:
             newstring = '\\S. ' + string
