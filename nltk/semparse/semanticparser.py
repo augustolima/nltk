@@ -4,7 +4,7 @@ import io
 import re
 import string
 
-from nltk import word_tokenize
+from nltk import word_tokenize, Tree
 from nltk.ccg import lexicon, chart
 from nltk.sem.logic import LogicalExpressionException
 
@@ -26,16 +26,16 @@ class Derivation(object):
         if not self.semantics:
             print("None")
             return
+
         def derivation_print(tree):
-            children = list(tree.subtrees())
-            if len(children) == 1:
-                return tree.label()
-            rule = tree.label()[1]
-            lhs = derivation_print(children[1])
-            rhs = derivation_print(children[2])
-            print("{0} {1} {2}\n\t==> {3}"
-                   .format(lhs[0], rule, rhs[0], tree.label()[0]))
-            return tree.label()
+            if not isinstance(tree, Tree):
+                return tree
+            rule = tree.label()[-1]
+            lhs = derivation_print(tree[0])
+            rhs = derivation_print(tree[1])
+            print("{0} {1} {2}\n\t==> {3}\n"
+                   .format(lhs, rule, rhs, tree.label()[0]))
+            return tree.label()[0]
 
         derivation_print(self.semantics)
 
