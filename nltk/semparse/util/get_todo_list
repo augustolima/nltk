@@ -1,5 +1,12 @@
 #! /bin/bash
 
+# =============================================
+# Finds all TODO notes in a codebase.
+#
+# REQUIRES grepfind
+# https://github.com/jvasilakes/bash-scripts/blob/master/grepfind
+# =============================================
+
 for FILE in $(grepfind TODO); do
 	if [ $(basename ${FILE}) = "get_todo_list" ]
 	then
