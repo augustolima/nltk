@@ -14,6 +14,11 @@ CCG lexicons in two domains. It also requires a special cases file
 * Special cases file
 
 ####Building the CCG lexicon.
+The CCG lexicon can be built by hand (see example usage below) or automatically.
+It is possible to use an existing CCG lexicon so long as it conforms to the format
+required by `nltk.ccg.lexicon`. See [this link](http://www.nltk.org/howto/ccg.html) for more information.
+
+#####Building the CCG lexicon automatically
 * First, obtain a file of tokenized sentences, one per line.
   + e.g. `data/lexica/reagan_sentences.txt`
 * Supertag these sentences using the C&C parser using `get_supertags`.
@@ -23,9 +28,6 @@ CCG lexicons in two domains. It also requires a special cases file
 * The output of `get_supertags` will be used to build the CCG lexicon.
 * Build the CCG lexicon using `build_ccglex`
   + `./build_ccglex -i data/lexica/reagan_supertags.txt -o data/lexica/reagan.ccg`
-
-It is also possible to use an existing CCG lexicon so long as it conforms to the format
-required by `nltk.ccg.lexicon`. See [this link](http://www.nltk.org/howto/ccg.html) for more information.
 
 ####Special Cases File
 The special cases file determines the semantics for words when the SemanticCategory class
@@ -39,11 +41,14 @@ interpreter or from within Python.
 ###Using the interactive interpreter
 The interpreter supports shell-like command line editing and history. Type a sentence
 at the '>' prompt and press ENTER.
-`./semparser --ccglex data/lexica/reagan.ccg`
+
+`Usage: semparser [-v] [-s] -l <path/to/ccg lexicon file>`
+
+E.g.  `./semparser -l data/lexica/reagan.ccg`
 
 ####Command line options
 #####Required
-* `--ccglex path/to/file`: CCG lexicon to use.
+* `-l --ccglex <path/to/file>`: CCG lexicon to use.
 
 #####Optional
 * `-v --verbose`: Show full semantic derivation.
@@ -81,5 +86,9 @@ output by nltk.pos_tag.
 ##Testing
 `test.py` holds unit tests for both the logical lexicon generation step
 and the semantic parsing step. For the semantic parsing step, the tests
-will output the composed logical form, nothing, or any error messages that
-occur in the pipeline.
+output the following form:
+
+`[SYN][SEM]<input sentence>`
+
+Where SYN/SEM will be red if syntacic/semantic derivation failed for `<input sentence>`
+or green if succeeded.

@@ -20,7 +20,7 @@ from semanticparser import SemanticParser ##
 optparser = optparse.OptionParser()
 optparser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Show MR derivation")
 optparser.add_option("-s", "--syntax", action="store_true", dest="syntax", default=False, help="Show syntactic parse")
-optparser.add_option("--ccglex", dest="ccglex", default="", help="CCG lexicon file")
+optparser.add_option("-l", "--ccglex", dest="ccglex", default="", help="CCG lexicon file")
 (opts, _) = optparser.parse_args()
 
 
@@ -41,7 +41,7 @@ class Interpreter(object):
         print(" '!quit' to exit.")
         print(" '!verbose on|off' to show/hide semantic derivation.")
         print(" '!syntax on|off' to show/hide syntactic parse.")
-        print(" '!predlex <word>' to show predicates assigned to <word>.\n")
+        print()
 
     def parseCmd(self, cmd):
         """
@@ -136,7 +136,7 @@ class Interpreter(object):
 if __name__ == '__main__':
     import sys
     if not opts.ccglex:
-        line = "Usage: semparser [-v] [-s] --ccglex <path/to/file>\n"
+        line = "Usage: semparser [-v] [-s] -l <path/to/ccg lexicon>\n"
         sys.stderr.write(line)
         sys.exit(1)
     interpreter = Interpreter(opts.ccglex, opts.syntax, opts.verbose)
