@@ -117,13 +117,13 @@ class SemanticCategoryTest(unittest.TestCase):
     def testQuestion(self):
         syncat = SyntacticCategory(r'S/(S/N)')
         expression = SemanticCategory("What", "WP", syncat, question=True).getExpression()
-        self.assertEqual(expression, lexpr(r'\P x.(P(x) & TARGET(x))'))
+        self.assertEqual(expression, lexpr(r'\P. exists x.(P(x) & TARGET(x))'))
 
     # DEGREE QUESTION
-    def testDegQuestion(self):
-        syncat = SyntacticCategory(r'S/S')
-        expression = SemanticCategory("How", "WP", syncat, question=True).getExpression()
-        self.assertEqual(expression, lexpr(r'\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))'))
+#    def testDegQuestion(self):
+#        syncat = SyntacticCategory(r'S/S')
+#        expression = SemanticCategory("How", "WP", syncat, question=True).getExpression()
+#        self.assertEqual(expression, lexpr(r'\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))'))
 
 class bcolors:
     HEADER = '\033[95m'
@@ -152,15 +152,14 @@ class SemanticParserTest(unittest.TestCase):
                 sem_parsed = False
                 tagged = pos_tag(word_tokenize(sent))
                 error = None
-                try:
-                    derivations = semParser.parse(tagged, n=100)
-                    for derivation in derivations:
-                        if derivation.syntax is not None:
-                            parsed = True
-                        if derivation.semantics is not None:
+                derivations = semParser.parse(tagged, n=30)
+                for derivation in derivations:
+                    if derivation.syntax is not None:
+                        parsed = True
+                    if derivation.getExpression() is not None:
+                        if len(derivation.semantics.leaves()) == len(tagged)-1:
                             sem_parsed = True
-                except Exception as e:
-                    error = str(e)
+                            break
                 if parsed: num_parsed += 1
                 if sem_parsed: num_sem += 1
 
@@ -196,16 +195,14 @@ class SemanticParserTest(unittest.TestCase):
                 sem_parsed = False
                 tagged = pos_tag(word_tokenize(sent))
                 error = None
-                try:
-                    derivations = semParser.parse(tagged, n=100)
-                    for derivation in derivations:
-                        if derivation.syntax is not None:
-                            parsed = True
-                        if derivation.getExpression() is not None:
+                derivations = semParser.parse(tagged, n=30)
+                for derivation in derivations:
+                    if derivation.syntax is not None:
+                        parsed = True
+                    if derivation.getExpression() is not None:
+                        if len(derivation.semantics.leaves()) == len(tagged)-1:
                             sem_parsed = True
                             break
-                except Exception as e:
-                    error = str(e)
                 if parsed: num_parsed += 1
                 if sem_parsed: num_sem += 1
 
