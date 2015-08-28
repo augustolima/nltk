@@ -1,0 +1,880 @@
+Give me the cities in Virginia .
+What are the high points of states surrounding Mississippi ?
+Name the rivers in Arkansas .
+Name all the rivers in Colorado .
+Can you tell me the capital of Texas ?
+Could you tell me what is the highest point in the state of Oregon ?
+Count the states which have elevations lower than what Alabama has .
+Give me all the states of USA .
+Give me the cities in Texas .
+Give me the cities in USA .
+Give me the cities in Virginia .
+Give me the cities which are in Texas .
+Give me the lakes in California .
+Give me the largest state .
+Give me the longest river that passes through the US .
+Give me the number of rivers in California .
+Give me the states that border Utah .
+How big is Alaska ?
+How big is Massachusetts ?
+How big is New Mexico ?
+How big is North Dakota ?
+How big is Texas ?
+How big is the city of New York ?
+How high are the highest points of all the states ?
+How high is Guadalupe Peak ?
+How high is Mount McKinley ?
+How high is the highest point in America ?
+How high is the highest point in Montana ?
+How high is the highest point in the largest state ?
+How high is the highest point of Alabama ?
+How high is the highest point of Delaware ?
+How high is the highest point of Florida ?
+How high is the highest point of Louisiana ?
+How large is Alaska ?
+How large is Texas ?
+How large is the largest city in Alaska ?
+How long is Rio Grande ?
+How long is the Colorado river ?
+How long is the Delaware river ?
+How long is the longest river in California ?
+How long is the longest river in the USA ?
+How long is the Mississippi ?
+How long is the Mississippi river ?
+How long is the Mississippi river in miles ?
+How long is the Missouri river ?
+How long is the North Platte river ?
+How long is the Ohio river ?
+How long is the Rio Grande river ?
+How long is the shortest river in the USA ?
+How many big cities are in Pennsylvania ?
+How many capitals does Rhode Island have ?
+How many cities are in Louisiana ?
+How many cities are in Montana ?
+How many cities are there in the United States ?
+How many cities are there in the US ?
+How many cities are there in US ?
+How many cities are there in USA ?
+How many cities does Texas have ?
+How many cities does the USA have ?
+How many cities named Austin are there in the USA ?
+How many citizens does the biggest city have in the USA ?
+How many citizens in Alabama ?
+How many citizens in Boulder ?
+How many citizens live in California ?
+How many Colorado rivers are there ?
+How many inhabitants does Montgomery have ?
+How many major cities are in Arizona ?
+How many major cities are in Florida ?
+How many major cities are in states bordering Nebraska ?
+How many major cities are in states bordering Utah ?
+How many major cities are in Texas ?
+How many major cities are there ?
+How many major cities are there in Oregon ?
+How many major rivers cross Ohio ?
+How many people are in the state of Nevada ?
+How many people are there in Iowa ?
+How many people are there in New York ?
+How many people in Boulder ?
+How many people live in Austin ?
+How many people live in Austin Texas ?
+How many people live in California ?
+How many people live in Chicago ?
+How many people live in Detroit ?
+How many people live in Hawaii ?
+How many people live in Houston ?
+How many people live in Kalamazoo ?
+How many people live in Kansas ?
+How many people live in Minneapolis Minnesota ?
+How many people live in Mississippi ?
+How many people live in Montana ?
+How many people live in New Hampshire ?
+How many people live in New Mexico ?
+How many people live in New York ?
+How many people live in Rhode Island ?
+How many people live in Riverside ?
+How many people live in San Francisco ?
+How many people live in South Dakota ?
+How many people live in Spokane Washington ?
+How many people live in Texas ?
+How many people live in the biggest city in New York state ?
+How many people live in the capital of Georgia ?
+How many people live in the capital of Texas ?
+How many people live in the smallest state bordering Wyoming ?
+How many people live in the state with the largest population density ?
+How many people live in the United States ?
+How many people live in Washington ?
+How many people live in Washington DC ?
+How many people lived in Austin ?
+How many people reside in Utah ?
+How many people stay in Utah ?
+How many residents live in Texas ?
+How many rivers are called Colorado ?
+How many rivers are found in Colorado ?
+How many rivers are in Colorado ?
+How many rivers are in Iowa ?
+How many rivers are in Missouri ?
+How many rivers are in New York ?
+How many rivers are in the state that has the most rivers ?
+How many rivers are in the state with the highest point ?
+How many rivers are in the state with the largest population ?
+How many rivers are there in Idaho ?
+How many rivers are there in Texas ?
+How many rivers are there in US ?
+How many rivers do not traverse the state with the capital Albany ?
+How many rivers does Alaska have ?
+How many rivers does Colorado have ?
+How many rivers in Texas are longer than the Red ?
+How many rivers in Washington ?
+How many rivers run through Texas ?
+How many rivers run through the states bordering Colorado ?
+How many square kilometers in the US ?
+How many states are in the United States ?
+How many states are in the USA ?
+How many states are next to major rivers ?
+How many states are there ?
+How many states are there in the USA ?
+How many states are there in United States ?
+How many states border Alaska ?
+How many states border at least one other state ?
+How many states border Colorado and border New Mexico ?
+How many states border Hawaii ?
+How many states border Iowa ?
+How many states border on the state whose capital is Boston ?
+How many states border Tennessee ?
+How many states border Texas ?
+How many states border the largest state ?
+How many states border the Mississippi river ?
+How many states border the state that borders the most states ?
+How many states border the state with the largest population ?
+How many states do not have rivers ?
+How many states does Iowa border ?
+How many states does Missouri border ?
+How many states does Tennessee border ?
+How many states does the Colorado river flow through ?
+How many states does the Colorado river run through ?
+How many states does the Mississippi river run through ?
+How many states does the Mississippi run through ?
+How many states does the Missouri river run through ?
+How many states does USA have ?
+How many states have a city called Rochester ?
+How many states have a city named Springfield ?
+How many states have a higher point than the highest point of the state with the largest capital city in the US ?
+How many states have cities named Austin ?
+How many states have cities or towns named Springfield ?
+How many states have major rivers ?
+How many states in the US does the shortest river run through ?
+How much population does Texas have ?
+How tall is Mount McKinley ?
+How tall is the highest point in Montana ?
+In what state is Mount McKinley ?
+In which state does the highest point in USA exist ?
+In which state is Rochester ?
+Iowa borders how many states ?
+List the states .
+Name all the lakes of US .
+Name all the rivers in Colorado .
+Name the 50 capitals in the USA .
+Name the longest river in US .
+Name the major lakes in Michigan .
+Name the major rivers in Florida .
+Name the rivers in Arkansas .
+Name the states which have no surrounding states .
+Number of citizens in Boulder ?
+Number of people in Boulder ?
+Number of states bordering Iowa ?
+Of the states washed by the Mississippi river which has the lowest point ?
+People in Boulder ?
+Population of Boulder ?
+Rivers in New York ?
+Sacramento is the capital of which state ?
+San Antonio is in what state ?
+Show major cities in Colorado .
+Show me all the major lakes in the US .
+State the state with the largest area .
+States bordering Iowa ?
+Tell me what cities are in Texas .
+Through which states does the longest river in Texas run ?
+Through which states does the Mississippi flow ?
+Through which states does the Mississippi run ?
+What are all the rivers in Texas ?
+What are major rivers in Texas ?
+What are the biggest rivers in Texas ?
+What are the capital cities of the states which border Texas ?
+What is the capital city in Texas ?
+What are the capitals of states that border Missouri ?
+What are the capitals of the states that border Texas ?
+What are the cities in California ?
+What are the cities in states through which the Mississippi runs ?
+What are the cities of the state with the highest point ?
+What are the highest points of all the states ?
+What are the highest points of states surrounding Mississippi ?
+What are the lakes in states bordering Texas ?
+What are the largest cities in the states that border the largest state ?
+What are the major cities in Alabama ?
+What are the major cities in Alaska ?
+What are the major cities in California ?
+What are the major cities in Delaware ?
+What are the major cities in Kansas ?
+What are the major cities in Missouri ?
+What are the major cities in New Mexico ?
+What are the major cities in New York ?
+What are the major cities in North Carolina ?
+What are the major cities in Ohio ?
+What are the major cities in Oklahoma ?
+What are the major cities in Rhode Island ?
+What are the major cities in states through which the Mississippi runs ?
+What are the major cities in Texas ?
+What are the major cities in the largest state ?
+What are the major cities in the smallest state in the US ?
+What are the major cities in the state of California ?
+What are the major cities in the states through which the major river in Virginia runs ?
+What are the major cities in the USA ?
+What are the major cities in Vermont ?
+What are the major cities in Wyoming ?
+What are the major cities of Texas ?
+What are the major cities of the United States ?
+What are the major cities of the US ?
+What are the major lakes in United States ?
+What are the major rivers in Ohio ?
+What are the major rivers in the US ?
+What are the names of the major cities in Illinois ?
+What are the neighboring states for Michigan ?
+What are the population densities of each US state ?
+What is the population of Mississippi ?
+What are the populations of all the major cities in Montana ?
+What are the populations of states through which the Mississippi river runs ?
+What are the populations of states through which the Mississippi river runs ?
+What are the populations of states through which the Mississippi runs ?
+What are the populations of states through which the Mississippi runs ?
+What are the populations of states which border Texas ?
+What are the populations of the major cities of Texas ?
+What are the populations of the states through which the Mississippi river runs ?
+What are the populations of the states through which the Mississippi river runs ?
+What are the populations of the states through which the Mississippi runs ?
+What are the populations of the states through which the Mississippi runs ?
+What are the rivers in Alaska ?
+What are the rivers in the state of Indiana ?
+What are the rivers in the state of Texas ?
+What are the rivers of Montana ?
+What are the states ?
+What are the states that border the state with the greatest population ?
+What are the states that the Potomac runs through ?
+What are the states through which the longest river runs ?
+What can you tell me about the population of Missouri ?
+What capital has the largest population ?
+What capital is the largest in the US ?
+What cities are located in Pennsylvania ?
+What cities in California ?
+What cities in Texas have the highest number of citizens ?
+What cities in Texas have the highest populations ?
+What city has the largest population ?
+What city has the least population ?
+What city has the most people ?
+What city in the United States has the highest population density ?
+What is capital of Iowa ?
+What is capital of the state with the lowest point ?
+What is largest capital ?
+What is the adjacent state of California ?
+What is the area of Alaska ?
+What is the area of all the states combined ?
+What is the area of California ?
+What is the area of Florida ?
+What is the area of Idaho ?
+What is the area of Maine ?
+What is the area of Maryland in square kilometers ?
+What is the area of New Mexico ?
+What is the area of Ohio ?
+What is the area of Seattle ?
+What is the area of South Carolina ?
+What is the area of Texas ?
+What is the area of the largest state ?
+What is the area of the smallest state ?
+What is the area of the state with the capital Albany ?
+What is the area of the state with the smallest population density ?
+What is the area of the states ?
+What is the area of the Texas state ?
+What is the area of Wisconsin ?
+What is the average population of the US by state ?
+What is the average population per square km in Pennsylvania ?
+What is the average population per square km in the US ?
+What is the biggest American city in a state with a river ?
+What is the biggest capital city in the US ?
+What is the biggest city in Arizona ?
+What is the biggest city in Georgia ?
+What is the biggest city in Kansas ?
+What is the biggest city in Louisiana ?
+What is the biggest city in Nebraska ?
+What is the biggest city in Oregon ?
+What is the biggest city in Texas ?
+What is the biggest city in the smallest state ?
+What is the biggest city in the US ?
+What is the biggest city in the USA ?
+What is the biggest city in USA ?
+What is the biggest city in Wyoming ?
+What is the biggest river in Illinois ?
+What is the biggest state ?
+What is the biggest state in continental US ?
+What is the biggest state in the USA ?
+What is the capital city of the largest state in the US ?
+What is the capital of California ?
+What is the capital of Colorado ?
+What is the capital of Georgia ?
+What is the capital of Hawaii ?
+What is the capital of Illinois ?
+What is the capital of Indiana ?
+What is the capital of Iowa ?
+What is the capital of Maine ?
+What is the capital of Maryland ?
+What is the capital of Massachusetts ?
+What is the capital of Michigan ?
+What is the capital of New Hampshire ?
+What is the capital of New Jersey ?
+What is the capital of New York ?
+What is the capital of North Dakota ?
+What is the capital of Ohio ?
+What is the capital of Pennsylvania ?
+What is the capital of states that have cities named Durham ?
+What is the capital of Texas ?
+What is the capital of the Alabama state ?
+What is the capital of the Florida state ?
+What is the capital of the largest state ?
+What is the capital of the smallest state ?
+What is the capital of the state Texas ?
+What is the capital of the state that borders the most states ?
+What is the capital of the state that borders the state that borders Texas ?
+What is the capital of the state with the highest elevation ?
+What is the capital of the state with the highest point ?
+What is the capital of the state with the largest population ?
+What is the capital of the state with the largest population density ?
+What is the capital of the state with the longest river ?
+What is the capital of the state with the most inhabitants ?
+What is the capital of Utah ?
+What is the capital of Vermont ?
+What is the capital of Washington ?
+What is the city in Texas with the largest population ?
+What is the city with the smallest population ?
+What is the combined area of all 50 states ?
+What is the combined population of all 50 states ?
+What is the density of Texas ?
+What is the density of the New York ?
+What is the elevation of Death Valley ?
+What is the elevation of the highest point in the USA ?
+What is the height of Mount McKinley ?
+What is the height of the highest mountain in Texas ?
+What is the height of the highest point in the USA ?
+What is the high point of Wyoming ?
+What is the highest elevation in New Mexico ?
+What is the highest elevation in South Carolina ?
+What is the highest elevation in Texas ?
+What is the highest elevation in the United States ?
+What is the highest mountain in Alaska ?
+What is the highest mountain in Texas ?
+What is the highest mountain in the US ?
+What is the highest mountain in US ?
+What is the highest point in Colorado ?
+What is the highest point in Delaware ?
+What is the highest point in each state whose lowest point is sea level ?
+What is the highest point in Florida ?
+What is the highest point in Iowa ?
+What is the highest point in Kansas ?
+What is the highest point in Maine ?
+What is the highest point in Montana ?
+What is the highest point in Nevada in meters ?
+What is the highest point in New Mexico ?
+What is the highest point in Ohio ?
+What is the highest point in Rhode Island ?
+What is the highest point in states bordering Georgia ?
+What is the highest point in Texas ?
+What is the highest point in the country ?
+What is the highest point in the smallest state ?
+What is the highest point in the state with capital Austin ?
+What is the highest point in the state with capital Des Moines ?
+What is the highest point in the state with the capital Des Moines ?
+What is the highest point in the state with the most rivers ?
+What is the highest point in the state with the smallest population ?
+What is the highest point in the states bordering Colorado ?
+What is the highest point in the United States ?
+What is the highest point in the US ?
+What is the highest point in the USA ?
+What is the highest point in Virginia ?
+What is the highest point in Wyoming ?
+What is the highest point of the state with the largest area ?
+What is the highest point of the state with the smallest population density ?
+What is the highest point of the USA ?
+What is the largest capital ?
+What is the largest capital city in the USA ?
+What is the largest city in a state that borders Texas ?
+What is the largest city in Alabama ?
+What is the largest city in California ?
+What is the largest city in Michigan ?
+What is the largest city in Minnesota by population ?
+What is the largest city in Missouri ?
+What is the largest city in Rhode Island ?
+What is the largest city in smallest state through which the Mississippi runs ?
+What is the largest city in states that border California ?
+What is the largest city in Texas ?
+What is the largest city in the smallest state in the USA ?
+What is the largest city in Wisconsin ?
+What is the largest city of Kansas ?
+What is the largest of the states that the Rio Grande runs through ?
+What is the largest river in Washington state ?
+What is the largest state ?
+What is the largest state bordering Arkansas ?
+What is the largest state bordering Texas ?
+What is the largest state capital in population ?
+What is the largest state in the US ?
+What is the largest state in USA ?
+What is the largest state that borders California ?
+What is the largest state that borders Texas ?
+What is the largest state that borders the state with the highest population ?
+What is the largest state that borders the state with the lowest point in the USA ?
+What is the largest state traversed by the Mississippi river ?
+What is the least populous state ?
+What is the length of the Colorado river ?
+What is the length of the Colorado river in Texas ?
+What is the length of the longest river in the USA ?
+What is the length of the longest river that runs through Texas ?
+What is the length of the Mississippi river ?
+What is the length of the river that flows through the most states ?
+What is the length of the river that runs through the most number of states ?
+What is the length of the river that runs through the most states ?
+What is the length of the river that traverses the most states ?
+What is the longest river ?
+What is the longest river flowing through New York ?
+What is the longest river in America ?
+What is the longest river in California ?
+What is the longest river in Florida ?
+What is the longest river in Mississippi ?
+What is the longest river in New York ?
+What is the longest river in Pennsylvania ?
+What is the longest river in Texas ?
+What is the longest river in the largest state ?
+What is the longest river in the smallest state in the USA ?
+What is the longest river in the state with the highest point ?
+What is the longest river in the state with the most major cities ?
+What is the longest river in the states that border Nebraska ?
+What is the longest river in the United States ?
+What is the longest river in the US ?
+What is the longest river that does not run through Texas ?
+What is the longest river that flows through a state that borders Indiana ?
+What is the longest river that flows through Colorado ?
+What is the longest river that passes the states that border the state that borders the most states ?
+What is the longest river that runs through a state that borders Tennessee ?
+What is the lowest elevation in Pennsylvania ?
+What is the lowest point in Arkansas ?
+What is the lowest point in California ?
+What is the lowest point in Louisiana ?
+What is the lowest point in Massachusetts ?
+What is the lowest point in Mississippi ?
+What is the lowest point in Nebraska in meters ?
+What is the lowest point in Oregon ?
+What is the lowest point in Texas ?
+What is the lowest point in the state of California ?
+What is the lowest point in the state of Texas ?
+What is the lowest point in the United States ?
+What is the lowest point in USA ?
+What is the lowest point in Wisconsin ?
+What is the lowest point of all states through which the Colorado river runs through ?
+What is the lowest point of Colorado ?
+What is the lowest point of the state with the largest area ?
+What is the lowest point of the US ?
+What is the major cities in Montana ?
+What is the maximum elevation of San Francisco ?
+What is the most dense state in the USA ?
+What is the most populated capital in the USA ?
+What is the most populated state bordering Oklahoma ?
+What is the most populous city ?
+What is the most populous city in Texas ?
+What is the most populous city in Wyoming ?
+What is the most populous state ?
+What is the most populous state in the US ?
+What is the most populous state through which the Mississippi runs ?
+What is the name of the state with the lowest point ?
+What is the number of neighboring states for Kentucky ?
+What is the population density in the state with capital Austin ?
+What is the population density of Maine ?
+What is the population density of South Dakota ?
+What is the population density of Texas ?
+What is the population density of the largest state ?
+What is the population density of the smallest state ?
+What is the population density of the state with the smallest area ?
+What is the population density of the state with the smallest population ?
+What is the population density of Wyoming ?
+What is the population in Boston ?
+What is the population of Alaska ?
+What is the population of Arizona ?
+What is the population of Atlanta ?
+What is the population of Atlanta GA ?
+What is the population of Austin ?
+What is the population of Austin Texas ?
+What is the population of Boston Massachusetts ?
+What is the population of Boulder ?
+What is the population of California ?
+What is the population of Dallas ?
+What is the population of Denver ?
+What is the population of Erie Pennsylvania ?
+What is the population of Hawaii ?
+What is the population of Houston ?
+What is the population of Idaho ?
+What is the population of Illinois ?
+What is the population of Maine ?
+What is the population of Maryland ?
+What is the population of Minnesota ?
+What is the population of Montana ?
+What is the population of New Mexico ?
+What is the population of New York ?
+What is the population of New York City ?
+What is the population of Oregon ?
+What is the population of Portland Maine ?
+What is the population of Rhode Island ?
+What is the population of Sacramento ?
+What is the population of San Antonio ?
+What is the population of Seattle ?
+What is the population of Seattle Washington ?
+What is the population of South Dakota ?
+What is the population of Springfield Missouri ?
+What is the population of Springfield South Dakota ?
+What is the population of Tempe Arizona ?
+What is the population of Texas ?
+What is the population of the capital of the largest state ?
+What is the population of the capital of the largest state through which the Mississippi runs ?
+What is the population of the capital of the smallest state ?
+What is the population of the largest city in the state with the largest area ?
+What is the population of the largest state ?
+What is the population of the largest state that borders Texas ?
+What is the population of the major cities in Wisconsin ?
+What is the population of the smallest state ?
+What is the population of the state that borders the most states ?
+What is the population of the state with the highest population density ?
+What is the population of the state with the largest area ?
+What is the population of Tucson ?
+What is the population of Utah ?
+What is the population of Washington ?
+What is the population of Washington DC ?
+What is the river that cross over Ohio ?
+What is the shortest river ?
+What is the shortest river in Alaska ?
+What is the shortest river in Iowa ?
+What is the shortest river in Nebraska ?
+What is the shortest river in Texas ?
+What is the shortest river in the United States ?
+What is the shortest river in the US ?
+What is the shortest river in the USA ?
+What is the size of California ?
+What is the size of Florida ?
+What is the size of Texas ?
+What is the size of the capital of Texas ?
+What is the size of the largest state in the USA ?
+What is the smallest city in Alaska ?
+What is the smallest city in Arkansas ?
+What is the smallest city in Hawaii ?
+What is the smallest city in the largest state ?
+What is the smallest city in the US ?
+What is the smallest city in the USA ?
+What is the smallest city in Washington ?
+What is the smallest city of the smallest state in the US ?
+What is the smallest state bordering Ohio ?
+What is the smallest state bordering Wyoming ?
+What is the smallest state by area ?
+What is the smallest state in the USA ?
+What is the smallest state that borders Texas ?
+What is the smallest state that borders the most states ?
+What is the smallest state that the Mississippi river runs through ?
+What is the smallest state through which the longest river runs ?
+What is the state that contains the highest point ?
+What is the state with the highest elevation in the United States ?
+What is the state with the largest area ?
+What is the state with the largest density in USA ?
+What is the state with the largest population density ?
+What is the state with the lowest point ?
+What is the state with the lowest population ?
+What is the state with the lowest population density ?
+What is the state with the smallest area ?
+What is the tallest mountain in America ?
+What is the tallest mountain in the United States ?
+What is the total area of the USA ?
+What is the total length of all rivers in the USA ?
+What is the total population of the states that border Texas ?
+What length is the Mississippi ?
+What major cities are located in Pennsylvania ?
+What major rivers run through Illinois ?
+What mountains are in Alaska ?
+What river flows through Kansas ?
+What river flows through Texas ?
+What river flows through the most states ?
+What river is the longest one in the United States ?
+What river runs through Illinois ?
+What river runs through the most states ?
+What river runs through the state with the most cities ?
+What river runs through Virginia ?
+What river traverses the most states ?
+What river traverses the state which borders the most states ?
+What rivers are in Nevada ?
+What rivers are in New Mexico ?
+What rivers are in Oregon ?
+What rivers are in states that border Texas ?
+What rivers are in Texas ?
+What rivers are in Utah ?
+What rivers are there in Texas ?
+What rivers do not run through Tennessee ?
+What rivers flow though Colorado ?
+What rivers flow through Missouri ?
+What rivers flow through states that Alabama borders ?
+What rivers flow through states that border the state with the largest population ?
+What rivers flow through the largest state ?
+What rivers flow through the state with the largest population ?
+What rivers run through Arizona ?
+What rivers run through Austin Texas ?
+What rivers run through Colorado ?
+What rivers run through Louisiana ?
+What rivers run through Maine ?
+What rivers run through New York ?
+What rivers run through the state with the lowest point in the USA ?
+What rivers run through the states that border the state with the capital Atlanta ?
+What rivers run through West Virginia ?
+What rivers traverses the state which borders the most states ?
+What state bordering Nevada has the largest population ?
+What state borders Michigan ?
+What state borders most other states ?
+What state borders New York ?
+What state borders the least states ?
+What state borders the least states excluding Alaska and excluding Hawaii ?
+What state borders the most states ?
+What state borders the state with the smallest population ?
+What state contains the highest point in the US ?
+What state contains the highest point of those the Colorado river traverses ?
+What state has highest elevation ?
+What state has no rivers ?
+What state has the capital Salem ?
+What state has the city Flint ?
+What state has the city with the largest population ?
+What state has the city with the most population ?
+What state has the greatest population density ?
+What state has the highest elevation ?
+What state has the highest population ?
+What state has the highest population density ?
+What state has the largest area ?
+What state has the largest capital ?
+What state has the largest city ?
+What state has the largest population ?
+What state has the largest population density ?
+What state has the largest urban population ?
+What state has the least population density ?
+What state has the longest river ?
+What state has the lowest population density ?
+What state has the most cities ?
+What state has the most major cities ?
+What state has the most major rivers running through it ?
+What state has the most people ?
+What state has the most rivers ?
+What state has the most rivers running through it ?
+What state has the shortest river ?
+What state has the smallest area ?
+What state has the smallest capital ?
+What state has the smallest population ?
+What state has the smallest population density ?
+What state has the smallest urban population ?
+What state has the sparsest population density ?
+What state is Austin in ?
+What state is Austin the capital of ?
+What state is Boston in ?
+What state is Columbus the capital of ?
+What state is Dallas in ?
+What state is Des Moines located in ?
+What state is Miami in ?
+What state is Pittsburgh in ?
+What state is the biggest ?
+What state is the largest in population ?
+What state is the state with the most rivers ?
+What state that borders Texas has the highest population ?
+What state that borders Texas is the largest ?
+What state which the Mississippi runs through has the largest population ?
+What states are next to Arizona ?
+What states are next to Texas ?
+What states are next to the Mississippi ?
+What states border Alaska ?
+What states border Arkansas ?
+What states border Delaware ?
+What states border Florida ?
+What states border Georgia ?
+What states border Hawaii ?
+What states border Indiana ?
+What states border Kentucky ?
+What states border Michigan ?
+What states border Missouri ?
+What states border Montana ?
+What states border New Hampshire ?
+What states border New Jersey ?
+What states border Ohio ?
+What states border Rhode Island ?
+What states border states that border Colorado ?
+What states border states that border Mississippi ?
+What states border states that border states that border Florida ?
+What states border states that border states that border states that border Texas ?
+What states border states that border the state with the largest population ?
+What states border states that the Mississippi runs through ?
+What states border states that the Ohio runs through ?
+What states border states which the Mississippi runs through ?
+What states border Texas ?
+What states border Texas and have a major river ?
+What states border the Mississippi river ?
+What states border the most populous state ?
+What states border the state that borders the most states ?
+What states border the state with the most cities ?
+What states border the state with the most major cities ?
+What states border the state with the smallest area ?
+What states border the states with the most cities ?
+What states border Wisconsin ?
+What state 's capital is Dover ?
+What states contain at least one major rivers ?
+What states does the Colorado river run through ?
+What states does the Delaware river run through ?
+What states does the Mississippi river run through ?
+What states does the Mississippi run through ?
+What states does the Missouri river run through ?
+What states does the Missouri run through ?
+What states does the Ohio river go through ?
+What states does the Ohio river run through ?
+What states does the shortest river run through ?
+What states have a capital that is the highest point in the state ?
+What states have a city named Austin ?
+What states have cities named Austin ?
+What states have cities named Dallas ?
+What states have cities named Plano ?
+What states have cities named Portland ?
+What states have cities named Rochester ?
+What states have cities named Salt Lake City ?
+What states have no bordering state ?
+What states have rivers named Colorado ?
+What states have rivers running through them ?
+What states have towns named Springfield ?
+What state 's high point is higher than that of Colorado ?
+What states in the United States have a city of Springfield ?
+What states neighbor Maine ?
+What states surround Kentucky ?
+What Texas city has the largest population ?
+What 's the largest city ?
+Where are mountains ?
+Where is Austin ?
+Where is Baton Rouge ?
+Where is Dallas ?
+Where is Fort Wayne ?
+Where is Houston ?
+Where is Indianapolis ?
+Where is Massachusetts ?
+Where is Mount Whitney ?
+Where is Mount Whitney located ?
+Where is New Hampshire ?
+Where is New Orleans ?
+Where is Portland ?
+Where is San Diego ?
+Where is San Jose ?
+Where is Scotts Valley ?
+Where is Springfield ?
+Where is the Chattahoochee river ?
+Where is the highest mountain of the United States ?
+Where is the highest point in Hawaii ?
+Where is the highest point in Montana ?
+Where is the lowest point in Maryland ?
+Where is the lowest point in the US ?
+Where is the lowest spot in Iowa ?
+Where is the most populated area of New Mexico ?
+Where is the smallest city ?
+Which capitals are in the states that border Texas ?
+Which capitals are not major cities ?
+Which city in California has the largest population ?
+Which is the density of the state that the largest river in the United States runs through ?
+Which is the highest peak not in Alaska ?
+Which is the longest river in USA ?
+Which is the lowest point of the states that the Mississippi runs through ?
+Which is the shortest river ?
+Which is the smallest state ?
+Which of the states bordering Pennsylvania has the largest population ?
+Which river goes through the most states ?
+Which river runs through most states ?
+Which river runs through the most states ?
+Which river traverses most states ?
+Which rivers are in Alaska ?
+Which rivers do not run through Texas ?
+Which rivers do not run through USA ?
+Which rivers flow through Alaska ?
+Which rivers run through states bordering New Mexico ?
+Which rivers run through states that border the state with the capital Austin ?
+Which rivers run through states with fewest cities ?
+Which rivers run through the state with the largest city in the US ?
+Which rivers run through the state with the lowest elevation in the USA ?
+Which state border Kentucky ?
+Which state borders Florida ?
+Which state borders Hawaii ?
+Which state borders most states ?
+Which state borders the most states ?
+Which state capital has the smallest population ?
+Which state contains most rivers ?
+Which state has the biggest population ?
+Which state has the greatest density ?
+Which state has the greatest population ?
+Which state has the highest elevation ?
+Which state has the highest peak in the country ?
+Which state has the highest point ?
+Which state has the highest population density ?
+Which state has the largest city ?
+Which state has the largest density ?
+Which state has the least population density ?
+Which state has the longest river ?
+Which state has the lowest elevation ?
+Which state has the lowest point that borders Idaho ?
+Which state has the lowest population density ?
+Which state has the most major cities ?
+Which state has the most major rivers ?
+Which state has the most major rivers running through it ?
+Which state has the most people ?
+Which state has the most population ?
+Which state has the most rivers ?
+Which state has the most rivers running through it ?
+Which state has the Red river ?
+Which state has the smallest area that borders Texas ?
+Which state has the smallest average urban population ?
+Which state has the smallest population density ?
+Which state has the sparsest population density ?
+Which state is Kalamazoo in ?
+Which state is Mount McKinley in ?
+Which state is the city Denver located in ?
+Which state is the largest city in Montana in ?
+Which state is the smallest ?
+Which states adjoin Alabama ?
+Which states border Alabama ?
+Which states border Alaska ?
+Which states border Arizona ?
+Which states border Colorado ?
+Which states border Hawaii ?
+Which states border Illinois ?
+Which states border Iowa ?
+Which states border Kentucky ?
+Which states border Michigan ?
+Which states border New York ?
+Which states border no other states ?
+Which states border South Dakota ?
+Which states border states through which the Mississippi traverses ?
+Which states border Texas ?
+Which states border the longest river in the USA ?
+Which states border the Missouri river ?
+Which states border the state with the smallest area ?
+Which state 's capital city is the largest ?
+Which states do Colorado river flow through ?
+Which states does not border Texas ?
+Which states does the Chattahoochee river run through ?
+Which states does the Colorado river run through ?
+Which states does the longest river cross ?
+Which states does the longest river run through ?
+Which states does the Mississippi river run through ?
+Which states does the Mississippi run through ?
+Which states does the Missouri river pass through ?
+Which states does the Missouri river run through ?
+Which states have a major city named Austin ?
+Which states have a river ?
+Which states have cities named Austin ?
+Which states have points higher than the highest point in Colorado ?
+Which states have points that are higher than the highest point in Texas ?
+Which states lie on the largest river in the United States ?
+Which US city has the highest population density ?
