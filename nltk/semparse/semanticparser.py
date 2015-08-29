@@ -10,7 +10,14 @@ from nltk.sem.logic import LogicalExpressionException
 
 #from nltk.semparse.composer import SemanticComposer
 from composer import SemanticComposer ##
+from parseconverter import CCGParseConverter
 
+
+class CCGParseException(Exception):
+    def __init__(self, string):
+        self.string = string
+    def __str__(self):
+        return self.string
 
 class Derivation(object):
 
@@ -51,13 +58,17 @@ class SemanticParser(object):
     Relies on a CCG parser and a semantic composition function.
     Here use nltk.ccg.CCGChartParser and nltk.semparse.SemanticComposer
     """
-    def __init__(self, ccg_lexicon):
+    def __init__(self, ccg_lexicon=None):
         """
         :param ccglex_file: CCG lexicon filename.
         :type ccglex_file: str
         """
-        self.ccg_parser = chart.CCGChartParser(ccg_lexicon, chart.DefaultRuleSet)
+        self.rules = chart.DefaultRuleSet
         self.composer = SemanticComposer()
+        if ccg_lexicon:
+            self.ccg_parser = chart.CCGChartParser(ccg_lexicon, self.rules)
+        else:
+            self.ccg_parser = None
 
     def _getTokens(self, tagged_sentence):
         """
@@ -71,7 +82,7 @@ class SemanticParser(object):
         tokens = [tok for tok in tokens if tok not in string.punctuation]
         return tokens
 
-    def parse(self, tagged_sentence, n=0):
+    def parse(self, tagged_sentence, ccg_parse_str=None, n=0):
         """
         Parses sentences first into a CCG syntactic parse.
         Then uses this parse to compose a semantics.
@@ -83,6 +94,10 @@ class SemanticParser(object):
         :returns: yields a derivation for each syntactic parse.
         :rtype: Derivation
         """
+        if not self.ccg_parser and not ccg_parse_str:
+            raise CCGParseException("No CCG parser and no CCG parse specified.")
+
+        # Determine if input is a question or a statement.
         if tagged_sentence[-1][0] == '?':
             question = True
             sent_type = 'QUESTION'
@@ -90,9 +105,18 @@ class SemanticParser(object):
             question = False
             sent_type = 'STATEMENT'
 
+        # Get just the tokens from the POS tagged sentence.
         tokens = self._getTokens(tagged_sentence)
-        ccg_parses = self.ccg_parser.parse(tokens)
 
+        # Get the CCG parse(s).
+        if ccg_parse_str:
+            converter = CCGParseConverter()
+            ccg_parse = converter.fromstring(ccg_parse_str, self.rules)
+            ccg_parses = [ccg_parse]
+        else:
+            ccg_parses = self.ccg_parser.parse(tokens)
+
+        # Build semantic expression for input sentence.
         for (i,parse) in enumerate(ccg_parses):
             if i+1 == n:
                 break
@@ -111,23 +135,35 @@ class SemanticParser(object):
 
 def demo():
     from nltk import word_tokenize, pos_tag
+    from nltk.ccg import lexicon
 
-    # Statement data.
-    semParser = SemanticParser('data/lexica/reagan.ccg')
-    sent = "Reagan had four children."
-    print('\n', sent)
+    # The semantic parser can either parse the input sentence
+    # using nltk.ccg.
+    ccglex = lexicon.parseLexicon(r'''
+	:- S, N
+	I => N
+	eat => (S\N)/N
+	peaches => N
+    ''')	
+    semparser = SemanticParser(ccglex)
+    
+    sent = "I eat peaches."
     tagged_sent = pos_tag(word_tokenize(sent))
-    derivation = semParser.parse(tagged_sent).next()
-    print("+", derivation.expression)
+    for parse in semparser.parse(tagged_sent):
+        print(parse.getExpression())
+        break
 
-    # Question data.
-    semParser = SemanticParser('data/lexica/geoquery.ccg')
-    sent = "What is the longest river?"
-    print('\n', sent)
-    tagged_sent = pos_tag(word_tokenize(sent))
-    derivation = semParser.parse(tagged_sent).next()
-    print("+", derivation.expression)
-
+    # Or you can provide a parse in the following format.
+    # TODO: get lexical rules (e.g. N->NP) to work with SemanticComposer.
+    parse_str = r'''
+    (<T S[dcl] 1 2> (<L NP POS POS I NP>)
+    (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS eat
+    (S[dcl]\NP)/NP>) (<T NP 0 1> (<L N POS POS peaches N>) ) ) )
+    '''
+    semparser2 = SemanticParser()
+    for parse in semparser2.parse(tagged_sent, parse_str):
+        print(parse.getExpression())
+        break
 
 if __name__ == '__main__':
     demo()
