@@ -1,8 +1,11 @@
 from __future__ import print_function, unicode_literals
 
+import os
 import re
+from pprint import pprint
 from nltk import Tree
 from nltk.ccg.lexicon import parseCategory
+from nltk.ccg.api import PrimitiveCategory
 
 class CCGParseConverter(object):
     '''
@@ -16,11 +19,12 @@ class CCGParseConverter(object):
             combinatory_rules is e.g. nltk.ccg.chart.DefaultRuleSet
     '''
     def __init__(self):
-        pass
+        self.grammar = set()
 
     def fromstring(self, tree_str, combinatory_rules):
         parse = self._parse(tree_str)[0]
         tree = self._toTree(parse, combinatory_rules)
+        
         return tree
 
     def _parse(self, tree_str):
@@ -43,15 +47,18 @@ class CCGParseConverter(object):
         level = 0
         stack = []
         arg = ""
+        closing_brace_found = False
         for i in range(len(tree_str) - 2):
             if tree_str[i:i+2] == '(<':
+                closing_brace_found = False
                 levelappend(stack, level, [])
                 level += 1
             elif tree_str[i] == '>':
+                closing_brace_found = True
                 arg += tree_str[i]
                 levelappend(stack, level, arg.strip())
                 arg = ""
-            elif tree_str[i] == ')' and tree_str[i-1] == '>':
+            elif tree_str[i] == ')' and closing_brace_found:
                 level -= 1
             else:
                 arg += tree_str[i]
@@ -65,10 +72,14 @@ class CCGParseConverter(object):
                       of CCGParseConverter._parse().
         :rtype: nltk.Tree
         '''
+        # TODO: make toTree able to handle punctuation.
         # Leaf
         if len(parse) == 1:
-            (_,_,_,_, word, cat) = parse[0].split()
-            category = self._makeCategory(cat)
+            (_, cat, _, _, word, _) = parse[0].split()
+            if cat in string.punctuation:
+                category = PrimitiveCategory(cat)
+            else:
+                category = self._makeCategory(cat)
             return Tree((category, 'Leaf'), [Tree(category, [word])])
 
         # Unary lexical rule.
@@ -89,7 +100,11 @@ class CCGParseConverter(object):
             if rule._combinator.can_combine(left_cat, right_cat):
                 res = rule._combinator.combine(left_cat, right_cat).next()
                 if res == target_category:
-                    return Tree((res, rule.__str__()), [lhs, rhs])
+                    return Tree((res, str(rule)), [lhs, rhs])
+        # No rule works -> grammar rule
+        rule = "{0} + {1} => {2}".format(left_cat, right_cat, target_category)
+        self.grammar.add(rule)
+        return Tree((target_category, 'Grammar'), [lhs, rhs])
 
     def _makeCategory(self, category_str):
         category_str = re.sub(r'[<>]', '', category_str)
@@ -101,3 +116,46 @@ class CCGParseConverter(object):
         temp = re.sub(r'\[.+?\]', '', category_str)
         primitives = list(set(re.sub(r'[\\/\(\)]', ' ', temp).split()))
         return primitives
+
+
+class CCGBankData(object):
+    """
+    A generator over the ccgbank data held in directory.
+    """
+
+    def __init__(self, directory):
+        self.file_idx = 0
+        self.content_idx = 0
+        self.directory = directory
+        self.filenames = self._getFilenames()
+
+    def _getFilenames(self):
+        filenames = []
+        for root, _, files in os.walk(self.directory):
+            for name in files:
+                filenames.append(os.path.join(root, name))
+        return filenames
+
+    def _nextLine(self):
+        lines = open(self.filenames[self.file_idx]).readlines()
+        line = lines[self.content_idx]
+        if self.content_idx == len(lines) - 1:
+            self.file_idx += 1
+            self.content_idx = 0
+        else:
+            self.content_idx += 1
+        if line.startswith('ID'):
+            return self._nextLine()
+        return line
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return self.next()
+
+    def next(self):
+        try:
+            return self._nextLine()
+        except:
+            raise StopIteration()
