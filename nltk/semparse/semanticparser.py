@@ -26,10 +26,10 @@ class Derivation(object):
         self.semantics = semantics
         self.sentence_type = sentence_type
 
-    def printSyntacticDerivation(self):
+    def print_syntactic_derivation(self):
         chart.printCCGDerivation(self.syntax)
 
-    def printSemanticDerivation(self):
+    def print_semantic_derivation(self):
         if not self.semantics:
             print("None")
             return
@@ -46,7 +46,7 @@ class Derivation(object):
 
         derivation_print(self.semantics)
 
-    def getExpression(self):
+    def get_expression(self):
         if self.semantics:
             return self.semantics.label()[0]
         else:
@@ -70,7 +70,7 @@ class SemanticParser(object):
         else:
             self.ccg_parser = None
 
-    def _getTokens(self, tagged_sentence):
+    def _get_tokens(self, tagged_sentence):
         """
         Gets the words of the sentence and removes punctuation.
         
@@ -106,7 +106,7 @@ class SemanticParser(object):
             sent_type = 'STATEMENT'
 
         # Get just the tokens from the POS tagged sentence.
-        tokens = self._getTokens(tagged_sentence)
+        tokens = self._get_tokens(tagged_sentence)
 
         # Get the CCG parse(s).
         if ccg_parse_str:
@@ -121,7 +121,7 @@ class SemanticParser(object):
             if i+1 == n:
                 break
             try:
-                derivation = self.composer.buildExpressions(parse, tagged_sentence, question)
+                derivation = self.composer.build_expressions(parse, tagged_sentence, question)
                 yield Derivation(parse, derivation, sent_type)
                 continue
             # Yield just syntactic parse if semantics fail.
@@ -150,7 +150,7 @@ def demo():
     sent = "I eat peaches."
     tagged_sent = pos_tag(word_tokenize(sent))
     for parse in semparser.parse(tagged_sent):
-        print(parse.getExpression())
+        print(parse.get_expression())
         break
 
     # Or you can provide a parse in the following format.
@@ -162,7 +162,7 @@ def demo():
     '''
     semparser2 = SemanticParser()
     for parse in semparser2.parse(tagged_sent, parse_str):
-        print(parse.getExpression())
+        print(parse.get_expression())
         break
 
 if __name__ == '__main__':

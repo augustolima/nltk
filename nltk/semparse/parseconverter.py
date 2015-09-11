@@ -2,10 +2,22 @@ from __future__ import print_function, unicode_literals
 
 import os
 import re
+import string
 from pprint import pprint
 from nltk import Tree
 from nltk.ccg.lexicon import parseCategory
 from nltk.ccg.api import PrimitiveCategory
+from nltk.ccg.chart import TypeRaiseRuleSet, DefaultRuleSet
+
+
+_DATA_DIR = ""
+dirlist = ['nltk/semparse/data', 'data/']
+for d in dirlist:
+    if os.path.exists(d) and os.path.isdir(d):
+        _DATA_DIR = d
+if not _DATA_DIR:
+    print("Data directory not found. Searched in: {0}".format(dirlist))
+
 
 class CCGParseConverter(object):
     '''
@@ -23,8 +35,7 @@ class CCGParseConverter(object):
 
     def fromstring(self, tree_str, combinatory_rules):
         parse = self._parse(tree_str)[0]
-        tree = self._toTree(parse, combinatory_rules)
-        
+        tree = self._to_tree(parse, combinatory_rules)
         return tree
 
     def _parse(self, tree_str):
@@ -64,7 +75,7 @@ class CCGParseConverter(object):
                 arg += tree_str[i]
         return stack
 
-    def _toTree(self, parse, combinatory_rules):
+    def _to_tree(self, parse, combinatory_rules):
         '''
         Converts parse into an nltk.Tree.
 
@@ -72,31 +83,35 @@ class CCGParseConverter(object):
                       of CCGParseConverter._parse().
         :rtype: nltk.Tree
         '''
-        # TODO: make toTree able to handle punctuation.
         # Leaf
         if len(parse) == 1:
             (_, cat, _, _, word, _) = parse[0].split()
             if cat in string.punctuation:
                 category = PrimitiveCategory(cat)
             else:
-                category = self._makeCategory(cat)
+                category = self._make_category(cat)
             return Tree((category, 'Leaf'), [Tree(category, [word])])
 
+        # TODO: Make _to_tree correctly handle type raising.
         # Unary lexical rule.
         if len(parse) == 2:
             (_, new_category, _, _) = parse[0].split()
-            new_category = self._makeCategory(new_category)
-            child = self._toTree(parse[-1], combinatory_rules)
+            new_category = self._make_category(new_category)
+            child = self._to_tree(parse[-1], combinatory_rules)
             return Tree((new_category, 'Lex'), [child])
 
         # Binary combinatory rule.
         (_, target_category, _, _) = parse[0].split()
-        target_category = self._makeCategory(target_category)
-        lhs = self._toTree(parse[1], combinatory_rules)
+        target_category = self._make_category(target_category)
+        lhs = self._to_tree(parse[1], combinatory_rules)
         left_cat = lhs.label()[0]
-        rhs = self._toTree(parse[2], combinatory_rules)
+        rhs = self._to_tree(parse[2], combinatory_rules)
         right_cat = rhs.label()[0]
-        for rule in combinatory_rules:
+        # Consider all rules except type raise rules.
+        ruleset = set(combinatory_rules).difference(set(TypeRaiseRuleSet))
+        for rule in ruleset:
+            print(type(rule))
+            print(left_cat, right_cat)
             if rule._combinator.can_combine(left_cat, right_cat):
                 res = rule._combinator.combine(left_cat, right_cat).next()
                 if res == target_category:
@@ -106,13 +121,13 @@ class CCGParseConverter(object):
         self.grammar.add(rule)
         return Tree((target_category, 'Grammar'), [lhs, rhs])
 
-    def _makeCategory(self, category_str):
+    def _make_category(self, category_str):
         category_str = re.sub(r'[<>]', '', category_str)
-        primitives = self._findPrimitives(category_str)
+        primitives = self._find_primitives(category_str)
         category = parseCategory(category_str, primitives, [])
         return category
 
-    def _findPrimitives(self, category_str):
+    def _find_primitives(self, category_str):
         temp = re.sub(r'\[.+?\]', '', category_str)
         primitives = list(set(re.sub(r'[\\/\(\)]', ' ', temp).split()))
         return primitives
@@ -127,16 +142,16 @@ class CCGBankData(object):
         self.file_idx = 0
         self.content_idx = 0
         self.directory = directory
-        self.filenames = self._getFilenames()
+        self.filenames = self._get_filenames()
 
-    def _getFilenames(self):
+    def _get_filenames(self):
         filenames = []
         for root, _, files in os.walk(self.directory):
             for name in files:
                 filenames.append(os.path.join(root, name))
         return filenames
 
-    def _nextLine(self):
+    def _next_line(self):
         lines = open(self.filenames[self.file_idx]).readlines()
         line = lines[self.content_idx]
         if self.content_idx == len(lines) - 1:
@@ -145,7 +160,7 @@ class CCGBankData(object):
         else:
             self.content_idx += 1
         if line.startswith('ID'):
-            return self._nextLine()
+            return self._next_line()
         return line
 
     def __iter__(self):
@@ -156,6 +171,19 @@ class CCGBankData(object):
 
     def next(self):
         try:
-            return self._nextLine()
+            return self._next_line()
         except:
             raise StopIteration()
+
+def evaluate():
+    converter = CCGParseConverter()
+    ccgbank_dir = os.path.join(_DATA_DIR, 'test/ccgbank')
+    data = CCGBankData(ccgbank_dir)
+    for parse in data:
+        tree = converter.fromstring(parse, DefaultRuleSet)
+        tree.draw()
+    pprint(converter.grammar)
+
+
+if __name__ == '__main__':
+    evaluate()

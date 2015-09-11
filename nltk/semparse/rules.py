@@ -17,17 +17,17 @@ from nltk.sem.logic import (is_eventvar, is_indvar, Variable, Expression,
 
 lexpr = Expression.fromstring
 
-def findVariables(expression):
+def find_variables(expression):
     ''' Returns all bound variables.'''
     def helper(expression):
         if isinstance(expression, LambdaExpression) or \
            isinstance(expression, ExistsExpression): 
-            return findVariables(expression.term)
+            return find_variables(expression.term)
         if isinstance(expression, AndExpression): 
-            return findVariables(expression.second) + \
-                   findVariables(expression.first)
+            return find_variables(expression.second) + \
+                   find_variables(expression.first)
         if isinstance(expression, ApplicationExpression): 
-            return findVariables(expression.function) + [expression.argument]
+            return find_variables(expression.function) + [expression.argument]
         if isinstance(expression, IndividualVariableExpression): 
             return [expression.variable]
         if isinstance(expression, FunctionVariableExpression): 
@@ -38,7 +38,7 @@ def findVariables(expression):
     vars = [var for var in vars if isinstance(var, IndividualVariableExpression)]
     return vars
 
-def getIndVar(stem):
+def get_indvar(stem):
     '''Returns individual or event variable, e.g. \\e or \\x'''
     ivar = None
     while not ivar:
@@ -48,7 +48,7 @@ def getIndVar(stem):
         stem = stem.term 
     return ivar
 
-def getAndExpr(stem):
+def get_andexpr(stem):
     '''Returns just the AND expression of stem.
        e.g. \P Q x.(P(x) & Q(x) => (P(x) & Q(x))'''
     while type(stem) == LambdaExpression or type(stem) == ExistsExpression:
@@ -62,11 +62,11 @@ def getAndExpr(stem):
 
 # VB*, IN, TO, POS
 def event(stem):
-    evar = getIndVar(stem)  # Event variable.
-    andexpr = getAndExpr(stem)
+    evar = get_indvar(stem)  # Event variable.
+    andexpr = get_andexpr(stem)
     reLambda = re.compile(re.escape(str(andexpr)))
     lambda_bit = reLambda.split(str(stem))[0]
-    for (i,var) in enumerate(findVariables(andexpr)):
+    for (i,var) in enumerate(find_variables(andexpr)):
         string = "{0}:{1}({2})({3})".format('{0}', i+1, evar, var)
         andexpr = AndExpression(andexpr, lexpr(string))
     expression = lambda_bit + str(andexpr)
@@ -74,8 +74,8 @@ def event(stem):
 
 # RB*, JJ*
 def mod(stem):
-    ivar = getIndVar(stem)
-    andexpr = getAndExpr(stem)
+    ivar = get_indvar(stem)
+    andexpr = get_andexpr(stem)
     reLambda = re.compile(re.escape(str(andexpr)))
     string = "{0}({1})".format('{0}', ivar)
     andexpr = AndExpression(andexpr, lexpr(string))
@@ -85,8 +85,8 @@ def mod(stem):
 
 # CD
 def count(stem):
-    ivar = getIndVar(stem)
-    andexpr = getAndExpr(stem)
+    ivar = get_indvar(stem)
+    andexpr = get_andexpr(stem)
     reLambda = re.compile(re.escape(str(andexpr)))
     string = "COUNT({0}, {1})".format(ivar, '{0}')
     andexpr = AndExpression(andexpr, lexpr(string))
@@ -102,8 +102,8 @@ def count(stem):
 
 # not, n't
 def negate(stem):
-    ivar = getIndVar(stem)
-    andexpr = getAndExpr(stem)
+    ivar = get_indvar(stem)
+    andexpr = get_andexpr(stem)
     reLambda = re.compile(re.escape(str(andexpr)))
     andexpr = AndExpression(andexpr, lexpr("NEGATION({0})".format(ivar)))
     lambda_bit = reLambda.split(str(stem))[0]
@@ -112,8 +112,8 @@ def negate(stem):
 
 # no
 def complement(stem):
-    ivar = getIndVar(stem)
-    andexpr = getAndExpr(stem)
+    ivar = get_indvar(stem)
+    andexpr = get_andexpr(stem)
     reLambda = re.compile(re.escape(str(andexpr)))
     andexpr = AndExpression(andexpr, lexpr("COMPLEMENT({0})".format(ivar)))
     lambda_bit = reLambda.split(str(stem))[0]
@@ -122,8 +122,8 @@ def complement(stem):
 
 # definite articles
 def unique(stem):
-    ivar = getIndVar(stem)
-    andexpr = getAndExpr(stem)
+    ivar = get_indvar(stem)
+    andexpr = get_andexpr(stem)
     reLambda = re.compile(re.escape(str(andexpr)))
     andexpr = AndExpression(andexpr, lexpr("UNIQUE({0})".format(ivar)))
     lambda_bit = reLambda.split(str(stem))[0]
@@ -131,7 +131,7 @@ def unique(stem):
     return lexpr(expression)
 
 # What, which
-def entityQuestion():
+def entity_question():
     return lexpr(r'\P. exists x.(P(x) & TARGET(x))')
 
 # TODO: should these go in the specialcases file?
@@ -175,5 +175,5 @@ question_rules = {
 question_special_rules = {
         'TYPE': kind,
         'ENTITY': entity,
-        'ENTQUESTION': entityQuestion
+        'ENTQUESTION': entity_question
         }

@@ -17,13 +17,13 @@ class SyntacticCategory(object):
     syncat_dict_cache = None
 
     @classmethod
-    def getCachedSyncatDict(cls):
+    def get_cached_syncat_dict(cls):
         if not cls.syncat_dict_cache:
-            cls.syncat_dict_cache = cls._parseMarkedupFile()
+            cls.syncat_dict_cache = cls._parse_markedup_file()
         return cls.syncat_dict_cache
 
     @classmethod
-    def _parseMarkedupFile(cls):
+    def _parse_markedup_file(cls):
         """
         Parses the C&C markedup file into a dictionary of the form
         {syntactic_category: indexed_syntactic_category}. E.g.
@@ -58,11 +58,11 @@ class SyntacticCategory(object):
         return pairsdict
 
     def __init__(self, syncat_str):
-        self._syncat_dict = self.getCachedSyncatDict()
+        self._syncat_dict = self.get_cached_syncat_dict()
         self.syncat = syncat_str
-        self.index_syncat = self._getIndexSyncat()
+        self.index_syncat = self._get_index_syncat()
 
-    def _getIndexSyncat(self):
+    def _get_index_syncat(self):
         """
         Gets the indexed syntactic category from the C&C mapping.
 
@@ -70,7 +70,7 @@ class SyntacticCategory(object):
         """
         return self._syncat_dict.get(self.syncat, None)
 
-    def _preprocessCategory(self):
+    def _preprocess_category(self):
         """
         For self.index_syncat
         Removes astericks in (it specifies unneeded information). 
@@ -96,7 +96,7 @@ class SyntacticCategory(object):
         :type index_syncat: str
         :rtype: list
         """
-        processed_category = self._preprocessCategory()
+        processed_category = self._preprocess_category()
         PARENS = ['(', ')']
         OPERATORS = ['\\', '/']
 

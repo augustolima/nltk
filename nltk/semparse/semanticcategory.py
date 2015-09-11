@@ -19,9 +19,9 @@ lexpr = Expression.fromstring
 # Find the proper data directory.
 _DATA_DIR = ""
 dirlist = ['nltk/semparse/data', 'data/']
-for dir in dirlist:
-    if os.path.exists(dir) & os.path.isdir(dir):
-        _DATA_DIR = dir
+for d in dirlist:
+    if os.path.exists(d) & os.path.isdir(d):
+        _DATA_DIR = d
 if not _DATA_DIR:
     print("Data directory not found. Searched in {0}".format(dirlist))
 
@@ -53,6 +53,7 @@ class SemanticCategory(object):
 
     _CandC_MARKEDUP_FILE = os.path.join(_DATA_DIR, 'lib/markedup')
 
+    # TODO: move POS map to specialcases file.
     TYPEMAP = reDict({r'NN$|NNS$': 'TYPE',
             r'NNP.?$|PRP.?$': 'ENTITY',
             r'CC$': 'CONJ',
@@ -81,16 +82,16 @@ class SemanticCategory(object):
         self.pos = pos
         self.syncat = syntactic_category
         
-        special_case = self.getSpecialCase()
+        special_case = self.get_special_case()
         if special_case and special_case in self.TYPES:
             self.semantic_type = special_case
-            self._expression = self.generateExpression()
-        elif special_case and self.isExpression(special_case):
+            self._expression = self.generate_expression()
+        elif special_case and self.is_expression(special_case):
             self.semantic_type = 'SPECIAL_CASE'
             self._expression = special_case
         else:
-            self.semantic_type = self.getSemanticType()
-            self._expression = self.generateExpression()
+            self.semantic_type = self.get_semantic_type()
+            self._expression = self.generate_expression()
 
     # TODO: figure out unicode() for Python3 compatibility.
     def __str__(self):
@@ -111,7 +112,7 @@ class SemanticCategory(object):
         expression = unicode(str(self._expression))
         return expression.format(word)
 
-    def getExpression(self):
+    def get_expression(self):
         if len(self.word) == 1:
             word = "_{0}".format(self.word)
         else:
@@ -120,10 +121,10 @@ class SemanticCategory(object):
         expression = unicode(str(self._expression))
         return lexpr(expression.format(word))
 
-    def getBaseExpression(self):
+    def get_base_expression(self):
         return self._expression
 
-    def isExpression(self, string):
+    def is_expression(self, string):
         """
         Determines if string is a valid Expression.
         :param string: expression string, e.g. '\\x.cool(x)'
@@ -137,7 +138,7 @@ class SemanticCategory(object):
             return False
         return
 
-    def generateExpression(self):
+    def generate_expression(self):
         """
         Determines logical predicate for the word given its
         syntactic category and semantic type.
@@ -155,16 +156,16 @@ class SemanticCategory(object):
             return None
 
         syncat_parse = self.syncat.parse()
-        (pred_vars, arg_var) = self._getVars(syncat_parse)
+        (pred_vars, arg_var) = self._get_vars(syncat_parse)
         if not pred_vars:
             return None
-        stem_expression = self._getStem(pred_vars, arg_var)
+        stem_expression = self._get_stem(pred_vars, arg_var)
         try:
             return self.rules[self.semantic_type](stem_expression)
         except KeyError:
             return None
 
-    def getSemanticType(self):
+    def get_semantic_type(self):
         """
         Determines semantic type for the given word
         based on it's lemma or POS tag.
@@ -174,7 +175,7 @@ class SemanticCategory(object):
         else:
             return None
 
-    def getSpecialCase(self):
+    def get_special_case(self):
         """
         If the word, syntactic category, etc. indicates that
         this is a special case, return the corresponding semantic type
@@ -199,7 +200,7 @@ class SemanticCategory(object):
         return None
 #                   syncat_str == self.syncat.index_syncat: ##
 
-    def _getVars(self, syncat_parse):
+    def _get_vars(self, syncat_parse):
         """
         Finds and pairs up the predicate and argument variables
         for the logical expression from the syntactic category.
@@ -241,7 +242,7 @@ class SemanticCategory(object):
         getVars(syncat_parse[0])
         return (predicate_variables, individual_variable[0])
 
-    def _getStem(self, predicate_variables, argument_variable):
+    def _get_stem(self, predicate_variables, argument_variable):
         """
         Builds the stem expression. i.e. the expression without
         semantic type specific information.

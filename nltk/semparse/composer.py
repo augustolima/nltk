@@ -9,7 +9,7 @@ from semanticcategory import SemanticCategory
 
 # ==============================
 # The main semantic parsing algorithm
-# buildExpressions. Takes as input a CCG parse
+# build_expressions. Takes as input a CCG parse
 # as an nltk.Tree and outputs a logic form.
 # ==============================
 
@@ -21,8 +21,8 @@ class SemanticComposer(object):
     def __init__(self):
         pass
 
-    # TODO: make buildExpressions return None if not valid expression is possible.
-    def buildExpressions(self, tree, pos_tags, question=False):
+    # TODO: make build_expressions return None if not valid expression is possible.
+    def build_expressions(self, tree, pos_tags, question=False):
         """
 
         The main semantic composition algorithm.
@@ -33,7 +33,7 @@ class SemanticComposer(object):
         :type pos_tags: list(tuple(str, str))
         :rtype: list(nltk.sem.logic.Expression)
         """
-        children = self.getChildren(tree)
+        children = self.get_children(tree)
 
         # Leaf
         if len(children) == 0:
@@ -44,16 +44,16 @@ class SemanticComposer(object):
                 syncat_str = re.findall(r'\((.*)\)', syncat_str)[0]
             syncat = SyntacticCategory(syncat_str)
             semcat = SemanticCategory(word, pos, syncat, question)
-            expr = semcat.getExpression()
+            expr = semcat.get_expression()
             return expr
 
         # Unary rule
         if len(children) == 1:
-            return self.buildExpressions(children[0], pos_tags, question)
+            return self.build_expressions(children[0], pos_tags, question)
 
         rule = tree.label()[1]
-        left_expr = self.buildExpressions(children[0], pos_tags, question)
-        right_expr = self.buildExpressions(children[1], pos_tags, question)
+        left_expr = self.build_expressions(children[0], pos_tags, question)
+        right_expr = self.build_expressions(children[1], pos_tags, question)
         if isinstance(left_expr, Tree):
             lexpr = left_expr.label()[0]
         else:
@@ -62,14 +62,14 @@ class SemanticComposer(object):
             rexpr = right_expr.label()[0]
         else:
             rexpr = right_expr
-        expr = self.applyRule(lexpr, rexpr, rule)
+        expr = self.apply_rule(lexpr, rexpr, rule)
         if self.check(expr):
             derivation = Tree((expr, rule), [left_expr, right_expr])
             return derivation
         else:
             return Tree((None, None), [])
 
-    def getChildren(self, tree):
+    def get_children(self, tree):
         """
         Gets all child nodes from tree.
 
@@ -104,7 +104,7 @@ class SemanticComposer(object):
         except Exception as e:
             return False
 
-    def applyRule(self, left_ex, right_ex, rule):
+    def apply_rule(self, left_ex, right_ex, rule):
         """
         Passes left_ex and right_ex to the correct rule application
         function.
