@@ -11,8 +11,8 @@ from nltk.ccg import lexicon
 #from nltk.semparse.semanticcategory import SemanticCategory
 #from nltk.semparse.semanticparser import SemanticParser
 from syntacticcategory import SyntacticCategory
-from semanticcategory import SemanticCategory ##
-from semanticparser import SemanticParser ##
+from semanticcategory import SemanticCategory
+from semanticparser import SemanticParser
 
 '''
 Unit tests for SemanticCategory.
@@ -21,6 +21,10 @@ Unit tests for SemanticCategory.
 lexpr = Expression.fromstring
 logging.basicConfig(filename=".unittest.log", level=logging.DEBUG)
 
+
+# TODO: write CCG parse converter tests.
+class ParseConverterTest(unittest.TestCase):
+    pass
 
 class SemanticCategoryTest(unittest.TestCase):
 

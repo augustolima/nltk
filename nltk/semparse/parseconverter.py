@@ -1,5 +1,6 @@
 from __future__ import print_function, unicode_literals
 
+import sys
 import os
 import re
 import string
@@ -110,14 +111,12 @@ class CCGParseConverter(object):
         # Consider all rules except type raise rules.
         ruleset = set(combinatory_rules).difference(set(TypeRaiseRuleSet))
         for rule in ruleset:
-            print(type(rule))
-            print(left_cat, right_cat)
             if rule._combinator.can_combine(left_cat, right_cat):
                 res = rule._combinator.combine(left_cat, right_cat).next()
                 if res == target_category:
                     return Tree((res, str(rule)), [lhs, rhs])
         # No rule works -> grammar rule
-        rule = "{0} + {1} => {2}".format(left_cat, right_cat, target_category)
+        rule = "{0} | {1} | {2}".format(left_cat, right_cat, target_category)
         self.grammar.add(rule)
         return Tree((target_category, 'Grammar'), [lhs, rhs])
 
@@ -179,11 +178,25 @@ def evaluate():
     converter = CCGParseConverter()
     ccgbank_dir = os.path.join(_DATA_DIR, 'test/ccgbank')
     data = CCGBankData(ccgbank_dir)
-    for parse in data:
-        tree = converter.fromstring(parse, DefaultRuleSet)
-        tree.draw()
-    pprint(converter.grammar)
+    total = 0
+    converted = 0
+    for i,parse in enumerate(data):
+        total += 1
+        if i % 5 == 0:
+            sys.stderr.write('{0}\r'.format(i))
+        try:
+            tree = converter.fromstring(parse, DefaultRuleSet)
+            converted += 1
+        except:
+            with open('bad_parses.txt', 'a') as out:
+                out.write(parse + '\n')
+    with open('data/grammars/ccg_grammar.txt', 'w') as out:
+        for rule in converter.grammar:
+            out.write(rule + '\n')
+    print("{0}/{1} parses converted".format(converted, total))
 
 
 if __name__ == '__main__':
+    print("Converting CCGBank data (48934 sentences in total)")
+    print("--------------------------------------------------")
     evaluate()
