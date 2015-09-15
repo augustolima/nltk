@@ -1,0 +1,29 @@
+# priority	word_regex	pos_regex	indexsyncat	semantic_type
+
+# Copula
+1	be$|is$|was$|am$|are|\'m$	.*$	((S[adj]{_}\NP{Y}<1>){_}/N[num]{Z}<2>){_}	\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))
+2	be$|is$|was$|am$|are|\'m$	.*$	.*$	\P x.P(x)
+
+# Quantifiers
+3	an?$	.*$	(NP{Y}/N{Y}<1>){_}	None
+4	the$	.*$	(NP{Y}/N{Y}<1>){_}	UNIQUE
+5	the$	.*$	(((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}/N[num]{W}<2>){_}	UNIQUE
+6	no$	.*$	(NP{Y}/N{Y}<1>){_}	COMPLEMENT
+7	not$|n't$	.*$	((S[adj]{Y}\NP{Z}){Y}\(S[adj]{Y}<1>\NP{Z}){Y}){_}	NEGATE	
+
+# TODO: figure out conjunction. What I have isn't quite right.
+# Conjunction
+8	.*$	CC$	conj{_}	\P Q x.(P(x) & Q(x))
+
+# Adjectives which act like verbs - e.g. Reagan was athletic.
+9	.*$	JJ.?$	(S{_}\NP{Y}<1>){_}	EVENT
+
+# TODO: figure out passive case.
+# Passive case
+#10	by$	.*$	(((S[X]{Y}\\NP{Z}){Y}\\(S[X]{Y}<1>\\NP{Z}){Y}){_}/N[num]{W}<2>){_}	\P Q R y. exists w z.(P(w) & Q(\x.EQUAL(x,z))(y) & R(z) & 
+
+# Gerunds which modify nouns.
+10	.*$	VBG	(NP{Y}/N{Y}<1>){_}	MOD
+
+# Degree questions
+11	[Hh]ow$	.*$	((S[wq]{_}/(S[q]{Y}<1>/(S[adj]{Z}\NP{W}){Z}){V}){_}/(S[adj]{Z}<2>\NP{W}){Z}){_}	\P Q.exists z d.(P(\x.EQUAL(x,z),d) & Q(z) & TARGET(d))	

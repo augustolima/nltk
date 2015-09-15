@@ -66,17 +66,18 @@ class SemanticCategory(object):
              'CONJ', 'EVENT', 'COPULA', 'MOD', 'COUNT', 'ENTQUESTION']
 
     def __init__(self, word, pos, syntactic_category, question=False):
+        self._LANGUAGE_FILE = os.path.join(_DATA_DIR, 'lib/english.txt')
+        if not os.path.isfile(self._LANGUAGE_FILE):
+            raise IOError("No such file or directory: '{0}'"
+                           .format(self._LANGUAGE_FILE))
+
         # Special question handling.
         if question:
-            self._SPECIAL_CASES_FILE = os.path.join(_DATA_DIR, 'lib/question_specialcases.txt')
             self.rules = rules.question_rules
             self.special_rules = rules.question_special_rules
         else:
-            self._SPECIAL_CASES_FILE = os.path.join(_DATA_DIR, 'lib/specialcases.txt')
             self.rules = rules.rules
             self.special_rules = rules.special_rules
-        if not os.path.isfile(self._SPECIAL_CASES_FILE):
-            raise IOError("No such file or directory: '{0}'".format(self._SPECIAL_CASES_FILE))
 
         self.word = word
         self.pos = pos
@@ -136,7 +137,6 @@ class SemanticCategory(object):
             return True
         except LogicalExpressionException:
             return False
-        return
 
     def generate_expression(self):
         """
@@ -152,6 +152,7 @@ class SemanticCategory(object):
         quantifiers = Tokens.EXISTS_LIST + Tokens.ALL_LIST
         if self.word.lower() in quantifiers:
             return None
+        # TODO: generate indexed syncat when markedup fails
         if not self.syncat.index_syncat:
             return None
 
@@ -183,22 +184,24 @@ class SemanticCategory(object):
         
         :rtype: str
         """
-        with io.open(self._SPECIAL_CASES_FILE, 'rt', encoding='utf-8') as fp:
-            for line in fp:
-                if line.startswith('\n') or line.startswith('#'):
-                    continue
-                line = line.strip().split('\t')
-                (word_regex, pos_regex, syncat_str, sem) = line
-                if syncat_str == '.*$':
-                    syncat_match = True
-                else:
-                    syncat_match = syncat_str == self.syncat.index_syncat
-                if re.match(word_regex, self.word) and \
-                   re.match(pos_regex, self.pos) and \
-                   syncat_match:
-                    return sem
+        lines = io.open(self._LANGUAGE_FILE, 'rt', encoding='utf-8').readlines() ##
+        # Sort lines by priority field.
+        lines = [line for line in lines if line != '\n' and not line.startswith('#')] ##
+        lines = sorted(lines, key=lambda l: int(l.split()[0]))
+        for line in lines: ##
+            if line.startswith('\n') or line.startswith('#'):
+                continue
+            line = line.strip().split('\t')
+            (_, word_regex, pos_regex, syncat_str, sem) = line ##
+            if syncat_str == '.*$':
+                syncat_match = True
+            else:
+                syncat_match = syncat_str == self.syncat.index_syncat
+            if re.match(word_regex, self.word) and \
+               re.match(pos_regex, self.pos) and \
+               syncat_match:
+                return sem
         return None
-#                   syncat_str == self.syncat.index_syncat: ##
 
     def _get_vars(self, syncat_parse):
         """

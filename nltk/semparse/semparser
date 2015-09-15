@@ -68,12 +68,12 @@ class Interpreter(object):
         print(semparse.sentence_type)
         if self.opt_syntax:
             print("\n======== SYNTACTIC PARSE ========\n")
-            semparse.printSyntacticDerivation()
+            semparse.print_syntactic_derivation()
         if self.opt_semantics:
             print("\n====== SEMANTIC DERIVATION =======\n")
-            semparse.printSemanticDerivation()
+            semparse.print_semantic_derivation()
         print("\n========= SEMANTIC PARSE =========\n")
-        print(semparse.getExpression())
+        print(semparse.get_expression())
 
     def run(self):
         while self.status == 'GO':

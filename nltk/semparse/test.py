@@ -156,7 +156,7 @@ class SemanticParserTest(unittest.TestCase):
                 sem_parsed = False
                 tagged = pos_tag(word_tokenize(sent))
                 error = None
-                derivations = semParser.parse(tagged, n=30)
+                derivations = semParser.parse(tagged, n=100)
                 for derivation in derivations:
                     if derivation.syntax is not None:
                         parsed = True
@@ -199,7 +199,7 @@ class SemanticParserTest(unittest.TestCase):
                 sem_parsed = False
                 tagged = pos_tag(word_tokenize(sent))
                 error = None
-                derivations = semParser.parse(tagged, n=30)
+                derivations = semParser.parse(tagged, n=100)
                 for derivation in derivations:
                     if derivation.syntax is not None:
                         parsed = True

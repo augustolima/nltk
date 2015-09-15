@@ -7,8 +7,8 @@ be$|is$|was$|am$|are|\'m$	.*$	.*$	\P x.P(x)
 
 # Quantifiers
 an?$	.*$	(NP{Y}/N{Y}<1>){_}	None
-#the$	.*$	(NP{Y}/N{Y}<1>){_}	UNIQUE
-$the$	.*$	(((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}/N[num]{W}<2>){_}	UNIQUE
+the$	.*$	(NP{Y}/N{Y}<1>){_}	UNIQUE
+the$	.*$	(((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}/N[num]{W}<2>){_}	UNIQUE
 the$	.*$	.*$	UNIQUE
 no$	.*$	(NP{Y}/N{Y}<1>){_}	COMPLEMENT
 not$|n't$	.*$	((S[adj]{Y}\NP{Z}){Y}\(S[adj]{Y}<1>\NP{Z}){Y}){_}	NEGATE	
