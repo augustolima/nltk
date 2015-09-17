@@ -25,6 +25,18 @@ for d in dirlist:
 if not _DATA_DIR:
     print("Data directory not found. Searched in {0}".format(dirlist))
 
+_CandC_MARKEDUP_FILE = os.path.join(_DATA_DIR, 'lib/markedup')
+_LANGUAGE_FILE = os.path.join(_DATA_DIR, 'lib/english.txt')
+if not os.path.isfile(_CandC_MARKEDUP_FILE):
+    raise IOError("No such file or directory: '{0}'"
+                   .format(_CandC_MARKEDUP_FILE))
+if not os.path.isfile(_LANGUAGE_FILE):
+    raise IOError("No such file or directory: '{0}'"
+                   .format(_LANGUAGE_FILE))
+
+TYPES = ['INDEF', 'UNIQUE', 'COMPLEMENT', 'NEGATE', 'TYPE', 'ENTITY',
+         'CONJ', 'EVENT', 'COPULA', 'MOD', 'COUNT', 'ENTQUESTION']
+
 
 @python_2_unicode_compatible
 class reDict(dict):
@@ -51,8 +63,6 @@ class reDict(dict):
 
 class SemanticCategory(object):
 
-    _CandC_MARKEDUP_FILE = os.path.join(_DATA_DIR, 'lib/markedup')
-
     # TODO: move POS map to specialcases file.
     TYPEMAP = reDict({r'NN$|NNS$': 'TYPE',
             r'NNP.?$|PRP.?$': 'ENTITY',
@@ -62,14 +72,10 @@ class SemanticCategory(object):
             r'CD$': 'COUNT',
             r'WDT$|WP.?$|WRB$': 'ENTQUESTION'})
 
-    TYPES = ['INDEF', 'UNIQUE', 'COMPLEMENT', 'NEGATE', 'TYPE', 'ENTITY',
-             'CONJ', 'EVENT', 'COPULA', 'MOD', 'COUNT', 'ENTQUESTION']
-
     def __init__(self, word, pos, syntactic_category, question=False):
-        self._LANGUAGE_FILE = os.path.join(_DATA_DIR, 'lib/english.txt')
-        if not os.path.isfile(self._LANGUAGE_FILE):
-            raise IOError("No such file or directory: '{0}'"
-                           .format(self._LANGUAGE_FILE))
+        self.word = word
+        self.pos = pos
+        self.syncat = syntactic_category
 
         # Special question handling.
         if question:
@@ -78,22 +84,7 @@ class SemanticCategory(object):
         else:
             self.rules = rules.rules
             self.special_rules = rules.special_rules
-
-        self.word = word
-        self.pos = pos
-        self.syncat = syntactic_category
         
-        special_case = self.get_special_case()
-        if special_case and special_case in self.TYPES:
-            self.semantic_type = special_case
-            self._expression = self.generate_expression()
-        elif special_case and self.is_expression(special_case):
-            self.semantic_type = 'SPECIAL_CASE'
-            self._expression = special_case
-        else:
-            self.semantic_type = self.get_semantic_type()
-            self._expression = self.generate_expression()
-
     # TODO: figure out unicode() for Python3 compatibility.
     def __str__(self):
         if len(self.word) == 1:
@@ -125,83 +116,42 @@ class SemanticCategory(object):
     def get_base_expression(self):
         return self._expression
 
-    def is_expression(self, string):
-        """
-        Determines if string is a valid Expression.
-        :param string: expression string, e.g. '\\x.cool(x)'
-        :type string: str
-        :rtype: bool
-        """
-        try:
-            lexpr(string)
-            return True
-        except LogicalExpressionException:
-            return False
-
+    # TODO: clean up generate_expression
     def generate_expression(self):
         """
         Determines logical predicate for the word given its
         syntactic category and semantic type.
-
-        :param syntactic_category: CCG category for self.word.
-        :type syntactic_category: str
         """
-        if self.semantic_type in self.special_rules:
-            return self.special_rules[self.semantic_type]()
-        # TODO: use quantifiers.
         quantifiers = Tokens.EXISTS_LIST + Tokens.ALL_LIST
-        if self.word.lower() in quantifiers:
-            return None
+        if self.semantic_type in self.special_rules:
+            self._expression = self.special_rules[self.semantic_type]()
+        # TODO: use quantifiers.
+        elif self.word.lower() in quantifiers:
+            self._expression = None
         # TODO: generate indexed syncat when markedup fails
-        if not self.syncat.index_syncat:
-            return None
+        elif not self.syncat.index_syncat:
+            self._expression = None
 
-        syncat_parse = self.syncat.parse()
-        (pred_vars, arg_var) = self._get_vars(syncat_parse)
-        if not pred_vars:
-            return None
-        stem_expression = self._get_stem(pred_vars, arg_var)
-        try:
-            return self.rules[self.semantic_type](stem_expression)
-        except KeyError:
-            return None
+        else:
+            syncat_parse = self.syncat.parse()
+            (pred_vars, arg_var) = self._get_vars(syncat_parse)
+            if not pred_vars:
+                self._expression = None
+            stem_expression = self._get_stem(pred_vars, arg_var)
+            try:
+                self._expression = self.rules[self.semantic_type](stem_expression)
+            except KeyError:
+                self._expression = None
 
-    def get_semantic_type(self):
+    def set_semantic_type(self):
         """
         Determines semantic type for the given word
         based on it's lemma or POS tag.
         """
         if self.pos in self.TYPEMAP:
-            return self.TYPEMAP[self.pos]
+            self.semantic_type = self.TYPEMAP[self.pos]
         else:
-            return None
-
-    def get_special_case(self):
-        """
-        If the word, syntactic category, etc. indicates that
-        this is a special case, return the corresponding semantic type
-        or lambda expression. Otherwise, return None.
-        
-        :rtype: str
-        """
-        lines = io.open(self._LANGUAGE_FILE, 'rt', encoding='utf-8').readlines() ##
-        # Sort lines by priority field.
-        lines = [line for line in lines if line != '\n' and not line.startswith('#')] ##
-        lines = sorted(lines, key=lambda l: int(l.split()[0]))
-        for line in lines: ##
-            if line.startswith('\n') or line.startswith('#'):
-                continue
-            line = line.strip().split('\t')
-            (_, word_regex, pos_regex, syncat_str, sem) = line ##
-            if syncat_str == '.*$':
-                syncat_match = True
-            else:
-                syncat_match = syncat_str == self.syncat.index_syncat
-            if re.match(word_regex, self.word) and \
-               re.match(pos_regex, self.pos) and \
-               syncat_match:
-                return sem
-        return None
+            self.semantic_type = None
 
     def _get_vars(self, syncat_parse):
         """
@@ -226,7 +176,10 @@ class SemanticCategory(object):
             if isinstance(tree, list):
                 first_arg = getArgs(tree[1])[0]
                 sc = SyntacticCategory('N')
-                exprvar = str(SemanticCategory(first_arg, 'NNP', sc))
+                semcat = SemanticCategory(first_arg, 'NNP', sc)
+                semcat.set_semantic_type()
+                semcat.generate_expression()
+                exprvar = str(semcat)
                 exprvar = exprvar.replace('_'+first_arg, first_arg)
                 return getArgs(tree[0]) + [exprvar]
             else:
@@ -272,6 +225,8 @@ class SemanticCategory(object):
             sub_expressions.append(lexpr(pred))
         lambda_vars.append(argument_variable)
                 
+        if not sub_expressions:
+            return None
         # Just the expression without lambdas or quantifiers.
         andexpr = sub_expressions[0]
         for i in range(1, len(sub_expressions)):
@@ -291,3 +246,97 @@ class SemanticCategory(object):
             lambdaexpr = LambdaExpression(Variable(var), lambdaexpr)
         
         return lambdaexpr
+
+
+# ////////////////////////////////////////////
+# //           Helper functions             //
+# ////////////////////////////////////////////
+
+def get_special_cases(word, pos, syncat):
+    """
+    Returns all possible semantic types/logical expressions for input
+    word, POS tag, and syntactic category. Returns an empty list if
+    no special cases found.
+
+    :param word: input word
+    :param pos: POS tag for input word
+    :param syncat: syntactic category
+    :rtype: list
+    """
+    lines = io.open(_LANGUAGE_FILE, 'rt', encoding='utf-8').readlines()
+    lines = [line for line in lines
+             if line != '\n' and not line.startswith('#')]
+    # Sort lines by priority field.
+    lines = sorted(lines, key=lambda l: int(l.split()[0]))
+
+    cases = []
+    for line in lines:
+        line = line.strip().split('\t')
+        (_, word_regex, pos_regex, syncat_str, sem) = line
+        if syncat_str == '.*$':
+            syncat_match = True
+        else:
+            syncat_match = syncat_str == syncat.index_syncat
+        if re.match(word_regex, word) and \
+           re.match(pos_regex, pos) and \
+           syncat_match:
+            cases.append(sem)
+    return cases
+
+def get_semantic_categories(word, pos, syncat, question=False):
+    """
+    Returns a list of SemanticCategory objects, one for each
+    possible semantics for the input word, POS tag and syntactic
+    category.
+
+    :param word: input word
+    :type word: str
+    :param pos: POS tag for word
+    :type pos: str
+    :param syncat: syntactic category for word and POS tag
+    :type syncat: nltk.semparse.SyntacticCategory
+    :param question: whether the word appears in a question
+                     sentence or not.
+    :type question: bool
+    :returns: all possible semantic categories for the input
+    :rtype: list(SemanticCategory)
+    """
+    expressions = []
+
+    # Add any special cases.
+    special_cases = get_special_cases(word, pos, syncat)
+    if special_cases:
+        for case in special_cases:
+            semcat = SemanticCategory(word, pos, syncat, question)
+            if case in TYPES:
+                semcat.semantic_type = case
+                semcat.generate_expression()
+            elif is_expression(case):
+                semcat.semantic_type = 'SPECIAL_CASE'
+                semcat._expression = case
+            else:
+                raise Exception("Invalid specification '{0}' in file '{1}'"
+                                .format(case, _LANGUAGE_FILE))
+            expressions.append(semcat)
+
+    # Add normal cases.
+    semcat = SemanticCategory(word, pos, syncat, question)
+    semcat.set_semantic_type()
+    semcat.generate_expression()
+    expressions.append(semcat)
+    return expressions
+
+def is_expression(string):
+    """
+    Determines if string is a valid Expression.
+    :param string: expression string, e.g. '\\x.cool(x)'
+    :type string: str
+    :rtype: bool
+    """
+    try:
+        lexpr(string)
+        return True
+    except LogicalExpressionException:
+        return False
+
+

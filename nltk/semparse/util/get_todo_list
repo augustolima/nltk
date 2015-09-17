@@ -7,12 +7,11 @@
 # https://github.com/jvasilakes/bash-scripts/blob/master/grepfind
 # =============================================
 
-for FILE in $(grepfind TODO); do
+for FILE in $(grepfind -i data/test TODO); do
 	if [ $(basename ${FILE}) = "get_todo_list" ]
 	then
 		continue
 	fi
-
 	find . -name $(basename ${FILE})
 	grep TODO ${FILE} | sed -e 's/^\s*//'
 	echo

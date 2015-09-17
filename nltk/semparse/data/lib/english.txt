@@ -3,6 +3,7 @@
 # Copula
 1	be$|is$|was$|am$|are|\'m$	.*$	((S[adj]{_}\NP{Y}<1>){_}/N[num]{Z}<2>){_}	\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))
 2	be$|is$|was$|am$|are|\'m$	.*$	.*$	\P x.P(x)
+3	be$|is$|was$|am$|are|\'m$	.*$	((S[dcl]{_}\\NP[thr]{Y}<1>){_}/(S[pt]{Z}<2>\\NP{Y*}){Z}){_}	EVENT
 
 # Quantifiers
 3	an?$	.*$	(NP{Y}/N{Y}<1>){_}	None
