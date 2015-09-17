@@ -80,7 +80,7 @@ output by nltk.pos_tag.
     sent = "I eat peaches."
     tagged_sent = pos_tag(word_tokenize(sent))
     for parse in semparser.parse(tagged_sent):
-        print parse.getExpression()
+        print parse.get_expression()
         break
 
 ##Testing
