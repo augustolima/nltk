@@ -4,16 +4,17 @@ import io
 import sys
 import unittest
 import logging
+import pickle
 
 from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
-from nltk.ccg import lexicon
+from nltk.ccg import chart, lexicon
 #from nltk.semparse.semanticcategory import SemanticCategory
 #from nltk.semparse.semanticparser import SemanticParser
 from syntacticcategory import SyntacticCategory
 from semanticcategory import get_semantic_categories
 from semanticparser import SemanticParser
-from rules import StemException
+from parseconverter import CCGParseConverter
 
 '''
 Unit tests for SemanticCategory.
@@ -25,7 +26,18 @@ logging.basicConfig(filename=".unittest.log", level=logging.DEBUG)
 
 # TODO: write CCG parse converter tests.
 class ParseConverterTest(unittest.TestCase):
-    pass
+    
+    def test(self):
+        gold_tree_file = "data/test/parse_converter_data/gold_tree.p"
+        gold_tree = pickle.load(open(gold_tree_file, "rb"))
+        converter = CCGParseConverter()
+        ruleset = chart.DefaultRuleSet
+        auto_string = r'''
+        (<T S[dcl] 1 2> (<T NP 0 1> (<L N POS POS Reagan N>) ) (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS had (S[dcl]\NP)/NP>) (<T NP 0 2> (<T NP 0 1> (<T N 1 2> (<L N/N POS POS four N/N>) (<L N POS POS children N>) ) ) (<L . POS POS . .>) ) ) )
+        '''
+        tree = converter.fromstring(auto_string, ruleset)
+        self.assertEqual(tree, gold_tree)
+
 
 class SemanticCategoryTest(unittest.TestCase):
 
