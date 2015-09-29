@@ -14,10 +14,10 @@ from parseconverter import CCGParseConverter
 
 
 class CCGParseException(Exception):
-    def __init__(self, string):
-        self.string = string
+    def __init__(self, msg):
+        self.msg = msg
     def __str__(self):
-        return self.string
+        return self.msg
 
 class Derivation(object):
 
@@ -95,7 +95,7 @@ class SemanticParser(object):
         :rtype: Derivation
         """
         if not self.ccg_parser and not ccg_parse_str:
-            raise CCGParseException("No CCG parser and no CCG parse specified.")
+            raise CCGParseException("No CCG parser or CCG parse specified.")
 
         # Determine if input is a question or a statement.
         if tagged_sentence[-1][0] == '?':
@@ -121,16 +121,15 @@ class SemanticParser(object):
             if i+1 == n:
                 break
             try:
-                derivation = self.composer.build_expressions(parse, tagged_sentence, question)
-                yield Derivation(parse, derivation, sent_type)
+                derivations = self.composer.build_expressions(parse, tagged_sentence, question)
+                for derivation in derivations:
+                    yield Derivation(parse, derivation, sent_type)
                 continue
             # Yield just syntactic parse if semantics fail.
             except LogicalExpressionException:
                 yield Derivation(parse, None, sent_type)
                 continue
-            else:
-                yield Derivation(parse, None, sent_type)
-                continue
+            
 
 
 def demo():

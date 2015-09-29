@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 import re
 from collections import OrderedDict
@@ -9,11 +9,37 @@ from nltk.sem.logic import (is_eventvar, is_indvar, Variable, Expression,
                             IndividualVariableExpression,
                             FunctionVariableExpression)
 
-# =========================================
-# Rules for translating words/phrases into
-# Neo-Davidsonian logic forms as described
-# in Reddy et. al. 2014.
-# =========================================
+# ////////////////////////////////////////////
+# Rules for translating words/phrases into  //
+# Neo-Davidsonian logic forms as described  //
+# in Reddy et. al. 2014.                    //
+# ////////////////////////////////////////////
+
+
+# //////////////////////////////////
+#         Error handling          //
+# //////////////////////////////////
+
+class StemException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    def __str__(self):
+        return self.msg
+
+
+def input_checker(func):
+    '''Decorator for checking input to rule functions'''
+    def wrapper(stem):
+        if not stem:
+            raise StemException("In function <{0}>. stem == None"
+                                 .format(func.__name__))
+        return func(stem)
+    return wrapper
+
+
+# //////////////////////////////////
+#         Helper functions        //
+# //////////////////////////////////
 
 lexpr = Expression.fromstring
 
@@ -56,11 +82,12 @@ def get_andexpr(stem):
     return stem
 
 
-# =========================
-#        POS Rules        
-# =========================
+# /////////////////////////
+#        POS Rules       // 
+# /////////////////////////
 
 # VB*, IN, TO, POS
+@input_checker
 def event(stem):
     evar = get_indvar(stem)  # Event variable.
     andexpr = get_andexpr(stem)
@@ -73,6 +100,7 @@ def event(stem):
     return lexpr(expression)
 
 # RB*, JJ*
+@input_checker
 def mod(stem):
     ivar = get_indvar(stem)
     andexpr = get_andexpr(stem)
@@ -84,6 +112,7 @@ def mod(stem):
     return lexpr(expression)
 
 # CD
+@input_checker
 def count(stem):
     ivar = get_indvar(stem)
     andexpr = get_andexpr(stem)
@@ -96,11 +125,12 @@ def count(stem):
 
 
 
-# =========================
-#        Word Rules       
-# =========================
+# /////////////////////////
+#       Word Rules       // 
+# /////////////////////////
 
 # not, n't
+@input_checker
 def negate(stem):
     ivar = get_indvar(stem)
     andexpr = get_andexpr(stem)
@@ -111,6 +141,7 @@ def negate(stem):
     return lexpr(expression)
 
 # no
+@input_checker
 def complement(stem):
     ivar = get_indvar(stem)
     andexpr = get_andexpr(stem)
@@ -121,6 +152,7 @@ def complement(stem):
     return lexpr(expression)
 
 # definite articles
+@input_checker
 def unique(stem):
     ivar = get_indvar(stem)
     andexpr = get_andexpr(stem)
@@ -145,9 +177,9 @@ def entity():
 
 
 
-# =========================
-#         Mappings        
-# =========================
+# /////////////////////////
+#        Mappings        // 
+# /////////////////////////
 
 rules = {
         'NEGATE': negate,

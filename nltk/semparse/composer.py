@@ -5,7 +5,7 @@ from collections import namedtuple
 from nltk import Tree
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
 from syntacticcategory import SyntacticCategory
-from semanticcategory import SemanticCategory
+from semanticcategory import get_semantic_categories
 
 # ==============================
 # The main semantic parsing algorithm
@@ -21,7 +21,6 @@ class SemanticComposer(object):
     def __init__(self):
         pass
 
-    # TODO: make build_expressions return None if not valid expression is possible.
     def build_expressions(self, tree, pos_tags, question=False):
         """
 
@@ -43,31 +42,35 @@ class SemanticComposer(object):
             if '(' in syncat_str:  # Get rid of extra parentheses.
                 syncat_str = re.findall(r'\((.*)\)', syncat_str)[0]
             syncat = SyntacticCategory(syncat_str)
-            semcat = SemanticCategory(word, pos, syncat, question)
-            expr = semcat.get_expression()
-            return expr
+            semcats = get_semantic_categories(word, pos, syncat, question)
+            expressions = [semcat.get_expression() for semcat in semcats]
+            return expressions
 
         # Unary rule
         if len(children) == 1:
             return self.build_expressions(children[0], pos_tags, question)
 
+        derivations = []
         rule = tree.label()[1]
-        left_expr = self.build_expressions(children[0], pos_tags, question)
-        right_expr = self.build_expressions(children[1], pos_tags, question)
-        if isinstance(left_expr, Tree):
-            lexpr = left_expr.label()[0]
-        else:
-            lexpr = left_expr
-        if isinstance(right_expr, Tree):
-            rexpr = right_expr.label()[0]
-        else:
-            rexpr = right_expr
-        expr = self.apply_rule(lexpr, rexpr, rule)
-        if self.check(expr):
-            derivation = Tree((expr, rule), [left_expr, right_expr])
-            return derivation
-        else:
-            return Tree((None, None), [])
+        left_exprs = self.build_expressions(children[0], pos_tags, question)
+        right_exprs = self.build_expressions(children[1], pos_tags, question)
+        for left in left_exprs:
+            for right in right_exprs:
+                if isinstance(left, Tree):
+                    lexpr = left.label()[0]
+                else:
+                    lexpr = left
+                if isinstance(right, Tree):
+                    rexpr = right.label()[0]
+                else:
+                    rexpr = right
+                expr = self.apply_rule(lexpr, rexpr, rule)
+                if self.check(expr):
+                    derivation = Tree((expr, rule), [left, right])
+                    derivations.append(derivation)
+                else:
+                    derivations.append(Tree((None, None), []))
+        return derivations
 
     def get_children(self, tree):
         """
@@ -187,10 +190,6 @@ class SemanticComposer(object):
         except AttributeError:
             newstring = '\\S. ' + string
         return lexpr(newstring)
-#        first = ApplicationExpression(expr2, lexpr('S'))
-#        sec = ApplicationExpression(expr1, first).simplify()
-#        newstring = '\\S ' + sec.__str__()
-#        return lexpr(newstring)
 
     # TODO: fix resolve function.
     def resolve(expression):

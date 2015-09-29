@@ -11,7 +11,7 @@ CCG lexicons in two domains. It also requires a special cases file
 
 ### Data required for the semantic parser
 * CCG lexicon
-* Special cases file
+* Language file
 
 ####Building the CCG lexicon.
 The CCG lexicon can be built by hand (see example usage below) or automatically.
@@ -29,10 +29,10 @@ required by `nltk.ccg.lexicon`. See [this link](http://www.nltk.org/howto/ccg.ht
 * Build the CCG lexicon using `build_ccglex`
   + `./build_ccglex -i data/lexica/reagan_supertags.txt -o data/lexica/reagan.ccg`
 
-####Special Cases File
-The special cases file determines the semantics for words when the SemanticCategory class
-fails to generate an expression. It can be found at `data/lib/specialcases.txt`.
-A version for questions is at `data/lib/question_specialcases.txt`.
+####Language File
+The language file describes language-specific side cases. It specifies the semantics for
+words when the SemanticCategory class fails to generate an expression. An example can be found
+at `data/lib/specialcases.txt`.
 
 ##Usage
 Once you have the required data, the semantic parser can be used as an interactive

@@ -1,0 +1,2 @@
+All pickle files (*.p) in this directory are the gold standard
+nltk.Tree trees for testing CCGParseConverter.

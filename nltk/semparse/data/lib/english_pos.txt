@@ -1,0 +1,9 @@
+# POS regex		Semantic Type
+
+NN$|NNS$		TYPE
+NNP.?$|PRP.?$		ENTITY
+CC$			CONJ
+VB.?$|POS$|IN$|TO$	EVENT
+RB.?$|JJ.?$		MOD
+CD$			COUNT
+WDT$|WP.?$|WRB$		ENTQUESTION
