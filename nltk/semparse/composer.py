@@ -1,7 +1,6 @@
 from __future__ import print_function, unicode_literals
 
 import re
-from collections import namedtuple
 from nltk import Tree
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
 from syntacticcategory import SyntacticCategory
@@ -15,6 +14,7 @@ from semanticcategory import get_semantic_categories
 
 
 lexpr = Expression.fromstring
+
 
 class SemanticComposer(object):
 
@@ -104,7 +104,7 @@ class SemanticComposer(object):
         try:
             lexpr(expression.__str__())
             return True
-        except Exception as e:
+        except Exception:
             return False
 
     def apply_rule(self, left_ex, right_ex, rule):
@@ -118,11 +118,13 @@ class SemanticComposer(object):
         :type rule: str
         :rtype: nltk.sem.logic.Expression
         """
-        if left_ex.__str__() == 'None': return right_ex
-        if right_ex.__str__() == 'None': return left_ex
+        if left_ex.__str__() == 'None':
+            return right_ex
+        if right_ex.__str__() == 'None':
+            return left_ex
 
         if rule == '>':  # Forward application
-            return ApplicationExpression(left_ex, right_ex).simplify() 
+            return ApplicationExpression(left_ex, right_ex).simplify()
         if rule == '<':  # Backward application
             return ApplicationExpression(right_ex, left_ex).simplify()
         if '>S' in rule:  # Forward substitution
@@ -147,20 +149,19 @@ class SemanticComposer(object):
         :rtype: nltk.sem.logic.Expression
         """
         pass
-        
 
     def compose(self, expr1, expr2):
         """
-        Performs the functional composition of 
+        Performs the functional composition of
         expr1 and expr2.
 
         :param expr1 expr2: input expressions
-        :type expr1, expr2: nltk.sem.logic.Expression 
+        :type expr1, expr2: nltk.sem.logic.Expression
         :rtype: nltk.sem.logic.Expression
         """
         first = ApplicationExpression(expr2, lexpr('C')).simplify()
         sec = ApplicationExpression(expr1, first).simplify()
-        string = sec.__str__() 
+        string = sec.__str__()
         try:
             first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
             index = string.index(first_var)
@@ -176,12 +177,12 @@ class SemanticComposer(object):
         Performs the substitute operation of expr1 and expr2
 
         :param expr1 expr2: input expressions
-        :type expr1, expr2: nltk.sem.logic.Expression 
+        :type expr1, expr2: nltk.sem.logic.Expression
         :rtype: nltk.sem.logic.Expression
         """
         first = ApplicationExpression(expr1, lexpr('S'))
         sec = ApplicationExpression(first, expr2).simplify()
-        string = sec.__str__() 
+        string = sec.__str__()
         try:
             first_var = re.match(r'\\.*?([a-z])[a-z]*?\.', string).group(1)
             index = string.index(first_var)
@@ -222,7 +223,7 @@ class SemanticComposer(object):
         # Find all variables x s.t. exists x
         exist_vars = reExists.match(mr_string).groups()
         exist_vars = [var for var in exist_vars if var]  # Filter out None's
-        
+
         # If we're replacing every variable x s.t. exists x,
         # delete the whole exists part of the expression.
         if len(exist_vars) == len(replacements):

@@ -29,7 +29,7 @@ class SyntacticCategory(object):
         {syntactic_category: indexed_syntactic_category}. E.g.
         {'S\\N': '(S{_}\\NP{Y}<1>){_}'}
         :rtype: dict
-        """ 
+        """
         filestr = open(cls._CandC_MARKEDUP_FILE, 'r').read()
         marks = filestr.split('\n\n')
         marks = [line.strip() for line in marks
@@ -48,7 +48,7 @@ class SyntacticCategory(object):
         ppairs = [(re.sub(r'\[.*?\]', '', syncat), _)
                   for (syncat, _) in pairs]
         # This is necessary because of the mapping that happens
-        # according to the NLTK CCG lexicon. 
+        # according to the NLTK CCG lexicon.
         # TODO: changing NP to N here is not robust. Do it on the fly.
         processed_pairs = [(syncat.replace('NP', 'N'), _)
                            for (syncat, _) in ppairs]
@@ -73,7 +73,7 @@ class SyntacticCategory(object):
     def _preprocess_category(self):
         """
         For self.index_syncat
-        Removes astericks in (it specifies unneeded information). 
+        Removes astericks in (it specifies unneeded information).
         Removes bracketed syntactic specifiers, e.g. 'S[dcl]' => 'S'
 
         :rtype: str
@@ -110,7 +110,7 @@ class SyntacticCategory(object):
         levelup = 0
         stack = []
         arg = ""
-        for i,c in enumerate(processed_category):
+        for i, c in enumerate(processed_category):
             if c == '(':
                 levelappend(stack, level, [])
                 level += 1
@@ -120,7 +120,7 @@ class SyntacticCategory(object):
                 levelappend(stack, level, arg)
                 arg = ""
                 if levelup > 0 and level > 0:
-                    level -= levelup 
+                    level -= levelup
                     levelup = 0
             elif c == ')':
                 levelup += 1

@@ -9,8 +9,8 @@ from nltk.compat import python_2_unicode_compatible
 from nltk.sem.logic import (Expression, Tokens, Variable,
                             ExistsExpression, LambdaExpression,
                             LogicalExpressionException)
-#from nltk.semparse import rules
-import rules ##
+# from nltk.semparse import rules
+import rules  ##
 from syntacticcategory import SyntacticCategory
 
 
@@ -59,7 +59,7 @@ class redict(dict):
         if [k for k in self.keys() if re.match(k, key)]:
             return True
         return False
-            
+
 
 class SemanticCategory(object):
 
@@ -86,7 +86,7 @@ class SemanticCategory(object):
                 (pos_regex, semtype) = line.split()
                 pos_regex = pos_regex.strip()
                 semtype = semtype.strip()
-                pos_map.append( (pos_regex, semtype) )
+                pos_map.append((pos_regex, semtype))
         cls.posmap_cache = redict(pos_map)
         return redict(pos_map)
 
@@ -103,7 +103,7 @@ class SemanticCategory(object):
         else:
             self.rules = rules.rules
             self.special_rules = rules.special_rules
-        
+
     # TODO: figure out unicode() for Python3 compatibility.
     def __str__(self):
         if len(self.word) == 1:
@@ -156,9 +156,9 @@ class SemanticCategory(object):
             (pred_vars, arg_var) = self._get_vars(syncat_parse)
             if not pred_vars:
                 self._expression = None
-            stem_expression = self._get_stem(pred_vars, arg_var)
+            stem = self._get_stem(pred_vars, arg_var)
             try:
-                self._expression = self.rules[self.semantic_type](stem_expression)
+                self._expression = self.rules[self.semantic_type](stem)
             except KeyError:
                 self._expression = None
 
@@ -189,7 +189,7 @@ class SemanticCategory(object):
         """
         variable_store = ['P', 'Q', 'R', 'S']
         predicate_variables = OrderedDict()
-        individual_variable = [] 
+        individual_variable = []
 
         def getArgs(tree):
             if isinstance(tree, list):
@@ -238,19 +238,19 @@ class SemanticCategory(object):
         for (pred, args) in predicate_variables.items():
             lambda_vars.append(pred)
             for arg in reversed(args):
-                pred += "({0})".format(arg)    
+                pred += "({0})".format(arg)
                 if arg != argument_variable and arg not in exists_vars:
                     exists_vars.append(arg)
             sub_expressions.append(lexpr(pred))
         lambda_vars.append(argument_variable)
-                
+
         if not sub_expressions:
             return None
         # Just the expression without lambdas or quantifiers.
         andexpr = sub_expressions[0]
         for i in range(1, len(sub_expressions)):
             andexpr = andexpr & sub_expressions[i]
-       
+
         # Add the exists part.
         existsexpr = andexpr
         for var in reversed(exists_vars):
@@ -258,12 +258,12 @@ class SemanticCategory(object):
             if len(var) > 1:
                 continue
             existsexpr = ExistsExpression(Variable(var), existsexpr)
-                 
+
         # Add the lambda part.
         lambdaexpr = existsexpr
         for var in reversed(lambda_vars):
             lambdaexpr = LambdaExpression(Variable(var), lambdaexpr)
-        
+
         return lambdaexpr
 
 
@@ -301,6 +301,7 @@ def get_special_cases(word, pos, syncat):
            syncat_match:
             cases.append(sem)
     return cases
+
 
 def get_semantic_categories(word, pos, syncat, question=False):
     """
@@ -345,6 +346,7 @@ def get_semantic_categories(word, pos, syncat, question=False):
     expressions.append(semcat)
     return expressions
 
+
 def is_expression(string):
     """
     Determines if string is a valid Expression.
@@ -357,5 +359,3 @@ def is_expression(string):
         return True
     except LogicalExpressionException:
         return False
-
-

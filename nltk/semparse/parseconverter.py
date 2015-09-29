@@ -4,7 +4,6 @@ import sys
 import os
 import re
 import string
-from pprint import pprint
 from nltk import Tree
 from nltk.ccg.lexicon import parseCategory
 from nltk.ccg.api import PrimitiveCategory
@@ -22,7 +21,7 @@ if not _DATA_DIR:
 
 class CCGParseConverter(object):
     '''
-    Class for converting string representations of CCG parses into 
+    Class for converting string representations of CCG parses into
     nltk.Tree objects identical to the output of nltk.ccg.CCGChartParser.
 
     Usage: CCGParseConverter(parse_str, combinatory_rules) -> nltk.Tree
@@ -41,7 +40,7 @@ class CCGParseConverter(object):
 
     def _parse(self, tree_str):
         '''
-        Parses the string representation of the CCG parse into 
+        Parses the string representation of the CCG parse into
         a nested list representing the tree.
 
         :param tree_str: string representation of the CCG parse tree.
@@ -174,13 +173,14 @@ class CCGBankData(object):
         except:
             raise StopIteration()
 
+
 def evaluate():
     converter = CCGParseConverter()
     ccgbank_dir = os.path.join(_DATA_DIR, 'test/ccgbank')
     data = CCGBankData(ccgbank_dir)
     total = 0
     converted = 0
-    for i,parse in enumerate(data):
+    for i, parse in enumerate(data):
         total += 1
         if i % 5 == 0:
             sys.stderr.write('{0}/48934\r'.format(i))

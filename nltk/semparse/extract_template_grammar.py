@@ -2,8 +2,6 @@ from __future__ import print_function, unicode_literals
 
 import sys
 import string
-import re
-from pprint import pprint
 from collections import OrderedDict
 
 

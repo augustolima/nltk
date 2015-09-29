@@ -3,7 +3,7 @@ from __future__ import print_function, unicode_literals
 import re
 from collections import OrderedDict
 
-from nltk.sem.logic import (is_eventvar, is_indvar, Variable, Expression,
+from nltk.sem.logic import (is_eventvar, is_indvar, Expression,
                             LambdaExpression, ExistsExpression,
                             AndExpression, ApplicationExpression,
                             IndividualVariableExpression,
@@ -21,8 +21,10 @@ from nltk.sem.logic import (is_eventvar, is_indvar, Variable, Expression,
 # //////////////////////////////////
 
 class StemException(Exception):
+
     def __init__(self, msg):
         self.msg = msg
+
     def __str__(self):
         return self.msg
 
@@ -43,26 +45,28 @@ def input_checker(func):
 
 lexpr = Expression.fromstring
 
+
 def find_variables(expression):
     ''' Returns all bound variables.'''
     def helper(expression):
         if isinstance(expression, LambdaExpression) or \
-           isinstance(expression, ExistsExpression): 
+           isinstance(expression, ExistsExpression):
             return find_variables(expression.term)
-        if isinstance(expression, AndExpression): 
+        if isinstance(expression, AndExpression):
             return find_variables(expression.second) + \
                    find_variables(expression.first)
-        if isinstance(expression, ApplicationExpression): 
+        if isinstance(expression, ApplicationExpression):
             return find_variables(expression.function) + [expression.argument]
-        if isinstance(expression, IndividualVariableExpression): 
+        if isinstance(expression, IndividualVariableExpression):
             return [expression.variable]
-        if isinstance(expression, FunctionVariableExpression): 
+        if isinstance(expression, FunctionVariableExpression):
             return []
-    vars = helper(expression)
+    vs = helper(expression)
     # Removes duplicates while keeping order.
-    vars = list(OrderedDict.fromkeys(vars))
-    vars = [var for var in vars if isinstance(var, IndividualVariableExpression)]
-    return vars
+    vs = list(OrderedDict.fromkeys(vs))
+    vs = [v for v in vs if isinstance(v, IndividualVariableExpression)]
+    return vs
+
 
 def get_indvar(stem):
     '''Returns individual or event variable, e.g. \\e or \\x'''
@@ -71,19 +75,20 @@ def get_indvar(stem):
         v = str(stem.variable)
         if is_eventvar(v) or is_indvar(v):
             ivar = stem.variable
-        stem = stem.term 
+        stem = stem.term
     return ivar
+
 
 def get_andexpr(stem):
     '''Returns just the AND expression of stem.
        e.g. \P Q x.(P(x) & Q(x) => (P(x) & Q(x))'''
     while type(stem) == LambdaExpression or type(stem) == ExistsExpression:
-        stem = stem.term 
+        stem = stem.term
     return stem
 
 
 # /////////////////////////
-#        POS Rules       // 
+#        POS Rules       //
 # /////////////////////////
 
 # VB*, IN, TO, POS
@@ -93,11 +98,12 @@ def event(stem):
     andexpr = get_andexpr(stem)
     reLambda = re.compile(re.escape(str(andexpr)))
     lambda_bit = reLambda.split(str(stem))[0]
-    for (i,var) in enumerate(find_variables(andexpr)):
+    for i, var in enumerate(find_variables(andexpr)):
         string = "{0}:{1}({2})({3})".format('{0}', i+1, evar, var)
         andexpr = AndExpression(andexpr, lexpr(string))
     expression = lambda_bit + str(andexpr)
     return lexpr(expression)
+
 
 # RB*, JJ*
 @input_checker
@@ -110,6 +116,7 @@ def mod(stem):
     lambda_bit = reLambda.split(str(stem))[0]
     expression = lambda_bit + str(andexpr)
     return lexpr(expression)
+
 
 # CD
 @input_checker
@@ -124,9 +131,8 @@ def count(stem):
     return lexpr(expression)
 
 
-
 # /////////////////////////
-#       Word Rules       // 
+#       Word Rules       //
 # /////////////////////////
 
 # not, n't
@@ -140,6 +146,7 @@ def negate(stem):
     expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
+
 # no
 @input_checker
 def complement(stem):
@@ -150,6 +157,7 @@ def complement(stem):
     lambda_bit = reLambda.split(str(stem))[0]
     expression = lambda_bit + str(andexpr)
     return lexpr(expression)
+
 
 # definite articles
 @input_checker
@@ -162,50 +170,52 @@ def unique(stem):
     expression = lambda_bit + str(andexpr)
     return lexpr(expression)
 
+
 # What, which
 def entity_question():
     return lexpr(r'\P. exists x.(P(x) & TARGET(x))')
+
 
 # TODO: should these go in the specialcases file?
 # NN, NNS
 def kind():
     return lexpr(r'\x.({0}(x))')
 
+
 # NNP*, PRP*
 def entity():
     return lexpr(r'\x.(EQUAL(x, {0}))')
 
 
-
 # /////////////////////////
-#        Mappings        // 
+#        Mappings        //
 # /////////////////////////
 
 rules = {
-        'NEGATE': negate,
-        'COMPLEMENT': complement,
-        'UNIQUE': unique,
-        'EVENT': event,
-        'MOD': mod,
-        'COUNT': count
-        }
+    'NEGATE': negate,
+    'COMPLEMENT': complement,
+    'UNIQUE': unique,
+    'EVENT': event,
+    'MOD': mod,
+    'COUNT': count
+    }
 
 special_rules = {
-        'TYPE': kind,
-        'ENTITY': entity,
-        }
+    'TYPE': kind,
+    'ENTITY': entity,
+    }
 
 question_rules = {
-        'NEGATE': negate,
-        'COMPLEMENT': complement,
-        'UNIQUE': unique,
-        'EVENT': event,
-        'MOD': mod,
-        'COUNT': count,
-        }
+    'NEGATE': negate,
+    'COMPLEMENT': complement,
+    'UNIQUE': unique,
+    'EVENT': event,
+    'MOD': mod,
+    'COUNT': count,
+    }
 
 question_special_rules = {
-        'TYPE': kind,
-        'ENTITY': entity,
-        'ENTQUESTION': entity_question
-        }
+    'TYPE': kind,
+    'ENTITY': entity,
+    'ENTQUESTION': entity_question
+    }

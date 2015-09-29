@@ -1,23 +1,24 @@
 from __future__ import print_function, unicode_literals
 
-import io
-import re
 import string
 
-from nltk import word_tokenize, Tree
-from nltk.ccg import lexicon, chart
+from nltk import Tree
+from nltk.ccg import chart
 from nltk.sem.logic import LogicalExpressionException
 
-#from nltk.semparse.composer import SemanticComposer
-from composer import SemanticComposer ##
+# from nltk.semparse.composer import SemanticComposer
+from composer import SemanticComposer  ##
 from parseconverter import CCGParseConverter
 
 
 class CCGParseException(Exception):
+
     def __init__(self, msg):
         self.msg = msg
+
     def __str__(self):
         return self.msg
+
 
 class Derivation(object):
 
@@ -73,7 +74,7 @@ class SemanticParser(object):
     def _get_tokens(self, tagged_sentence):
         """
         Gets the words of the sentence and removes punctuation.
-        
+
         :param tagged_sentence: POS tagged input sentence.
         :type tagged_sentence: list(tuple(str, str))
         :rtype: list
@@ -117,11 +118,13 @@ class SemanticParser(object):
             ccg_parses = self.ccg_parser.parse(tokens)
 
         # Build semantic expression for input sentence.
-        for (i,parse) in enumerate(ccg_parses):
+        for i, parse in enumerate(ccg_parses):
             if i+1 == n:
                 break
             try:
-                derivations = self.composer.build_expressions(parse, tagged_sentence, question)
+                derivations = self.composer.build_expressions(parse,
+                                                              tagged_sentence,
+                                                              question)
                 for derivation in derivations:
                     yield Derivation(parse, derivation, sent_type)
                 continue
@@ -129,7 +132,6 @@ class SemanticParser(object):
             except LogicalExpressionException:
                 yield Derivation(parse, None, sent_type)
                 continue
-            
 
 
 def demo():
@@ -139,13 +141,13 @@ def demo():
     # The semantic parser can either parse the input sentence
     # using nltk.ccg.
     ccglex = lexicon.parseLexicon(r'''
-	:- S, N
-	I => N
-	eat => (S\N)/N
-	peaches => N
-    ''')	
+        :- S, N
+        I => N
+        eat => (S\N)/N
+        peaches => N
+    ''')
     semparser = SemanticParser(ccglex)
-    
+
     sent = "I eat peaches."
     tagged_sent = pos_tag(word_tokenize(sent))
     for parse in semparser.parse(tagged_sent):

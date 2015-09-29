@@ -9,8 +9,8 @@ import pickle
 from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
-#from nltk.semparse.semanticcategory import SemanticCategory
-#from nltk.semparse.semanticparser import SemanticParser
+# from nltk.semparse.semanticcategory import SemanticCategory
+# from nltk.semparse.semanticparser import SemanticParser
 from syntacticcategory import SyntacticCategory
 from semanticcategory import get_semantic_categories
 from semanticparser import SemanticParser
@@ -25,7 +25,7 @@ logging.basicConfig(filename=".unittest.log", level=logging.DEBUG)
 
 
 class ParseConverterTest(unittest.TestCase):
-    
+
     def test(self):
         gold_tree_file = "data/test/parse_converter_data/gold_tree.p"
         gold_tree = pickle.load(open(gold_tree_file, "rb"))
@@ -52,8 +52,7 @@ class SemanticCategoryTest(unittest.TestCase):
         syncat = SyntacticCategory(r'N/N')
         semcats = get_semantic_categories("successful", "JJ", syncat)
         expressions = [s.get_expression() for s in semcats]
-        self.assertTrue(lexpr(r'\P y.(P(y) & successful(y))') in expressions) 
-
+        self.assertTrue(lexpr(r'\P y.(P(y) & successful(y))') in expressions)
 
         syncat = SyntacticCategory(r'(S\N)\(S\N)')
         semcats = get_semantic_categories("annually", "RB", syncat)
@@ -158,6 +157,7 @@ class SemanticCategoryTest(unittest.TestCase):
 #        expressions = [s.get_expression() for s in semcats]
 #        self.assertTrue(lexpr(r'\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))') in expressions)
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -167,6 +167,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
 
 class SemanticParserTest(unittest.TestCase):
 
@@ -198,8 +199,10 @@ class SemanticParserTest(unittest.TestCase):
                                 break
                 except:
                     error = str(sys.exc_info()[1])
-                if parsed: num_parsed += 1
-                if sem_parsed: num_sem += 1
+                if parsed:
+                    num_parsed += 1
+                if sem_parsed:
+                    num_sem += 1
 
                 if parsed:
                     sys.stderr.write('[' + bcolors.OKGREEN + 'SYN' + bcolors.ENDC + ']')
@@ -247,8 +250,10 @@ class SemanticParserTest(unittest.TestCase):
                 except:
                     error = str(sys.exc_info()[1])
 
-                if parsed: num_parsed += 1
-                if sem_parsed: num_sem += 1
+                if parsed:
+                    num_parsed += 1
+                if sem_parsed:
+                    num_sem += 1
 
                 if parsed:
                     sys.stderr.write('[' + bcolors.OKGREEN + 'SYN' + bcolors.ENDC + ']')
