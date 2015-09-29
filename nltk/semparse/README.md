@@ -6,8 +6,8 @@ using a CCG parse. Following [Reddy et. al.](http://www.sivareddy.in/papers/redd
 The semantic parser requires a CCG lexicon in order to run. 
 This section explains how to build it. For the
 purpose of example, the `data/lexica/` directory contains 
-CCG lexicons in two domains. It also requires a special cases file
-(e.g. `data/lib/specialcases.txt`).
+CCG lexicons in two domains. It also requires a language file
+(e.g. `data/lib/english.txt`).
 
 ### Data required for the semantic parser
 * CCG lexicon
@@ -32,7 +32,8 @@ required by `nltk.ccg.lexicon`. See [this link](http://www.nltk.org/howto/ccg.ht
 ####Language File
 The language file describes language-specific side cases. It specifies the semantics for
 words when the SemanticCategory class fails to generate an expression. An example can be found
-at `data/lib/specialcases.txt`.
+at `data/lib/english.txt`. There should be a separate file for defining the mappings between
+POS tags and semantic types, e.g. `data/lib/english_pos.txt`.
 
 ##Usage
 Once you have the required data, the semantic parser can be used as an interactive
@@ -65,30 +66,51 @@ E.g.  `./semparser -l data/lexica/reagan.ccg`
 The SemanticParser requires tokenized and POS tagged input, in the format
 output by nltk.pos_tag.
 
-    from nltk import word_tokenize, pos_tag
-    from nltk.ccg import lexicon
-    from nltk.semparse import SemanticParser
+     1 from nltk import word_tokenize, pos_tag
+     2 from nltk.ccg import lexicon
+     3 from nltk.semparse import SemanticParser
+     4
+     5 ccglex = lexicon.parseLexicon(r'''
+     6  :- S, N
+     7  I => N
+     8  eat => (S\N)/N
+     9	 peaches => N
+    10 ''')	
+    11 semparser = SemanticParser(ccglex)
+    12  
+    13 sent = "I eat peaches."
+    14 tagged_sent = pos_tag(word_tokenize(sent))
+    15 for parse in semparser.parse(tagged_sent):
+    16   print parse.get_expression()
+    17   break
 
-    ccglex = lexicon.parseLexicon(r'''
-	:- S, N
-	I => N
-	eat => (S\N)/N
-	peaches => N
-    ''')	
-    semparser = SemanticParser(ccglex)
+###Using other CCG syntactic parsers
+It is possible to use external programs for CCG syntactic parsing in place of
+`nltk.ccg`. The output of the CCG parser should be in the AUTO format and
+a `str` instance. The parse string is then passed as an optional argument
+to `SemanticParser.parse()`. The entire process looks like:
+
+     1 from nltk import word_tokenize, pos_tag
+     2 from nltk.semparse import SemanticParser
+     3
+     4 semparser = SemanticParser()
+     5  
+     6 # Set variable auto_str to the CCG parse string.
+     7 sent = "I eat peaches."
+     8 tagged_sent = pos_tag(word_tokenize(sent))
+     9 for parse in semparser.parse(tagged_sent, ccg_parse_str=auto_str):
+    10   print parse.get_expression()
+    11   break
     
-    sent = "I eat peaches."
-    tagged_sent = pos_tag(word_tokenize(sent))
-    for parse in semparser.parse(tagged_sent):
-        print parse.get_expression()
-        break
+
+NB that `SemanticParser` is instantiated without a CCG lexicon.
 
 ##Testing
 `test.py` holds unit tests for both the logical lexicon generation step
 and the semantic parsing step. For the semantic parsing step, the tests
-output the following form:
+output the following:
 
 `[SYN][SEM]<input sentence>`
 
 Where SYN/SEM will be red if syntacic/semantic derivation failed for `<input sentence>`
-or green if succeeded.
+or green if succeeded. If any errors occur, they will be shown after `[SEM]` in yellow.
