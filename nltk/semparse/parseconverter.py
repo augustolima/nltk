@@ -183,7 +183,7 @@ def evaluate():
     for i,parse in enumerate(data):
         total += 1
         if i % 5 == 0:
-            sys.stderr.write('{0}\r'.format(i))
+            sys.stderr.write('{0}/48934\r'.format(i))
         try:
             tree = converter.fromstring(parse, DefaultRuleSet)
             converted += 1
@@ -197,6 +197,6 @@ def evaluate():
 
 
 if __name__ == '__main__':
-    print("Converting CCGBank data (48934 sentences in total)")
-    print("--------------------------------------------------")
+    print("Converting CCGBank data")
+    print("-----------------------")
     evaluate()

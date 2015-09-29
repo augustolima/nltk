@@ -24,7 +24,6 @@ lexpr = Expression.fromstring
 logging.basicConfig(filename=".unittest.log", level=logging.DEBUG)
 
 
-# TODO: write CCG parse converter tests.
 class ParseConverterTest(unittest.TestCase):
     
     def test(self):

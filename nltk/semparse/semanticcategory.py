@@ -39,7 +39,7 @@ TYPES = ['INDEF', 'UNIQUE', 'COMPLEMENT', 'NEGATE', 'TYPE', 'ENTITY',
 
 
 @python_2_unicode_compatible
-class reDict(dict):
+class redict(dict):
     """
     Dictionary keyed by regular expressions. Cuts down
     on redundancy when matching e.g. multiple POS tags
@@ -63,16 +63,35 @@ class reDict(dict):
 
 class SemanticCategory(object):
 
-    # TODO: move POS map to specialcases file.
-    TYPEMAP = reDict({r'NN$|NNS$': 'TYPE',
-            r'NNP.?$|PRP.?$': 'ENTITY',
-            r'CC$': 'CONJ',
-            r'VB.?$|POS$|IN$|TO$': 'EVENT',
-            r'RB.?$|JJ.?$': 'MOD',
-            r'CD$': 'COUNT',
-            r'WDT$|WP.?$|WRB$': 'ENTQUESTION'})
+    posmap_cache = None
+
+    @classmethod
+    def read_pos_map(cls):
+        """
+        Reads _DATA_DIR/lib/<language>_pos.txt into an redict
+        object.
+        """
+        if cls.posmap_cache:
+            return cls.posmap_cache
+
+        # TODO: make language variable.
+        pos_file = os.path.join(_DATA_DIR, 'lib/english_pos.txt')
+        pos_map = []
+        with open(pos_file, 'r') as fp:
+            for line in fp:
+                if line.startswith('#'):
+                    continue
+                if line == '\n':
+                    continue
+                (pos_regex, semtype) = line.split()
+                pos_regex = pos_regex.strip()
+                semtype = semtype.strip()
+                pos_map.append( (pos_regex, semtype) )
+        cls.posmap_cache = redict(pos_map)
+        return redict(pos_map)
 
     def __init__(self, word, pos, syntactic_category, question=False):
+        self.POSMAP = self.read_pos_map()
         self.word = word
         self.pos = pos
         self.syncat = syntactic_category
@@ -148,8 +167,8 @@ class SemanticCategory(object):
         Determines semantic type for the given word
         based on it's lemma or POS tag.
         """
-        if self.pos in self.TYPEMAP:
-            self.semantic_type = self.TYPEMAP[self.pos]
+        if self.pos in self.POSMAP:
+            self.semantic_type = self.POSMAP[self.pos]
         else:
             self.semantic_type = None
 

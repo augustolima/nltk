@@ -21,7 +21,6 @@ class SemanticComposer(object):
     def __init__(self):
         pass
 
-    # TODO: make build_expressions return None if not valid expression is possible.
     def build_expressions(self, tree, pos_tags, question=False):
         """
 
@@ -191,10 +190,6 @@ class SemanticComposer(object):
         except AttributeError:
             newstring = '\\S. ' + string
         return lexpr(newstring)
-#        first = ApplicationExpression(expr2, lexpr('S'))
-#        sec = ApplicationExpression(expr1, first).simplify()
-#        newstring = '\\S ' + sec.__str__()
-#        return lexpr(newstring)
 
     # TODO: fix resolve function.
     def resolve(expression):
