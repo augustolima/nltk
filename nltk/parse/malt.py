@@ -9,15 +9,13 @@
 
 from __future__ import print_function
 from __future__ import unicode_literals
-from six import text_type
+from nltk.six import text_type
 
 import os
 import tempfile
 import subprocess
 import inspect
 
-from nltk.tokenize import word_tokenize
-from nltk.tag import pos_tag
 from nltk.data import ZipFilePathPointer
 from nltk.internals import find_dir, find_file, find_jars_within_path
 
@@ -287,6 +285,7 @@ if __name__ == '__main__':
     '''
     A demostration function to show how NLTK users can use the malt parser API.
 
+    >>> from nltk import pos_tag
     >>> assert 'MALT_PARSER' in os.environ, str(
     ... "Please set MALT_PARSER in your global environment, e.g.:\n"
     ... "$ export MALT_PARSER='/home/user/maltparser-1.7.2/'")
