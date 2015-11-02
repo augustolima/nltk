@@ -48,6 +48,7 @@ class SemanticComposer(object):
 
         # Unary rule
         if len(children) == 1:
+            rule = tree.label()[1]
             return self.build_expressions(children[0], pos_tags, question)
 
         derivations = []
