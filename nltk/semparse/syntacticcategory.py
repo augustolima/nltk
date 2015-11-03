@@ -1,19 +1,11 @@
 import os
 import re
 
-# Find the proper data directory.
-_DATA_DIR = ""
-dirlist = ['nltk/semparse/data', 'data/']
-for dir in dirlist:
-    if os.path.exists(dir) & os.path.isdir(dir):
-        _DATA_DIR = dir
-if not _DATA_DIR:
-    print("Data directory not found. Searched in {0}".format(dirlist))
+from nltk.semparse.config import (_DATA_DIR, _CandC_MARKEDUP_FILE)
 
 
 class SyntacticCategory(object):
 
-    _CandC_MARKEDUP_FILE = os.path.join(_DATA_DIR, 'lib/markedup')
     syncat_dict_cache = None
 
     @classmethod
@@ -30,7 +22,7 @@ class SyntacticCategory(object):
         {'S\\N': '(S{_}\\NP{Y}<1>){_}'}
         :rtype: dict
         """
-        filestr = open(cls._CandC_MARKEDUP_FILE, 'r').read()
+        filestr = open(_CandC_MARKEDUP_FILE, 'r').read()
         marks = filestr.split('\n\n')
         marks = [line.strip() for line in marks
                  if not line.startswith('#') and not line.startswith('=')]

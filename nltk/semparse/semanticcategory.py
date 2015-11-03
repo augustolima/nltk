@@ -1,38 +1,23 @@
 from __future__ import print_function, unicode_literals
 
-import os
 import io
+import sys
+import os
 import re
+
 from collections import OrderedDict
 
 from nltk.compat import python_2_unicode_compatible
 from nltk.sem.logic import (Expression, Tokens, Variable,
                             ExistsExpression, LambdaExpression,
                             LogicalExpressionException)
-# from nltk.semparse import rules
-import rules  ##
-from syntacticcategory import SyntacticCategory
+
+from nltk.semparse import rules
+from nltk.semparse.syntacticcategory import SyntacticCategory
+from nltk.semparse.config import (_DATA_DIR, _LANGUAGE_FILE)
 
 
 lexpr = Expression.fromstring
-
-# Find the proper data directory.
-_DATA_DIR = ""
-dirlist = ['nltk/semparse/data', 'data/']
-for d in dirlist:
-    if os.path.exists(d) & os.path.isdir(d):
-        _DATA_DIR = d
-if not _DATA_DIR:
-    print("Data directory not found. Searched in {0}".format(dirlist))
-
-_CandC_MARKEDUP_FILE = os.path.join(_DATA_DIR, 'lib/markedup')
-_LANGUAGE_FILE = os.path.join(_DATA_DIR, 'lib/english.txt')
-if not os.path.isfile(_CandC_MARKEDUP_FILE):
-    raise IOError("No such file or directory: '{0}'"
-                   .format(_CandC_MARKEDUP_FILE))
-if not os.path.isfile(_LANGUAGE_FILE):
-    raise IOError("No such file or directory: '{0}'"
-                   .format(_LANGUAGE_FILE))
 
 TYPES = ['INDEF', 'UNIQUE', 'COMPLEMENT', 'NEGATE', 'TYPE', 'ENTITY',
          'CONJ', 'EVENT', 'COPULA', 'MOD', 'COUNT', 'ENTQUESTION']

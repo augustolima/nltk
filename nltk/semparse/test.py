@@ -9,11 +9,9 @@ import pickle
 from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
-# from nltk.semparse.semanticcategory import SemanticCategory
-# from nltk.semparse.semanticparser import SemanticParser
+from nltk.semparse.semanticparser import SemanticParser
 from syntacticcategory import SyntacticCategory
 from semanticcategory import get_semantic_categories
-from semanticparser import SemanticParser
 from parseconverter import CCGParseConverter
 
 '''

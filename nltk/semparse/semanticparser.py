@@ -6,8 +6,7 @@ from nltk import Tree
 from nltk.ccg import chart
 from nltk.sem.logic import LogicalExpressionException
 
-# from nltk.semparse.composer import SemanticComposer
-from composer import SemanticComposer  ##
+from nltk.semparse.composer import SemanticComposer
 from parseconverter import CCGParseConverter
 
 
