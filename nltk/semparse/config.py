@@ -1,10 +1,14 @@
+from __future__ import print_function
+
 import sys
 import os
 
+
 def find_data_dir():
-    data_dir = ""
-    dirlist = ['nltk/semparse/data']
+    data_dir = "cat"
+    dirlist = ['nltk/semparse/data', 'data']
     pypath = sys.path
+    pypath.append('.') # CWD
     found = False
     for folder in pypath:
         if found:
@@ -15,11 +19,7 @@ def find_data_dir():
                 data_dir = d
                 found = True
                 break
-    if not data_dir:
-        print("Data directory not found. Check your python path.")
-        return None
-    else:
-        return data_dir
+    return data_dir
 
 _DATA_DIR = find_data_dir()
 if _DATA_DIR:
@@ -32,5 +32,6 @@ if _DATA_DIR:
         raise IOError("Language file not found: '{0}'"
                        .format(_LANGUAGE_FILE))
 else:
+    print("Data directory not found. Check your python path.")
     _CandC_MARKEDUP_FILE = None
     _LANGUAGE_FILE = None

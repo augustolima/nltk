@@ -10,13 +10,14 @@ from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
 from nltk.semparse.semanticparser import SemanticParser
-from syntacticcategory import SyntacticCategory
-from semanticcategory import get_semantic_categories
-from parseconverter import CCGParseConverter
+from nltk.semparse.syntacticcategory import SyntacticCategory
+from nltk.semparse.semanticcategory import get_semantic_categories
+from nltk.semparse.parseconverter import CCGParseConverter
 
 '''
 Unit tests for SemanticCategory.
 '''
+
 
 lexpr = Expression.fromstring
 logging.basicConfig(filename=".unittest.log", level=logging.DEBUG)
