@@ -74,7 +74,7 @@ output by nltk.pos_tag.
      6  :- S, N
      7  I => N
      8  eat => (S\N)/N
-     9	 peaches => N
+     9	peaches => N
     10 ''')	
     11 semparser = SemanticParser(ccglex)
     12  
