@@ -1,7 +1,6 @@
-import os
 import re
 
-from nltk.semparse.config import (_DATA_DIR, _CandC_MARKEDUP_FILE)
+from nltk.semparse.config import _CandC_MARKEDUP_FILE
 
 
 class SyntacticCategory(object):

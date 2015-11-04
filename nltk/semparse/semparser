@@ -43,7 +43,7 @@ class Interpreter(object):
         print(" '!syntax on|off' to show/hide syntactic parse.")
         print()
 
-    def parseCmd(self, cmd):
+    def parse_cmd(self, cmd):
         """
         param str cmd: command to be parsed
         """
@@ -86,7 +86,7 @@ class Interpreter(object):
                 continue
             # Command
             if sent.startswith('!'):
-                self.status = self.parseCmd(sent)
+                self.status = self.parse_cmd(sent)
             # Sentence
             else:
                 tagged_sent = pos_tag(word_tokenize(sent))

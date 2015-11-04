@@ -23,7 +23,6 @@ class SemanticComposer(object):
 
     def build_expressions(self, tree, pos_tags, question=False):
         """
-
         The main semantic composition algorithm.
 
         :param tree: input CCG parse
@@ -44,7 +43,7 @@ class SemanticComposer(object):
             syncat = SyntacticCategory(syncat_str)
             semcats = get_semantic_categories(word, pos, syncat, question)
             expressions = [semcat.get_expression() for semcat in semcats]
-            expressions = [Tree((expr, 'Leaf'), []) for expr in expressions]
+            expressions = [Tree((expr, 'Leaf'), [word]) for expr in expressions]
             return expressions
 
         # Unary rule
@@ -67,11 +66,8 @@ class SemanticComposer(object):
                 else:
                     rexpr = right
                 expr = self.apply_rule(lexpr, rexpr, rule)
-#                if self.check(expr):
                 derivation = Tree((expr, rule), [left, right])
                 derivations.append(derivation)
-#                else:
-#                    derivations.append(Tree((None, None), []))
         return derivations
 
     def get_children(self, tree):
@@ -89,25 +85,6 @@ class SemanticComposer(object):
                 subsubtrees = list(subtrees[i].subtrees())
                 i = i + len(subsubtrees)
         return children
-
-    def check(self, expression):
-        """
-        Checks if expression is valid.
-
-        :param expression: logical expression to check.
-        :type expression: nltk.sem.logic.Expression
-        :rtype: bool
-        """
-        if not expression:
-            return False
-        # Check for misplaced lambda expressions.
-        if re.findall(r'[a-zA-Z]+?(?::[0-9])?\([^a-z]', expression.__str__()):
-            return False
-        try:
-            lexpr(expression.__str__())
-            return True
-        except Exception:
-            return False
 
     def apply_rule(self, left_ex, right_ex, rule):
         """

@@ -1,7 +1,6 @@
 from __future__ import print_function, unicode_literals
 
 import io
-import sys
 import os
 import re
 
@@ -109,6 +108,8 @@ class SemanticCategory(object):
         return expression.format(word)
 
     def get_expression(self):
+        if not self._expression:
+            return None
         if len(self.word) == 1:
             word = "_{0}".format(self.word)
         else:

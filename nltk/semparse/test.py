@@ -192,10 +192,14 @@ class SemanticParserTest(unittest.TestCase):
                     for derivation in derivations:
                         if derivation.syntax is not None:
                             parsed = True
-                        if derivation.get_expression() is not None:
-                            if len(derivation.semantics.leaves()) == len(tagged)-1:
+                        if derivation.check():
+                            exprs = [p[1][0] for p in derivation.semantics.pos()]
+                            if None not in exprs:
                                 sem_parsed = True
                                 break
+#                            if len(derivation.semantics.leaves()) == len(tagged)-1:
+#                                sem_parsed = True
+#                                break
                 except:
                     error = str(sys.exc_info()[1])
                 if parsed:
@@ -242,10 +246,14 @@ class SemanticParserTest(unittest.TestCase):
                     for derivation in derivations:
                         if derivation.syntax is not None:
                             parsed = True
-                        if derivation.get_expression() is not None:
-                            if len(derivation.semantics.leaves()) == len(tagged)-1:
+                        if derivation.check():
+                            exprs = [p[1][0] for p in derivation.semantics.pos()]
+                            if None not in exprs:
                                 sem_parsed = True
                                 break
+#                            if len(derivation.semantics.leaves()) == len(tagged)-1:
+#                                sem_parsed = True
+#                                break
                 except:
                     error = str(sys.exc_info()[1])
 

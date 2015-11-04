@@ -1,13 +1,16 @@
 from __future__ import print_function, unicode_literals
 
 import string
+import re
 
-from nltk import Tree
 from nltk.ccg import chart
-from nltk.sem.logic import LogicalExpressionException
+from nltk.sem.logic import Expression, LogicalExpressionException
 
 from nltk.semparse.composer import SemanticComposer
 from parseconverter import CCGParseConverter
+
+
+lexpr = Expression.fromstring
 
 
 class CCGParseException(Exception):
@@ -25,6 +28,26 @@ class Derivation(object):
         self.syntax = syntax
         self.semantics = semantics
         self.sentence_type = sentence_type
+
+    def check(self):
+        """
+        Checks if expression is valid.
+
+        :param expression: logical expression to check.
+        :type expression: nltk.sem.logic.Expression
+        :rtype: bool
+        """
+        expression = self.get_expression()
+        if not expression:
+            return False
+        # Check for misplaced lambda expressions.
+        if re.findall(r'[a-zA-Z]+?(?::[0-9])?\([^a-z]', str(expression)):
+            return False
+        try:
+            lexpr(str(expression))
+            return True
+        except Exception:
+            return False
 
     def print_syntactic_derivation(self):
         chart.printCCGDerivation(self.syntax)
