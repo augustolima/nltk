@@ -7,14 +7,14 @@
 
 
 echo "Install to virtual environment '$(basename ${VIRTUAL_ENV})'? (y/n)"
-ANS=$(read -n 1)
-if [[ ${ANS} -ne "y" ]]
+read -n 1 ANS
+if [[ ${ANS} == "n" ]]
 then
-    echo -e "\nInstallation aborted"
+    echo -e "\rInstallation aborted"
     exit 1
 fi
 
-echo -e "\nCreating required directories"
+echo -e "\rCreating required directories"
 INSTALLDIR=${VIRTUAL_ENV}/lib/python2.7/site-packages/nltk
 TEMPDIR=${HOME}/Software/nltk
 mkdir -p ${INSTALLDIR}
