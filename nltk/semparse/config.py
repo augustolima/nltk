@@ -8,7 +8,6 @@ def find_data_dir():
     data_dir = "cat"
     dirlist = ['nltk/semparse/data', 'data']
     pypath = sys.path
-    pypath.append('.') # CWD
     found = False
     for folder in pypath:
         if found:

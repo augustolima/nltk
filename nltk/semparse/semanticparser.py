@@ -35,7 +35,7 @@ class Derivation(object):
             return
 
         def derivation_print(tree):
-            if not isinstance(tree, Tree):
+            if len(tree) < 2:
                 return tree
             rule = tree.label()[-1]
             lhs = derivation_print(tree[0])
@@ -151,10 +151,12 @@ def demo():
     tagged_sent = pos_tag(word_tokenize(sent))
     for parse in semparser.parse(tagged_sent):
         print(parse.get_expression())
+        parse.print_semantic_derivation()
+        parse.semantics.draw()
         break
 
     # Or you can provide a parse in the following format.
-    # TODO: get lexical rules (e.g. N->NP) to work with SemanticComposer.
+    # TODO: figure out why 'eat' doesn't get a semcat here.
     parse_str = r'''
     (<T S[dcl] 1 2> (<L NP POS POS I NP>)
     (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS eat
@@ -163,6 +165,8 @@ def demo():
     semparser2 = SemanticParser()
     for parse in semparser2.parse(tagged_sent, parse_str):
         print(parse.get_expression())
+        parse.print_semantic_derivation()
+        parse.semantics.draw()
         break
 
 if __name__ == '__main__':

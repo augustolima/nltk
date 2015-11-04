@@ -44,12 +44,13 @@ class SemanticComposer(object):
             syncat = SyntacticCategory(syncat_str)
             semcats = get_semantic_categories(word, pos, syncat, question)
             expressions = [semcat.get_expression() for semcat in semcats]
+            expressions = [Tree((expr, 'Leaf'), []) for expr in expressions]
             return expressions
 
         # Unary rule
         if len(children) == 1:
-            rule = tree.label()[1]
-            return self.build_expressions(children[0], pos_tags, question)
+            derivations = self.build_expressions(children[0], pos_tags, question)
+            return derivations
 
         derivations = []
         rule = tree.label()[1]
@@ -66,11 +67,11 @@ class SemanticComposer(object):
                 else:
                     rexpr = right
                 expr = self.apply_rule(lexpr, rexpr, rule)
-                if self.check(expr):
-                    derivation = Tree((expr, rule), [left, right])
-                    derivations.append(derivation)
-                else:
-                    derivations.append(Tree((None, None), []))
+#                if self.check(expr):
+                derivation = Tree((expr, rule), [left, right])
+                derivations.append(derivation)
+#                else:
+#                    derivations.append(Tree((None, None), []))
         return derivations
 
     def get_children(self, tree):
