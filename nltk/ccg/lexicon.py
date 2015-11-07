@@ -51,7 +51,10 @@ class CCGLexicon(object):
     * `entries`: A mapping of words to possible categories
     """
     def __init__(self, start, primitives, families, entries):
-        self._start = PrimitiveCategory(start)
+        # TODO: test changes
+        target = start[0] ##
+        restrictions = start[1] ##
+        self._start = PrimitiveCategory(target, restrictions=restrictions) ##
         self._primitives = primitives
         self._families = families
         self._entries = entries
@@ -227,6 +230,10 @@ def fromstring(lex_str):
             # The first one is the target category
             # ie, :- S, N, NP, VP
             primitives = primitives + [prim.strip() for prim in line[2:].strip().split(',')]
+            #TODO: test additions
+            restrictions = re.findall(r'\[([a-zA-Z]+)\]', primitives[0]) ##
+            target = re.match(r'[A-Za-z]+(?=$|\[)', primitives[0]).group() ##
+            start = (target, restrictions) ##
         else:
             # Either a family definition, or a word definition
             (ident, sep, catstr) = LEX_RE.match(line).groups()
@@ -239,7 +246,7 @@ def fromstring(lex_str):
                 # Word definition
                 # ie, which => (N\N)/(S/NP)
                 entries[ident].append(cat)
-    return CCGLexicon(primitives[0], primitives, families, entries)
+    return CCGLexicon(start, primitives, families, entries) ##
 
 
 @deprecated('Use fromstring() instead.')
