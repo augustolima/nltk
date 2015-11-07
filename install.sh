@@ -6,12 +6,34 @@
 # the desired virtual environment.
 
 
-echo "Install to virtual environment '$(basename ${VIRTUAL_ENV})'? (y/n)"
-read -n 1 ANS
-if [[ ${ANS} == "n" ]]
+function doublecheck {
+    echo "Install to virtual environment '$(basename ${VIRTUAL_ENV})'? (y/n)"
+    read -n 1 ANS
+    if [[ ${ANS} == "n" ]]
+    then
+        echo -e "\rInstallation aborted"
+        exit 1
+    fi
+}
+
+
+SAFE=true
+while getopts ":f" opt
+do
+    case ${opt} in
+        f)
+            SAFE=false
+            ;;
+        \?)
+            echo "Invalid option -${OPTARG}" >&2
+            ;;
+    esac
+done
+
+
+if [ ${SAFE} = true ]
 then
-    echo -e "\rInstallation aborted"
-    exit 1
+    doublecheck
 fi
 
 echo -e "\rCreating required directories"
