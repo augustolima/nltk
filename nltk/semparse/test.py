@@ -9,9 +9,11 @@ import pickle
 from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
+
+from nltk.semparse import get_semantic_categories
+from nltk.semparse.config import parse_markedup_file
 from nltk.semparse.semanticparser import SemanticParser
 from nltk.semparse.syntacticcategory import SyntacticCategory
-from nltk.semparse.semanticcategory import get_semantic_categories
 from nltk.semparse.parseconverter import CCGParseConverter
 
 '''
@@ -39,56 +41,62 @@ class ParseConverterTest(unittest.TestCase):
 
 class SemanticCategoryTest(unittest.TestCase):
 
+    def setUp(self):
+        self.syncat_dict = parse_markedup_file()
+
+
     # EVENT
     def test_event(self):
-        syncat = SyntacticCategory(r'(S\N)/N')
+        #TODO: add test for gerunds which act like verbs, e.g. "running man" NP/N
+        syncat = SyntacticCategory(r'(S[dcl]\NP)/NP', self.syncat_dict)
         semcats = get_semantic_categories("won", "VBD", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P Q e.exists z y.(P(z) & Q(y) & won:1(e,y) & won:2(e,z))') in expressions)
 
     # MOD
     def test_mod(self):
-        syncat = SyntacticCategory(r'N/N')
+        #TODO: add test for athletic "S\NP" JJ
+        syncat = SyntacticCategory(r'N/N', self.syncat_dict)
         semcats = get_semantic_categories("successful", "JJ", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P y.(P(y) & successful(y))') in expressions)
 
-        syncat = SyntacticCategory(r'(S\N)\(S\N)')
+        syncat = SyntacticCategory(r'(S\NP)\(S\NP)', self.syncat_dict)
         semcats = get_semantic_categories("annually", "RB", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P \Q \y. exists z. (P(\x.EQUAL(x,z))(y) & Q(z) & annually(y))') in expressions)
 
     # COUNT
     def test_count(self):
-        syncat = SyntacticCategory(r'N/N')
+        syncat = SyntacticCategory(r'N/N', self.syncat_dict)
         semcats = get_semantic_categories("four", "CD", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P y.(P(y) & COUNT(y,four))') in expressions)
 
     # NEGATE
     def test_negate(self):
-        syncat = SyntacticCategory(r'(S\N)\(S\N)')
+        syncat = SyntacticCategory(r'(S\NP)\(S\NP)', self.syncat_dict)
         semcats = get_semantic_categories("not", "RB", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P Q y.exists z.(P(\x.EQUAL(x,z))(y) & Q(z) & NEGATION(y))') in expressions)
 
     # COMPLEMENT
     def test_complement(self):
-        syncat = SyntacticCategory(r'N/N')
+        syncat = SyntacticCategory(r'NP[nb]/N', self.syncat_dict)
         semcats = get_semantic_categories("no", "DT", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P y.(P(y) & COMPLEMENT(y))') in expressions)
 
     # UNIQUE
     def test_unique(self):
-        syncat = SyntacticCategory(r'N/N')
+        syncat = SyntacticCategory(r'NP/N', self.syncat_dict)
         semcats = get_semantic_categories("the", "DT", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P y.(P(y) & UNIQUE(y))') in expressions)
 
     # INDEFINITE ARTICLES
     def test_indef(self):
-        syncat = SyntacticCategory(r'N/N')
+        syncat = SyntacticCategory(r'NP[nb]/N', self.syncat_dict)
         semcats = get_semantic_categories("an", "DT", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr("None") in expressions)
@@ -96,55 +104,55 @@ class SemanticCategoryTest(unittest.TestCase):
     # COPULA
     def test_copula1(self):
         # "is" as copula.
-        syncat = SyntacticCategory(r'(S\N)/N')
+        syncat = SyntacticCategory(r'(S[dcl]\NP)/NP', self.syncat_dict)
         semcats = get_semantic_categories("is", "VBZ", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))') in expressions)
 
     def test_ques_copula(self):
         # "is" in a question.
-        syncat = SyntacticCategory(r'(S\N)/N')
+        syncat = SyntacticCategory(r'(S\NP)/NP', self.syncat_dict)
         semcats = get_semantic_categories("is", "VBZ", syncat, question=True)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P x. (P(x))') in expressions)
 
-    def test_is_event1(self):
+    def test_is_as_event1(self):
         # "is" as a normal verb.
-        syncat = SyntacticCategory(r'(S\N)/S')
+        syncat = SyntacticCategory(r'(S[dcl]\NP)/S[qem]', self.syncat_dict)
         semcats = get_semantic_categories("is", "VBZ", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P Q e.exists z y.(P(z) & Q(y) & is:1(e,y) & is:2(e,z))') in expressions)
 
     def test_is_as_event2(self):
-        syncat = SyntacticCategory(r'(S\N)/(S\N)')
+        syncat = SyntacticCategory(r'(S\NP)/(S\NP)', self.syncat_dict)
         semcats = get_semantic_categories("is", "VBZ", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P Q e. exists y z.(P(\x.EQUAL(x,z),y) & Q(z) & is:1(e,z) & is:2(e,y))') in expressions)
 
     # TYPE
     def test_type(self):
-        syncat = SyntacticCategory('N')
+        syncat = SyntacticCategory('N', self.syncat_dict)
         semcats = get_semantic_categories("actor", "NN", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\x.(actor(x))') in expressions)
 
     # ENTITY
     def test_entity(self):
-        syncat = SyntacticCategory('N')
+        syncat = SyntacticCategory('NP', self.syncat_dict)
         semcats = get_semantic_categories("Reagan", "NNP", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\x.EQUAL(x, reagan)') in expressions)
 
     # CONJ
     def test_conj(self):
-        syncat = SyntacticCategory('conj')
+        syncat = SyntacticCategory('conj', self.syncat_dict)
         semcats = get_semantic_categories("and", "CC", syncat)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P Q x.(P(x) & Q(x))') in expressions)
 
     # QUESTION
     def test_question(self):
-        syncat = SyntacticCategory(r'S/(S/N)')
+        syncat = SyntacticCategory(r'S[wq]/(S[q]/NP)', self.syncat_dict)
         semcats = get_semantic_categories("What", "WP", syncat, question=True)
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P. exists x.(P(x) & TARGET(x))') in expressions)

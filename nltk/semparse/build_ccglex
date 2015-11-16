@@ -25,11 +25,10 @@ if not opts.infile or not opts.outfile:
     print("Usage: build_ccg_lex [-i <path/to/inputfile>] [-o <path/to/outputfile>]")
     sys.exit(1)
 
-
 primitives = []
 lex = defaultdict(list)
 
-# Find the supertags in the parse file. 
+# Find the supertags in the parse file.
 # Match words to categories.
 fp = io.open(opts.infile, 'rt', encoding='utf-8')
 for line in fp:
@@ -43,13 +42,11 @@ for line in fp:
         if not word:
             continue
 
-	# NLTK can't handle the bracketed stuff.
-        category = re.sub(r'\[.*?\]', '', category)
         # NLTK CCG form for conj
         if category == 'conj':
             category = 'var\\.,var/.,var'
         if category not in lex[word]:
-            lex[word].append(category) 
+            lex[word].append(category)
         for prim in re.findall(r'[A-Z]+', category):
             if prim not in primitives:
                 primitives.append(prim)
@@ -60,7 +57,7 @@ primitives.insert(0, 'S')
 
 with io.open(opts.outfile, 'wt', encoding='utf-8') as out:
     out.write(":- ")
-    for i,prim in enumerate(primitives):
+    for i, prim in enumerate(primitives):
         out.write(prim)
         if i+1 < len(primitives):
             out.write(', ')
@@ -69,4 +66,4 @@ with io.open(opts.outfile, 'wt', encoding='utf-8') as out:
 
     for (word, cats) in sorted(lex.items(), key=lambda e: e[0]):
         for cat in cats:
-	    out.write("{0} => {1}\n".format(word, cat))
+            out.write("{0} => {1}\n".format(word, cat))

@@ -15,5 +15,5 @@ from nltk.semparse.semanticparser import SemanticParser
 from nltk.semparse.semanticparser import Derivation
 from nltk.semparse.composer import SemanticComposer
 from nltk.semparse.syntacticcategory import SyntacticCategory
-from nltk.semparse.semanticcategory import SemanticCategory
+from nltk.semparse.semanticcategory import get_semantic_categories
 from nltk.semparse.config import (_DATA_DIR, _CandC_MARKEDUP_FILE, _LANGUAGE_FILE)

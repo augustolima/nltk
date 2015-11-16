@@ -6,6 +6,7 @@ import re
 from nltk.ccg import chart
 from nltk.sem.logic import Expression, LogicalExpressionException
 
+from nltk.semparse.config import parse_markedup_file
 from nltk.semparse.composer import SemanticComposer
 from parseconverter import CCGParseConverter
 
@@ -87,11 +88,15 @@ class SemanticParser(object):
         :type ccglex_file: str
         """
         self.rules = chart.DefaultRuleSet
-        self.composer = SemanticComposer()
         if ccg_lexicon:
             self.ccg_parser = chart.CCGChartParser(ccg_lexicon, self.rules)
+            families = ccg_lexicon._families.items()
+            replacements = [(r[0], str(r[1][0])) for r in families]
         else:
             self.ccg_parser = None
+            replacements = []
+        syncat_dict = parse_markedup_file(replacements)
+        self.composer = SemanticComposer(syncat_dict)
 
     def _get_tokens(self, tagged_sentence):
         """
@@ -151,6 +156,7 @@ class SemanticParser(object):
                     yield Derivation(parse, derivation, sent_type)
                 continue
             # Yield just syntactic parse if semantics fail.
+            # TODO: make sure this exception works with new SemanticComposer
             except LogicalExpressionException:
                 yield Derivation(parse, None, sent_type)
                 continue
@@ -163,9 +169,10 @@ def demo():
     # The semantic parser can either parse the input sentence
     # using nltk.ccg.
     ccglex = lexicon.parseLexicon(r'''
-        :- S, N
-        I => N
-        eat => (S\N)/N
+        :- S, N, NP
+        NP :: N
+        I => NP
+        eat => (S\NP)/NP
         peaches => N
     ''')
     semparser = SemanticParser(ccglex)
@@ -173,13 +180,11 @@ def demo():
     sent = "I eat peaches."
     tagged_sent = pos_tag(word_tokenize(sent))
     for parse in semparser.parse(tagged_sent):
-        print(parse.get_expression())
-        parse.print_semantic_derivation()
         parse.semantics.draw()
+        print(parse.get_expression())
         break
 
-    # Or you can provide a parse in the following format.
-    # TODO: figure out why 'eat' doesn't get a semcat here.
+    # Or you can provide a parse in the auto format.
     parse_str = r'''
     (<T S[dcl] 1 2> (<L NP POS POS I NP>)
     (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS eat
@@ -187,9 +192,8 @@ def demo():
     '''
     semparser2 = SemanticParser()
     for parse in semparser2.parse(tagged_sent, parse_str):
-        print(parse.get_expression())
-        parse.print_semantic_derivation()
         parse.semantics.draw()
+        print(parse.get_expression())
         break
 
 if __name__ == '__main__':

@@ -1,56 +1,12 @@
 import re
 
-from nltk.semparse.config import _CandC_MARKEDUP_FILE
-
 
 class SyntacticCategory(object):
 
-    syncat_dict_cache = None
-
-    @classmethod
-    def get_cached_syncat_dict(cls):
-        if not cls.syncat_dict_cache:
-            cls.syncat_dict_cache = cls._parse_markedup_file()
-        return cls.syncat_dict_cache
-
-    @classmethod
-    def _parse_markedup_file(cls):
-        """
-        Parses the C&C markedup file into a dictionary of the form
-        {syntactic_category: indexed_syntactic_category}. E.g.
-        {'S\\N': '(S{_}\\NP{Y}<1>){_}'}
-        :rtype: dict
-        """
-        filestr = open(_CandC_MARKEDUP_FILE, 'r').read()
-        marks = filestr.split('\n\n')
-        marks = [line.strip() for line in marks
-                 if not line.startswith('#') and not line.startswith('=')]
-        pairs = [line.split('\n')[:2] for line in marks]
-        pairs = [(syncat.strip(), idxsyncat.strip())
-                 for (syncat, idxsyncat) in pairs]
-        pairs = [(syncat, idxsyncat.split()[1])
-                 for (syncat, idxsyncat) in pairs]
-        # For matching the syntactic_categories to the
-        # NLTK CCG syntactic categories, we have to get rid of
-        # the brackets. S[adj]\\NP => S\NP.
-        # This means the the resulting dictionary will collapse
-        # all syntactic categories that differ only in type,
-        # e.g. S[adj]\\NP & S[ng]NP => S\\NP.
-        ppairs = [(re.sub(r'\[.*?\]', '', syncat), _)
-                  for (syncat, _) in pairs]
-        # This is necessary because of the mapping that happens
-        # according to the NLTK CCG lexicon.
-        # TODO: changing NP to N here is not robust. Do it on the fly.
-        processed_pairs = [(syncat.replace('NP', 'N'), _)
-                           for (syncat, _) in ppairs]
-        # Create the dictionary that maps from syntactic
-        # category to indexed syntactic category.
-        pairsdict = dict(processed_pairs)
-        return pairsdict
-
-    def __init__(self, syncat_str):
-        self._syncat_dict = self.get_cached_syncat_dict()
+    def __init__(self, syncat_str, syncat_dict=None):
+        self._syncat_dict = syncat_dict
         self.syncat = syncat_str
+        self.syncat = syncat_str.replace("'", '')
         self.index_syncat = self._get_index_syncat()
 
     def _get_index_syncat(self):

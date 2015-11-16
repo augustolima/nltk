@@ -1,14 +1,37 @@
 #! /bin/bash
 
 
-usage() { echo "Usage: $0 [-i <path/to/inputfile>] [-o <path/to/outputfile>]" 1>&2; exit 1; }
+function usage {
+	echo "Usage: $0 [-q] -i [inputfile] -o [outputfile]" 1>&2
+       	exit 1
+}
 
-INFILE=$1
+MODEL=models/pos_quotes
+SUPER=models/super_quotes
+while getopts ":qi:o:" opt
+do
+    case ${opt} in
+	q)
+	    MODEL=models/pos_questions
+	    SUPER=models/super_questions
+	    ;;
+	i)
+	    INFILE=${OPTARG}
+	    ;;
+	o)
+	    OUTFILE=${OPTARG}
+	    ;;
+	\?)
+	    usage
+	    ;;
+    esac
+done
 
-if [ -z "${INFILE}" ]; then
+if [[ -z ${INFILE} || -z ${OUTFILE} ]]
+then
     usage
 fi
 
-bin/pos --model models/pos_questions --input ${INFILE} --output pos.out
-bin/super --model models/super --input pos.out 
+bin/pos --model ${MODEL}  --input ${INFILE} --output pos.out
+bin/super --model ${SUPER} --input pos.out > ${OUTFILE}
 rm pos.out

@@ -1,16 +1,16 @@
 # priority	word_regex	pos_regex	indexsyncat	semantic_type
 
 # Copula
-1	be$|is$|was$|am$|are|\'m$	.*$	((S[adj]{_}\NP{Y}<1>){_}/N[num]{Z}<2>){_}	\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))
+1	be$|is$|was$|am$|are|\'m$	.*$	((S[dcl]{_}\NP{Y}<1>){_}/NP{Z}<2>){_}	\P Q y. exists z.(\x.EQUAL(x,y)(z) & P(z) & Q(y))
 2	be$|is$|was$|am$|are|\'m$	.*$	.*$	\P x.P(x)
-3	be$|is$|was$|am$|are|\'m$	.*$	((S[dcl]{_}\\NP[thr]{Y}<1>){_}/(S[pt]{Z}<2>\\NP{Y*}){Z}){_}	EVENT
+3	be$|is$|was$|am$|are|\'m$	.*$	((S[dcl]{_}\NP[thr]{Y}<1>){_}/(S[pt]{Z}<2>\\NP{Y*}){Z}){_}	EVENT
 
 # Quantifiers
-3	an?$	.*$	(NP{Y}/N{Y}<1>){_}	None
+3	an?$	.*$	(NP[nb]{Y}/N{Y}<1>){_}	None
 4	the$	.*$	(NP{Y}/N{Y}<1>){_}	UNIQUE
 5	the$	.*$	(((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}/N[num]{W}<2>){_}	UNIQUE
-6	no$	.*$	(NP{Y}/N{Y}<1>){_}	COMPLEMENT
-7	not$|n't$	.*$	((S[adj]{Y}\NP{Z}){Y}\(S[adj]{Y}<1>\NP{Z}){Y}){_}	NEGATE	
+6	no$	.*$	(NP[nb]{Y}/N{Y}<1>){_}	COMPLEMENT
+7	not$|n't$	.*$	((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}	NEGATE	
 
 # TODO: figure out conjunction. What I have isn't quite right.
 # Conjunction

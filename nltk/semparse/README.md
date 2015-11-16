@@ -23,7 +23,7 @@ required by `nltk.ccg.lexicon`. See [this link](http://www.nltk.org/howto/ccg.ht
   + e.g. `data/lexica/reagan_sentences.txt`
 * Supertag these sentences using the C&C parser using `get_supertags`.
   + Read usage instructions ( `get_supertags -h` ) to make sure the C&C parser is set up as required.
-  + `./get_supertags data/lexica/reagan_sentences.txt > data/lexica/reagan_supertags.txt`
+  + `./get_supertags -i data/lexica/reagan_sentences.txt -o data/lexica/reagan_supertags.txt`
   + N.B. use the `-q` flag for supertagging questions.
 * The output of `get_supertags` will be used to build the CCG lexicon.
 * Build the CCG lexicon using `build_ccglex`

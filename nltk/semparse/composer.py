@@ -18,8 +18,8 @@ lexpr = Expression.fromstring
 
 class SemanticComposer(object):
 
-    def __init__(self):
-        pass
+    def __init__(self, syncat_dict):
+        self._syncat_dict = syncat_dict
 
     def build_expressions(self, tree, pos_tags, question=False):
         """
@@ -40,7 +40,7 @@ class SemanticComposer(object):
             syncat_str = str(tree.label())
             if '(' in syncat_str:  # Get rid of extra parentheses.
                 syncat_str = re.findall(r'\((.*)\)', syncat_str)[0]
-            syncat = SyntacticCategory(syncat_str)
+            syncat = SyntacticCategory(syncat_str, self._syncat_dict)
             semcats = get_semantic_categories(word, pos, syncat, question)
             expressions = [semcat.get_expression() for semcat in semcats]
             expressions = [Tree((expr, 'Leaf'), [word]) for expr in expressions]

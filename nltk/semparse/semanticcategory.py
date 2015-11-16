@@ -12,6 +12,7 @@ from nltk.sem.logic import (Expression, Tokens, Variable,
                             LogicalExpressionException)
 
 from nltk.semparse import rules
+from nltk.semparse.config import parse_markedup_file
 from nltk.semparse.syntacticcategory import SyntacticCategory
 from nltk.semparse.config import (_DATA_DIR, _LANGUAGE_FILE)
 
@@ -180,7 +181,7 @@ class SemanticCategory(object):
         def getArgs(tree):
             if isinstance(tree, list):
                 first_arg = getArgs(tree[1])[0]
-                sc = SyntacticCategory('N')
+                sc = SyntacticCategory('N', parse_markedup_file())
                 semcat = SemanticCategory(first_arg, 'NNP', sc)
                 semcat.set_semantic_type()
                 semcat.generate_expression()
@@ -282,6 +283,12 @@ def get_special_cases(word, pos, syncat):
             syncat_match = True
         else:
             syncat_match = syncat_str == syncat.index_syncat
+#        print(line)
+#        print(syncat_str, syncat.index_syncat)
+#        print(syncat_match)
+#        print(re.match(word_regex, word))
+#        print(re.match(pos_regex, pos))
+#        raw_input()
         if re.match(word_regex, word) and \
            re.match(pos_regex, pos) and \
            syncat_match:
