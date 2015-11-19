@@ -178,6 +178,34 @@ class bcolors:
 
 class SemanticParserTest(unittest.TestCase):
 
+    def test_auto(self):
+        ccglex = lexicon.parseLexicon(r'''
+            :- S, N, NP
+            NP :: N
+            I => NP
+            eat => (S\NP)/NP
+            peaches => N
+        ''')
+        semparser = SemanticParser(ccglex)
+        sent = "I eat peaches."
+        tagged_sent = pos_tag(word_tokenize(sent))
+        for parse in semparser.parse(tagged_sent):
+            ccg_expr = parse.get_expression()
+            break
+
+        # Or you can provide a parse in the auto format.
+        parse_str = r'''
+        (<T S[dcl] 1 2> (<L NP POS POS I NP>)
+        (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS eat
+        (S[dcl]\NP)/NP>) (<T NP 0 1> (<L N POS POS peaches N>) ) ) )
+        '''
+        semparser2 = SemanticParser()
+        for parse in semparser2.parse(tagged_sent, parse_str):
+            auto_expr = parse.get_expression()
+            break
+
+        self.assertEqual(ccg_expr, auto_expr)
+
     def test_statement(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD + "STATEMENTS" + bcolors.ENDC + "\n")
         filestr = open('data/lexica/reagan.ccg').read()
@@ -197,17 +225,18 @@ class SemanticParserTest(unittest.TestCase):
                 error = None
                 derivations = semParser.parse(tagged, n=100)
                 try:
-                    for derivation in derivations:
-                        if derivation.syntax is not None:
+                    for deriv in derivations:
+                        if deriv.syntax is not None:
                             parsed = True
-                        if derivation.check():
-                            exprs = [p[1][0] for p in derivation.semantics.pos()]
-                            if None not in exprs:
+                        if deriv.check():
+                            words = deriv.semantics.leaves()
+                            none_words = sum([1 for w in words
+                                              if w == 'a' or w == 'an'])
+                            exprs = [p[1][0] for p in deriv.semantics.pos()]
+                            none_exprs = sum([1 for e in exprs if e == None])
+                            if none_words == none_exprs:
                                 sem_parsed = True
                                 break
-#                            if len(derivation.semantics.leaves()) == len(tagged)-1:
-#                                sem_parsed = True
-#                                break
                 except:
                     error = str(sys.exc_info()[1])
                 if parsed:
@@ -251,17 +280,18 @@ class SemanticParserTest(unittest.TestCase):
                 error = None
                 derivations = semParser.parse(tagged, n=100)
                 try:
-                    for derivation in derivations:
-                        if derivation.syntax is not None:
+                    for deriv in derivations:
+                        if deriv.syntax is not None:
                             parsed = True
-                        if derivation.check():
-                            exprs = [p[1][0] for p in derivation.semantics.pos()]
-                            if None not in exprs:
+                        if deriv.check():
+                            words = deriv.semantics.leaves()
+                            none_words = sum([1 for w in words
+                                              if w == 'a' or w == 'an'])
+                            exprs = [p[1][0] for p in deriv.semantics.pos()]
+                            none_exprs = sum([1 for e in exprs if e == None])
+                            if none_words == none_exprs:
                                 sem_parsed = True
                                 break
-#                            if len(derivation.semantics.leaves()) == len(tagged)-1:
-#                                sem_parsed = True
-#                                break
                 except:
                     error = str(sys.exc_info()[1])
 
