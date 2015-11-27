@@ -9,19 +9,13 @@ from nltk.ccg.lexicon import parseCategory
 from nltk.ccg.api import PrimitiveCategory
 from nltk.ccg.chart import TypeRaiseRuleSet, DefaultRuleSet
 
-
-_DATA_DIR = ""
-dirlist = ['nltk/semparse/data', 'data/']
-for d in dirlist:
-    if os.path.exists(d) and os.path.isdir(d):
-        _DATA_DIR = d
-if not _DATA_DIR:
-    print("Data directory not found. Searched in: {0}".format(dirlist))
+#from nltk.semparse.config import _DATA_DIR
+from config import _DATA_DIR ##
 
 
 class CCGParseConverter(object):
     '''
-    Class for converting string representations of CCG parses into
+    Class for converting AUTO string representations of CCG parses into
     nltk.Tree objects identical to the output of nltk.ccg.CCGChartParser.
 
     Usage: CCGParseConverter(parse_str, combinatory_rules) -> nltk.Tree

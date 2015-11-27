@@ -11,11 +11,17 @@ from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
 
-from nltk.semparse import get_semantic_categories, build_ccglex
-from nltk.semparse.config import parse_markedup_file
-from nltk.semparse.semanticparser import SemanticParser
-from nltk.semparse.syntacticcategory import SyntacticCategory
-from nltk.semparse.parseconverter import CCGParseConverter
+import build_ccglex ##
+from semanticcategory import get_semantic_categories ##
+from config import parse_markedup_file ##
+from semanticparser import SemanticParser ##
+from syntacticcategory import SyntacticCategory ##
+from parseconverter import CCGParseConverter ##
+#from nltk.semparse import get_semantic_categories, build_ccglex
+#from nltk.semparse.config import parse_markedup_file
+#from nltk.semparse.semanticparser import SemanticParser
+#from nltk.semparse.syntacticcategory import SyntacticCategory
+#from nltk.semparse.parseconverter import CCGParseConverter
 
 '''
 Unit tests for SemanticCategory.
