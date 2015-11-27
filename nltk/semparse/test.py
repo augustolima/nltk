@@ -2,6 +2,7 @@ from __future__ import print_function, unicode_literals
 
 import io
 import sys
+import os
 import unittest
 import logging
 import pickle
@@ -10,7 +11,7 @@ from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
 
-from nltk.semparse import get_semantic_categories
+from nltk.semparse import get_semantic_categories, build_ccglex
 from nltk.semparse.config import parse_markedup_file
 from nltk.semparse.semanticparser import SemanticParser
 from nltk.semparse.syntacticcategory import SyntacticCategory
@@ -33,10 +34,52 @@ class ParseConverterTest(unittest.TestCase):
         converter = CCGParseConverter()
         ruleset = chart.DefaultRuleSet
         auto_string = r'''
-        (<T S[dcl] 1 2> (<T NP 0 1> (<L N POS POS Reagan N>) ) (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS had (S[dcl]\NP)/NP>) (<T NP 0 2> (<T NP 0 1> (<T N 1 2> (<L N/N POS POS four N/N>) (<L N POS POS children N>) ) ) (<L . POS POS . .>) ) ) )
+        (<T S[dcl] 1 2> (<T NP 0 1> (<L N POS POS Reagan N>) )
+        (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS had (S[dcl]\NP)/NP>)
+        (<T NP 0 2> (<T NP 0 1> (<T N 1 2> (<L N/N POS POS four N/N>)
+        (<L N POS POS children N>) ) ) (<L . POS POS . .>) ) ) )
         '''
         tree = converter.fromstring(auto_string, ruleset)
         self.assertEqual(tree, gold_tree)
+
+
+class BuildCCGLexiconTest(unittest.TestCase):
+
+    def setUp(self):
+        self.reagan_ccg_file = 'test_reagan.ccg'
+        self.geoquery_ccg_file = 'test_geoquery.ccg'
+        build_ccglex.main('data/lexica/reagan_supertags.txt',
+                           self.reagan_ccg_file)
+        build_ccglex.main('data/lexica/geoquery_supertags.txt',
+                           self.geoquery_ccg_file)
+
+    def tearDown(self):
+        os.remove(self.reagan_ccg_file)
+        os.remove(self.geoquery_ccg_file)
+
+    def test_reagan_ccg_valid(self):
+        ccglex = lexicon.fromstring(open(self.reagan_ccg_file).read())
+        self.assertTrue(ccglex)
+
+    def test_geoquery_ccg_valid(self):
+        ccglex = lexicon.fromstring(open(self.geoquery_ccg_file).read())
+        self.assertTrue(ccglex)
+
+    def test_reagan_ccg_parse(self):
+        ccglex = lexicon.fromstring(open(self.reagan_ccg_file).read())
+        semparser = SemanticParser(ccglex)
+        sent = "They had four children."
+        tagged = pos_tag(word_tokenize(sent))
+        parses = list(semparser.parse(tagged, n=10))
+        self.assertTrue(parses)
+
+    def test_geoquery_ccg_parse(self):
+        ccglex = lexicon.fromstring(open(self.geoquery_ccg_file).read())
+        semparser = SemanticParser(ccglex)
+        sent = "What is the capital?"
+        tagged = pos_tag(word_tokenize(sent))
+        parses = list(semparser.parse(tagged, n=10))
+        self.assertTrue(parses)
 
 
 class SemanticCategoryTest(unittest.TestCase):
@@ -44,10 +87,10 @@ class SemanticCategoryTest(unittest.TestCase):
     def setUp(self):
         self.syncat_dict = parse_markedup_file()
 
-
     # EVENT
     def test_event(self):
-        #TODO: add test for gerunds which act like verbs, e.g. "running man" NP/N
+        # TODO: add test for gerunds which act like verbs,
+        #       e.g. "running man" NP/N
         syncat = SyntacticCategory(r'(S[dcl]\NP)/NP', self.syncat_dict)
         semcats = get_semantic_categories("won", "VBD", syncat)
         expressions = [s.get_expression() for s in semcats]
@@ -55,7 +98,7 @@ class SemanticCategoryTest(unittest.TestCase):
 
     # MOD
     def test_mod(self):
-        #TODO: add test for athletic "S\NP" JJ
+        # TODO: add test for athletic "S\NP" JJ
         syncat = SyntacticCategory(r'N/N', self.syncat_dict)
         semcats = get_semantic_categories("successful", "JJ", syncat)
         expressions = [s.get_expression() for s in semcats]
@@ -165,7 +208,7 @@ class SemanticCategoryTest(unittest.TestCase):
 #        self.assertTrue(lexpr(r'\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))') in expressions)
 
 
-class bcolors:
+class bcolors(object):
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -207,8 +250,9 @@ class SemanticParserTest(unittest.TestCase):
         self.assertEqual(ccg_expr, auto_expr)
 
     def test_statement(self):
-        sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD + "STATEMENTS" + bcolors.ENDC + "\n")
-        filestr = open('data/lexica/reagan.ccg').read()
+        sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
+                         "STATEMENTS" + bcolors.ENDC + "\n")
+        filestr = open('data/lexica/reagan_new.ccg').read()
         ccglex = lexicon.parseLexicon(filestr)
         semParser = SemanticParser(ccglex)
         total = 0
@@ -233,7 +277,7 @@ class SemanticParserTest(unittest.TestCase):
                             none_words = sum([1 for w in words
                                               if w == 'a' or w == 'an'])
                             exprs = [p[1][0] for p in deriv.semantics.pos()]
-                            none_exprs = sum([1 for e in exprs if e == None])
+                            none_exprs = sum([1 for e in exprs if e is None])
                             if none_words == none_exprs:
                                 sem_parsed = True
                                 break
@@ -245,25 +289,37 @@ class SemanticParserTest(unittest.TestCase):
                     num_sem += 1
 
                 if parsed:
-                    sys.stderr.write('[' + bcolors.OKGREEN + 'SYN' + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.OKGREEN + 'SYN' +
+                                     bcolors.ENDC + ']')
                 else:
-                    sys.stderr.write('[' + bcolors.FAIL + 'SYN' + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.FAIL + 'SYN' +
+                                     bcolors.ENDC + ']')
                 if sem_parsed:
-                    sys.stderr.write('[' + bcolors.OKGREEN + 'SEM' + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.OKGREEN + 'SEM' + 
+                                     bcolors.ENDC + ']')
                 else:
-                    sys.stderr.write('[' + bcolors.FAIL + 'SEM' + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.FAIL + 'SEM' +
+                                     bcolors.ENDC + ']')
                 if error:
-                    sys.stderr.write('[' + bcolors.WARNING + error + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.WARNING + 
+                                     error + bcolors.ENDC + ']')
                 sys.stderr.write(sent + '\r')
 
-        sys.stderr.write(bcolors.HEADER + "STATEMENTS SYNPARSED: " + bcolors.ENDC + bcolors.BOLD + "{0}/{1}".format(num_parsed, total) + bcolors.ENDC + "\n")
-        sys.stderr.write(bcolors.HEADER + "STATEMENTS SEMPARSED: " + bcolors.ENDC + bcolors.BOLD + "{0}/{1}".format(num_sem, total) + bcolors.ENDC + "\n")
+        sys.stderr.write(bcolors.HEADER + "STATEMENTS SYNPARSED: " + 
+                         bcolors.ENDC + bcolors.BOLD + 
+                         "{0}/{1}".format(num_parsed, total) + 
+                         bcolors.ENDC + "\n")
+        sys.stderr.write(bcolors.HEADER + "STATEMENTS SEMPARSED: " + 
+                         bcolors.ENDC + bcolors.BOLD + 
+                         "{0}/{1}".format(num_sem, total) +
+                         bcolors.ENDC + "\n")
         logging.info("STATEMENTS SYNPARSED: {0}/{1}".format(num_parsed, total))
         logging.info("STATEMENTS SEMPARSED: {0}/{1}".format(num_sem, total))
 
     def test_question(self):
-        sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD + "QUESTIONS" + bcolors.ENDC + "\n")
-        filestr = open('data/lexica/geoquery.ccg').read()
+        sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
+                         "QUESTIONS" + bcolors.ENDC + "\n")
+        filestr = open('data/lexica/geoquery_new.ccg').read()
         ccglex = lexicon.parseLexicon(filestr)
         semParser = SemanticParser(ccglex)
         total = 0
@@ -288,7 +344,7 @@ class SemanticParserTest(unittest.TestCase):
                             none_words = sum([1 for w in words
                                               if w == 'a' or w == 'an'])
                             exprs = [p[1][0] for p in deriv.semantics.pos()]
-                            none_exprs = sum([1 for e in exprs if e == None])
+                            none_exprs = sum([1 for e in exprs if e is None])
                             if none_words == none_exprs:
                                 sem_parsed = True
                                 break
@@ -301,19 +357,30 @@ class SemanticParserTest(unittest.TestCase):
                     num_sem += 1
 
                 if parsed:
-                    sys.stderr.write('[' + bcolors.OKGREEN + 'SYN' + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.OKGREEN + 'SYN' +
+                                     bcolors.ENDC + ']')
                 else:
-                    sys.stderr.write('[' + bcolors.FAIL + 'SYN' + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.FAIL + 'SYN' +
+                                     bcolors.ENDC + ']')
                 if sem_parsed:
-                    sys.stderr.write('[' + bcolors.OKGREEN + 'SEM' + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.OKGREEN + 'SEM' +
+                                     bcolors.ENDC + ']')
                 else:
-                    sys.stderr.write('[' + bcolors.FAIL + 'SEM' + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.FAIL + 'SEM' +
+                                     bcolors.ENDC + ']')
                 if error:
-                    sys.stderr.write('[' + bcolors.WARNING + error + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.WARNING +
+                                     error + bcolors.ENDC + ']')
                 sys.stderr.write(sent + '\r')
 
-        sys.stderr.write(bcolors.HEADER + "STATEMENTS SYNPARSED: " + bcolors.ENDC + bcolors.BOLD + "{0}/{1}".format(num_parsed, total) + bcolors.ENDC + "\n")
-        sys.stderr.write(bcolors.HEADER + "STATEMENTS SEMPARSED: " + bcolors.ENDC + bcolors.BOLD + "{0}/{1}".format(num_sem, total) + bcolors.ENDC + "\n")
+        sys.stderr.write(bcolors.HEADER + "STATEMENTS SYNPARSED: " +
+                         bcolors.ENDC + bcolors.BOLD +
+                         "{0}/{1}".format(num_parsed, total) + 
+                         bcolors.ENDC + "\n")
+        sys.stderr.write(bcolors.HEADER + "STATEMENTS SEMPARSED: " +
+                         bcolors.ENDC + bcolors.BOLD + 
+                         "{0}/{1}".format(num_sem, total) + 
+                         bcolors.ENDC + "\n")
         logging.info("QUESTIONS SYNPARSED: {0}/{1}".format(num_parsed, total))
         logging.info("QUESTIONS SEMPARSED: {0}/{1}".format(num_sem, total))
 

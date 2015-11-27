@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Natural Language Toolkit (NLTK)
 
 NLTK -- the Natural Language Toolkit -- is a suite of open source Python
@@ -46,3 +47,15 @@ For license information, see [LICENSE.txt](LICENSE.txt).
 - NLTK corpora are provided under the terms given in the README file for each
   corpus; all are redistributable, and available for non-commercial use.
 - NLTK may be freely redistributed, subject to the provisions of these licenses.
+=======
+Latex report template. 
+
+report.tex --> main Latex file (compile this one).
+
+references.bib --> references to be compiled into the bibliography.
+
+graphics/ --> directory where all plots, images, etc. should be stored.
+
+
+Create new .tex as needed for sections to be \inputed into report.tex.
+>>>>>>> c8573cfd2c244a5de3b61b5042aaa6f40f84adae

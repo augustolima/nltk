@@ -19,6 +19,7 @@ lexpr = Expression.fromstring
 class SemanticComposer(object):
 
     def __init__(self, syncat_dict):
+        # syncat_dict is the parsed C&C markedup file. 
         self._syncat_dict = syncat_dict
 
     def build_expressions(self, tree, pos_tags, question=False):
