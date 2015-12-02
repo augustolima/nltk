@@ -4,13 +4,14 @@ import sys
 import os
 import re
 import string
+import traceback
 from nltk import Tree
 from nltk.ccg.lexicon import parseCategory
 from nltk.ccg.api import PrimitiveCategory
 from nltk.ccg.chart import TypeRaiseRuleSet, DefaultRuleSet
 
-#from nltk.semparse.config import _DATA_DIR
-from config import _DATA_DIR ##
+from nltk.semparse.config import _DATA_DIR
+#from config import _DATA_DIR ##
 
 
 class CCGParseConverter(object):
@@ -83,20 +84,20 @@ class CCGParseConverter(object):
             if cat in string.punctuation:
                 category = PrimitiveCategory(cat)
             else:
-                category = self._make_category(cat)
+                category = self._make_category(cat, delete=r'[<>]')
             return Tree((category, 'Leaf'), [Tree(category, [word])])
 
         # TODO: Make _to_tree correctly handle type raising.
         # Unary lexical rule.
         if len(parse) == 2:
             (_, new_category, _, _) = parse[0].split()
-            new_category = self._make_category(new_category)
+            new_category = self._make_category(new_category, delete=r'[<>]')
             child = self._to_tree(parse[-1], combinatory_rules)
             return Tree((new_category, 'Lex'), [child])
 
         # Binary combinatory rule.
         (_, target_category, _, _) = parse[0].split()
-        target_category = self._make_category(target_category)
+        target_category = self._make_category(target_category, delete=r'[<>]')
         lhs = self._to_tree(parse[1], combinatory_rules)
         left_cat = lhs.label()[0]
         rhs = self._to_tree(parse[2], combinatory_rules)
@@ -106,15 +107,19 @@ class CCGParseConverter(object):
         for rule in ruleset:
             if rule._combinator.can_combine(left_cat, right_cat):
                 res = rule._combinator.combine(left_cat, right_cat).next()
-                if res == target_category:
-                    return Tree((res, str(rule)), [lhs, rhs])
+                return Tree((res, str(rule)), [lhs, rhs])
         # No rule works -> grammar rule
         rule = "{0} | {1} | {2}".format(left_cat, right_cat, target_category)
         self.grammar.add(rule)
         return Tree((target_category, 'Grammar'), [lhs, rhs])
 
-    def _make_category(self, category_str):
-        category_str = re.sub(r'[<>]', '', category_str)
+    def _make_category(self, category_str, delete=''):
+        '''
+        delete is a regular expression specifying which substrings
+        should be deleted from category_str prior to making
+        a category object.
+        '''
+        category_str = re.sub(delete, '', category_str)
         primitives = self._find_primitives(category_str)
         category = parseCategory(category_str, primitives, [])
         return category
@@ -183,11 +188,18 @@ def evaluate():
             converted += 1
         except:
             with open('bad_parses.txt', 'a') as out:
-                out.write(parse + '\n')
+                out.write(parse + '\n--------\n')
+                out.write(str(traceback.format_exc()))
+                out.write('\n\n')
     with open('data/grammars/ccg_grammar.txt', 'w') as out:
         for rule in converter.grammar:
             out.write(rule + '\n')
     print("{0}/{1} parses converted".format(converted, total))
+
+def test_sent(auto_str):
+    converter = CCGParseConverter()
+    tree = converter.fromstring(auto_str, DefaultRuleSet)
+    return tree
 
 
 if __name__ == '__main__':

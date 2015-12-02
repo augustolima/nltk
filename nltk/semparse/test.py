@@ -6,22 +6,24 @@ import os
 import unittest
 import logging
 import pickle
+import traceback
 
 from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
 
-import build_ccglex ##
-from semanticcategory import get_semantic_categories ##
-from config import parse_markedup_file ##
-from semanticparser import SemanticParser ##
-from syntacticcategory import SyntacticCategory ##
-from parseconverter import CCGParseConverter ##
-#from nltk.semparse import get_semantic_categories, build_ccglex
-#from nltk.semparse.config import parse_markedup_file
-#from nltk.semparse.semanticparser import SemanticParser
-#from nltk.semparse.syntacticcategory import SyntacticCategory
-#from nltk.semparse.parseconverter import CCGParseConverter
+#import build_ccglex ##
+#from semanticcategory import get_semantic_categories ##
+#from config import parse_markedup_file ##
+#from semanticparser import SemanticParser ##
+#from syntacticcategory import SyntacticCategory ##
+#from parseconverter import CCGParseConverter ##
+
+from nltk.semparse import get_semantic_categories, build_ccglex
+from nltk.semparse.config import parse_markedup_file
+from nltk.semparse.semanticparser import SemanticParser
+from nltk.semparse.syntacticcategory import SyntacticCategory
+from nltk.semparse.parseconverter import CCGParseConverter
 
 '''
 Unit tests for SemanticCategory.
@@ -31,6 +33,9 @@ Unit tests for SemanticCategory.
 lexpr = Expression.fromstring
 logging.basicConfig(filename=".unittest.log", level=logging.DEBUG)
 
+# /////////////
+# Unit Tests //
+# /////////////
 
 class ParseConverterTest(unittest.TestCase):
 
@@ -214,6 +219,11 @@ class SemanticCategoryTest(unittest.TestCase):
 #        self.assertTrue(lexpr(r'\P Q x.(Q(x) & P(x) & degree(P(d)) & TARGET(d))') in expressions)
 
 
+# ///////////////////
+# Functional Tests //
+# ///////////////////
+
+
 class bcolors(object):
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -255,9 +265,10 @@ class SemanticParserTest(unittest.TestCase):
 
         self.assertEqual(ccg_expr, auto_expr)
 
-    def test_statement(self):
+    @unittest.skip("skipping NLTK CCG tests")
+    def test_statement_nltk(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
-                         "STATEMENTS" + bcolors.ENDC + "\n")
+                         "STATEMENTS (NLTK CCG)" + bcolors.ENDC + "\n")
         filestr = open('data/lexica/reagan_new.ccg').read()
         ccglex = lexicon.parseLexicon(filestr)
         semParser = SemanticParser(ccglex)
@@ -288,7 +299,14 @@ class SemanticParserTest(unittest.TestCase):
                                 sem_parsed = True
                                 break
                 except:
-                    error = str(sys.exc_info()[1])
+                    _, err, tb = sys.exc_info()
+                    err_str = str(err)
+                    error = traceback.extract_tb(tb)[-1]
+                    filename = os.path.basename(error[0])
+                    err_lineno = error[1]
+                    err_string = "In {0}:{1} {2}" \
+                                 .format(filename, err_lineno, err_str)
+
                 if parsed:
                     num_parsed += 1
                 if sem_parsed:
@@ -301,30 +319,34 @@ class SemanticParserTest(unittest.TestCase):
                     sys.stderr.write('[' + bcolors.FAIL + 'SYN' +
                                      bcolors.ENDC + ']')
                 if sem_parsed:
-                    sys.stderr.write('[' + bcolors.OKGREEN + 'SEM' + 
+                    sys.stderr.write('[' + bcolors.OKGREEN + 'SEM' +
                                      bcolors.ENDC + ']')
                 else:
                     sys.stderr.write('[' + bcolors.FAIL + 'SEM' +
                                      bcolors.ENDC + ']')
                 if error:
-                    sys.stderr.write('[' + bcolors.WARNING + 
-                                     error + bcolors.ENDC + ']')
+                    sys.stderr.write('[' + bcolors.WARNING +
+                                     err_string +
+                                     bcolors.ENDC + ']')
                 sys.stderr.write(sent + '\r')
 
-        sys.stderr.write(bcolors.HEADER + "STATEMENTS SYNPARSED: " + 
-                         bcolors.ENDC + bcolors.BOLD + 
-                         "{0}/{1}".format(num_parsed, total) + 
+        sys.stderr.write(bcolors.HEADER + "STATEMENTS (NLTK CCG) SYNPARSED: " +
+                         bcolors.ENDC + bcolors.BOLD +
+                         "{0}/{1}".format(num_parsed, total) +
                          bcolors.ENDC + "\n")
-        sys.stderr.write(bcolors.HEADER + "STATEMENTS SEMPARSED: " + 
-                         bcolors.ENDC + bcolors.BOLD + 
+        sys.stderr.write(bcolors.HEADER + "STATEMENTS (NLTK CCG) SEMPARSED: " +
+                         bcolors.ENDC + bcolors.BOLD +
                          "{0}/{1}".format(num_sem, total) +
                          bcolors.ENDC + "\n")
-        logging.info("STATEMENTS SYNPARSED: {0}/{1}".format(num_parsed, total))
-        logging.info("STATEMENTS SEMPARSED: {0}/{1}".format(num_sem, total))
+        logging.info("STATEMENTS (NLTK CCG) SYNPARSED: {0}/{1}"
+                      .format(num_parsed, total))
+        logging.info("STATEMENTS (NLTK CCG) SEMPARSED: {0}/{1}"
+                      .format(num_sem, total))
 
-    def test_question(self):
+    @unittest.skip("skipping NLTK CCG tests")
+    def test_question_nltk(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
-                         "QUESTIONS" + bcolors.ENDC + "\n")
+                         "QUESTIONS (NLTK CCG)" + bcolors.ENDC + "\n")
         filestr = open('data/lexica/geoquery_new.ccg').read()
         ccglex = lexicon.parseLexicon(filestr)
         semParser = SemanticParser(ccglex)
@@ -355,7 +377,13 @@ class SemanticParserTest(unittest.TestCase):
                                 sem_parsed = True
                                 break
                 except:
-                    error = str(sys.exc_info()[1])
+                    _, err, tb = sys.exc_info()
+                    err_str = str(err)
+                    error = traceback.extract_tb(tb)[-1]
+                    filename = os.path.basename(error[0])
+                    err_lineno = error[1]
+                    err_string = "In {0}:{1} {2}" \
+                                 .format(filename, err_lineno, err_str)
 
                 if parsed:
                     num_parsed += 1
@@ -376,20 +404,139 @@ class SemanticParserTest(unittest.TestCase):
                                      bcolors.ENDC + ']')
                 if error:
                     sys.stderr.write('[' + bcolors.WARNING +
-                                     error + bcolors.ENDC + ']')
+                                     err_string +
+                                     bcolors.ENDC + ']')
                 sys.stderr.write(sent + '\r')
 
-        sys.stderr.write(bcolors.HEADER + "STATEMENTS SYNPARSED: " +
+        sys.stderr.write(bcolors.HEADER + "QUESTIONS (NLTK CCG) SYNPARSED: " +
                          bcolors.ENDC + bcolors.BOLD +
-                         "{0}/{1}".format(num_parsed, total) + 
+                         "{0}/{1}".format(num_parsed, total) +
                          bcolors.ENDC + "\n")
-        sys.stderr.write(bcolors.HEADER + "STATEMENTS SEMPARSED: " +
-                         bcolors.ENDC + bcolors.BOLD + 
-                         "{0}/{1}".format(num_sem, total) + 
+        sys.stderr.write(bcolors.HEADER + "QUESTIONS (NLTK CCG) SEMPARSED: " +
+                         bcolors.ENDC + bcolors.BOLD +
+                         "{0}/{1}".format(num_sem, total) +
                          bcolors.ENDC + "\n")
-        logging.info("QUESTIONS SYNPARSED: {0}/{1}".format(num_parsed, total))
-        logging.info("QUESTIONS SEMPARSED: {0}/{1}".format(num_sem, total))
+        logging.info("QUESTIONS (NTLK CCG) SYNPARSED: {0}/{1}"
+                      .format(num_parsed, total))
+        logging.info("QUESTIONS (NLTK CCG) SEMPARSED: {0}/{1}"
+                      .format(num_sem, total))
 
+    def test_question_auto(self):
+        sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
+                         "QUESTIONS (AUTO)" + bcolors.ENDC + "\n")
+        semParser = SemanticParser()
+        total = 0
+        num_sem = 0
+        parse_file = 'data/test/geoquery_parses.txt'
+        with io.open(parse_file, 'rt', encoding='utf-8') as parses:
+            for line in parses:
+                if line.startswith('#'):
+                    continue
+                (sent, parse) = line.split(' || ')
+                total += 1
+                sem_parsed = False
+                tagged = pos_tag(word_tokenize(sent))
+                error = None
+                derivations = semParser.parse(tagged, parse, n=100)
+                try:
+                    for deriv in derivations:
+                        if deriv.check():
+                            words = deriv.semantics.leaves()
+                            none_words = sum([1 for w in words
+                                              if w == 'a' or w == 'an'])
+                            exprs = [p[1][0] for p in deriv.semantics.pos()]
+                            none_exprs = sum([1 for e in exprs if e is None])
+                            if none_words == none_exprs:
+                                sem_parsed = True
+                                break
+                except:
+                    _, err, tb = sys.exc_info()
+                    err_str = str(err)
+                    error = traceback.extract_tb(tb)[-1]
+                    filename = os.path.basename(error[0])
+                    err_lineno = error[1]
+                    err_string = "In {0}:{1} {2}" \
+                                 .format(filename, err_lineno, err_str)
+
+                if sem_parsed:
+                    num_sem += 1
+
+                if sem_parsed:
+                    sys.stderr.write('[' + bcolors.OKGREEN + 'SEM' +
+                                     bcolors.ENDC + ']')
+                else:
+                    sys.stderr.write('[' + bcolors.FAIL + 'SEM' +
+                                     bcolors.ENDC + ']')
+                if error:
+                    sys.stderr.write('[' + bcolors.WARNING +
+                                     err_string +
+                                     bcolors.ENDC + ']')
+                sys.stderr.write(sent + '\n')
+
+        sys.stderr.write(bcolors.HEADER + "QUESTIONS (AUTO) SEMPARSED: " +
+                         bcolors.ENDC + bcolors.BOLD +
+                         "{0}/{1}".format(num_sem, total) +
+                         bcolors.ENDC + "\n")
+        logging.info("QUESTIONS (AUTO) SEMPARSED: {0}/{1}".format(num_sem, total))
+
+    def test_statement_auto(self):
+        sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
+                         "STATEMENTS (AUTO)" + bcolors.ENDC + "\n")
+        semParser = SemanticParser()
+        total = 0
+        num_sem = 0
+        parse_file = 'data/test/reagan_parses.txt'
+        with io.open(parse_file, 'rt', encoding='utf-8') as parses:
+            for line in parses:
+                if line.startswith('#'):
+                    continue
+                (sent, parse) = line.split(' || ')
+                total += 1
+                sem_parsed = False
+                tagged = pos_tag(word_tokenize(sent))
+                error = None
+                derivations = semParser.parse(tagged, parse, n=100)
+                try:
+                    for deriv in derivations:
+                        if deriv.check():
+                            words = deriv.semantics.leaves()
+                            none_words = sum([1 for w in words
+                                              if w == 'a' or w == 'an'])
+                            exprs = [p[1][0] for p in deriv.semantics.pos()]
+                            none_exprs = sum([1 for e in exprs if e is None])
+                            if none_words == none_exprs:
+                                sem_parsed = True
+                                break
+                except:
+                    _, err, tb = sys.exc_info()
+                    err_str = str(err)
+                    error = traceback.extract_tb(tb)[-1]
+                    filename = os.path.basename(error[0])
+                    err_lineno = error[1]
+                    err_string = "In {0}:{1} {2}" \
+                                 .format(filename, err_lineno, err_str)
+
+                if sem_parsed:
+                    num_sem += 1
+
+                if sem_parsed:
+                    sys.stderr.write('[' + bcolors.OKGREEN + 'SEM' +
+                                     bcolors.ENDC + ']')
+                else:
+                    sys.stderr.write('[' + bcolors.FAIL + 'SEM' +
+                                     bcolors.ENDC + ']')
+                if error:
+                    sys.stderr.write('[' + bcolors.WARNING +
+                                     err_string +
+                                     bcolors.ENDC + ']')
+                sys.stderr.write(sent + '\n')
+
+        sys.stderr.write(bcolors.HEADER + "STATEMENTS (AUTO) SEMPARSED: " +
+                         bcolors.ENDC + bcolors.BOLD +
+                         "{0}/{1}".format(num_sem, total) +
+                         bcolors.ENDC + "\n")
+        logging.info("STATEMENTS (AUTO) SEMPARSED: {0}/{1}"
+                      .format(num_sem, total))
 
 if __name__ == '__main__':
     unittest.main()
