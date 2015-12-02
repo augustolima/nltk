@@ -3,8 +3,8 @@ from __future__ import print_function, unicode_literals
 import re
 from nltk import Tree
 from nltk.sem.logic import Variable, Expression, ApplicationExpression
-from syntacticcategory import SyntacticCategory
-from semanticcategory import get_semantic_categories
+
+from nltk.semparse import SyntacticCategory, get_semantic_categories
 
 # ==============================
 # The main semantic parsing algorithm

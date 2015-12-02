@@ -21,17 +21,19 @@ optparser = optparse.OptionParser()
 optparser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Show MR derivation")
 optparser.add_option("-s", "--syntax", action="store_true", dest="syntax", default=False, help="Show syntactic parse")
 optparser.add_option("-l", "--ccglex", dest="ccglex", default="", help="CCG lexicon file")
+optparser.add_option("--draw", action="store_true", dest="draw", default=False, help="Draw semantic derivation tree.")
 (opts, _) = optparser.parse_args()
 
 
 class Interpreter(object):
 
-    def __init__(self, ccglex_path, syntax=False, semantics=False):
+    def __init__(self, ccglex_path, syntax=False, semantics=False, draw=False):
         lexstr = open(ccglex_path).read()
         ccglex = lexicon.parseLexicon(lexstr)
         self.SemParser = SemanticParser(ccglex)
         self.opt_syntax = syntax
         self.opt_semantics = semantics
+        self.opt_draw = draw
         self.status = 'GO'
 
     def print_welcome(self):
@@ -66,6 +68,8 @@ class Interpreter(object):
 
     def printSemanticParse(self, semparse):
         print(semparse.sentence_type)
+        if self.opt_draw:
+            semparse.semantics.draw()
         if self.opt_syntax:
             print("\n======== SYNTACTIC PARSE ========\n")
             semparse.print_syntactic_derivation()
@@ -139,6 +143,6 @@ if __name__ == '__main__':
         line = "Usage: semparser [-v] [-s] -l <path/to/ccg lexicon>\n"
         sys.stderr.write(line)
         sys.exit(1)
-    interpreter = Interpreter(opts.ccglex, opts.syntax, opts.verbose)
+    interpreter = Interpreter(opts.ccglex, opts.syntax, opts.verbose, opts.draw)
     interpreter.print_welcome()
     interpreter.run()
