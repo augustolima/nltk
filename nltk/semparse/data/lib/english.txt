@@ -7,8 +7,9 @@
 
 # Quantifiers
 3	an?$	.*$	(NP[nb]{Y}/N{Y}<1>){_}	None
-4	the$	.*$	(NP{Y}/N{Y}<1>){_}	UNIQUE
-5	the$	.*$	(((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}/N[num]{W}<2>){_}	UNIQUE
+#4	the$	.*$	(NP{Y}/N{Y}<1>){_}	UNIQUE
+#5	the$	.*$	(((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}/N[num]{W}<2>){_}	UNIQUE
+4	the$	.*$	.*$	UNIQUE
 6	no$	.*$	(NP[nb]{Y}/N{Y}<1>){_}	COMPLEMENT
 7	not$|n't$	.*$	((S[X]{Y}\NP{Z}){Y}\(S[X]{Y}<1>\NP{Z}){Y}){_}	NEGATE	
 
@@ -24,7 +25,7 @@
 #10	by$	.*$	(((S[X]{Y}\\NP{Z}){Y}\\(S[X]{Y}<1>\\NP{Z}){Y}){_}/N[num]{W}<2>){_}	\P Q R y. exists w z.(P(w) & Q(\x.EQUAL(x,z))(y) & R(z) & 
 
 # Gerunds which modify nouns.
-10	.*$	VBG	(NP{Y}/N{Y}<1>){_}	MOD
+11	.*$	VBG	(NP{Y}/N{Y}<1>){_}	MOD
 
 # Degree questions
-11	[Hh]ow$	.*$	((S[wq]{_}/(S[q]{Y}<1>/(S[adj]{Z}\NP{W}){Z}){V}){_}/(S[adj]{Z}<2>\NP{W}){Z}){_}	\P Q.exists z d.(P(\x.EQUAL(x,z),d) & Q(z) & TARGET(d))	
+12	[Hh]ow$	.*$	((S[wq]{_}/(S[q]{Y}<1>/(S[adj]{Z}\NP{W}){Z}){V}){_}/(S[adj]{Z}<2>\NP{W}){Z}){_}	\P Q.exists z d.(P(\x.EQUAL(x,z),d) & Q(z) & TARGET(d))	
