@@ -202,13 +202,13 @@ def demo():
 def test_sent():
     from nltk import word_tokenize, pos_tag
     
-    sent = "How big is Alaska?"
-    parse_str = r'''(<T S[wq] 0 2> (<T S[wq]/(S[q]/(S[adj]\NP)) 0 2>
-    (<L (S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) POS POS How
-    (S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP)>)
-    (<L S[adj]\NP POS POS big S[adj]\NP>) ) (<T S[q]/(S[adj]\NP) 0 2>
-    (<L (S[q]/(S[adj]\NP))/NP POS POS is (S[q]/(S[adj]\NP))/NP>)
-    (<T NP 0 1> (<L N POS POS Alaska N>) ) ) )
+    sent = "How many people live in Chicago?"
+    parse_str = r'''(<T S[wq] 0 2> (<T S[wq]/(S[dcl]\NP) 0 2>
+    (<T (S[wq]/(S[dcl]\NP))/N 0 2> (<L ((S[wq]/(S[dcl]\NP))/N)/(NP/N) POS POS
+    How ((S[wq]/(S[dcl]\NP))/N)/(NP/N)>) (<L NP/N POS POS many NP/N>) )
+    (<L N POS POS people N>) ) (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/PP POS POS
+    live (S[dcl]\NP)/PP>) (<T PP 0 2> (<L PP/NP POS POS in PP/NP>)
+    (<T NP 0 2> (<T NP 0 1> (<L N POS POS Chicago N>) ) ) ) ) )
     '''
     tagged_sent = pos_tag(word_tokenize(sent))
     semparser = SemanticParser()
@@ -217,4 +217,5 @@ def test_sent():
         
 
 if __name__ == '__main__':
+    #test_sent()
     demo()
