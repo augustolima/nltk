@@ -18,7 +18,8 @@
 8	.*$	CC$	conj{_}	\P Q x.(P(x) & Q(x))
 
 # Adjectives which act like verbs - e.g. Reagan was athletic.
-9	.*$	JJ.?$	(S{_}\NP{Y}<1>){_}	EVENT
+#9	.*$	JJ.?$	(S{_}\NP{Y}<1>){_}	EVENT
+9	.*$	JJ.?$	(S[adj]{_}\NP{Y}<1>){_}	EVENT
 
 # TODO: figure out passive case.
 # Passive case
