@@ -199,5 +199,22 @@ def demo():
         print(parse.get_expression())
         break
 
+def test_sent():
+    from nltk import word_tokenize, pos_tag
+    
+    sent = "How big is Alaska?"
+    parse_str = r'''(<T S[wq] 0 2> (<T S[wq]/(S[q]/(S[adj]\NP)) 0 2>
+    (<L (S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP) POS POS How
+    (S[wq]/(S[q]/(S[adj]\NP)))/(S[adj]\NP)>)
+    (<L S[adj]\NP POS POS big S[adj]\NP>) ) (<T S[q]/(S[adj]\NP) 0 2>
+    (<L (S[q]/(S[adj]\NP))/NP POS POS is (S[q]/(S[adj]\NP))/NP>)
+    (<T NP 0 1> (<L N POS POS Alaska N>) ) ) )
+    '''
+    tagged_sent = pos_tag(word_tokenize(sent))
+    semparser = SemanticParser()
+    for parse in semparser.parse(tagged_sent, parse_str):
+        parse.semantics.draw()
+        
+
 if __name__ == '__main__':
     demo()
