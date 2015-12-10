@@ -13,13 +13,6 @@ from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
 
-#import build_ccglex ##
-#from semanticcategory import get_semantic_categories ##
-#from config import parse_markedup_file ##
-#from semanticparser import SemanticParser ##
-#from syntacticcategory import SyntacticCategory ##
-#from parseconverter import CCGParseConverter ##
-
 from nltk.semparse import get_semantic_categories, build_ccglex
 from nltk.semparse.config import parse_markedup_file
 from nltk.semparse.semanticparser import SemanticParser
@@ -46,10 +39,10 @@ class ParseConverterTest(unittest.TestCase):
         converter = CCGParseConverter()
         ruleset = chart.DefaultRuleSet
         auto_string = r'''
-        (<T S[dcl] 1 2> (<T NP 0 1> (<L N POS POS Reagan N>) )
-        (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS had (S[dcl]\NP)/NP>)
-        (<T NP 0 2> (<T NP 0 1> (<T N 1 2> (<L N/N POS POS four N/N>)
-        (<L N POS POS children N>) ) ) (<L . POS POS . .>) ) ) )
+        (<T S[dcl] 1 2> (<T NP 0 1> (<L N NNP NNP Reagan N>) )
+        (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP VBD VBD had (S[dcl]\NP)/NP>)
+        (<T NP 0 2> (<T NP 0 1> (<T N 1 2> (<L N/N CD CD four N/N>)
+        (<L N NNS NNS children N>) ) ) (<L . . . . .>) ) ) )
         '''
         tree = converter.fromstring(auto_string, ruleset)
         self.assertEqual(tree, gold_tree)
@@ -431,7 +424,7 @@ class SemanticParserTest(unittest.TestCase):
         semParser = SemanticParser()
         total = 0
         num_sem = 0
-        parse_file = 'data/test/geoquery_parses_new.txt'
+        parse_file = 'data/test/geoquery_parses.txt'
         with io.open(parse_file, 'rt', encoding='utf-8') as parses:
             for line in parses:
                 if line.startswith('#'):
@@ -489,7 +482,7 @@ class SemanticParserTest(unittest.TestCase):
         semParser = SemanticParser()
         total = 0
         num_sem = 0
-        parse_file = 'data/test/reagan_parses_new.txt'
+        parse_file = 'data/test/reagan_parses.txt'
         with io.open(parse_file, 'rt', encoding='utf-8') as parses:
             for line in parses:
                 if line.startswith('#'):
