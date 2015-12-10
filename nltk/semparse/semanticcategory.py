@@ -11,9 +11,6 @@ from nltk.sem.logic import (Expression, Tokens, Variable,
                             ExistsExpression, LambdaExpression,
                             LogicalExpressionException)
 
-#import rules ##
-#from config import (parse_markedup_file, _DATA_DIR, _LANGUAGE_FILE) ##
-#from syntacticcategory import SyntacticCategory ##
 from nltk.semparse import rules
 from nltk.semparse.syntacticcategory import SyntacticCategory
 from nltk.semparse.config import (parse_markedup_file, _DATA_DIR, _LANGUAGE_FILE)

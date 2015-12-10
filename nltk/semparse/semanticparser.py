@@ -6,9 +6,6 @@ import re
 from nltk.ccg import chart
 from nltk.sem.logic import Expression, LogicalExpressionException
 
-#from config import parse_markedup_file ##
-#from composer import SemanticComposer ##
-#from parseconverter import CCGParseConverter ##
 from nltk.semparse.config import parse_markedup_file
 from nltk.semparse.composer import SemanticComposer
 from nltk.semparse.parseconverter import CCGParseConverter

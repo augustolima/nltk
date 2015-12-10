@@ -11,7 +11,6 @@ from nltk.ccg.api import PrimitiveCategory
 from nltk.ccg.chart import TypeRaiseRuleSet, DefaultRuleSet
 
 from nltk.semparse.config import _DATA_DIR
-#from config import _DATA_DIR ##
 
 
 class CCGParseConverter(object):
