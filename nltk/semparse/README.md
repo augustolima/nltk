@@ -43,7 +43,7 @@ interpreter or from within Python.
 The interpreter supports shell-like command line editing and history. Type a sentence
 at the '>' prompt and press ENTER.
 
-`Usage: semparser [-v] [-s] -l <path/to/ccg lexicon file>`
+`Usage: semparser [-v] [-s] [--draw] -l <path/to/ccg lexicon file>`
 
 E.g.  `./semparser -l data/lexica/reagan.ccg`
 
@@ -54,6 +54,7 @@ E.g.  `./semparser -l data/lexica/reagan.ccg`
 #####Optional
 * `-v --verbose`: Show full semantic derivation.
 * `-s --syntax`: Show syntactic parse tree.
+* `--draw`: draw the semantic derivation tree in the GUI.
 
 ####Commands
 * `!help`: show help message.
@@ -79,38 +80,38 @@ output by nltk.pos_tag.
     11 semparser = SemanticParser(ccglex)
     12  
     13 sent = "I eat peaches."
-    14 tagged_sent = pos_tag(word_tokenize(sent))
-    15 for parse in semparser.parse(tagged_sent):
+    14 tagged = pos_tag(word_tokenize(sent))
+    15 for parse in semparser.parse(tagged_sent=tagged):
     16   print parse.get_expression()
     17   break
 
 ###Using other CCG syntactic parsers
 It is possible to use external programs for CCG syntactic parsing in place of
-`nltk.ccg`. The output of the CCG parser should be in the AUTO format and
-a `str` instance. The parse string is then passed as an optional argument
-to `SemanticParser.parse()`. The entire process looks like:
+`nltk.ccg`. The output of the CCG parser should be in the AUTO format including POS tags
+and a `str` instance. The parse string is then passed to `SemanticParser.parse()`.
+The entire process looks like:
 
-     1 from nltk import word_tokenize, pos_tag
-     2 from nltk.semparse import SemanticParser
-     3
-     4 semparser = SemanticParser()
-     5  
-     6 # Set variable auto_str to the CCG parse string.
-     7 sent = "I eat peaches."
-     8 tagged_sent = pos_tag(word_tokenize(sent))
-     9 for parse in semparser.parse(tagged_sent, ccg_parse_str=auto_str):
-    10   print parse.get_expression()
-    11   break
-    
+     1 from nltk.semparse import SemanticParser
+     2
+     3 # Set variable parse_str to the CCG parse string.
+     4 # The semantic parser gets all needed information from the parse string.
+     5 
+     6 semparser = SemanticParser()
+     7 for parse in semparser.parse(auto_str=parse_str):
+     9   print parse.get_expression()
+    10   break
+
 
 NB that `SemanticParser` is instantiated without a CCG lexicon.
 
 ##Testing
 `test.py` holds unit tests for both the logical lexicon generation step
-and the semantic parsing step. For the semantic parsing step, the tests
-output the following:
+and the semantic parsing step. There are also functional tests of the converage of 
+the semantic parser. Using NLTK CCG as input the tests output the following:
 
 `[SYN][SEM]<input sentence>`
 
 Where SYN/SEM will be red if syntacic/semantic derivation failed for `<input sentence>`
 or green if succeeded. If any errors occur, they will be shown after `[SEM]` in yellow.
+
+Using AUTO string input the tests just output the `[SEM]` field.
