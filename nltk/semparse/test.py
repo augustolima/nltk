@@ -7,6 +7,7 @@ import unittest
 import logging
 import pickle
 import traceback
+import string
 
 from nltk import word_tokenize, pos_tag
 from nltk.sem.logic import Expression
@@ -81,7 +82,7 @@ class BuildCCGLexiconTest(unittest.TestCase):
         semparser = SemanticParser(ccglex)
         sent = "They had four children."
         tagged = pos_tag(word_tokenize(sent))
-        parses = list(semparser.parse(tagged, n=10))
+        parses = list(semparser.parse(tagged_sent=tagged, n=10))
         self.assertTrue(parses)
 
     def test_geoquery_ccg_parse(self):
@@ -89,7 +90,7 @@ class BuildCCGLexiconTest(unittest.TestCase):
         semparser = SemanticParser(ccglex)
         sent = "What is the capital?"
         tagged = pos_tag(word_tokenize(sent))
-        parses = list(semparser.parse(tagged, n=10))
+        parses = list(semparser.parse(tagged_sent=tagged, n=10))
         self.assertTrue(parses)
 
 
@@ -237,6 +238,9 @@ class bcolors(object):
 
 class SemanticParserTest(unittest.TestCase):
 
+    def setUp(self):
+        self.none_words = ['a', 'an'] + list(string.punctuation)
+
     def test_auto(self):
         ccglex = lexicon.parseLexicon(r'''
             :- S, N, NP
@@ -247,19 +251,19 @@ class SemanticParserTest(unittest.TestCase):
         ''')
         semparser = SemanticParser(ccglex)
         sent = "I eat peaches."
-        tagged_sent = pos_tag(word_tokenize(sent))
-        for parse in semparser.parse(tagged_sent):
+        tagged = pos_tag(word_tokenize(sent))
+        for parse in semparser.parse(tagged_sent=tagged):
             ccg_expr = parse.get_expression()
             break
 
         # Or you can provide a parse in the auto format.
         parse_str = r'''
-        (<T S[dcl] 1 2> (<L NP POS POS I NP>)
-        (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP POS POS eat
-        (S[dcl]\NP)/NP>) (<T NP 0 1> (<L N POS POS peaches N>) ) ) )
+        (<T S[dcl] 1 2> (<L NP PRP PRP I NP>)
+        (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/NP VBP VBP eat
+        (S[dcl]\NP)/NP>) (<T NP 0 1> (<L N NNS NNS peaches N>) ) ) )
         '''
         semparser2 = SemanticParser()
-        for parse in semparser2.parse(tagged_sent, parse_str):
+        for parse in semparser2.parse(auto_str=parse_str):
             auto_expr = parse.get_expression()
             break
 
@@ -291,11 +295,11 @@ class SemanticParserTest(unittest.TestCase):
                             parsed = True
                         if deriv.check():
                             words = deriv.semantics.leaves()
-                            none_words = sum([1 for w in words
-                                              if w == 'a' or w == 'an'])
+                            num_none_words = sum([1 for w in words
+                                              if w in self.none_words])
                             exprs = [p[1][0] for p in deriv.semantics.pos()]
-                            none_exprs = sum([1 for e in exprs if e is None])
-                            if none_words == none_exprs:
+                            num_none_exprs = sum([1 for e in exprs if e is None])
+                            if num_none_words == num_none_exprs:
                                 sem_parsed = True
                                 break
                 except:
@@ -369,11 +373,11 @@ class SemanticParserTest(unittest.TestCase):
                             parsed = True
                         if deriv.check():
                             words = deriv.semantics.leaves()
-                            none_words = sum([1 for w in words
-                                              if w == 'a' or w == 'an'])
+                            num_none_words = sum([1 for w in words
+                                              if w in self.none_words])
                             exprs = [p[1][0] for p in deriv.semantics.pos()]
-                            none_exprs = sum([1 for e in exprs if e is None])
-                            if none_words == none_exprs:
+                            num_none_exprs = sum([1 for e in exprs if e is None])
+                            if num_none_words == num_none_exprs:
                                 sem_parsed = True
                                 break
                 except:
@@ -427,7 +431,7 @@ class SemanticParserTest(unittest.TestCase):
         semParser = SemanticParser()
         total = 0
         num_sem = 0
-        parse_file = 'data/test/geoquery_parses.txt'
+        parse_file = 'data/test/geoquery_parses_new.txt'
         with io.open(parse_file, 'rt', encoding='utf-8') as parses:
             for line in parses:
                 if line.startswith('#'):
@@ -442,11 +446,11 @@ class SemanticParserTest(unittest.TestCase):
                     for deriv in derivations:
                         if deriv.check():
                             words = deriv.semantics.leaves()
-                            none_words = sum([1 for w in words
-                                              if w == 'a' or w == 'an'])
+                            num_none_words = sum([1 for w in words
+                                              if w in self.none_words])
                             exprs = [p[1][0] for p in deriv.semantics.pos()]
-                            none_exprs = sum([1 for e in exprs if e is None])
-                            if none_words == none_exprs:
+                            num_none_exprs = sum([1 for e in exprs if e is None])
+                            if num_none_words == num_none_exprs:
                                 sem_parsed = True
                                 break
                 except:
@@ -485,7 +489,7 @@ class SemanticParserTest(unittest.TestCase):
         semParser = SemanticParser()
         total = 0
         num_sem = 0
-        parse_file = 'data/test/reagan_parses.txt'
+        parse_file = 'data/test/reagan_parses_new.txt'
         with io.open(parse_file, 'rt', encoding='utf-8') as parses:
             for line in parses:
                 if line.startswith('#'):
@@ -500,11 +504,11 @@ class SemanticParserTest(unittest.TestCase):
                     for deriv in derivations:
                         if deriv.check():
                             words = deriv.semantics.leaves()
-                            none_words = sum([1 for w in words
-                                              if w == 'a' or w == 'an'])
+                            num_none_words = sum([1 for w in words
+                                              if w in self.none_words])
                             exprs = [p[1][0] for p in deriv.semantics.pos()]
-                            none_exprs = sum([1 for e in exprs if e is None])
-                            if none_words == none_exprs:
+                            num_none_exprs = sum([1 for e in exprs if e is None])
+                            if num_none_words == num_none_exprs:
                                 sem_parsed = True
                                 break
                 except:

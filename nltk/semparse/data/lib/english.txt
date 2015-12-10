@@ -28,3 +28,5 @@
 # Degree questions
 #12	[Hh]ow$	.*$	((S[wq]{_}/(S[q]{Y}<1>/(S[adj]{Z}\NP{W}){Z}){V}){_}/(S[adj]{Z}<2>\NP{W}){Z}){_}	\P Q.exists z d.(P(\x.EQUAL(x,z),d) & Q(z) & TARGET(d))	
 12	[Hh]ow$	.*$	.*$	\P Q.exists z d.(P(\x.EQUAL(x,z),d) & Q(z) & TARGET(d))	
+
+13	.*$	JJ.?$|RB.?$	.*$	EVENT

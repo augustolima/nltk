@@ -37,6 +37,8 @@ class SemanticComposer(object):
         # Leaf
         if len(children) == 0:
             word = tree[0]
+            if isinstance(word, tuple):
+                word = word[0]
             pos = dict(pos_tags)[word]
             syncat_str = str(tree.label())
             if '(' in syncat_str:  # Get rid of extra parentheses.

@@ -80,12 +80,12 @@ class CCGParseConverter(object):
         '''
         # Leaf
         if len(parse) == 1:
-            (_, cat, _, _, word, _) = parse[0].split()
+            (_, cat, pos, _, word, _) = parse[0].split()
             if cat in string.punctuation:
                 category = PrimitiveCategory(cat)
             else:
                 category = self._make_category(cat, delete=r'[<>]')
-            return Tree((category, 'Leaf'), [Tree(category, [word])])
+            return Tree((category, 'Leaf'), [Tree(category, [(word, pos)])])
 
         # TODO: Make _to_tree correctly handle type raising.
         # Unary lexical rule.

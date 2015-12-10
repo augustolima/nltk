@@ -113,39 +113,41 @@ class SemanticParser(object):
         tokens = [tok for tok in tokens if tok not in string.punctuation]
         return tokens
 
-    def parse(self, tagged_sentence, ccg_parse_str=None, n=0):
+    def parse(self, tagged_sent=None, auto_str=None, n=0):
         """
         Parses sentences first into a CCG syntactic parse.
         Then uses this parse to compose a semantics.
         Yields a list of Derivation instances for each syntactic
         parse of the sentence.
 
-        :param tagged_sentence: tokenized and POS tagged sentence.
-        :type tagged_sentence: list(tuple(str, str))
+        :param tagged_sent: tokenized and POS tagged sentence (word, POS).
+        :type tagged_sent: list(tuple(str, str))
+        :param auto_str: CCG parse in CCGBank AUTO format.
+        :type auto_str: str
         :returns: yields a derivation for each syntactic parse.
         :rtype: Derivation
         """
-        if not self.ccg_parser and not ccg_parse_str:
+        if not self.ccg_parser and not auto_str:
             raise CCGParseException("No CCG parser or CCG parse specified.")
 
+        if auto_str:
+            converter = CCGParseConverter()
+            ccg_parse = converter.fromstring(auto_str, self.rules)
+            tagged_sent = ccg_parse.leaves()
+            ccg_parses = [ccg_parse]
+        elif tagged_sent:
+            tokens = self._get_tokens(tagged_sent)
+            ccg_parses = self.ccg_parser.parse(tokens)
+        else:
+            raise CCGParseException("No sentence or CCG parse specified.")
+
         # Determine if input is a question or a statement.
-        if tagged_sentence[-1][0] == '?':
+        if tagged_sent[-1][0] == '?':
             question = True
             sent_type = 'QUESTION'
         else:
             question = False
             sent_type = 'STATEMENT'
-
-        # Get just the tokens from the POS tagged sentence.
-        tokens = self._get_tokens(tagged_sentence)
-
-        # Get the CCG parse(s).
-        if ccg_parse_str:
-            converter = CCGParseConverter()
-            ccg_parse = converter.fromstring(ccg_parse_str, self.rules)
-            ccg_parses = [ccg_parse]
-        else:
-            ccg_parses = self.ccg_parser.parse(tokens)
 
         # Build semantic expression for input sentence.
         for i, parse in enumerate(ccg_parses):
@@ -153,7 +155,7 @@ class SemanticParser(object):
                 break
             try:
                 derivations = self.composer.build_expressions(parse,
-                                                              tagged_sentence,
+                                                              tagged_sent,
                                                               question)
                 for derivation in derivations:
                     yield Derivation(parse, derivation, sent_type)
@@ -200,22 +202,23 @@ def demo():
         break
 
 def test_sent():
+    import pickle
     from nltk import word_tokenize, pos_tag
     
     sent = "How many people live in Chicago?"
-    parse_str = r'''(<T S[wq] 0 2> (<T S[wq]/(S[dcl]\NP) 0 2>
-    (<T (S[wq]/(S[dcl]\NP))/N 0 2> (<L ((S[wq]/(S[dcl]\NP))/N)/(NP/N) POS POS
-    How ((S[wq]/(S[dcl]\NP))/N)/(NP/N)>) (<L NP/N POS POS many NP/N>) )
-    (<L N POS POS people N>) ) (<T S[dcl]\NP 0 2> (<L (S[dcl]\NP)/PP POS POS
-    live (S[dcl]\NP)/PP>) (<T PP 0 2> (<L PP/NP POS POS in PP/NP>)
-    (<T NP 0 2> (<T NP 0 1> (<L N POS POS Chicago N>) ) ) ) ) )
-    '''
-    tagged_sent = pos_tag(word_tokenize(sent))
+    parse_str = r'''(<T S[wq] 0 2> (<L S[wq]/(S[q]/NP) WP WP What
+    S[wq]/(S[q]/NP)>) (<T S[q]/NP 0 2> (<L (S[q]/NP)/NP VBZ VBZ is
+    (S[q]/NP)/NP>) (<T NP[nb] 0 2> (<T NP[nb] 0 2>
+    (<L NP[nb]/N DT DT the NP[nb]/N>) (<L N NN NN capital N>) )
+    (<L . . . ? .>) ) ) )''' 
     semparser = SemanticParser()
-    for parse in semparser.parse(tagged_sent, parse_str):
+    for parse in semparser.parse(auto_str=parse_str):
+    #    parse.print_syntactic_derivation()
+    #    raw_input()
         parse.semantics.draw()
+        break
         
 
 if __name__ == '__main__':
-    #test_sent()
-    demo()
+    test_sent()
+    #demo()
