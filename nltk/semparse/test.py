@@ -74,16 +74,16 @@ class BuildCCGLexiconTest(unittest.TestCase):
         ccglex = lexicon.fromstring(open(self.reagan_ccg_file).read())
         semparser = SemanticParser(ccglex)
         sent = "They had four children."
-        tagged = pos_tag(word_tokenize(sent))
-        parses = list(semparser.parse(tagged_sent=tagged, n=10))
+        tagged_sent = pos_tag(word_tokenize(sent))
+        parses = list(semparser.parse(tagged_sent, n=10))
         self.assertTrue(parses)
 
     def test_geoquery_ccg_parse(self):
         ccglex = lexicon.fromstring(open(self.geoquery_ccg_file).read())
         semparser = SemanticParser(ccglex)
         sent = "What is the capital?"
-        tagged = pos_tag(word_tokenize(sent))
-        parses = list(semparser.parse(tagged_sent=tagged, n=10))
+        tagged_sent = pos_tag(word_tokenize(sent))
+        parses = list(semparser.parse(tagged_sent, n=10))
         self.assertTrue(parses)
 
 
@@ -244,8 +244,8 @@ class SemanticParserTest(unittest.TestCase):
         ''')
         semparser = SemanticParser(ccglex)
         sent = "I eat peaches."
-        tagged = pos_tag(word_tokenize(sent))
-        for parse in semparser.parse(tagged_sent=tagged):
+        tagged_sent = pos_tag(word_tokenize(sent))
+        for parse in semparser.parse(tagged_sent):
             ccg_expr = parse.get_expression()
             break
 
@@ -256,13 +256,13 @@ class SemanticParserTest(unittest.TestCase):
         (S[dcl]\NP)/NP>) (<T NP 0 1> (<L N NNS NNS peaches N>) ) ) )
         '''
         semparser2 = SemanticParser()
-        for parse in semparser2.parse(auto_str=parse_str):
+        for parse in semparser2.parse(parse_str):
             auto_expr = parse.get_expression()
             break
 
         self.assertEqual(ccg_expr, auto_expr)
 
-    @unittest.skip("skipping NLTK CCG tests")
+#    @unittest.skip("skipping NLTK CCG tests")
     def test_statement_nltk(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
                          "STATEMENTS (NLTK CCG)" + bcolors.ENDC + "\n")
@@ -279,9 +279,9 @@ class SemanticParserTest(unittest.TestCase):
                 total += 1
                 parsed = False
                 sem_parsed = False
-                tagged = pos_tag(word_tokenize(sent))
+                tagged_sent = pos_tag(word_tokenize(sent))
                 error = None
-                derivations = semParser.parse(tagged, n=100)
+                derivations = semParser.parse(tagged_sent, n=100)
                 try:
                     for deriv in derivations:
                         if deriv.syntax is not None:
@@ -340,7 +340,7 @@ class SemanticParserTest(unittest.TestCase):
         logging.info("STATEMENTS (NLTK CCG) SEMPARSED: {0}/{1}"
                       .format(num_sem, total))
 
-    @unittest.skip("skipping NLTK CCG tests")
+#    @unittest.skip("skipping NLTK CCG tests")
     def test_question_nltk(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
                          "QUESTIONS (NLTK CCG)" + bcolors.ENDC + "\n")
@@ -357,9 +357,9 @@ class SemanticParserTest(unittest.TestCase):
                 total += 1
                 parsed = False
                 sem_parsed = False
-                tagged = pos_tag(word_tokenize(sent))
+                tagged_sent = pos_tag(word_tokenize(sent))
                 error = None
-                derivations = semParser.parse(tagged, n=100)
+                derivations = semParser.parse(tagged_sent, n=100)
                 try:
                     for deriv in derivations:
                         if deriv.syntax is not None:
@@ -418,6 +418,7 @@ class SemanticParserTest(unittest.TestCase):
         logging.info("QUESTIONS (NLTK CCG) SEMPARSED: {0}/{1}"
                       .format(num_sem, total))
 
+    @unittest.skip("skipping NLTK CCG tests")
     def test_question_auto(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
                          "QUESTIONS (AUTO)" + bcolors.ENDC + "\n")
@@ -432,9 +433,9 @@ class SemanticParserTest(unittest.TestCase):
                 (sent, parse) = line.split(' || ')
                 total += 1
                 sem_parsed = False
-                tagged = pos_tag(word_tokenize(sent))
+                tagged_sent = pos_tag(word_tokenize(sent))
                 error = None
-                derivations = semParser.parse(tagged, parse, n=100)
+                derivations = semParser.parse(parse, n=100)
                 try:
                     for deriv in derivations:
                         if deriv.check():
@@ -476,6 +477,7 @@ class SemanticParserTest(unittest.TestCase):
                          bcolors.ENDC + "\n")
         logging.info("QUESTIONS (AUTO) SEMPARSED: {0}/{1}".format(num_sem, total))
 
+    @unittest.skip("skipping NLTK CCG tests")
     def test_statement_auto(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
                          "STATEMENTS (AUTO)" + bcolors.ENDC + "\n")
@@ -490,9 +492,9 @@ class SemanticParserTest(unittest.TestCase):
                 (sent, parse) = line.split(' || ')
                 total += 1
                 sem_parsed = False
-                tagged = pos_tag(word_tokenize(sent))
+                tagged_sent = pos_tag(word_tokenize(sent))
                 error = None
-                derivations = semParser.parse(tagged, parse, n=100)
+                derivations = semParser.parse(parse, n=100)
                 try:
                     for deriv in derivations:
                         if deriv.check():

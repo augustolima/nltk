@@ -28,10 +28,11 @@ class CCGParseConverter(object):
         self.grammar = set()
 
     def fromstring(self, tree_str, combinatory_rules):
-        parse = self._parse(tree_str)[0]
+        parse = self._parse(tree_str)
         tree = self._to_tree(parse, combinatory_rules)
         return tree
 
+    # TODO: _parse does not work. Does not convert to list.
     def _parse(self, tree_str):
         '''
         Parses the string representation of the CCG parse into
@@ -67,7 +68,7 @@ class CCGParseConverter(object):
                 level -= 1
             else:
                 arg += tree_str[i]
-        return stack
+        return stack.pop()
 
     def _to_tree(self, parse, combinatory_rules):
         '''
@@ -77,6 +78,9 @@ class CCGParseConverter(object):
                       of CCGParseConverter._parse().
         :rtype: nltk.Tree
         '''
+        if len(parse) == 0:
+            # None tree
+            return Tree('', [])
         # Leaf
         if len(parse) == 1:
             (_, cat, pos, _, word, _) = parse[0].split()

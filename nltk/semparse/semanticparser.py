@@ -110,33 +110,37 @@ class SemanticParser(object):
         tokens = [tok for tok in tokens if tok not in string.punctuation]
         return tokens
 
-    def parse(self, tagged_sent=None, auto_str=None, n=0):
+    def parse(self, parser_input, n=0):
         """
         Parses sentences first into a CCG syntactic parse.
-        Then uses this parse to compose a semantics.
+        Then uses this parse to compose semantics.
         Yields a list of Derivation instances for each syntactic
         parse of the sentence.
 
-        :param tagged_sent: tokenized and POS tagged sentence (word, POS).
-        :type tagged_sent: list(tuple(str, str))
-        :param auto_str: CCG parse in CCGBank AUTO format.
-        :type auto_str: str
+        :param parser_input: tokenized sentence (as a list)
+                             or CCG parse in AUTO format (as a str).
+        :type parser_input: list or str
         :returns: yields a derivation for each syntactic parse.
         :rtype: Derivation
         """
-        if not self.ccg_parser and not auto_str:
-            raise CCGParseException("No CCG parser or CCG parse specified.")
-
-        if auto_str:
+        tagged_sent = []
+        if isinstance(parser_input, list):
+            # Input is POS tagged sentence.
+            if not self.ccg_parser:
+                raise CCGParseException("No CCG parses specified.")
+            tagged_sent = parser_input
+            tokens = self._get_tokens(parser_input)
+            ccg_parses = self.ccg_parser.parse(tokens)
+        elif isinstance(parser_input, str) or isinstance(parser_input, unicode):
+            # Input is CCG parse.
             converter = CCGParseConverter()
-            ccg_parse = converter.fromstring(auto_str, self.rules)
+            ccg_parse = converter.fromstring(parser_input, self.rules)
+            if not ccg_parse:
+                raise CCGParseException("Input parse not in AUTO format.")
             tagged_sent = ccg_parse.leaves()
             ccg_parses = [ccg_parse]
-        elif tagged_sent:
-            tokens = self._get_tokens(tagged_sent)
-            ccg_parses = self.ccg_parser.parse(tokens)
         else:
-            raise CCGParseException("No sentence or CCG parse specified.")
+            raise CCGParseException("Unsupported input format.")
 
         # Determine if input is a question or a statement.
         if tagged_sent[-1][0] == '?':
@@ -209,7 +213,7 @@ def test_sent():
     (<L NP[nb]/N DT DT the NP[nb]/N>) (<L N NN NN capital N>) )
     (<L . . . ? .>) ) ) )''' 
     semparser = SemanticParser()
-    for parse in semparser.parse(auto_str=parse_str):
+    for parse in semparser.parse(parse_str):
     #    parse.print_syntactic_derivation()
     #    raw_input()
         parse.semantics.draw()
