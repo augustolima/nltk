@@ -1,10 +1,12 @@
-from __future__ import print_function, unicode_literals
+from __future__ import print_function, unicode_literals, division
 
 import sys
 import os
 import re
 import string
 import traceback
+import logging
+from time import strftime
 from nltk import Tree
 from nltk.ccg.lexicon import parseCategory
 from nltk.ccg.api import PrimitiveCategory
@@ -176,28 +178,61 @@ class CCGBankData(object):
             raise StopIteration()
 
 
-def evaluate():
-    converter = CCGParseConverter()
+def evaluate(nlim=-1):
+    '''
+    Evaluate the parse converter on CCG bank.
+    Trees that fail to convert are written to bad_parses.txt.
+    Discovered grammar rules are written to data/grammars/ccg_grammar.txt.
+    
+    :param nlim: maximum number of CCG bank trees to convert.
+    :type nlim: int
+    '''
+    logfile = os.path.join(_DATA_DIR, 'logs/parseconverter_eval.log')
+    bad_parses_file = os.path.join(_DATA_DIR, 'logs/bad_parses.txt')
+    grammar_file = os.path.join(_DATA_DIR, 'grammars/ccg_grammar.txt')
     ccgbank_dir = os.path.join(_DATA_DIR, 'test/ccgbank')
+
+    logging.basicConfig(filename=logfile,level=logging.DEBUG)
+    converter = CCGParseConverter()
     data = CCGBankData(ccgbank_dir)
-    total = 0
+    if nlim == -1:
+        total = 48934
+    else:
+        total = nlim
+    count = 0
     converted = 0
     for i, parse in enumerate(data):
-        total += 1
+        if count == nlim:
+            break
+        count += 1
         if i % 5 == 0:
-            sys.stderr.write('{0}/48934\r'.format(i))
+            sys.stderr.write('{0}/{1}\r'.format(i, total))
         try:
             tree = converter.fromstring(parse, DefaultRuleSet)
             converted += 1
         except:
-            with open('bad_parses.txt', 'a') as out:
+            with open(bad_parses_file, 'w') as out:
                 out.write(parse + '\n--------\n')
                 out.write(str(traceback.format_exc()))
                 out.write('\n\n')
-    with open('data/grammars/ccg_grammar.txt', 'w') as out:
+    with open(grammar_file, 'w') as out:
         for rule in converter.grammar:
             out.write(rule + '\n')
-    print("{0}/{1} parses converted".format(converted, total))
+
+    print("{0}/{1} ({2}%) parses converted".format(converted,
+                                                   total,
+                                                   (converted/total)*100))
+    logging.info("==============================")
+    logging.info("Evaluation run on {0}".format(strftime("%d/%m/%Y")))
+    logging.info("==============================")
+    logging.info("{0}/{1} ({2}%) parses converted"
+                  .format(converted, total, (converted/total)*100))
+    logging.info("Failed to convert {0} parses".format(total-converted))
+    logging.info("Discovered {0} grammar rules."
+                  .format(len(converter.grammar)))
+    logging.info("Bad parses written to {0}".format(bad_parses_file))
+    logging.info("Grammar rules written to {0}\n".format(grammar_file))
+
 
 def test_sent(auto_str):
     converter = CCGParseConverter()
@@ -206,6 +241,8 @@ def test_sent(auto_str):
 
 
 if __name__ == '__main__':
-    print("Converting CCGBank data")
-    print("-----------------------")
-    evaluate()
+    if len(sys.argv) == 2:
+        nlim = int(sys.argv[-1])
+    else:
+        nlim=-1
+    evaluate(nlim)
