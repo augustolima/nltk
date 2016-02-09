@@ -14,7 +14,7 @@ from nltk.sem.logic import Expression
 from nltk.ccg import chart, lexicon
 
 from nltk.semparse import get_semantic_categories, build_ccglex
-from nltk.semparse.config import parse_markedup_file
+from nltk.semparse.config import _DATA_DIR, parse_markedup_file
 from nltk.semparse.semanticparser import SemanticParser
 from nltk.semparse.syntacticcategory import SyntacticCategory
 from nltk.semparse.parseconverter import CCGParseConverter
@@ -25,7 +25,8 @@ Unit tests for SemanticCategory.
 
 
 lexpr = Expression.fromstring
-logging.basicConfig(filename=".unittest.log", level=logging.DEBUG)
+logfile = os.path.join(_DATA_DIR, 'logs/unittest.log')
+logging.basicConfig(filename=logfile, level=logging.DEBUG)
 
 # /////////////
 # Unit Tests //
@@ -418,7 +419,7 @@ class SemanticParserTest(unittest.TestCase):
         logging.info("QUESTIONS (NLTK CCG) SEMPARSED: {0}/{1}"
                       .format(num_sem, total))
 
-    @unittest.skip("skipping NLTK CCG tests")
+#    @unittest.skip("skipping AUTO tests")
     def test_question_auto(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
                          "QUESTIONS (AUTO)" + bcolors.ENDC + "\n")
@@ -477,7 +478,7 @@ class SemanticParserTest(unittest.TestCase):
                          bcolors.ENDC + "\n")
         logging.info("QUESTIONS (AUTO) SEMPARSED: {0}/{1}".format(num_sem, total))
 
-    @unittest.skip("skipping NLTK CCG tests")
+#    @unittest.skip("skipping AUTO tests")
     def test_statement_auto(self):
         sys.stderr.write("\n" + bcolors.HEADER + bcolors.BOLD +
                          "STATEMENTS (AUTO)" + bcolors.ENDC + "\n")
