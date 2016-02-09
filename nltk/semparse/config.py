@@ -35,7 +35,7 @@ def parse_markedup_file(replacements=[]):
     return pairsdict
 
 def find_data_dir():
-    dirlist = ['nltk/semparse/data', 'data']
+    dirlist = ['nltk/semparse/data', 'semparse/data', 'data']
     pypath = sys.path
     found = False
     for folder in pypath:
