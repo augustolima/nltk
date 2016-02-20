@@ -5,9 +5,14 @@ class SyntacticCategory(object):
 
     def __init__(self, syncat_str, syncat_dict=None):
         self._syncat_dict = syncat_dict
-        self.syncat = syncat_str
         self.syncat = syncat_str.replace("'", '')
         self.index_syncat = self._get_index_syncat()
+
+    def __str__(self):
+        return self.index_syncat
+
+    def __repr__(self):
+        return self.index_syncat
 
     def _get_index_syncat(self):
         """
