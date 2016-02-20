@@ -162,7 +162,7 @@ class SemanticParser(object):
                     yield Derivation(parse, derivation, sent_type)
                 continue
             # Yield just syntactic parse if semantics fail.
-            # TODO: make sure this exception works with new SemanticComposer
+            # TODO: make sure syntax prints if fail. 
             except LogicalExpressionException:
                 yield Derivation(parse, None, sent_type)
                 continue

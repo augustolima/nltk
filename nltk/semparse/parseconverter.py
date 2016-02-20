@@ -34,7 +34,6 @@ class CCGParseConverter(object):
         tree = self._to_tree(parse, combinatory_rules)
         return tree
 
-    # TODO: _parse does not work. Does not convert to list.
     def _parse(self, tree_str):
         '''
         Parses the string representation of the CCG parse into
@@ -135,6 +134,7 @@ class CCGParseConverter(object):
         return primitives
 
 
+# TODO: write documentation for installing and using CCG bank data.
 class CCGBankData(object):
     """
     A generator over the ccgbank data held in directory.
