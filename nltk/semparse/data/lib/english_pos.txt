@@ -1,4 +1,5 @@
 # POS regex		Semantic Type
+# TODO: put POS info in english.txt
 
 NN$|NNS$		TYPE
 NNP.?$|PRP.?$		ENTITY
