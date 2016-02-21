@@ -43,13 +43,13 @@ interpreter or from within Python.
 The interpreter supports shell-like command line editing and history. Type a sentence
 at the '>' prompt and press ENTER.
 
-`Usage: semparser [-v] [-s] [--draw] -l <path/to/ccg lexicon file>`
+`Usage: semparser [-v] [-s] [--draw] <path/to/ccg_lexicon_file>`
 
-E.g.  `./semparser -l data/lexica/reagan.ccg`
+E.g.  `./semparser -v -s data/lexica/reagan.ccg`
 
 ####Command line options
 #####Required
-* `-l --ccglex <path/to/file>`: CCG lexicon to use.
+* `<path/to/ccg_lexicon_file>`: CCG lexicon to use.
 
 #####Optional
 * `-v --verbose`: Show full semantic derivation.
@@ -59,8 +59,8 @@ E.g.  `./semparser -l data/lexica/reagan.ccg`
 ####Commands
 * `!help`: show help message.
 * `!quit`: exit the interpreter.
-* `!verbose On|Off`: set verbose.
-* `!syntax On|Off`: set syntax.
+* `!verbose [Oo]n|[Oo]ff`: set verbose.
+* `!syntax [Oo]n|[Oo]ff`: set syntax.
 
 
 ###Using the semantic parser within Python
@@ -72,16 +72,16 @@ output by nltk.pos_tag.
      3 from nltk.semparse import SemanticParser
      4
      5 ccglex = lexicon.parseLexicon(r'''
-     6  :- S, N
-     7  I => N
-     8  eat => (S\N)/N
-     9	peaches => N
+     6  :- S, NP
+     7  I => NP
+     8  eat => (S\NP)/NP
+     9	peaches => NP
     10 ''')	
     11 semparser = SemanticParser(ccglex)
     12  
     13 sent = "I eat peaches."
-    14 tagged = pos_tag(word_tokenize(sent))
-    15 for parse in semparser.parse(tagged_sent=tagged):
+    14 tagged_sent = pos_tag(word_tokenize(sent))
+    15 for parse in semparser.parse(tagged_sent):
     16   print parse.get_expression()
     17   break
 
@@ -93,11 +93,11 @@ The entire process looks like:
 
      1 from nltk.semparse import SemanticParser
      2
-     3 # Set variable parse_str to the CCG parse string.
+     3 # Set variable parse_str to a CCG parse string in AUTO format.
      4 # The semantic parser gets all needed information from the parse string.
      5 
      6 semparser = SemanticParser()
-     7 for parse in semparser.parse(auto_str=parse_str):
+     7 for parse in semparser.parse(parse_str):
      9   print parse.get_expression()
     10   break
 
