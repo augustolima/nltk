@@ -103,6 +103,13 @@ class SemanticCategoryTest(unittest.TestCase):
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P Q e.exists z y.(P(z) & Q(y) & won:1(e,y) & won:2(e,z))') in expressions)
 
+        # Athletic treated as event.
+        syncat = SyntacticCategory(r'S[adj]\NP', self.syncat_dict)
+        semcats = get_semantic_categories("athletic", "JJ", syncat)
+        expressions = [s.get_expression() for s in semcats]
+        self.assertTrue(lexpr(r'\P e. exists y. (P(y) & athletic:1(e,y))') in expressions)
+
+
     # MOD
     def test_mod(self):
         syncat = SyntacticCategory(r'N/N', self.syncat_dict)
@@ -115,10 +122,11 @@ class SemanticCategoryTest(unittest.TestCase):
         expressions = [s.get_expression() for s in semcats]
         self.assertTrue(lexpr(r'\P \Q \y. exists z. (P(\x.EQUAL(x,z))(y) & Q(z) & annually(y))') in expressions)
 
-        syncat = SyntacticCategory(r'S[adj]\NP', self.syncat_dict)
-        semcats = get_semantic_categories("athletic", "JJ", syncat)
+        # Gerunds are treated as mods.
+        syncat = SyntacticCategory(r'NP/N', self.syncat_dict)
+        semcats = get_semantic_categories("running", "VBG", syncat)
         expressions = [s.get_expression() for s in semcats]
-        self.assertTrue(lexpr(r'\P e. exists y. (P(y) & athletic:1(e,y))') in expressions)
+        self.assertTrue(lexpr(r'\P y.(P(y) & running(y))') in expressions)
 
     # COUNT
     def test_count(self):
