@@ -8,21 +8,26 @@ from __future__ import print_function, unicode_literals
 
 import optparse
 import readline  # Needed for shell-style line editing/cmd history.
-import re
-import string
 
 from nltk import word_tokenize, pos_tag
-from nltk.ccg import lexicon, chart
-#from nltk.semparse.semanticparser import SemanticParser
-from semanticparser import SemanticParser ##
+from nltk.ccg import lexicon
+from nltk.semparse.semanticparser import SemanticParser
 
 
 optparser = optparse.OptionParser()
 optparser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Show MR derivation")
 optparser.add_option("-s", "--syntax", action="store_true", dest="syntax", default=False, help="Show syntactic parse")
-optparser.add_option("-l", "--ccglex", dest="ccglex", default="", help="CCG lexicon file")
 optparser.add_option("--draw", action="store_true", dest="draw", default=False, help="Draw semantic derivation tree.")
 (opts, _) = optparser.parse_args()
+
+
+def usage():
+    message = '''Usage: semparser [-v] [-s] [--draw] <path/to/ccg lexicon>
+    -v      display semantic derivation
+    -s      display syntactic derivation
+    --draw  draw semantic derivation tree (GUI)
+    '''
+    sys.exit(message)
 
 
 class Interpreter(object):
@@ -85,7 +90,7 @@ class Interpreter(object):
                 sent = raw_input("> ")
             except EOFError:
                 self.status = 'STOP'
-		continue
+                continue
             if not sent:
                 continue
             # Command
@@ -100,9 +105,8 @@ class Interpreter(object):
                     if ans.lower() == 'q':
                         break
 
-
     # ===============================
-    #     Interpreter commands 
+    #     Interpreter commands
     # ===============================
 
     def _quit(self, arg=None):
@@ -114,35 +118,42 @@ class Interpreter(object):
 
     def _verbose(self, arg=None):
         if not arg:
-            if self.opt_semantics == True:
+            if self.opt_semantics is True:
                 print('On')
             else:
                 print('Off')
             return 'GO'
-        if arg.lower() == 'off': self.opt_semantics = False
-        elif arg.lower() == 'on': self.opt_semantics = True
-        else: print("Invalid value: {0}".format(arg))
+        if arg.lower() == 'off':
+            self.opt_semantics = False
+        elif arg.lower() == 'on':
+            self.opt_semantics = True
+        else:
+            print("Invalid value: {0}".format(arg))
         return 'GO'
 
     def _syntax(self, arg=None):
         if not arg:
-            if self.opt_syntax == True:
+            if self.opt_syntax is True:
                 print('On')
             else:
                 print('Off')
             return 'GO'
-        if arg.lower() == 'off': self.opt_syntax = False 
-        elif arg.lower() == 'on': self.opt_syntax = True 
-        else: print("Invalid value: {0}".format(arg))
+        if arg.lower() == 'off':
+            self.opt_syntax = False
+        elif arg.lower() == 'on':
+            self.opt_syntax = True
+        else:
+            print("Invalid value: {0}".format(arg))
         return 'GO'
 
 
 if __name__ == '__main__':
     import sys
-    if not opts.ccglex:
-        line = "Usage: semparser [-v] [-s] -l <path/to/ccg lexicon>\n"
-        sys.stderr.write(line)
-        sys.exit(1)
-    interpreter = Interpreter(opts.ccglex, opts.syntax, opts.verbose, opts.draw)
+    import os
+    ccglex_file = sys.argv[-1]
+    if len(sys.argv) < 2 or not os.path.isfile(ccglex_file):
+        usage()
+    interpreter = Interpreter(ccglex_file, opts.syntax,
+                              opts.verbose, opts.draw)
     interpreter.print_welcome()
     interpreter.run()
