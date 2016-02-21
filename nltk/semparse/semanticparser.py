@@ -32,10 +32,9 @@ class Derivation(object):
 
     def check(self):
         """
-        Checks if expression is valid.
+        Checks if the logical expression associated with this derivation
+        object is valid.
 
-        :param expression: logical expression to check.
-        :type expression: nltk.sem.logic.Expression
         :rtype: bool
         """
         expression = self.get_expression()
